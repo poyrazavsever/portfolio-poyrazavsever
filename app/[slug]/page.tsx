@@ -3,6 +3,7 @@ import { compileMDX } from "next-mdx-remote/rsc";
 import type { Metadata } from "next";
 import { getAllPageMetadata, getPageBySlug } from "@/lib/mdx";
 import { Icon } from "@iconify/react";
+import rehypeHighlight from "rehype-highlight";
 
 type PageParams = Promise<{ slug: string }>;
 
@@ -34,7 +35,12 @@ export default async function ContentPage({ params }: { params: PageParams }) {
 
   const { content } = await compileMDX({
     source: page.content,
-    options: { parseFrontmatter: false },
+    options: {
+      parseFrontmatter: false,
+      mdxOptions: {
+        rehypePlugins: [rehypeHighlight],
+      },
+    },
   });
 
   return (
@@ -74,7 +80,7 @@ export default async function ContentPage({ params }: { params: PageParams }) {
         )}
       </header>
 
-      <article className="prose prose-invert mt-10 max-w-none prose-headings:text-(--color-text) prose-p:text-(--color-muted) prose-li:text-(--color-text)">
+      <article className="mdx-content mt-10 max-w-none">
         {content}
       </article>
     </main>
