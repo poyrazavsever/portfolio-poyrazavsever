@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
+import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 
 type SidebarLink = {
@@ -16,6 +17,7 @@ type SidebarProps = {
 export default function Sidebar({ links }: SidebarProps) {
   const [query, setQuery] = useState("");
   const [mobileOpen, setMobileOpen] = useState(false);
+  const pathname = usePathname();
 
   const filteredLinks = useMemo(() => {
     const normalized = query.trim().toLowerCase();
@@ -58,16 +60,22 @@ export default function Sidebar({ links }: SidebarProps) {
 
         <nav className="mt-4 flex-1 overflow-y-auto">
           <ul className="text-sm text-(--color-muted)">
-            {filteredLinks.map((item) => (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  className="block rounded-lg px-3 py-2 text-(--color-text) transition hover:bg-(--color-overlay) hover:text-(--color-text)"
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
+            {filteredLinks.map((item) => {
+              const isActive = pathname === item.href;
+              return (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    data-active={isActive}
+                    className={`block rounded-lg px-3 py-2 transition hover:bg-(--color-overlay) hover:text-(--color-text) ${
+                      isActive ? "bg-(--color-overlay) text-(--color-text)" : "text-(--color-muted)"
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              );
+            })}
             {filteredLinks.length === 0 && <li className="px-3 py-2 text-xs text-(--color-muted)">No results</li>}
           </ul>
         </nav>
@@ -111,17 +119,22 @@ export default function Sidebar({ links }: SidebarProps) {
 
               <nav className="mt-6 flex-1 overflow-y-auto">
                 <ul className="space-y-2 text-sm text-(--color-muted)">
-                  {filteredLinks.map((item) => (
-                    <li key={`mobile-${item.href}`}>
-                      <Link
-                        href={item.href}
-                        className="block rounded-lg px-3 py-2 text-(--color-text) transition hover:bg-(--color-overlay)"
-                        onClick={() => setMobileOpen(false)}
-                      >
-                        {item.label}
-                      </Link>
-                    </li>
-                  ))}
+            {filteredLinks.map((item) => {
+              const isActive = pathname === item.href;
+              return (
+                <li key={`mobile-${item.href}`}>
+                  <Link
+                    href={item.href}
+                    className={`block rounded-lg px-3 py-2 transition hover:bg-(--color-overlay) ${
+                      isActive ? "bg-(--color-overlay) text-(--color-text)" : "text-(--color-muted)"
+                    }`}
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              );
+            })}
                   {filteredLinks.length === 0 && <li className="px-3 py-2 text-xs text-(--color-muted)">No results</li>}
                 </ul>
               </nav>

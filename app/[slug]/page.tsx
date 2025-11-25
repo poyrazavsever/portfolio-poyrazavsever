@@ -44,7 +44,7 @@ export default async function ContentPage({ params }: { params: PageParams }) {
   });
 
   return (
-    <main className="max-w-4xl px-6 py-16 lg:pl-[calc(64px+20rem)]">
+    <main className="max-w-4xl px-6 py-16 lg:pl-96">
       <header className="space-y-4">
         <h1 className="text-4xl font-semibold text-(--color-text)">
           {page.meta.title}
@@ -67,6 +67,7 @@ export default async function ContentPage({ params }: { params: PageParams }) {
               <a
                 key={link.href}
                 href={link.href}
+                target={link.target || "_self"}
                 className="rounded-lg border border-(--color-border) px-3 py-1 bg-(--color-surface) text-(--color-text) transition hover:border-(--color-accent) hover:text-(--color-accent)"
               >
                 {link.label}

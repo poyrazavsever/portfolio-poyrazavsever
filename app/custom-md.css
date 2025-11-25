@@ -134,7 +134,7 @@
 }
 
 .mdx-content img {
-  border-radius: 1.5rem;
+  border-radius: .5rem;
   border: 1px solid var(--color-border);
   margin: 2rem 0;
 }
