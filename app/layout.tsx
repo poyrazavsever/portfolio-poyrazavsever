@@ -52,7 +52,7 @@ export default async function RootLayout({
   }));
 
   return (
-    <html lang="en" data-theme="obsidian" className={nunito.variable} suppressHydrationWarning>
+    <html lang="en" data-theme="mint" className={nunito.variable} suppressHydrationWarning>
       <body className="bg-(--color-background) text-(--color-text) antialiased">
         <ThemeProvider>
           <ActivityBar />

@@ -179,6 +179,20 @@
   --shadow-glow: 0 28px 90px rgba(14, 165, 233, 0.2);
 }
 
+[data-theme="mint"] {
+  color-scheme: light;
+  --color-background: #f1fff6;
+  --color-surface: #e5fbec;
+  --color-overlay: rgba(52, 211, 153, 0.16);
+  --color-border: rgba(15, 118, 110, 0.2);
+  --color-text: #052316;
+  --color-muted: rgba(5, 35, 22, 0.62);
+  --color-accent: #2dd4bf;
+  --color-accent-soft: rgba(45, 212, 191, 0.24);
+  --color-accent-contrast: #e6fffa;
+  --shadow-glow: 0 30px 100px rgba(45, 212, 191, 0.35);
+}
+
 [data-theme="mono"] {
   color-scheme: light;
   --color-background: #fcfcfc;

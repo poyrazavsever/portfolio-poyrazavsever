@@ -121,6 +121,15 @@ export const APP_THEMES = [
     },
   },
   {
+    id: "mint",
+    label: "Mint Cream",
+    description: "Pastel yeşil taban ve tropical aksanlı hafif bir ışık modu.",
+    preview: {
+      colors: ["#f1fff6", "#e5fbec", "#2dd4bf"],
+      mood: "Fresh",
+    },
+  },
+  {
     id: "mono",
     label: "Mono Light",
     description: "Minimum beyaz/siyah kontrastlı ışık modu.",
@@ -132,6 +141,7 @@ export const APP_THEMES = [
 ] as const;
 
 export type ThemeId = (typeof APP_THEMES)[number]["id"];
+const DEFAULT_THEME: ThemeId = "mint";
 
 type ThemeContextValue = {
   theme: ThemeId;
@@ -143,7 +153,7 @@ const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
 const STORAGE_KEY = "portfolio.theme";
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<ThemeId>("obsidian");
+  const [theme, setTheme] = useState<ThemeId>(DEFAULT_THEME);
   const isFirstPaint = useRef(true);
 
   useEffect(() => {
@@ -160,8 +170,8 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       return;
     }
 
-    window.localStorage.setItem(STORAGE_KEY, "obsidian");
-    root.dataset.theme = "obsidian";
+    window.localStorage.setItem(STORAGE_KEY, DEFAULT_THEME);
+    root.dataset.theme = DEFAULT_THEME;
   }, []);
 
   useEffect(() => {
