@@ -35,8 +35,7 @@ export default function Sidebar({ links }: SidebarProps) {
         className="fixed left-4 top-4 z-40 flex h-10 w-10 items-center justify-center rounded-2xl border border-(--color-border) bg-(--color-background)/80 text-(--color-text) shadow-lg sm:hidden"
         onClick={() => setMobileOpen(true)}
       >
-        <span className="sr-only">Open menu</span>
-        <span className="space-y-1">
+          <span className="space-y-1">
           <span className="block h-0.5 w-5 bg-(--color-text)"></span>
           <span className="block h-0.5 w-5 bg-(--color-text)"></span>
           <span className="block h-0.5 w-5 bg-(--color-text)"></span>
@@ -98,13 +97,13 @@ export default function Sidebar({ links }: SidebarProps) {
               onClick={(event) => event.stopPropagation()}
             >
               <div className="flex items-center justify-between">
-                <p className="text-sm font-semibold uppercase tracking-[0.3em] text-(--color-muted)">Menu</p>
+                <p className="text-sm font-semibold text-(--color-muted)">Explorer</p>
                 <button
                   type="button"
                   className="rounded-full border border-(--color-border) px-2 py-1 text-xs text-(--color-muted)"
                   onClick={() => setMobileOpen(false)}
                 >
-                  Close
+                  X
                 </button>
               </div>
 
