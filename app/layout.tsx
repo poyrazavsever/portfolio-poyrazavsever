@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { ThemeProvider } from "@/components/theme-provider";
+import { ThemeProvider } from "./components/theme-provider";
 import ActivityBar from "./components/layout/activitybar";
 
 
@@ -45,8 +45,10 @@ export default function RootLayout({
   return (
     <html lang="en" data-theme="obsidian" suppressHydrationWarning>
       <body className="bg-(--color-background) text-(--color-text) antialiased">
-        <ActivityBar />
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <ActivityBar />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

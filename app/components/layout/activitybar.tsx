@@ -5,6 +5,8 @@ import Link from "next/link";
 import { Icon } from "@iconify/react";
 import { AnimatePresence, motion } from "framer-motion";
 import SearchModal from "./search-modal";
+import SettingsSheet from "./theme-sheet";
+import Image from "next/image";
 
 type NavItem = {
   id: string;
@@ -53,6 +55,8 @@ const ActivityBar = () => {
   const [searchOpen, setSearchOpen] = useState(false);
   const [hoveredId, setHoveredId] = useState<string | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const sheetRef = useRef<HTMLDivElement>(null);
+  const [settingsOpen, setSettingsOpen] = useState(false);
 
   useEffect(() => {
     if (!socialOpen) {
@@ -71,20 +75,42 @@ const ActivityBar = () => {
 
   const handleHover = (id: string | null) => setHoveredId(id);
 
+  useEffect(() => {
+    if (!settingsOpen) {
+      return;
+    }
+
+    const handleClickOutside = (event: MouseEvent) => {
+      if (sheetRef.current && !sheetRef.current.contains(event.target as Node)) {
+        setSettingsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [settingsOpen]);
+
   return (
     <>
-      <aside className="fixed left-0 top-0 z-30 flex h-screen w-max flex-col items-center gap-4 border border-(--color-border) bg-(--color-surface)/80 p-3 backdrop-blur-xl">
+      <aside className="fixed left-0 top-0 z-30 flex h-screen w-max flex-col justify-between gap-4 border-r border-(--color-border) bg-(--color-surface)/80 p-3 backdrop-blur-xl">
         <nav className="flex flex-col items-center gap-3">
           {NAV_ITEMS.map((item) => {
             const isExternal = item.href.startsWith("http");
             const isSearch = item.id === "search";
 
             return (
-              <motion.div key={item.id} className="relative" whileHover={{ y: -2 }} whileTap={{ scale: 0.94 }}>
+              <motion.div
+                key={item.id}
+                className="relative"
+                whileHover={{ y: -2 }}
+                whileTap={{ scale: 0.94 }}
+              >
                 {isSearch ? (
                   <button
                     type="button"
-                    className={`${iconButtonBase} ${searchOpen ? "text-(--color-accent)" : ""}`}
+                    className={`${iconButtonBase} ${
+                      searchOpen ? "text-(--color-accent)" : ""
+                    }`}
                     aria-label="Search"
                     aria-haspopup="dialog"
                     aria-expanded={searchOpen}
@@ -130,71 +156,118 @@ const ActivityBar = () => {
           })}
         </nav>
 
-        <div className="relative" ref={dropdownRef}>
-          <motion.button
-            type="button"
-            className={`${iconButtonBase} ${socialOpen ? "text-(--color-accent)" : ""}`}
-            aria-haspopup="true"
-            aria-expanded={socialOpen}
-            onClick={() => setSocialOpen((prev) => !prev)}
-            onMouseEnter={() => handleHover("social")}
-            onMouseLeave={() => handleHover(null)}
-            onFocus={() => handleHover("social")}
-            onBlur={() => handleHover(null)}
-            whileHover={{ y: -2 }}
-            whileTap={{ scale: 0.94 }}
-          >
-            <Icon icon="solar:hashtag-square-bold-duotone" className="text-[1.5rem]" />
-            <span className="sr-only">Social media links</span>
-          </motion.button>
+        <div className="flex flex-col items-center gap-4">
+          <div className="relative" ref={dropdownRef}>
+            <motion.button
+              type="button"
+              className={`${iconButtonBase} ${
+                socialOpen ? "text-(--color-accent)" : ""
+              }`}
+              aria-haspopup="true"
+              aria-expanded={socialOpen}
+              onClick={() => setSocialOpen((prev) => !prev)}
+              onMouseEnter={() => handleHover("social")}
+              onMouseLeave={() => handleHover(null)}
+              onFocus={() => handleHover("social")}
+              onBlur={() => handleHover(null)}
+              whileHover={{ y: -2 }}
+              whileTap={{ scale: 0.94 }}
+            >
+              <Icon
+                icon="solar:hashtag-square-bold-duotone"
+                className="text-[1.5rem]"
+              />
+              <span className="sr-only">Social media links</span>
+            </motion.button>
 
-          <AnimatePresence>
-            {hoveredId === "social" && !socialOpen && (
-              <motion.span
-                key="social-tooltip"
-                {...tooltipMotion}
-                transition={{ duration: 0.15, ease: "easeOut" }}
-                className="pointer-events-none absolute left-14 top-1/2 -translate-y-1/2 rounded-full border border-(--color-border) bg-(--color-background) px-3 py-1 text-xs font-medium w-24 text-center text-(--color-text) shadow-sm"
-              >
-                Social Links
-              </motion.span>
-            )}
-          </AnimatePresence>
+            <AnimatePresence>
+              {hoveredId === "social" && !socialOpen && (
+                <motion.span
+                  key="social-tooltip"
+                  {...tooltipMotion}
+                  transition={{ duration: 0.15, ease: "easeOut" }}
+                  className="pointer-events-none absolute left-14 top-1/2 -translate-y-1/2 rounded-full border border-(--color-border) bg-(--color-background) px-3 py-1 text-xs font-medium w-24 text-center text-(--color-text) shadow-sm"
+                >
+                  Social Links
+                </motion.span>
+              )}
+            </AnimatePresence>
 
-          <AnimatePresence>
-            {socialOpen && (
-              <motion.div
-                key="social-dropdown"
-                {...dropdownMotion}
-                transition={{ duration: 0.18, ease: "easeOut" }}
-                className="absolute left-16 top-1/2 z-10 min-w-[220px] -translate-y-1/2 rounded-2xl border border-(--color-border) bg-(--color-surface)/95 p-3 text-left shadow-[0_15px_50px_rgba(0,0,0,0.35)] backdrop-blur"
-              >
-                <ul className="flex flex-col gap-1.5">
-                  {SOCIAL_LINKS.map((social) => (
-                    <li key={social.id}>
-                      <Link
-                        href={social.href}
-                        target="_blank"
-                        rel="noreferrer"
-                        title={social.label}
-                        className="flex items-center gap-3 rounded-xl px-2 py-1.5 text-sm text-(--color-text) transition hover:bg-(--color-overlay)"
-                      >
-                        <span className="flex h-8 w-8 items-center justify-center rounded-2xl bg-(--color-background)/70">
-                          <Icon icon={social.icon} className="text-lg text-(--color-accent)" />
-                        </span>
-                        <span className="flex-1">{social.label}</span>
-                        <Icon icon="solar:arrow-right-up-linear" className="text-base text-(--color-muted)" />
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
-            )}
-          </AnimatePresence>
+            <AnimatePresence>
+              {socialOpen && (
+                <motion.div
+                  key="social-dropdown"
+                  {...dropdownMotion}
+                  transition={{ duration: 0.18, ease: "easeOut" }}
+                  className="absolute left-16 -top-14 z-10 min-w-[220px] -translate-y-1/2 rounded-2xl border border-(--color-border) bg-(--color-surface)/80 p-3 text-left shadow-[0_15px_50px_rgba(0,0,0,0.35)] backdrop-blur"
+                >
+                  <ul className="flex flex-col gap-1.5">
+                    {SOCIAL_LINKS.map((social) => (
+                      <li key={social.id}>
+                        <Link
+                          href={social.href}
+                          target="_blank"
+                          rel="noreferrer"
+                          title={social.label}
+                          className="flex items-center gap-3 rounded-xl px-2 py-1.5 text-sm text-(--color-text) transition hover:bg-(--color-overlay)"
+                        >
+                          <span className="flex h-8 w-8 items-center justify-center rounded-2xl bg-(--color-background)/70">
+                            <Icon
+                              icon={social.icon}
+                              className="text-lg text-(--color-accent)"
+                            />
+                          </span>
+                          <span className="flex-1">{social.label}</span>
+                          <Icon
+                            icon="solar:arrow-right-up-linear"
+                            className="text-base text-(--color-muted)"
+                          />
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
+          <div className="flex flex-col items-center gap-3">
+            <button
+              type="button"
+              aria-label="Settings"
+              className={`${iconButtonBase}`}
+              onClick={() => setSettingsOpen(true)}
+              onMouseEnter={() => handleHover("settings")}
+              onMouseLeave={() => handleHover(null)}
+              onFocus={() => handleHover("settings")}
+              onBlur={() => handleHover(null)}
+            >
+              <Icon
+                icon="solar:settings-bold-duotone"
+                className="text-[1.5rem]"
+              />
+            </button>
+
+            <div className="h-12 w-12 rounded-2xl border border-(--color-border) bg-(--color-background)/50 p-1">
+              <Image
+                src="/avatars/activitybar.jpeg"
+                alt="Poyraz Avsever avatar"
+                width={56}
+                height={56}
+                priority
+                className="h-full w-full rounded-xl object-cover"
+              />
+            </div>
+          </div>
         </div>
       </aside>
 
       <SearchModal open={searchOpen} onClose={() => setSearchOpen(false)} />
+      <SettingsSheet
+        open={settingsOpen}
+        sheetRef={sheetRef}
+        onClose={() => setSettingsOpen(false)}
+      />
     </>
   );
 };
