@@ -3,6 +3,7 @@ import "./globals.css";
 import { ThemeProvider } from "./components/theme-provider";
 import ActivityBar from "./components/layout/activitybar";
 import Sidebar from "./components/layout/sidebar";
+import { nunito } from "./font";
 
 
 export const metadata: Metadata = {
@@ -44,7 +45,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" data-theme="obsidian" suppressHydrationWarning>
+    <html lang="en" data-theme="obsidian" className={nunito.variable} suppressHydrationWarning>
       <body className="bg-(--color-background) text-(--color-text) antialiased">
         <ThemeProvider>
           <ActivityBar />
