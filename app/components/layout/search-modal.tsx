@@ -61,7 +61,7 @@ const SearchModal = ({ open, onClose }: SearchModalProps) => {
                 placeholder="Type to search..."
                 className="flex-1 bg-transparent text-lg text-(--color-text) placeholder:text-(--color-muted) focus:outline-none"
               />
-              <span className="rounded-full border border-(--color-border) px-3 py-1 text-xs text-(--color-muted)">Enter</span>
+              <span className="rounded-full border border-(--color-border) px-3 py-1 text-xs text-(--color-muted) hidden sm:flex">Enter</span>
             </div>
           </motion.div>
         </motion.div>

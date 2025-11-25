@@ -7,33 +7,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import SearchModal from "./search-modal";
 import SettingsSheet from "./theme-sheet";
 import Image from "next/image";
-
-type NavItem = {
-  id: string;
-  href: string;
-  label: string;
-  icon: string;
-};
-
-const NAV_ITEMS: NavItem[] = [
-  { id: "search", href: "/#search", label: "Search", icon: "solar:magnifer-line-duotone" },
-  { id: "rss", href: "/rss.xml", label: "RSS Feed", icon: "solar:feed-bold-duotone" },
-  { id: "resume", href: "/resume.pdf", label: "Resume", icon: "solar:inbox-archive-bold-duotone" },
-  { id: "ui-kit", href: "/#ui-kit", label: "My UI Kit", icon: "solar:colour-tuneing-bold-duotone" },
-  { id: "status", href: "/#status", label: "Status", icon: "solar:chat-square-2-bold-duotone" },
-  { id: "freelance", href: "/#freelance", label: "Freelance", icon: "solar:case-round-minimalistic-bold-duotone" },
-] as const;
-
-const SOCIAL_LINKS = [
-  { id: "linkedin", label: "LinkedIn", href: "https://www.linkedin.com/in/poyrazavsever/", icon: "mdi:linkedin" },
-  { id: "github", label: "GitHub", href: "https://github.com/poyrazavsever", icon: "mdi:github" },
-  { id: "instagram", label: "Instagram", href: "https://instagram.com/poyrazavsever", icon: "mdi:instagram" },
-  { id: "youtube", label: "YouTube", href: "https://youtube.com/@poyrazavsever", icon: "mdi:youtube" },
-  { id: "medium", label: "Medium", href: "https://medium.com/@poyrazavsever", icon: "mdi:medium" },
-  { id: "x", label: "X", href: "https://x.com/poyrazavsever", icon: "ri:twitter-x-fill" },
-  { id: "behance", label: "Behance", href: "https://behance.net/poyrazavsever", icon: "mdi:behance" },
-  { id: "coffee", label: "Buy Me a Coffee", href: "https://www.buymeacoffee.com/poyrazavsever", icon: "mdi:coffee-outline" },
-] as const;
+import { ACTIVITY_LINKS, SOCIAL_LINKS } from "@/data/navigation";
 
 const iconButtonBase =
   "relative flex h-12 w-12 items-center justify-center rounded-2xl border border-(--color-border) bg-(--color-surface)/90 text-(--color-muted) shadow-sm shadow-black/5 transition-colors hover:text-(--color-accent) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--color-accent) focus-visible:ring-offset-2 focus-visible:ring-offset-(--color-background)";
@@ -92,9 +66,9 @@ const ActivityBar = () => {
 
   return (
     <>
-      <aside className="fixed left-0 top-0 z-30 flex h-screen w-max flex-col justify-between gap-4 border-r border-(--color-border) bg-(--color-surface)/80 p-3 backdrop-blur-xl">
+      <aside className="fixed left-0 top-0 z-30 hidden h-screen w-max flex-col justify-between gap-4 border-r border-(--color-border) bg-(--color-surface)/80 p-3 backdrop-blur-xl sm:flex">
         <nav className="flex flex-col items-center gap-3">
-          {NAV_ITEMS.map((item) => {
+          {ACTIVITY_LINKS.map((item) => {
             const isExternal = item.href.startsWith("http");
             const isSearch = item.id === "search";
 
@@ -261,6 +235,95 @@ const ActivityBar = () => {
           </div>
         </div>
       </aside>
+
+      <div className="fixed inset-x-3 bottom-3 z-30 flex flex-wrap items-center justify-around gap-2 rounded-3xl border border-(--color-border) bg-(--color-background)/80 px-2 py-2 text-[10px] text-(--color-text) shadow-[0_12px_30px_rgba(0,0,0,0.35)] backdrop-blur lg:hidden">
+        {ACTIVITY_LINKS.map((item) => {
+          const isSearch = item.id === "search";
+          const isExternal = item.href.startsWith("http");
+          const content = (
+            <>
+              <Icon icon={item.icon} className="text-xl" />
+            </>
+          );
+
+          return isSearch ? (
+            <button
+              key={`mobile-${item.id}`}
+              type="button"
+              className="flex flex-col items-center gap-1 rounded-lg border border-(--color-border) bg-(--color-surface)/70 p-1"
+              onClick={() => setSearchOpen(true)}
+            >
+              {content}
+            </button>
+          ) : (
+            <Link
+              key={`mobile-${item.id}`}
+              href={item.href}
+              target={isExternal ? "_blank" : undefined}
+              rel={isExternal ? "noreferrer" : undefined}
+              className="flex flex-col items-center gap-1 rounded-lg border border-(--color-border) bg-(--color-surface)/70 p-1"
+            >
+              {content}
+            </Link>
+          )
+        })}
+        <button
+          type="button"
+          className="flex flex-col items-center gap-1 rounded-lg border border-(--color-border) bg-(--color-surface)/70 p-1"
+          onClick={() => setSettingsOpen(true)}
+        >
+          <Icon icon="solar:settings-bold-duotone" className="text-xl" />
+        </button>
+        <button
+          type="button"
+          className={`flex flex-col items-center gap-1 rounded-lg border border-(--color-border) bg-(--color-surface)/70 p-1 ${socialOpen ? "text-(--color-accent)" : ""}`}
+          onClick={() => setSocialOpen((prev) => !prev)}
+        >
+          <Icon icon="solar:hashtag-square-bold-duotone" className="text-xl" />
+        </button>
+      </div>
+
+      <AnimatePresence>
+        {socialOpen && (
+          <motion.div
+            className="fixed inset-0 z-40 flex items-end justify-center bg-black/70 px-4 pb-20 lg:hidden"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSocialOpen(false)}
+          >
+            <motion.div
+              className="w-full max-w-sm rounded-[28px] border border-(--color-border) bg-(--color-background) p-4 text-(--color-text) shadow-[0_20px_60px_rgba(0,0,0,0.45)]"
+              initial={{ y: 40, opacity: 0.5 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: 40, opacity: 0.5 }}
+              onClick={(event) => event.stopPropagation()}
+            >
+              <ul className="mt-4 space-y-2 text-sm">
+                {SOCIAL_LINKS.map((social) => (
+                  <li key={`mobile-social-${social.id}`}>
+                    <Link
+                      href={social.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="flex items-center justify-between gap-3 rounded-xl border border-(--color-border) px-3 py-2"
+                      onClick={() => setSocialOpen(false)}
+                    >
+                      <span className="flex items-center gap-2">
+                        <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-(--color-background)/60">
+                          <Icon icon={social.icon} className="text-lg text-(--color-accent)" />
+                        </span>
+                        {social.label}
+                      </span>
+                      <Icon icon="solar:arrow-right-up-linear" className="text-base text-(--color-muted)" />
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <SearchModal open={searchOpen} onClose={() => setSearchOpen(false)} />
       <SettingsSheet
