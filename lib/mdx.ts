@@ -7,6 +7,7 @@ const CONTENT_DIR = path.join(process.cwd(), "content/pages");
 export type PageLink = {
   label: string;
   href: string;
+  target?: "_blank" | "_self";
 };
 
 export type PageMeta = {
