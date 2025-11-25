@@ -24,7 +24,7 @@ export const ACTIVITY_LINKS: ActivityLink[] = [
 export const SOCIAL_LINKS: SocialLink[] = [
   { id: "linkedin", label: "LinkedIn", href: "https://www.linkedin.com/in/poyrazavsever/", icon: "mdi:linkedin" },
   { id: "github", label: "GitHub", href: "https://github.com/poyrazavsever", icon: "mdi:github" },
-  { id: "instagram", label: "Instagram", href: "https://instagram.com/poyrazavsever", icon: "mdi:instagram" },
+  { id: "instagram", label: "Instagram", href: "https://instagram.com/poyraz_avsever", icon: "mdi:instagram" },
   { id: "youtube", label: "YouTube", href: "https://youtube.com/@poyrazavsever", icon: "mdi:youtube" },
   { id: "medium", label: "Medium", href: "https://medium.com/@poyrazavsever", icon: "mdi:medium" },
   { id: "x", label: "X", href: "https://x.com/poyrazavsever", icon: "ri:twitter-x-fill" },
