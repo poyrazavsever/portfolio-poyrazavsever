@@ -12,11 +12,6 @@ export type SocialLink = {
   icon: string;
 };
 
-export type SidebarLink = {
-  label: string;
-  href: string;
-};
-
 export const ACTIVITY_LINKS: ActivityLink[] = [
   { id: "search", href: "/#search", label: "Search", icon: "solar:magnifer-line-duotone" },
   { id: "rss", href: "/rss.xml", label: "RSS Feed", icon: "solar:feed-bold-duotone" },
@@ -35,14 +30,4 @@ export const SOCIAL_LINKS: SocialLink[] = [
   { id: "x", label: "X", href: "https://x.com/poyrazavsever", icon: "ri:twitter-x-fill" },
   { id: "behance", label: "Behance", href: "https://behance.net/poyrazavsever", icon: "mdi:behance" },
   { id: "coffee", label: "Buy Me a Coffee", href: "https://www.buymeacoffee.com/poyrazavsever", icon: "mdi:coffee-outline" },
-] as const;
-
-export const SIDEBAR_LINKS: SidebarLink[] = [
-  { label: "Overview", href: "/overview" },
-  { label: "Services", href: "/services" },
-  { label: "Case Studies", href: "/case-studies" },
-  { label: "Blog", href: "/blog" },
-  { label: "Resources", href: "/resources" },
-  { label: "Testimonials", href: "/testimonials" },
-  { label: "Contact", href: "/contact" },
 ] as const;

@@ -4,6 +4,7 @@ import { ThemeProvider } from "./components/theme-provider";
 import ActivityBar from "./components/layout/activitybar";
 import Sidebar from "./components/layout/sidebar";
 import { nunito } from "./font";
+import { getAllPageMetadata } from "@/lib/mdx";
 
 
 export const metadata: Metadata = {
@@ -39,17 +40,23 @@ export const metadata: Metadata = {
   ],
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const pages = await getAllPageMetadata();
+  const sidebarLinks = pages.map((page) => ({
+    label: page.title,
+    href: `/${page.slug}`,
+  }));
+
   return (
     <html lang="en" data-theme="obsidian" className={nunito.variable} suppressHydrationWarning>
       <body className="bg-(--color-background) text-(--color-text) antialiased">
         <ThemeProvider>
           <ActivityBar />
-          <Sidebar />
+          <Sidebar links={sidebarLinks} />
           {children}
         </ThemeProvider>
       </body>

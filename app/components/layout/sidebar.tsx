@@ -3,19 +3,27 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { SIDEBAR_LINKS } from "@/data/navigation";
 
-export default function Sidebar() {
+type SidebarLink = {
+  label: string;
+  href: string;
+};
+
+type SidebarProps = {
+  links: SidebarLink[];
+};
+
+export default function Sidebar({ links }: SidebarProps) {
   const [query, setQuery] = useState("");
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const filteredLinks = useMemo(() => {
     const normalized = query.trim().toLowerCase();
     if (!normalized) {
-      return SIDEBAR_LINKS;
+      return links;
     }
-    return SIDEBAR_LINKS.filter((item) => item.label.toLowerCase().includes(normalized));
-  }, [query]);
+    return links.filter((item) => item.label.toLowerCase().includes(normalized));
+  }, [query, links]);
 
   return (
     <>
