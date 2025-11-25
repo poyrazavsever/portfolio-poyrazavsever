@@ -41,7 +41,7 @@ export default function Sidebar({ links }: SidebarProps) {
         </span>
       </button>
 
-      <aside className="fixed left-[calc(56px+1rem)] top-0 hidden h-screen w-64 flex-col border border-(--color-border) bg-(--color-surface)/85 p-5 backdrop-blur-xl sm:flex">
+      <aside className="fixed left-[calc(56px+1rem)] top-0 hidden h-screen w-64 flex-col border-r border-(--color-border) bg-(--color-surface)/85 p-5 backdrop-blur-xl sm:flex">
         <div>
           <label htmlFor="sidebar-search-desktop" className="text-xs font-semibold text-(--color-muted)">
             Explorer
