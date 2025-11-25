@@ -55,7 +55,7 @@ export default async function RootLayout({
     <html lang="en" data-theme="mint" className={nunito.variable} suppressHydrationWarning>
       <body className="bg-(--color-background) text-(--color-text) antialiased">
         <ThemeProvider>
-          <ActivityBar />
+          <ActivityBar pages={pages} />
           <Sidebar links={sidebarLinks} />
           {children}
         </ThemeProvider>
