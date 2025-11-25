@@ -10,7 +10,7 @@ import Image from "next/image";
 import { ACTIVITY_LINKS, SOCIAL_LINKS } from "@/data/navigation";
 
 const iconButtonBase =
-  "relative flex h-12 w-12 items-center justify-center rounded-2xl border border-(--color-border) bg-(--color-surface)/90 text-(--color-muted) shadow-sm shadow-black/5 transition-colors hover:text-(--color-accent) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--color-accent) focus-visible:ring-offset-2 focus-visible:ring-offset-(--color-background)";
+  "relative flex h-12 w-12 items-center justify-center rounded-2xl border border-(--color-border) bg-(--color-surface)/90 text-(--color-muted) shadow-black/5 transition-colors hover:text-(--color-accent) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--color-accent) focus-visible:ring-offset-2 focus-visible:ring-offset-(--color-background)";
 
 const dropdownMotion = {
   initial: { opacity: 0, y: 8, scale: 0.98 },
@@ -119,7 +119,7 @@ const ActivityBar = () => {
                       key={`${item.id}-tooltip`}
                       {...tooltipMotion}
                       transition={{ duration: 0.15, ease: "easeOut" }}
-                      className="pointer-events-none absolute left-14 top-1/2 -translate-y-1/2 rounded-full border border-(--color-border) bg-(--color-background) px-3 py-1 text-xs font-medium w-24 text-center text-(--color-text) shadow-sm"
+                      className="pointer-events-none absolute left-14 top-1/2 -translate-y-1/2 rounded-full border border-(--color-border) bg-(--color-background) px-3 py-1 text-xs font-medium w-24 text-center text-(--color-text)"
                     >
                       {item.label}
                     </motion.span>
@@ -160,7 +160,7 @@ const ActivityBar = () => {
                   key="social-tooltip"
                   {...tooltipMotion}
                   transition={{ duration: 0.15, ease: "easeOut" }}
-                  className="pointer-events-none absolute left-14 top-1/2 -translate-y-1/2 rounded-full border border-(--color-border) bg-(--color-background) px-3 py-1 text-xs font-medium w-24 text-center text-(--color-text) shadow-sm"
+                  className="pointer-events-none absolute left-14 top-1/2 -translate-y-1/2 rounded-full border border-(--color-border) bg-(--color-background) px-3 py-1 text-xs font-medium w-24 text-center text-(--color-text)"
                 >
                   Social Links
                 </motion.span>
