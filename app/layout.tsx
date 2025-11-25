@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { ThemeProvider } from "@/components/theme-provider";
+import ActivityBar from "./components/layout/activitybar";
 
 
 export const metadata: Metadata = {
@@ -41,9 +43,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body>
-        {children}
+    <html lang="en" data-theme="obsidian" suppressHydrationWarning>
+      <body className="bg-(--color-background) text-(--color-text) antialiased">
+        <ActivityBar />
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   );
