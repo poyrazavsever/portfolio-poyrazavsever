@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "./components/theme-provider";
 import ActivityBar from "./components/layout/activitybar";
+import Sidebar from "./components/layout/sidebar";
 
 
 export const metadata: Metadata = {
@@ -47,6 +48,7 @@ export default function RootLayout({
       <body className="bg-(--color-background) text-(--color-text) antialiased">
         <ThemeProvider>
           <ActivityBar />
+          <Sidebar />
           {children}
         </ThemeProvider>
       </body>
