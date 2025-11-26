@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import Fuse from "fuse.js";
 import { Icon } from "@iconify/react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useRouter } from "next/navigation";
@@ -8,6 +9,7 @@ import type { PageMeta } from "@/lib/mdx";
 import type { BlogMeta } from "@/lib/blog";
 import type { NoteFile } from "@/lib/notes";
 import type { ProjectMeta } from "@/lib/projects";
+import { APP_THEMES, useTheme } from "@/app/components/theme-provider";
 
 type SearchModalProps = {
   open: boolean;
@@ -21,90 +23,54 @@ type SearchModalProps = {
   };
 };
 
+type ResultType = "action" | "page" | "project" | "blog" | "note" | "social";
+
+type SearchEntity = {
+  id: string;
+  title: string;
+  description?: string;
+  keywords?: string;
+  type: ResultType;
+  href?: string;
+  external?: boolean;
+  meta?: string;
+  onSelect?: () => Promise<void> | void;
+};
+
+const SECTION_ORDER: ResultType[] = ["action", "project", "page", "blog", "note", "social"];
+
+const SECTION_LABELS: Record<ResultType, string> = {
+  action: "Quick Actions",
+  page: "Pages",
+  project: "Projects",
+  blog: "Blog Posts",
+  note: "Notes",
+  social: "Social",
+};
+
+const SECTION_ICONS: Record<ResultType, string> = {
+  action: "solar:magic-stick-3-bold-duotone",
+  page: "solar:book-bold-duotone",
+  project: "solar:case-round-minimalistic-bold-duotone",
+  blog: "solar:document-bold-duotone",
+  note: "solar:document-text-bold-duotone",
+  social: "solar:share-bold-duotone",
+};
+
 const SearchModal = ({ open, onClose, searchData }: SearchModalProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [query, setQuery] = useState("");
   const router = useRouter();
   const { pages, blogPosts, notes, projects, socialLinks } = searchData;
+  const { theme, setTheme } = useTheme();
 
-  const normalizedQuery = query.trim().toLowerCase();
-  const filteredPages = useMemo(() => {
-    if (!normalizedQuery) {
-      return [];
-    }
-    return pages.filter((page) => {
-      const haystack = [
-        page.title,
-        page.description ?? "",
-        (page.tags ?? []).join(" "),
-      ]
-        .join(" ")
-        .toLowerCase();
-      return haystack.includes(normalizedQuery);
-    });
-  }, [normalizedQuery, pages]);
-
-  const filteredBlogPosts = useMemo(() => {
-    if (!normalizedQuery) {
-      return [];
-    }
-    return blogPosts.filter((post) => {
-      const haystack = [
-        post.title,
-        post.description ?? "",
-        (post.tags ?? []).join(" "),
-      ]
-        .join(" ")
-        .toLowerCase();
-      return haystack.includes(normalizedQuery);
-    });
-  }, [normalizedQuery, blogPosts]);
-
-  const filteredNotes = useMemo(() => {
-    if (!normalizedQuery) {
-      return [];
-    }
-    return notes.filter((note) => {
-      const haystack = [
-        note.title,
-        note.description ?? "",
-        (note.tags ?? []).join(" "),
-      ]
-        .join(" ")
-        .toLowerCase();
-      return haystack.includes(normalizedQuery);
-    });
-  }, [normalizedQuery, notes]);
-
-  const filteredSocialLinks = useMemo(() => {
-    if (!normalizedQuery) {
-      return [];
-    }
-    return socialLinks.filter((social) =>
-      social.label.toLowerCase().includes(normalizedQuery),
-    );
-  }, [normalizedQuery, socialLinks]);
-
-  const filteredProjects = useMemo(() => {
-    if (!normalizedQuery) {
-      return [];
-    }
-    return projects.filter((project) => {
-      const haystack = [
-        project.title,
-        project.description ?? "",
-        project.tags.join(" "),
-      ]
-        .join(" ")
-        .toLowerCase();
-      return haystack.includes(normalizedQuery);
-    });
-  }, [normalizedQuery, projects]);
+  const normalizedQuery = query.trim();
 
   useEffect(() => {
     if (!open) {
       return;
     }
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- Reset input when palette reopens
     setQuery("");
 
     const handleKey = (event: KeyboardEvent) => {
@@ -118,23 +84,201 @@ const SearchModal = ({ open, onClose, searchData }: SearchModalProps) => {
     return () => document.removeEventListener("keydown", handleKey);
   }, [open, onClose]);
 
+  const quickActions = useMemo<SearchEntity[]>(() => {
+    const currentIndex = APP_THEMES.findIndex((item) => item.id === theme);
+    const nextTheme = APP_THEMES[(currentIndex + 1) % APP_THEMES.length];
+
+    return [
+      {
+        id: "action-theme",
+        title: "Cycle Theme",
+        description: `Next: ${nextTheme.label}`,
+        keywords: "theme switch palette color dark light mint",
+        type: "action",
+        onSelect: () => setTheme(nextTheme.id),
+      },
+      {
+        id: "action-copy-email",
+        title: "Copy Email",
+        description: "poyrazavsever@gmail.com",
+        keywords: "email contact copy",
+        type: "action",
+        onSelect: async () => {
+          try {
+            await navigator.clipboard?.writeText("poyrazavsever@gmail.com");
+          } catch {
+            window.open("mailto:poyrazavsever@gmail.com", "_self");
+          }
+        },
+      },
+    ];
+  }, [setTheme, theme]);
+
+  const pageItems = useMemo<SearchEntity[]>(
+    () =>
+      pages.map((page) => ({
+        id: `page-${page.slug}`,
+        title: page.title,
+        description: page.description,
+        keywords: [page.title, page.description ?? "", page.tags.join(" ")].join(" "),
+        type: "page",
+        href: `/${page.slug}`,
+      })),
+    [pages],
+  );
+
+  const projectItems = useMemo<SearchEntity[]>(
+    () =>
+      projects.map((project) => ({
+        id: `project-${project.slug}`,
+        title: project.title,
+        description: project.description,
+        keywords: [project.title, project.description ?? "", project.tags.join(" ")].join(" "),
+        type: "project",
+        href: `/projects/${project.slug}`,
+      })),
+    [projects],
+  );
+
+  const blogItems = useMemo<SearchEntity[]>(
+    () =>
+      blogPosts.map((post) => ({
+        id: `blog-${post.slug}`,
+        title: post.title,
+        description: post.description,
+        keywords: [post.title, post.description ?? "", (post.tags ?? []).join(" "), post.date ?? ""].join(" "),
+        type: "blog",
+        href: `/blog/${post.slug}`,
+        meta: post.date,
+      })),
+    [blogPosts],
+  );
+
+  const noteItems = useMemo<SearchEntity[]>(
+    () =>
+      notes.map((note) => ({
+        id: `note-${note.slug}`,
+        title: note.title,
+        description: note.description,
+        keywords: [note.title, note.description ?? "", (note.tags ?? []).join(" "), note.date ?? ""].join(" "),
+        type: "note",
+        href: `/api/notes/${encodeURIComponent(note.slug)}`,
+        external: true,
+        meta: "PDF",
+      })),
+    [notes],
+  );
+
+  const socialItems = useMemo<SearchEntity[]>(
+    () =>
+      socialLinks.map((social) => ({
+        id: `social-${social.id}`,
+        title: social.label,
+        description: "Open in new tab",
+        keywords: social.label,
+        type: "social",
+        href: social.href,
+        external: true,
+      })),
+    [socialLinks],
+  );
+
+  const searchableItems = useMemo(
+    () => [...quickActions, ...projectItems, ...pageItems, ...blogItems, ...noteItems, ...socialItems],
+    [blogItems, noteItems, pageItems, projectItems, quickActions, socialItems],
+  );
+
+  const fuse = useMemo(
+    () =>
+      new Fuse(searchableItems, {
+        includeScore: true,
+        threshold: 0.35,
+        keys: [
+          { name: "title", weight: 0.6 },
+          { name: "description", weight: 0.25 },
+          { name: "keywords", weight: 0.15 },
+        ],
+      }),
+    [searchableItems],
+  );
+
+  const searchResults = useMemo(
+    () => (normalizedQuery ? fuse.search(normalizedQuery).map((result) => result.item) : []),
+    [fuse, normalizedQuery],
+  );
+
+  const groupedResults = useMemo(() => {
+    if (!normalizedQuery) {
+      return {};
+    }
+
+    return searchResults.reduce<Record<ResultType, SearchEntity[]>>((acc, item) => {
+      if (!acc[item.type]) {
+        acc[item.type] = [];
+      }
+      acc[item.type].push(item);
+      return acc;
+    }, {} as Record<ResultType, SearchEntity[]>);
+  }, [normalizedQuery, searchResults]);
+
+  const defaultSections = useMemo(() => {
+    const sections: Partial<Record<ResultType, SearchEntity[]>> = {
+      action: quickActions,
+      project: projectItems.slice(0, 3),
+      page: pageItems.slice(0, 4),
+      blog: blogItems.slice(0, 3),
+      note: noteItems.slice(0, 2),
+      social: socialItems.slice(0, 3),
+    };
+    return sections;
+  }, [blogItems, noteItems, pageItems, projectItems, quickActions, socialItems]);
+
   const handleNavigate = (href: string, options?: { external?: boolean }) => {
     if (options?.external) {
       window.open(href, "_blank", "noopener,noreferrer");
-      onClose();
       return;
     }
     router.push(href);
-    onClose();
   };
 
-  const hasResults =
-    filteredPages.length +
-      filteredBlogPosts.length +
-      filteredNotes.length +
-      filteredProjects.length +
-      filteredSocialLinks.length >
-    0;
+  const handleResultSelect = async (item: SearchEntity) => {
+    if (item.type === "action" && item.onSelect) {
+      await item.onSelect();
+      onClose();
+      return;
+    }
+
+    if (item.href) {
+      handleNavigate(item.href, { external: item.external });
+      onClose();
+    }
+  };
+
+  const primaryResult = normalizedQuery
+    ? searchResults[0]
+    : defaultSections.action?.[0] ?? defaultSections.project?.[0] ?? defaultSections.page?.[0];
+
+  const renderResult = (item: SearchEntity) => (
+    <button
+      key={item.id}
+      type="button"
+      onClick={() => handleResultSelect(item)}
+      className="w-full rounded-2xl border border-(--color-border) bg-(--color-background)/80 px-5 py-4 text-left transition hover:border-(--color-accent) hover:bg-(--color-surface)"
+    >
+      <div className="flex items-center justify-between gap-3">
+        <div className="space-y-1">
+          <p className="text-base font-semibold text-(--color-text)">{item.title}</p>
+          {item.description && <p className="text-sm text-(--color-muted)">{item.description}</p>}
+          {item.meta && (
+            <p className="text-[11px] uppercase tracking-[0.3em] text-(--color-muted)">
+              {item.meta}
+            </p>
+          )}
+        </div>
+        <Icon icon={SECTION_ICONS[item.type]} className="text-xl text-(--color-muted)" />
+      </div>
+    </button>
+  );
 
   return (
     <AnimatePresence>
@@ -150,7 +294,7 @@ const SearchModal = ({ open, onClose, searchData }: SearchModalProps) => {
           <motion.div
             role="dialog"
             aria-modal="true"
-            aria-label="Global search"
+            aria-label="Command palette"
             className="flex w-full max-w-4xl flex-col items-center gap-8 rounded-[34px] border border-(--color-border) bg-(--color-background) px-10 py-12 text-center shadow-[0_50px_120px_rgba(0,0,0,0.55)] max-h-[85vh] overflow-y-auto"
             initial={{ opacity: 0, y: 24, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -158,7 +302,7 @@ const SearchModal = ({ open, onClose, searchData }: SearchModalProps) => {
             onClick={(event) => event.stopPropagation()}
           >
             <p className="max-w-2xl text-sm text-(--color-muted)">
-              Start typing below to quickly filter through case studies, long-form content, and open-source work.
+              Search across case studies, blog posts, study notes, and social links. Press <kbd>⌘K</kbd>/<kbd>Ctrl+K</kbd> anywhere to open this palette.
             </p>
 
             <div className="flex w-full items-center gap-3 rounded-3xl border border-(--color-border) bg-(--color-surface) px-6 py-5">
@@ -166,249 +310,65 @@ const SearchModal = ({ open, onClose, searchData }: SearchModalProps) => {
               <input
                 ref={inputRef}
                 type="search"
-                placeholder="Type to search..."
+                placeholder="Type a command or search..."
                 className="flex-1 bg-transparent text-lg text-(--color-text) placeholder:text-(--color-muted) focus:outline-none"
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
                 onKeyDown={(event) => {
                   if (event.key === "Enter") {
                     event.preventDefault();
-                    if (filteredPages.length > 0) {
-                      handleNavigate(`/${filteredPages[0].slug}`);
+                    if (primaryResult) {
+                      void handleResultSelect(primaryResult);
                     }
                   }
                 }}
               />
-              <span className="rounded-full border border-(--color-border) px-3 py-1 text-xs text-(--color-muted) hidden sm:flex">Enter</span>
+              <span className="hidden rounded-full border border-(--color-border) px-3 py-1 text-xs text-(--color-muted) sm:flex">
+                Enter
+              </span>
             </div>
 
             {normalizedQuery ? (
-              hasResults ? (
+              searchResults.length > 0 ? (
                 <div className="w-full space-y-6 text-left">
-                  {filteredPages.length > 0 && (
-                    <div>
-                      <p className="mb-2 text-xs font-semibold uppercase tracking-[0.3em] text-(--color-muted)">
-                        Sayfalar
-                      </p>
-                      <div className="space-y-2">
-                        {filteredPages.map((page) => (
-                          <button
-                            key={page.slug}
-                            type="button"
-                            onClick={() => handleNavigate(`/${page.slug}`)}
-                            className="w-full rounded-2xl border border-(--color-border) bg-(--color-background)/80 px-5 py-4 text-left transition hover:border-(--color-accent) hover:bg-(--color-surface)"
-                          >
-                            <div className="flex items-center justify-between gap-4">
-                              <div>
-                                <p className="text-base font-semibold text-(--color-text)">
-                                  {page.title}
-                                </p>
-                                {page.description && (
-                                  <p className="text-sm text-(--color-muted)">
-                                    {page.description}
-                                  </p>
-                                )}
-                              </div>
-                              <Icon
-                                icon="solar:arrow-right-up-linear"
-                                className="hidden text-xl text-(--color-muted) sm:block"
-                              />
-                            </div>
-                            {page.tags?.length ? (
-                              <div className="mt-3 flex flex-wrap gap-2 text-xs text-(--color-muted)">
-                                {page.tags.slice(0, 3).map((tag) => (
-                                  <span
-                                    key={tag}
-                                    className="rounded-full border border-(--color-border) px-2 py-0.5"
-                                  >
-                                    #{tag}
-                                  </span>
-                                ))}
-                              </div>
-                            ) : null}
-                          </button>
-                        ))}
+                  {SECTION_ORDER.map((section) => {
+                    const entries = groupedResults[section];
+                    if (!entries || entries.length === 0) {
+                      return null;
+                    }
+                    return (
+                      <div key={section}>
+                        <p className="mb-2 text-xs font-semibold uppercase tracking-[0.3em] text-(--color-muted)">
+                          {SECTION_LABELS[section]}
+                        </p>
+                        <div className="space-y-2">{entries.map((entry) => renderResult(entry))}</div>
                       </div>
-                    </div>
-                  )}
-
-                  {filteredBlogPosts.length > 0 && (
-                    <div>
-                      <p className="mb-2 text-xs font-semibold uppercase tracking-[0.3em] text-(--color-muted)">
-                        Blog
-                      </p>
-                      <div className="space-y-2">
-                        {filteredBlogPosts.map((post) => (
-                          <button
-                            key={post.slug}
-                            type="button"
-                            onClick={() => handleNavigate(`/blog/${post.slug}`)}
-                            className="w-full rounded-2xl border border-(--color-border) bg-(--color-background)/80 px-5 py-4 text-left transition hover:border-(--color-accent) hover:bg-(--color-surface)"
-                          >
-                            <div className="flex items-center justify-between gap-4">
-                              <div>
-                                <p className="text-base font-semibold text-(--color-text)">
-                                  {post.title}
-                                </p>
-                                {post.description && (
-                                  <p className="text-sm text-(--color-muted)">
-                                    {post.description}
-                                  </p>
-                                )}
-                              </div>
-                              <Icon
-                                icon="solar:arrow-right-up-linear"
-                                className="hidden text-xl text-(--color-muted) sm:block"
-                              />
-                            </div>
-                            {post.date && (
-                              <p className="mt-3 text-xs uppercase tracking-[0.3em] text-(--color-muted)">
-                                {post.date}
-                              </p>
-                            )}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {filteredNotes.length > 0 && (
-                    <div>
-                      <p className="mb-2 text-xs font-semibold uppercase tracking-[0.3em] text-(--color-muted)">
-                        Notes
-                      </p>
-                      <div className="space-y-2">
-                        {filteredNotes.map((note) => (
-                          <button
-                            key={note.slug}
-                            type="button"
-                            onClick={() =>
-                              handleNavigate(
-                                `/api/notes/${encodeURIComponent(note.slug)}`,
-                                { external: true },
-                              )
-                            }
-                            className="w-full rounded-2xl border border-(--color-border) bg-(--color-background)/80 px-5 py-3 text-left transition hover:border-(--color-accent) hover:bg-(--color-surface)"
-                          >
-                            <div className="flex items-center justify-between gap-3">
-                              <div className="space-y-1">
-                                <p className="text-base font-semibold text-(--color-text)">
-                                  {note.title}
-                                </p>
-                                {note.description && (
-                                  <p className="text-sm text-(--color-muted)">
-                                    {note.description}
-                                  </p>
-                                )}
-                                <div className="flex flex-wrap gap-2 text-[10px] uppercase tracking-[0.3em] text-(--color-muted)">
-                                  <span>PDF Note</span>
-                                  {note.date && <span>{note.date}</span>}
-                                </div>
-                                {note.tags?.length ? (
-                                  <div className="flex flex-wrap gap-2 text-xs text-(--color-muted)">
-                                    {note.tags.slice(0, 3).map((tag) => (
-                                      <span
-                                        key={tag}
-                                        className="rounded-full border border-(--color-border) px-2 py-0.5"
-                                      >
-                                        #{tag}
-                                      </span>
-                                    ))}
-                                  </div>
-                                ) : null}
-                              </div>
-                              <Icon
-                                icon="solar:download-bold-duotone"
-                                className="text-xl text-(--color-muted)"
-                              />
-                            </div>
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {filteredProjects.length > 0 && (
-                    <div>
-                      <p className="mb-2 text-xs font-semibold uppercase tracking-[0.3em] text-(--color-muted)">
-                        Projects
-                      </p>
-                      <div className="space-y-2">
-                        {filteredProjects.map((project) => (
-                          <button
-                            key={project.slug}
-                            type="button"
-                            onClick={() => handleNavigate(`/projects/${project.slug}`)}
-                            className="w-full rounded-2xl border border-(--color-border) bg-(--color-background)/80 px-5 py-4 text-left transition hover:border-(--color-accent) hover:bg-(--color-surface)"
-                          >
-                            <div className="flex items-center justify-between gap-4">
-                              <div>
-                                <p className="text-base font-semibold text-(--color-text)">
-                                  {project.title}
-                                </p>
-                                {project.description && (
-                                  <p className="text-sm text-(--color-muted)">
-                                    {project.description}
-                                  </p>
-                                )}
-                              </div>
-                              <Icon
-                                icon="solar:arrow-right-up-linear"
-                                className="hidden text-xl text-(--color-muted) sm:block"
-                              />
-                            </div>
-                            {project.tags.length > 0 && (
-                              <div className="mt-3 flex flex-wrap gap-2 text-xs text-(--color-muted)">
-                                {project.tags.slice(0, 3).map((tag) => (
-                                  <span
-                                    key={tag}
-                                    className="rounded-full border border-(--color-border) px-2 py-0.5"
-                                  >
-                                    #{tag}
-                                  </span>
-                                ))}
-                              </div>
-                            )}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {filteredSocialLinks.length > 0 && (
-                    <div>
-                      <p className="mb-2 text-xs font-semibold uppercase tracking-[0.3em] text-(--color-muted)">
-                        Sosyal
-                      </p>
-                      <div className="space-y-2">
-                        {filteredSocialLinks.map((social) => (
-                          <button
-                            key={social.id}
-                            type="button"
-                            onClick={() =>
-                              handleNavigate(social.href, { external: true })
-                            }
-                            className="flex w-full items-center justify-between rounded-2xl border border-(--color-border) bg-(--color-background)/80 px-5 py-3 text-left transition hover:border-(--color-accent) hover:bg-(--color-surface)"
-                          >
-                            <span className="text-base font-semibold text-(--color-text)">
-                              {social.label}
-                            </span>
-                            <Icon
-                              icon="solar:arrow-right-up-linear"
-                              className="text-xl text-(--color-muted)"
-                            />
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-                  )}
+                    );
+                  })}
                 </div>
               ) : (
                 <p className="w-full rounded-2xl border border-dashed border-(--color-border) px-5 py-6 text-center text-sm text-(--color-muted)">
-                  “{query}” için sonuç bulunamadı. Lütfen farklı bir terim deneyin.
+                  No results for “{query}”. Try another keyword.
                 </p>
               )
-            ) : null}
+            ) : (
+              <div className="w-full space-y-6 text-left">
+                {SECTION_ORDER.map((section) => {
+                  const entries = defaultSections[section];
+                  if (!entries || entries.length === 0) {
+                    return null;
+                  }
+                  return (
+                    <div key={section}>
+                      <p className="mb-2 text-xs font-semibold uppercase tracking-[0.3em] text-(--color-muted)">
+                        {SECTION_LABELS[section]}
+                      </p>
+                      <div className="space-y-2">{entries.map((entry) => renderResult(entry))}</div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
           </motion.div>
         </motion.div>
       )}
