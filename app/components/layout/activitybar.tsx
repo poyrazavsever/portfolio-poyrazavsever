@@ -11,7 +11,7 @@ import { ACTIVITY_LINKS, SOCIAL_LINKS } from "@/data/navigation";
 import type { PageMeta } from "@/lib/mdx";
 
 const iconButtonBase =
-  "relative flex h-12 w-12 items-center justify-center rounded-2xl border border-(--color-border) bg-(--color-surface)/90 text-(--color-muted) shadow-black/5 transition-colors hover:text-(--color-accent) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--color-accent) focus-visible:ring-offset-2 focus-visible:ring-offset-(--color-background)";
+  "relative flex h-12 w-12 items-center justify-center rounded-2xl border border-(--color-border) bg-(--color-surface)/90 text-(--color-muted) shadow-black/5 transition-colors hover:text-(--color-accent) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--color-accent) focus-visible:ring-offset-2 focus-visible:ring-offset-(--color-background) cursor-pointer";
 
 const dropdownMotion = {
   initial: { opacity: 0, y: 8, scale: 0.98 },

@@ -14,7 +14,7 @@ const SettingsSheet = ({ open, onClose, sheetRef }: SettingsSheetProps) => {
     <AnimatePresence>
       {open && (
         <motion.div
-          className="fixed inset-0 z-40 flex items-end justify-end bg-black/50 p-4 backdrop-blur"
+          className="fixed inset-0 z-40 flex items-end justify-end bg-black/10 p-4 backdrop-blur-xs"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
