@@ -1,0 +1,158 @@
+{
+  "atomicdesign": {
+    "title": "Atomic Design Notları",
+    "description": "Bileşen hiyerarşisini atomlardan sayfalara kadar parçalayan çalışma dökümü.",
+    "tags": ["design systems", "ui"],
+    "date": "2025-02-10"
+  },
+  "bun": {
+    "title": "Bun Runtime Cheatsheet",
+    "description": "Bun CLI komutları, paket yöneticisi ve runtime optimizasyonları için hızlı notlar.",
+    "tags": ["runtime", "javascript"],
+    "date": "2025-02-18"
+  },
+  "cache": {
+    "title": "Caching Yaklaşımları",
+    "description": "Redis, CDN ve tarayıcı cache stratejilerini kıyaslayan özet.",
+    "tags": ["performance", "backend"],
+    "date": "2025-02-08"
+  },
+  "commit": {
+    "title": "Commit Mesaj Rehberi",
+    "description": "Conventional commits örnekleri ve takım içi standartlar.",
+    "tags": ["git", "workflow"],
+    "date": "2025-02-01"
+  },
+  "cv": {
+    "title": "CV Tasarım Draftı",
+    "description": "Güncel CV taslağı, bölüm başlıkları ve örnek içerik notları.",
+    "tags": ["career"],
+    "date": "2025-01-28"
+  },
+  "electron": {
+    "title": "Electron Hızlı Notlar",
+    "description": "Desktop app skeleton, IPC ve security checklist.",
+    "tags": ["desktop", "javascript"],
+    "date": "2025-02-20"
+  },
+  "end2end": {
+    "title": "End-to-End Test Pratikleri",
+    "description": "Playwright ve Cypress senaryoları için iyi uygulamalar.",
+    "tags": ["testing"],
+    "date": "2025-02-05"
+  },
+  "httpcodes": {
+    "title": "HTTP Status Kodları",
+    "description": "REST API tasarımı için en sık kullanılan durum kodları tablo halinde.",
+    "tags": ["api", "http"],
+    "date": "2025-01-15"
+  },
+  "i18n": {
+    "title": "i18n & L10n Kılavuzu",
+    "description": "Çok dilli Next.js projeleri için routing ve çeviri notları.",
+    "tags": ["internationalization"],
+    "date": "2025-02-03"
+  },
+  "islandarchitecture": {
+    "title": "Island Architecture Özeti",
+    "description": "ISR, streaming ve adacık tabanlı render yaklaşımı üzerine notlar.",
+    "tags": ["architecture", "nextjs"],
+    "date": "2025-02-12"
+  },
+  "json": {
+    "title": "JSON & Schema Notları",
+    "description": "JSON schema validasyon örnekleri ve tip güvenliği tüyoları.",
+    "tags": ["data"],
+    "date": "2025-01-18"
+  },
+  "mikrofrontend": {
+    "title": "Mikro-Frontend Stratejileri",
+    "description": "Module federation, deploy stratejileri ve takım yapılanması.",
+    "tags": ["frontend", "architecture"],
+    "date": "2025-02-22"
+  },
+  "mvc": {
+    "title": "MVC vs MVVM",
+    "description": "Katmanlı mimariler ve sorumluluk ayrımı üzerine kısa karşılaştırma.",
+    "tags": ["architecture"],
+    "date": "2025-01-20"
+  },
+  "nitro": {
+    "title": "Nitro Server Engine",
+    "description": "Nuxt/Nitro dağıtım hedefleri ve adaptörleri üzerine çalışma dosyası.",
+    "tags": ["nuxt", "serverless"],
+    "date": "2025-02-14"
+  },
+  "readme": {
+    "title": "README İpuçları",
+    "description": "Proje README'lerini standartlaştırmak için şablon ve kontrol listesi.",
+    "tags": ["documentation"],
+    "date": "2025-01-10"
+  },
+  "refactoring": {
+    "title": "Refactoring Checklist",
+    "description": "Kodu küçültürken gözden kaçmaması gereken adımlar.",
+    "tags": ["clean code"],
+    "date": "2025-01-26"
+  },
+  "restful": {
+    "title": "RESTful API İlkeleri",
+    "description": "Kaynak tasarımı, versiyonlama ve hata cevapları üzerine notlar.",
+    "tags": ["api"],
+    "date": "2025-02-06"
+  },
+  "rollback": {
+    "title": "Rollback Stratejileri",
+    "description": "Feature flag, canary ve otomatik geri alma senaryoları.",
+    "tags": ["devops"],
+    "date": "2025-02-11"
+  },
+  "smartdumb": {
+    "title": "Smart vs Dumb Components",
+    "description": "React bileşen sorumluluk dağılımı için mini rehber.",
+    "tags": ["react"],
+    "date": "2025-01-22"
+  },
+  "sqlvsnosql": {
+    "title": "SQL vs NoSQL",
+    "description": "Hangi veri yapısında hangi veritabanı modeli tercih edilmeli?",
+    "tags": ["database"],
+    "date": "2025-02-09"
+  },
+  "stackoverflow": {
+    "title": "Stack Overflow SSS",
+    "description": "Sık aldığım sorular ve verdiğim cevapların kısa özetleri.",
+    "tags": ["community"],
+    "date": "2025-01-30"
+  },
+  "statemanagment": {
+    "title": "State Yönetimi Rehberi",
+    "description": "Context, Redux Toolkit ve Zustand karşılaştırması.",
+    "tags": ["state management", "react"],
+    "date": "2025-02-04"
+  },
+  "stitch ai": {
+    "title": "Stitch AI Notları",
+    "description": "AI workflow otomasyonuna dair kavramlar ve API akışı.",
+    "tags": ["ai", "automation"],
+    "date": "2025-02-16"
+  },
+  "strapi": {
+    "title": "Strapi Headless CMS",
+    "description": "Content modelleme, auth ve deployment notları.",
+    "tags": ["cms"],
+    "date": "2025-02-13"
+  },
+  "tauri": {
+    "title": "Tauri vs Electron",
+    "description": "Rust tabanlı Tauri ile cross-platform masaüstü geliştirme kıyası.",
+    "tags": ["desktop", "rust"],
+    "date": "2025-02-19"
+  },
+  "versiyonlama": {
+    "title": "Semver & Release Planı",
+    "description": "Semantic versioning uygulamaları ve release yönetimi.",
+    "tags": ["release", "workflow"],
+    "date": "2025-01-25"
+  }
+}

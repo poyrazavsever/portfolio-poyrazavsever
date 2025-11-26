@@ -154,15 +154,24 @@ export async function GET() {
 
     const noteItems: FeedItem[] = notesWithDates.map(({ note, updatedAt }) => {
       const noteUrl = `${SITE_URL}/api/notes/${encodeURIComponent(note.slug)}`;
-      const noteContent = `<div><p>This PDF note lives in my <a href="${SITE_URL}/notes">Notes</a> shelf.</p><p><a href="${noteUrl}">Download the PDF</a></p></div>`;
+      const noteDescription =
+        note.description ?? `New PDF note available: ${note.title}`;
+      const contentSummary = note.description
+        ? `<p>${escapeHtml(note.description)}</p>`
+        : "";
+      const noteContent = `<div>${contentSummary}<p>This PDF lives in my <a href="${SITE_URL}/notes">Notes</a> rafında.</p><p><a href="${noteUrl}">PDF olarak indir</a></p></div>`;
+      const categories = ["notes", ...(note.tags ?? [])];
+      const resolvedDate = note.date
+        ? normalizeDate(note.date).toUTCString()
+        : updatedAt.toUTCString();
 
       return {
         title: `${note.title} (Note)`,
-        description: `New PDF note available: ${note.title}`,
+        description: noteDescription,
         link: noteUrl,
         guid: noteUrl,
-        pubDate: updatedAt.toUTCString(),
-        categories: ["notes"],
+        pubDate: resolvedDate,
+        categories,
         contentHtml: noteContent,
       };
     });

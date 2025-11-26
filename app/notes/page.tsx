@@ -26,11 +26,14 @@ export default async function NotesPage() {
             No notes yet. Add PDF files under <code>content/notes</code> and they will show up here instantly.
           </p>
         ) : (
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-8">
             {notes.map((note) => (
               <PdfViewer
                 key={note.slug}
                 title={note.title}
+                description={note.description}
+                tags={note.tags}
+                date={note.date}
                 fileUrl={`/api/notes/${encodeURIComponent(note.slug)}`}
               />
             ))}

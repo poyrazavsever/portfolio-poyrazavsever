@@ -7,11 +7,14 @@ import { Icon } from "@iconify/react";
 type PdfViewerProps = {
   title: string;
   fileUrl: string;
+  description?: string;
+  tags?: string[];
+  date?: string;
 };
 
 const PREVIEW_RESOLUTION = 1600;
 
-export default function PdfViewer({ title, fileUrl }: PdfViewerProps) {
+export default function PdfViewer({ title, fileUrl, description, tags = [], date }: PdfViewerProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [previewState, setPreviewState] = useState<"idle" | "loading" | "ready" | "error">("idle");
   const [previewError, setPreviewError] = useState<string | null>(null);
@@ -142,6 +145,28 @@ export default function PdfViewer({ title, fileUrl }: PdfViewerProps) {
         >
           <Icon icon="solar:download-bold-duotone" className="text-xl" />
         </a>
+      </div>
+      <div className="mt-3 space-y-1 text-left">
+        <p className="text-base font-semibold text-(--color-text)">{title}</p>
+        {description && (
+          <p className="text-sm text-(--color-muted)">
+            {description}
+          </p>
+        )}
+        {(date || tags.length > 0) && (
+          <div className="flex flex-wrap gap-2 text-xs text-(--color-muted)">
+            {date && (
+              <span className="rounded-full border border-(--color-border) px-2 py-0.5 uppercase tracking-[0.3em]">
+                {date}
+              </span>
+            )}
+            {tags.slice(0, 3).map((tag) => (
+              <span key={tag} className="rounded-full border border-(--color-border) px-2 py-0.5">
+                #{tag}
+              </span>
+            ))}
+          </div>
+        )}
       </div>
 
       <AnimatePresence>

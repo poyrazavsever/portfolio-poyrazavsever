@@ -6,6 +6,8 @@ import Sidebar from "./components/layout/sidebar";
 import { nunito } from "./font";
 import { getAllPageMetadata } from "@/lib/mdx";
 import type { PageMeta } from "@/lib/mdx";
+import { getAllBlogPostsMetadata } from "@/lib/blog";
+import { getAllNoteFiles } from "@/lib/notes";
 
 
 export const metadata: Metadata = {
@@ -47,6 +49,8 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const pages = await getAllPageMetadata();
+  const blogPosts = await getAllBlogPostsMetadata();
+  const notes = await getAllNoteFiles();
   const blogPage: PageMeta = {
     slug: "blog",
     title: "My Blog Posts",
@@ -105,12 +109,17 @@ export default async function RootLayout({
   }
 
   const searchablePages = [...pages, blogPage, notesPage];
+  const searchIndex = {
+    pages: searchablePages,
+    blogPosts,
+    notes,
+  };
 
   return (
     <html lang="en" data-theme="mint" className={nunito.variable} suppressHydrationWarning>
       <body className="bg-(--color-background) text-(--color-text) antialiased">
         <ThemeProvider>
-          <ActivityBar pages={searchablePages} />
+          <ActivityBar searchData={searchIndex} />
           <Sidebar links={sidebarLinks} />
           {children}
         </ThemeProvider>
