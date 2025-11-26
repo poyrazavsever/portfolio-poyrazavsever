@@ -43,7 +43,10 @@ const ActivityBar = ({ pages }: ActivityBarProps) => {
     }
 
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
         setSocialOpen(false);
       }
     };
@@ -60,7 +63,10 @@ const ActivityBar = ({ pages }: ActivityBarProps) => {
     }
 
     const handleClickOutside = (event: MouseEvent) => {
-      if (sheetRef.current && !sheetRef.current.contains(event.target as Node)) {
+      if (
+        sheetRef.current &&
+        !sheetRef.current.contains(event.target as Node)
+      ) {
         setSettingsOpen(false);
       }
     };
@@ -72,68 +78,80 @@ const ActivityBar = ({ pages }: ActivityBarProps) => {
   return (
     <>
       <aside className="fixed left-0 top-0 z-30 hidden h-screen w-max flex-col justify-between gap-4 border-r border-(--color-border) bg-(--color-surface)/80 p-3 backdrop-blur-xl sm:flex">
-        <nav className="flex flex-col items-center gap-3">
-          {ACTIVITY_LINKS.map((item) => {
-            const isExternal = item.href.startsWith("http");
-            const isSearch = item.id === "search";
+        <div className="flex flex-col items-center gap-4">
+          <div className="h-12 w-12 rounded-2xl border border-(--color-border) bg-(--color-background)/60 p-1">
+            <Image
+              src="/avatars/activitybar.jpeg"
+              alt="Poyraz Avsever avatar"
+              width={56}
+              height={56}
+              priority
+              className="h-full w-full rounded-xl object-cover"
+            />
+          </div>
+          <nav className="flex flex-col items-center gap-3">
+            {ACTIVITY_LINKS.map((item) => {
+              const isExternal = item.href.startsWith("http");
+              const isSearch = item.id === "search";
 
-            return (
-              <motion.div
-                key={item.id}
-                className="relative"
-                whileHover={{ y: -2 }}
-                whileTap={{ scale: 0.94 }}
-              >
-                {isSearch ? (
-                  <button
-                    type="button"
-                    className={`${iconButtonBase} ${
-                      searchOpen ? "text-(--color-accent)" : ""
-                    }`}
-                    aria-label="Search"
-                    aria-haspopup="dialog"
-                    aria-expanded={searchOpen}
-                    onClick={() => setSearchOpen(true)}
-                    onMouseEnter={() => handleHover(item.id)}
-                    onMouseLeave={() => handleHover(null)}
-                    onFocus={() => handleHover(item.id)}
-                    onBlur={() => handleHover(null)}
-                  >
-                    <Icon icon={item.icon} className="text-[1.5rem]" />
-                  </button>
-                ) : (
-                  <Link
-                    href={item.href}
-                    target={isExternal ? "_blank" : undefined}
-                    rel={isExternal ? "noreferrer" : undefined}
-                    className={iconButtonBase}
-                    aria-label={item.label}
-                    title={item.label}
-                    onMouseEnter={() => handleHover(item.id)}
-                    onMouseLeave={() => handleHover(null)}
-                    onFocus={() => handleHover(item.id)}
-                    onBlur={() => handleHover(null)}
-                  >
-                    <Icon icon={item.icon} className="text-[1.5rem]" />
-                  </Link>
-                )}
-
-                <AnimatePresence>
-                  {hoveredId === item.id && (
-                    <motion.span
-                      key={`${item.id}-tooltip`}
-                      {...tooltipMotion}
-                      transition={{ duration: 0.15, ease: "easeOut" }}
-                      className="pointer-events-none absolute left-14 top-1/2 -translate-y-1/2 rounded-full border border-(--color-border) bg-(--color-background) px-3 py-1 text-xs font-medium w-24 text-center text-(--color-text)"
+              return (
+                <motion.div
+                  key={item.id}
+                  className="relative"
+                  whileHover={{ y: -2 }}
+                  whileTap={{ scale: 0.94 }}
+                >
+                  {isSearch ? (
+                    <button
+                      type="button"
+                      className={`${iconButtonBase} ${
+                        searchOpen ? "text-(--color-accent)" : ""
+                      }`}
+                      aria-label="Search"
+                      aria-haspopup="dialog"
+                      aria-expanded={searchOpen}
+                      onClick={() => setSearchOpen(true)}
+                      onMouseEnter={() => handleHover(item.id)}
+                      onMouseLeave={() => handleHover(null)}
+                      onFocus={() => handleHover(item.id)}
+                      onBlur={() => handleHover(null)}
                     >
-                      {item.label}
-                    </motion.span>
+                      <Icon icon={item.icon} className="text-[1.5rem]" />
+                    </button>
+                  ) : (
+                    <Link
+                      href={item.href}
+                      target={isExternal ? "_blank" : undefined}
+                      rel={isExternal ? "noreferrer" : undefined}
+                      className={iconButtonBase}
+                      aria-label={item.label}
+                      title={item.label}
+                      onMouseEnter={() => handleHover(item.id)}
+                      onMouseLeave={() => handleHover(null)}
+                      onFocus={() => handleHover(item.id)}
+                      onBlur={() => handleHover(null)}
+                    >
+                      <Icon icon={item.icon} className="text-[1.5rem]" />
+                    </Link>
                   )}
-                </AnimatePresence>
-              </motion.div>
-            );
-          })}
-        </nav>
+
+                  <AnimatePresence>
+                    {hoveredId === item.id && (
+                      <motion.span
+                        key={`${item.id}-tooltip`}
+                        {...tooltipMotion}
+                        transition={{ duration: 0.15, ease: "easeOut" }}
+                        className="pointer-events-none absolute left-14 top-1/2 -translate-y-1/2 rounded-full border border-(--color-border) bg-(--color-background) px-3 py-1 text-xs font-medium w-24 text-center text-(--color-text)"
+                      >
+                        {item.label}
+                      </motion.span>
+                    )}
+                  </AnimatePresence>
+                </motion.div>
+              );
+            })}
+          </nav>
+        </div>
 
         <div className="flex flex-col items-center gap-4">
           <div className="relative" ref={dropdownRef}>
@@ -226,17 +244,6 @@ const ActivityBar = ({ pages }: ActivityBarProps) => {
                 className="text-[1.5rem]"
               />
             </button>
-
-            <div className="h-12 w-12 rounded-2xl border border-(--color-border) bg-(--color-background)/50 p-1">
-              <Image
-                src="/avatars/activitybar.jpeg"
-                alt="Poyraz Avsever avatar"
-                width={56}
-                height={56}
-                priority
-                className="h-full w-full rounded-xl object-cover"
-              />
-            </div>
           </div>
         </div>
       </aside>
@@ -270,7 +277,7 @@ const ActivityBar = ({ pages }: ActivityBarProps) => {
             >
               {content}
             </Link>
-          )
+          );
         })}
         <button
           type="button"
@@ -316,11 +323,17 @@ const ActivityBar = ({ pages }: ActivityBarProps) => {
                     >
                       <span className="flex items-center gap-2">
                         <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-(--color-background)/60">
-                          <Icon icon={social.icon} className="text-lg text-(--color-accent)" />
+                          <Icon
+                            icon={social.icon}
+                            className="text-lg text-(--color-accent)"
+                          />
                         </span>
                         {social.label}
                       </span>
-                      <Icon icon="solar:arrow-right-up-linear" className="text-base text-(--color-muted)" />
+                      <Icon
+                        icon="solar:arrow-right-up-linear"
+                        className="text-base text-(--color-muted)"
+                      />
                     </Link>
                   </li>
                 ))}
