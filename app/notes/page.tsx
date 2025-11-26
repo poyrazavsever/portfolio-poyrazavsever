@@ -13,7 +13,6 @@ export default async function NotesPage() {
   return (
     <main className="max-w-7xl px-6 py-16 lg:pl-96">
       <header className="space-y-4">
-        <p className="text-sm uppercase tracking-[0.25em] text-(--color-muted)">Reference shelf</p>
         <h1 className="text-4xl font-semibold text-(--color-text)">My Notes</h1>
         <p className="text-(--color-muted)">
           Everything here is a direct export from my study sessions. Drop your PDFs into <code>content/notes</code> to
