@@ -56,9 +56,22 @@ export default async function RootLayout({
     links: [],
   };
 
+  const notesPage: PageMeta = {
+    slug: "notes",
+    title: "My Notes",
+    order: Number.MAX_SAFE_INTEGER - 1,
+    tags: ["notes", "pdf"],
+    description: "A collection of study notes and references rendered as PDFs.",
+    links: [],
+  };
+
   const blogLink = {
     label: blogPage.title,
     href: "/blog",
+  };
+  const notesLink = {
+    label: notesPage.title,
+    href: "/notes",
   };
 
   const sidebarLinks = pages.reduce<{ label: string; href: string }[]>((acc, page) => {
@@ -68,7 +81,7 @@ export default async function RootLayout({
     });
 
     if (page.slug === "about") {
-      acc.push(blogLink);
+      acc.push(blogLink, notesLink);
     }
 
     return acc;
@@ -80,7 +93,18 @@ export default async function RootLayout({
     sidebarLinks.splice(targetIndex, 0, blogLink);
   }
 
-  const searchablePages = [...pages, blogPage];
+  if (!sidebarLinks.some((link) => link.href === notesLink.href)) {
+    const blogIndex = sidebarLinks.findIndex((link) => link.href === blogLink.href);
+    if (blogIndex >= 0) {
+      sidebarLinks.splice(blogIndex + 1, 0, notesLink);
+    } else {
+      const contentIndex = sidebarLinks.findIndex((link) => link.href === "/content");
+      const targetIndex = contentIndex >= 0 ? contentIndex : sidebarLinks.length;
+      sidebarLinks.splice(targetIndex, 0, notesLink);
+    }
+  }
+
+  const searchablePages = [...pages, blogPage, notesPage];
 
   return (
     <html lang="en" data-theme="mint" className={nunito.variable} suppressHydrationWarning>
