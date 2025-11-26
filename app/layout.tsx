@@ -56,13 +56,29 @@ export default async function RootLayout({
     links: [],
   };
 
-  const sidebarLinks = [...pages.map((page) => ({
-    label: page.title,
-    href: `/${page.slug}`,
-  })), {
+  const blogLink = {
     label: blogPage.title,
     href: "/blog",
-  }];
+  };
+
+  const sidebarLinks = pages.reduce<{ label: string; href: string }[]>((acc, page) => {
+    acc.push({
+      label: page.title,
+      href: `/${page.slug}`,
+    });
+
+    if (page.slug === "about") {
+      acc.push(blogLink);
+    }
+
+    return acc;
+  }, []);
+
+  if (!sidebarLinks.some((link) => link.href === blogLink.href)) {
+    const contentIndex = sidebarLinks.findIndex((link) => link.href === "/content");
+    const targetIndex = contentIndex >= 0 ? contentIndex : sidebarLinks.length;
+    sidebarLinks.splice(targetIndex, 0, blogLink);
+  }
 
   const searchablePages = [...pages, blogPage];
 
