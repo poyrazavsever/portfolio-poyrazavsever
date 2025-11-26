@@ -226,7 +226,7 @@ const ActivityBar = ({ searchData }: ActivityBarProps) => {
                   key="social-dropdown"
                   {...dropdownMotion}
                   transition={{ duration: 0.18, ease: "easeOut" }}
-                  className="absolute left-16 -top-14 z-10 min-w-[220px] -translate-y-1/2 rounded-2xl border border-(--color-border) bg-(--color-surface)/80 p-3 text-left shadow-[0_15px_50px_rgba(0,0,0,0.35)] backdrop-blur"
+                  className="absolute left-16 -top-32 z-10 min-w-[220px] -translate-y-1/2 rounded-2xl border border-(--color-border) bg-(--color-surface)/80 p-3 text-left shadow-[0_15px_50px_rgba(0,0,0,0.35)] backdrop-blur"
                 >
                   <ul className="flex flex-col gap-1.5">
                     {SOCIAL_LINKS.map((social) => (
@@ -278,7 +278,7 @@ const ActivityBar = ({ searchData }: ActivityBarProps) => {
         </div>
       </aside>
 
-      <div className="fixed inset-x-3 bottom-3 z-30 flex flex-wrap items-center justify-around gap-2 rounded-3xl border border-(--color-border) bg-(--color-background)/80 px-2 py-2 text-[10px] text-(--color-text) shadow-[0_12px_30px_rgba(0,0,0,0.35)] backdrop-blur lg:hidden">
+      <div className="fixed inset-x-3 bottom-3 z-30 flex flex-wrap items-center justify-around gap-2 rounded-3xl border border-(--color-border) bg-(--color-background)/80 px-2 py-2 text-[10px] text-(--color-text) shadow-[0_12px_30px_rgba(0,0,0,0.35)] backdrop-blur sm:hidden">
         {ACTIVITY_LINKS.map((item) => {
           const isSearch = item.id === "search";
           const isExternal = item.href.startsWith("http");
