@@ -1,0 +1,83 @@
+---
+slug: "tech-stack"
+title: "I Use These Technologies"
+order: 4
+tags:
+  - stack
+  - tools
+  - workflow
+links: []
+description: "Snapshot of the frontend, backend, data, and productivity tools I reach for every week."
+---
+
+<div className="space-y-10">
+  <section>
+    <h2>Frontend & UI</h2>
+    <div className="flex flex-wrap items-center gap-3">
+      {["html", "css", "sass", "tailwind", "bootstrap", "materialui", "react", "react", "electron", "nextjs", "vue", "nuxtjs", "svelte", "redux", "pug"].map((icon, index) => (
+        <img
+          key={`${icon}-${index}`}
+          src={`https://skillicons.dev/icons?i=${icon}`}
+          alt={icon}
+          className="h-12 w-12 rounded-xl border border-(--color-border)/40 bg-(--color-surface) p-2"
+        />
+      ))}
+    </div>
+  </section>
+
+  <section>
+    <h2>Languages</h2>
+    <div className="flex flex-wrap items-center gap-3">
+      {["js", "ts", "python"].map((icon) => (
+        <img
+          key={icon}
+          src={`https://skillicons.dev/icons?i=${icon}`}
+          alt={icon}
+          className="h-12 w-12 rounded-xl border border-(--color-border)/40 bg-(--color-surface) p-2"
+        />
+      ))}
+    </div>
+  </section>
+
+  <section>
+    <h2>Backend & APIs</h2>
+    <div className="flex flex-wrap items-center gap-3">
+      {["nodejs", "express", "nestjs", "fastapi", "flask"].map((icon) => (
+        <img
+          key={icon}
+          src={`https://skillicons.dev/icons?i=${icon}`}
+          alt={icon}
+          className="h-12 w-12 rounded-xl border border-(--color-border)/40 bg-(--color-surface) p-2"
+        />
+      ))}
+    </div>
+  </section>
+
+  <section>
+    <h2>Databases & Hosting</h2>
+    <div className="flex flex-wrap items-center gap-3">
+      {["firebase", "supabase", "sqlite", "mysql", "mongodb", "vercel"].map((icon) => (
+        <img
+          key={icon}
+          src={`https://skillicons.dev/icons?i=${icon}`}
+          alt={icon}
+          className="h-12 w-12 rounded-xl border border-(--color-border)/40 bg-(--color-surface) p-2"
+        />
+      ))}
+    </div>
+  </section>
+
+  <section>
+    <h2>Tools & Platforms</h2>
+    <div className="flex flex-wrap items-center gap-3">
+      {["figma", "xd", "ps", "sketchup", "stackoverflow", "markdown", "notion", "discord", "linux", "jenkins", "git", "gitlab", "github", "vscode", "visualstudio"].map((icon) => (
+        <img
+          key={icon}
+          src={`https://skillicons.dev/icons?i=${icon}`}
+          alt={icon}
+          className="h-12 w-12 rounded-xl border border-(--color-border)/40 bg-(--color-surface) p-2"
+        />
+      ))}
+    </div>
+  </section>
+</div>
