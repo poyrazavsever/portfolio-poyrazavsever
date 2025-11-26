@@ -1,0 +1,100 @@
+---
+slug: "ciftci-app"
+title: "Çiftçi App"
+description: "AI-assisted field companion that Ottoqua and I build for smallholder farmers."
+tags:
+  - agritech
+  - nextjs
+  - supabase
+  - ai
+links:
+  - label: "Ottoqua Team"
+    href: "https://ottoqua.com"
+    target: "_blank"
+  - label: "Contact us"
+    href: "mailto:poyrazavsever@gmail.com"
+---
+
+# Çiftçi App with Ottoqua
+
+I serve as the software lead inside Ottoqua for this initiative. The goal: give farmers an AI-powered assistant that handles disease detection, logistics, and communication in one place.
+
+## Context & Responsibilities
+- Lead the Next.js codebase, design the data model, and coordinate with Ottoqua's agronomy team.
+- Own the Supabase schema (auth, row-level security, realtime messaging) and Gemini integration for computer vision prompts.
+- Ship weekly releases to a pilot group of 50 farmers and iterate based on their voice notes and field visits.
+
+## Core Stack
+<table>
+  <thead>
+    <tr>
+      <th>Layer</th>
+      <th>Tech</th>
+      <th>Icon</th>
+      <th>Reason</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Frontend</td>
+      <td><strong>Next.js 15 + App Router</strong></td>
+      <td><img src="https://skillicons.dev/icons?i=nextjs" alt="Next.js icon" width="32" height="32" /></td>
+      <td>React Server Components with streaming UI for fast dashboards.</td>
+    </tr>
+    <tr>
+      <td>Styling</td>
+      <td><strong>Tailwind CSS + Radix UI</strong></td>
+      <td><img src="https://skillicons.dev/icons?i=tailwind" alt="Tailwind icon" width="32" height="32" /></td>
+      <td>Adaptive components that remain readable in field sunlight.</td>
+    </tr>
+    <tr>
+      <td>Backend</td>
+      <td><strong>Supabase (Postgres, Auth, Realtime)</strong></td>
+      <td><img src="https://avatars.githubusercontent.com/u/54469796?s=64&v=4" alt="Supabase icon" width="32" height="32" /></td>
+      <td>Managed Postgres with row-level security for coop-based tenancy.</td>
+    </tr>
+    <tr>
+      <td>AI</td>
+      <td><strong>Google Gemini</strong></td>
+      <td><img src="https://skillicons.dev/icons?i=googlecloud" alt="Google Cloud icon" width="32" height="32" /></td>
+      <td>Diagnose plant diseases from photos and recommend treatments.</td>
+    </tr>
+    <tr>
+      <td>Messaging</td>
+      <td><strong>Supabase Realtime Channels</strong></td>
+      <td><img src="https://avatars.githubusercontent.com/u/54469796?s=64&v=4" alt="Supabase icon" width="32" height="32" /></td>
+      <td>1:1 and group chats between farmers, agronomists, and suppliers.</td>
+    </tr>
+  </tbody>
+</table>
+
+## Features That Matter to Farmers
+
+### 1. Plant Disease Prediction via Photo
+Farmers upload a leaf photo, we run it through Gemini Vision prompts fine-tuned with Ottoqua's dataset, and respond with:
+- Likely disease and confidence score
+- Immediate treatment steps (spray, irrigation change, quarantine)
+- Recommended product list with dosage
+
+### 2. Nearby Agrochemical Store Finder
+Using Supabase PostGIS + open municipal data we map the nearest certified chemical shops.
+- GPS pin from farmer's location
+- Filter by product availability (fungicide, fertilizer, etc.)
+- Directions + contact via WhatsApp deep links
+
+### 3. Community Forum
+A lightweight forum allows farmers to share best practices and ask experts for help.
+- Channels by crop (wheat, tomatoes, hazelnut)
+- Upvoted answers pinned by moderators
+- Gemini suggests related threads before posting to cut duplicates
+
+### 4. Messaging & Advisory Inbox
+Farmers can DM Ottoqua agronomists or suppliers.
+- Supabase Realtime channels with optimistic UI
+- Audio note transcription using Gemini text-batching
+- Automated follow-up reminders when an advisor hasn't replied within 12 hours
+
+## Impact & Next Steps
+- 50 pilot farmers actively logging disease reports, 1,200+ AI diagnoses served.
+- Time to find reliable chemical supplies dropped from hours to minutes thanks to the locator.
+- Community forum retains 78% of weekly active users due to helpful responses.

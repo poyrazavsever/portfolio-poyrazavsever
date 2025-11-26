@@ -8,6 +8,7 @@ import { getAllPageMetadata } from "@/lib/mdx";
 import type { PageMeta } from "@/lib/mdx";
 import { getAllBlogPostsMetadata } from "@/lib/blog";
 import { getAllNoteFiles } from "@/lib/notes";
+import { getAllProjectMetadata } from "@/lib/projects";
 
 
 export const metadata: Metadata = {
@@ -51,6 +52,7 @@ export default async function RootLayout({
   const pages = await getAllPageMetadata();
   const blogPosts = await getAllBlogPostsMetadata();
   const notes = await getAllNoteFiles();
+  const projectDetails = await getAllProjectMetadata();
   const blogPage: PageMeta = {
     slug: "blog",
     title: "My Blog Posts",
@@ -113,6 +115,7 @@ export default async function RootLayout({
     pages: searchablePages,
     blogPosts,
     notes,
+    projects: projectDetails,
   };
 
   return (

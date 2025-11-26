@@ -1,0 +1,223 @@
+---
+slug: "pixel-sinav"
+title: "Pixel Sınav"
+description: "Gamified exam prep platform that mixes pixel art UI with timed assessments."
+tags:
+  - education
+  - nextjs
+  - nestjs
+links:
+  - label: "Frontend Repo"
+    href: "https://github.com/poyrazavsever/PixelSinav-Frontend"
+    target: "_blank"
+  - label: "Backend Repo"
+    href: "https://github.com/poyrazavsever/PixelSinav-Backend"
+    target: "_blank"
+---
+
+
+# Pixel Sınav: My Most Comprehensive Learning Project
+
+Hello, I’m Poyraz Avsever. As part of advancing my software development journey, I created a project called Pixel Sınav to improve my technical skills and build something meaningful.
+
+Pixel Sınav is a comprehensive educational platform built with modern web technologies, where teachers can create course content and students can track their learning progress.
+
+In this article, I will share the development journey of this project, the technologies I used, the challenges I faced, what I learned, and my future plans.
+
+---
+
+## Purpose and Background
+
+There were two main motivations behind starting this project:
+
+1. I wanted to build higher-quality, more scalable, and technically challenging projects.
+2. I wanted to learn backend-focused technologies such as NestJS and Docker.
+
+Additionally, my personal interest in educational technologies and my desire to contribute to this field helped shape the concept of Pixel Sınav. With the increasing digitalization in education, I aimed to build a platform that brings valuable learning content to users.
+
+---
+
+## Why an Educational Platform?
+
+EdTech aligns with my goals for personal growth while also generating social value. The idea of a system where teachers can easily produce content and students can learn at their own pace felt both motivating and technically challenging.
+
+Through this project, I had the opportunity to apply many frontend and backend concepts in a practical way.
+
+---
+
+## Technology Stack
+
+While planning the tech stack, I decided to stay within the JavaScript ecosystem. This allowed me to use technologies like Next.js and NestJS together and build both frontend and backend using TypeScript.
+
+### Core Technologies
+
+<table>
+  <thead>
+    <tr>
+      <th>Technology</th>
+      <th>Icon</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Next.js</strong></td>
+      <td><img src="https://skillicons.dev/icons?i=next" alt="Next.js icon" width="32" height="32" /></td>
+      <td>A React-based, server-side rendering web framework.</td>
+    </tr>
+    <tr>
+      <td><strong>React</strong></td>
+      <td><img src="https://skillicons.dev/icons?i=react" alt="React icon" width="32" height="32" /></td>
+      <td>A component-based UI development library.</td>
+    </tr>
+    <tr>
+      <td><strong>TailwindCSS</strong></td>
+      <td><img src="https://skillicons.dev/icons?i=tailwind" alt="Tailwind CSS icon" width="32" height="32" /></td>
+      <td>Utility-first CSS framework for building custom designs.</td>
+    </tr>
+    <tr>
+      <td><strong>NestJS</strong></td>
+      <td><img src="https://skillicons.dev/icons?i=nestjs" alt="NestJS icon" width="32" height="32" /></td>
+      <td>A TypeScript-based progressive Node.js framework.</td>
+    </tr>
+    <tr>
+      <td><strong>MongoDB</strong></td>
+      <td><img src="https://skillicons.dev/icons?i=mongodb" alt="MongoDB icon" width="32" height="32" /></td>
+      <td>A scalable NoSQL document database.</td>
+    </tr>
+    <tr>
+      <td><strong>TypeScript</strong></td>
+      <td><img src="https://skillicons.dev/icons?i=ts" alt="TypeScript icon" width="32" height="32" /></td>
+      <td>A type-safe superset of JavaScript.</td>
+    </tr>
+    <tr>
+      <td><strong>Docker</strong></td>
+      <td><img src="https://skillicons.dev/icons?i=docker" alt="Docker icon" width="32" height="32" /></td>
+      <td>Containerization technology to run applications in isolated environments.</td>
+    </tr>
+    <tr>
+      <td><strong>Jest</strong></td>
+      <td><img src="https://skillicons.dev/icons?i=jest" alt="Jest icon" width="32" height="32" /></td>
+      <td>A JavaScript testing framework.</td>
+    </tr>
+  </tbody>
+</table>
+
+### Other Libraries
+
+- **Framer Motion** – Smooth animation library for React
+- **React Markdown** – Markdown rendering support
+- **Chart.js + react-chartjs-2** – For student performance visualizations
+- **React Hot Toast** – Lightweight notification system
+
+---
+
+## Design Process
+
+For UI/UX inspiration, I referenced the platform [Codedex](https://www.codedex.io/). Its color palettes, clean typography, and simplicity greatly influenced my design choices.
+
+I designed the UI myself and focused on:
+
+- Proper color contrast
+- Readable typography
+- Consistent spacing and layout
+- Mobile responsiveness with a flexible grid system
+
+**Frontend Code**: [GitHub - PixelSinav-Frontend](https://github.com/poyrazavsever/PixelSinav-Frontend)  
+**Backend Code**: [GitHub - PixelSinav-Backend](https://github.com/poyrazavsever/PixelSinav-Backend)
+
+---
+
+## User Roles and Structure
+
+Pixel Sınav has two main user roles:
+
+1. **Teacher**: Can create lessons, add content, and view student progress
+2. **Student**: Can enroll in lessons, read content, and track their own progress
+
+Authentication, authorization, and role-based endpoints were implemented accordingly.
+
+---
+
+## Development Process
+
+### Getting Started
+
+I started with the frontend. The first step was to build the authentication system, including login, registration, and JWT-based session handling. After that, I moved to the teacher panel and developed the lesson creation module.
+
+### Backend Integration
+
+I learned NestJS from scratch. The biggest challenges were understanding modular architecture and creating structured API documentation with Swagger.
+
+What I accomplished quickly:
+
+- User registration and login
+- Secure token-based authentication with JWT
+- Email verification system
+- Lesson creation, listing, and deletion
+- Filtering lessons by teacher
+
+---
+
+## Authentication and Authorization
+
+JWT-based authentication was implemented in the NestJS backend. Protected routes were created based on user roles, and Swagger/OpenAPI was used to generate API documentation.
+
+### Sample Endpoints
+
+- `POST /auth/register` – Register a new user
+- `POST /auth/login` – Login and receive token
+- `POST /lessons` – Create a lesson (teacher only)
+- `GET /lessons/teacher/:id` – Get lessons by teacher ID
+
+---
+
+## Testing, Validation, and Security
+
+- **Validation Pipe**: All requests are validated using `class-validator`
+- **Jest**: Unit and integration tests are written using Jest
+- **Rate Limiting**: Anonymous users have a limited request quota per hour
+
+---
+
+## What I Learned
+
+This project helped me gain hands-on experience in:
+
+- Building robust API architectures with NestJS
+- Using MongoDB Aggregation Framework for advanced filtering
+- Applying Clean Architecture principles in backend development
+- Improving responsive design skills on the frontend
+
+---
+
+## Future Plans
+
+I intend to continue developing this project. Some of my roadmap items include:
+
+- Developing a mobile app using React Native
+- Adding advanced exam result analytics
+- Implementing real-time notification features
+- Creating an admin panel and reporting system
+
+---
+
+## Final Thoughts
+
+Pixel Sınav is more than just a project for me. It’s a milestone that represents how far I’ve come and what I can build when I challenge myself.
+
+If you're on a similar journey, feel free to clone the project, contribute to it, or simply star it on GitHub.
+
+---
+
+## Useful Links
+
+- [Frontend Repo](https://github.com/poyrazavsever/PixelSinav-Frontend)
+- [Backend Repo](https://github.com/poyrazavsever/PixelSinav-Backend)
+- [Figma Design](https://www.figma.com/design/9lpzqI7EmUKKfEh0S7vfWO/Pixel-S%C4%B1nav?node-id=0-1&p=f&t=CHImoBwT1CzSSeqd-0)
+- [LinkedIn](https://www.linkedin.com/in/poyrazavsever)
+- [Email](mailto:poyrazavsever@gmail.com)
+
+---
+
+Thank you for reading.

@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import type { PageMeta } from "@/lib/mdx";
 import type { BlogMeta } from "@/lib/blog";
 import type { NoteFile } from "@/lib/notes";
+import type { ProjectMeta } from "@/lib/projects";
 
 type SearchModalProps = {
   open: boolean;
@@ -15,6 +16,7 @@ type SearchModalProps = {
     pages: PageMeta[];
     blogPosts: BlogMeta[];
     notes: NoteFile[];
+    projects: ProjectMeta[];
     socialLinks: { id: string; label: string; href: string }[];
   };
 };
@@ -23,7 +25,7 @@ const SearchModal = ({ open, onClose, searchData }: SearchModalProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [query, setQuery] = useState("");
   const router = useRouter();
-  const { pages, blogPosts, notes, socialLinks } = searchData;
+  const { pages, blogPosts, notes, projects, socialLinks } = searchData;
 
   const normalizedQuery = query.trim().toLowerCase();
   const filteredPages = useMemo(() => {
@@ -83,6 +85,22 @@ const SearchModal = ({ open, onClose, searchData }: SearchModalProps) => {
     );
   }, [normalizedQuery, socialLinks]);
 
+  const filteredProjects = useMemo(() => {
+    if (!normalizedQuery) {
+      return [];
+    }
+    return projects.filter((project) => {
+      const haystack = [
+        project.title,
+        project.description ?? "",
+        project.tags.join(" "),
+      ]
+        .join(" ")
+        .toLowerCase();
+      return haystack.includes(normalizedQuery);
+    });
+  }, [normalizedQuery, projects]);
+
   useEffect(() => {
     if (!open) {
       return;
@@ -114,6 +132,7 @@ const SearchModal = ({ open, onClose, searchData }: SearchModalProps) => {
     filteredPages.length +
       filteredBlogPosts.length +
       filteredNotes.length +
+      filteredProjects.length +
       filteredSocialLinks.length >
     0;
 
@@ -303,6 +322,53 @@ const SearchModal = ({ open, onClose, searchData }: SearchModalProps) => {
                                 className="text-xl text-(--color-muted)"
                               />
                             </div>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {filteredProjects.length > 0 && (
+                    <div>
+                      <p className="mb-2 text-xs font-semibold uppercase tracking-[0.3em] text-(--color-muted)">
+                        Projects
+                      </p>
+                      <div className="space-y-2">
+                        {filteredProjects.map((project) => (
+                          <button
+                            key={project.slug}
+                            type="button"
+                            onClick={() => handleNavigate(`/projects/${project.slug}`)}
+                            className="w-full rounded-2xl border border-(--color-border) bg-(--color-background)/80 px-5 py-4 text-left transition hover:border-(--color-accent) hover:bg-(--color-surface)"
+                          >
+                            <div className="flex items-center justify-between gap-4">
+                              <div>
+                                <p className="text-base font-semibold text-(--color-text)">
+                                  {project.title}
+                                </p>
+                                {project.description && (
+                                  <p className="text-sm text-(--color-muted)">
+                                    {project.description}
+                                  </p>
+                                )}
+                              </div>
+                              <Icon
+                                icon="solar:arrow-right-up-linear"
+                                className="hidden text-xl text-(--color-muted) sm:block"
+                              />
+                            </div>
+                            {project.tags.length > 0 && (
+                              <div className="mt-3 flex flex-wrap gap-2 text-xs text-(--color-muted)">
+                                {project.tags.slice(0, 3).map((tag) => (
+                                  <span
+                                    key={tag}
+                                    className="rounded-full border border-(--color-border) px-2 py-0.5"
+                                  >
+                                    #{tag}
+                                  </span>
+                                ))}
+                              </div>
+                            )}
                           </button>
                         ))}
                       </div>

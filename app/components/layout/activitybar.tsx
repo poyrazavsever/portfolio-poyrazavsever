@@ -11,6 +11,7 @@ import { ACTIVITY_LINKS, SOCIAL_LINKS } from "@/data/navigation";
 import type { PageMeta } from "@/lib/mdx";
 import type { BlogMeta } from "@/lib/blog";
 import type { NoteFile } from "@/lib/notes";
+import type { ProjectMeta } from "@/lib/projects";
 
 const iconButtonBase =
   "relative flex h-12 w-12 items-center justify-center rounded-2xl border border-(--color-border) bg-(--color-surface)/90 text-(--color-muted) shadow-black/5 transition-colors hover:text-(--color-accent) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--color-accent) focus-visible:ring-offset-2 focus-visible:ring-offset-(--color-background) cursor-pointer";
@@ -31,6 +32,7 @@ type SearchIndex = {
   pages: PageMeta[];
   blogPosts: BlogMeta[];
   notes: NoteFile[];
+  projects: ProjectMeta[];
 };
 
 type ActivityBarProps = {
