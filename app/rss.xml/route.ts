@@ -1,11 +1,15 @@
+import fs from "node:fs/promises";
+import path from "node:path";
 import { NextResponse } from "next/server";
 import { getAllBlogPostsMetadata, getBlogPostBySlug } from "@/lib/blog";
 import type { LoadedBlogPost } from "@/lib/blog";
+import { getAllNoteFiles } from "@/lib/notes";
 
 const SITE_URL = "https://poyrazavsever.com";
 const SITE_TITLE = "Poyraz Avsever Blog";
 const SITE_DESCRIPTION = "Personal blog of Poyraz Avsever - Developer and Designer";
 const FEED_URL = `${SITE_URL}/rss.xml`;
+const NOTES_DIR = path.join(process.cwd(), "content/notes");
 
 const escapeXml = (value: string) =>
   value
@@ -48,36 +52,45 @@ const formatContent = (content: string) => {
   return sanitized;
 };
 
-const generateRssXml = (posts: LoadedBlogPost[]) => {
+type FeedItem = {
+  title: string;
+  description: string;
+  link: string;
+  guid: string;
+  pubDate: string;
+  categories?: string[];
+  contentHtml?: string;
+};
+
+const buildItemXml = (item: FeedItem) => {
+  const categories = item.categories?.length
+    ? item.categories.map((tag) => `<category>${wrapCdata(tag)}</category>`).join("")
+    : "";
+  const encodedContent = item.contentHtml
+    ? `<content:encoded>${wrapCdata(item.contentHtml)}</content:encoded>`
+    : "";
+
+  return `
+    <item>
+      <title>${wrapCdata(item.title)}</title>
+      <description>${wrapCdata(item.description)}</description>
+      ${encodedContent}
+      <link>${escapeXml(item.link)}</link>
+      <guid isPermaLink="true">${escapeXml(item.guid)}</guid>
+      <pubDate>${item.pubDate}</pubDate>
+      ${categories}
+    </item>
+  `;
+};
+
+const generateRssXml = (items: FeedItem[]) => {
   const currentDate = new Date().toUTCString();
 
-  const sortedPosts = [...posts].sort((a, b) => {
-    const aDate = a.meta.date ? new Date(a.meta.date).getTime() : 0;
-    const bDate = b.meta.date ? new Date(b.meta.date).getTime() : 0;
-    return bDate - aDate;
-  });
+  const sortedItems = [...items].sort(
+    (a, b) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime(),
+  );
 
-  const items = sortedPosts
-    .map((post) => {
-      const postUrl = `${SITE_URL}/blog/${post.meta.slug}`;
-      const pubDate = normalizeDate(post.meta.date).toUTCString();
-      const contentHtml = formatContent(post.content);
-
-      return `
-        <item>
-          <title>${wrapCdata(post.meta.title)}</title>
-          <description>${wrapCdata(post.meta.description ?? "")}</description>
-          <content:encoded>${wrapCdata(
-            `<div>${post.meta.description ? `<p>${escapeHtml(post.meta.description)}</p>` : ""}${contentHtml}<p><a href="${postUrl}">Read more on the website</a></p></div>`
-          )}</content:encoded>
-          <link>${escapeXml(postUrl)}</link>
-          <guid isPermaLink="true">${escapeXml(postUrl)}</guid>
-          <pubDate>${pubDate}</pubDate>
-          ${post.meta.tags.map((tag) => `<category>${wrapCdata(tag)}</category>`).join("")}
-        </item>
-      `;
-    })
-    .join("");
+  const itemsXml = sortedItems.map((item) => buildItemXml(item)).join("");
 
   return `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0"
@@ -97,7 +110,7 @@ const generateRssXml = (posts: LoadedBlogPost[]) => {
       <title>${wrapCdata(SITE_TITLE)}</title>
       <link>${SITE_URL}</link>
     </image>
-    ${items}
+    ${itemsXml}
   </channel>
 </rss>`;
 };
@@ -109,7 +122,52 @@ export async function GET() {
       await Promise.all(metas.map((meta) => getBlogPostBySlug(meta.slug)))
     ).filter((post): post is LoadedBlogPost => Boolean(post));
 
-    const rssXml = generateRssXml(posts);
+    const notes = await getAllNoteFiles();
+
+    const notesWithDates = await Promise.all(
+      notes.map(async (note) => {
+        try {
+          const filePath = path.join(NOTES_DIR, note.fileName);
+          const stats = await fs.stat(filePath);
+          return { note, updatedAt: stats.mtime };
+        } catch {
+          return { note, updatedAt: new Date() };
+        }
+      }),
+    );
+
+    const blogItems: FeedItem[] = posts.map((post) => {
+      const postUrl = `${SITE_URL}/blog/${post.meta.slug}`;
+      const pubDate = normalizeDate(post.meta.date).toUTCString();
+      const contentHtml = formatContent(post.content);
+
+      return {
+        title: post.meta.title,
+        description: post.meta.description ?? "",
+        link: postUrl,
+        guid: postUrl,
+        pubDate,
+        categories: post.meta.tags,
+        contentHtml: `<div>${post.meta.description ? `<p>${escapeHtml(post.meta.description)}</p>` : ""}${contentHtml}<p><a href="${postUrl}">Read more on the website</a></p></div>`,
+      };
+    });
+
+    const noteItems: FeedItem[] = notesWithDates.map(({ note, updatedAt }) => {
+      const noteUrl = `${SITE_URL}/api/notes/${encodeURIComponent(note.slug)}`;
+      const noteContent = `<div><p>This PDF note lives in my <a href="${SITE_URL}/notes">Notes</a> shelf.</p><p><a href="${noteUrl}">Download the PDF</a></p></div>`;
+
+      return {
+        title: `${note.title} (Note)`,
+        description: `New PDF note available: ${note.title}`,
+        link: noteUrl,
+        guid: noteUrl,
+        pubDate: updatedAt.toUTCString(),
+        categories: ["notes"],
+        contentHtml: noteContent,
+      };
+    });
+
+    const rssXml = generateRssXml([...blogItems, ...noteItems]);
 
     return new NextResponse(rssXml, {
       status: 200,
