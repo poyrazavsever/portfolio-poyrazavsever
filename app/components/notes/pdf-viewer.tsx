@@ -112,61 +112,64 @@ export default function PdfViewer({ title, fileUrl, description, tags = [], date
 
   return (
     <>
-      <div className="relative aspect-square overflow-hidden rounded-md border border-(--color-border)">
-        <canvas ref={canvasRef} className="h-full w-full object-cover" aria-hidden />
+      <div className="grid gap-4 text-left lg:grid-cols-[220px_1fr] lg:items-start">
+        <div className="relative aspect-square overflow-hidden rounded-md border border-(--color-border)">
+          <canvas ref={canvasRef} className="h-full w-full object-cover" aria-hidden />
 
-        {previewState === "loading" && (
-          <div className="absolute inset-0 z-20 flex flex-col items-center justify-center bg-(--color-background)/70 text-xs uppercase tracking-[0.3em] text-(--color-muted)">
-            <Icon icon="solar:document-bold-duotone" className="mb-2 text-xl" />
-            Loading
-          </div>
-        )}
-        {previewState === "error" && (
-          <div className="absolute inset-0 z-20 flex flex-col items-center justify-center bg-(--color-background)/70 px-4 text-center text-xs text-red-300">
-            <Icon icon="solar:danger-triangle-bold-duotone" className="mb-2 text-xl" />
-            {previewError ?? "Preview failed"}
-          </div>
-        )}
+          {previewState === "loading" && (
+            <div className="absolute inset-0 z-20 flex flex-col items-center justify-center bg-(--color-background)/70 text-xs uppercase tracking-[0.3em] text-(--color-muted)">
+              <Icon icon="solar:document-bold-duotone" className="mb-2 text-xl" />
+              Loading
+            </div>
+          )}
+          {previewState === "error" && (
+            <div className="absolute inset-0 z-20 flex flex-col items-center justify-center bg-(--color-background)/70 px-4 text-center text-xs text-red-300">
+              <Icon icon="solar:danger-triangle-bold-duotone" className="mb-2 text-xl" />
+              {previewError ?? "Preview failed"}
+            </div>
+          )}
 
-        <button
-          type="button"
-          className="absolute inset-0 z-10"
-          aria-label={`Open ${title}`}
-          onClick={handleOpen}
-        />
+          <button
+            type="button"
+            className="absolute inset-0 z-10"
+            aria-label={`Open ${title}`}
+            onClick={handleOpen}
+          />
 
-        <a
-          href={fileUrl}
-          target="_blank"
-          rel="noreferrer"
-          className="absolute right-3 top-3 z-30 rounded-full bg-(--color-background)/85 p-2 text-(--color-text) transition hover:text-(--color-accent)"
-          aria-label={`Download ${title}`}
-          onClick={(event) => event.stopPropagation()}
-        >
-          <Icon icon="solar:download-bold-duotone" className="text-xl" />
-        </a>
-      </div>
-      <div className="mt-3 space-y-1 text-left">
-        <p className="text-base font-semibold text-(--color-text)">{title}</p>
-        {description && (
-          <p className="text-sm text-(--color-muted)">
-            {description}
-          </p>
-        )}
-        {(date || tags.length > 0) && (
-          <div className="flex flex-wrap gap-2 text-xs text-(--color-muted)">
-            {date && (
-              <span className="rounded-full border border-(--color-border) px-2 py-0.5 uppercase tracking-[0.3em]">
-                {date}
-              </span>
-            )}
-            {tags.slice(0, 3).map((tag) => (
-              <span key={tag} className="rounded-full border border-(--color-border) px-2 py-0.5">
-                #{tag}
-              </span>
-            ))}
-          </div>
-        )}
+          <a
+            href={fileUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="absolute right-3 top-3 z-30 rounded-full bg-(--color-background)/85 p-2 text-(--color-text) transition hover:text-(--color-accent)"
+            aria-label={`Download ${title}`}
+            onClick={(event) => event.stopPropagation()}
+          >
+            <Icon icon="solar:download-bold-duotone" className="text-xl" />
+          </a>
+        </div>
+
+        <div className="space-y-2">
+          <p className="text-base font-semibold text-(--color-text)">{title}</p>
+          {description && (
+            <p className="text-sm text-(--color-muted)">
+              {description}
+            </p>
+          )}
+          {(date || tags.length > 0) && (
+            <div className="flex flex-wrap gap-2 text-xs text-(--color-muted)">
+              {date && (
+                <span className="rounded-full border border-(--color-border) px-2 py-0.5 uppercase tracking-[0.3em]">
+                  {date}
+                </span>
+              )}
+              {tags.slice(0, 3).map((tag) => (
+                <span key={tag} className="rounded-full border border-(--color-border) px-2 py-0.5">
+                  #{tag}
+                </span>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
 
       <AnimatePresence>
