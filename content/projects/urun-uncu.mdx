@@ -1,21 +1,35 @@
 ---
 slug: "urun-uncu"
 title: "Ürün Uncu"
-description: "E-commerce experience for a boutique bakery marketplace."
+description: "Full-stack commerce platform where Ürün Uncu sells digital products, on-demand videos, and one-on-one coaching."
 tags:
-  - ecommerce
-  - shopify
-  - headless
+  - nextjs
+  - express
+  - mongodb
 links:
   - label: "Live site"
     href: "https://urununcu.com"
     target: "_blank"
 ---
 
-## Highlights
-- Designed a modular product grid with ingredient badges and seasonal highlights  
-- Built a headless Shopify storefront that renders via Next.js for instant routing  
-- Implemented delivery-slot selector to coordinate pickup windows
+## Overview
+Ürün Uncu needed a platform to sell digital self-development products, prerecorded workshops, and private coaching sessions. I built a full-stack Next.js application backed by an Express.js API and MongoDB/Mongoose so she can manage everything—sales pages, blog content, gated videos, and booking requests—from one admin console. The site mixes marketing-heavy static routes (story, testimonials, retreats) with dynamic pages for each product, session type, and blog post, giving her flexibility to launch new offerings quickly.
 
-## Result
-Client can now stage campaigns without developer help and customers complete checkout 40% faster compared to their previous WooCommerce stack.
+## Architecture
+- Next.js renders the marketing pages statically while server components fetch live inventory, bundles, and session availability from the API.  
+- Express.js acts as a middle layer for secure admin actions (uploading videos, publishing blogs, managing newsletters) and handles payment webhooks.  
+- MongoDB + Mongoose store products, session slots, blog posts, video metadata, and newsletter subscribers with schema-level validation, ensuring content consistency.  
+- Cloud storage for video thumbnails plus signed URLs so paid customers can stream securely.
+
+## Admin Panel
+- **Blog management:** rich-text editor with cover uploads, scheduled publishing, and automatic Open Graph previews.  
+- **Video library:** upload, categorize, and gate long-form sessions with access rules tied to purchases.  
+- **Product catalog:** create digital bundles, coupon codes, and upsell blocks without touching code.  
+- **Individual sessions:** configure durations, pricing tiers, and availability windows that sync to a booking form.  
+- **Newsletter tools:** collect opt-ins sitewide, sync to MongoDB, and export CSV for her ESP.
+
+## Site Structure
+Dozens of static and dynamic pages cover the brand story, FAQs, workshop landing pages, and each product variant. Slugs drive SEO-friendly URLs (`/urunler/beden-calismalari`, `/blog/nefes-pratigi`), while dynamic routes share layout components so adding a new product means only inserting a document in MongoDB. Results pages integrate testimonials, cross-sells, and embedded checkout widgets to keep conversions high.
+
+## Outcome
+Ürün Uncu now launches new digital products or one-on-one offerings without developer involvement, keeps her blog and videos fresh through the admin panel, and tracks bookings centrally. The unified stack removed her dependence on multiple SaaS tools and reduced content publishing time from days to minutes.

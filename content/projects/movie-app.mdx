@@ -15,10 +15,22 @@ links:
     target: "_blank"
 ---
 
+## Overview
+Movie Discovery App is a React hobby project where I experiment with TMDb's API and Firebase auth to track everything I watch. Beyond browsing rich movie profiles (trailers, cast, streaming providers), I can push titles into a synced favorites list or a private watch queue, then review them on any device thanks to Firestore persistence.
+
+## Technologies
+- React + TypeScript + Vite for a fast SPA developer loop  
+- TMDb REST API for metadata, posters, credits, and watch provider data  
+- Firebase Authentication + Firestore for user profiles, favorites, and watchlist syncing  
+- React Query to cache API responses, dedupe requests, and warm the UI for infinite scroll  
+- Tailwind CSS for utility-driven layouts plus Framer Motion for card transitions  
+- IndexedDB (via idb-keyval) to pin a lightweight offline watchlist snapshot
+
 ## Features
-- Mood-based filters (calm, intense, nostalgic) mapped to TMDb discover queries  
-- Infinite scroll grid with skeleton loading states  
-- Pinned watchlist stored in IndexedDB for offline usage
+- Mood-based filters (calm, intense, nostalgic) mapped to TMDb discover queries with query param presets  
+- Detailed movie drawer combining synopsis, trailers, stills, and related picks fetched lazily  
+- Infinite scroll grid with skeleton loading states and optimistic favorite toggles  
+- Firebase-backed favorites and watchlists that mirror into IndexedDB for offline usage
 
 ## Lessons Learned
-Focused on API caching and skeleton states to keep interactions fluid even during rate-limited windows. The project later informed the content calendar visual design.
+I obsessed over API caching, race-condition handling, and skeleton states to keep interactions fluid even when TMDb rate limits or the network drops. Working through auth edge cases also sharpened how I design content calendar tools that rely on third-party APIs.

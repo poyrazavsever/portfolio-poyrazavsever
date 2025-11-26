@@ -1,11 +1,11 @@
 ---
 slug: "readme-maker"
 title: "README Maker"
-description: "AI-assisted generator that writes polished GitHub README files in minutes."
+description: "Template-driven GitHub profile README builder with live previews and export tools."
 tags:
-  - ai
-  - nextjs
-  - open-source
+  - react
+  - redux
+  - tooling
 links:
   - label: "Live site"
     href: "https://readme-maker-eight.vercel.app"
@@ -15,13 +15,20 @@ links:
     target: "_blank"
 ---
 
-## Problem
-Hackathon teams kept shipping with empty README files. I built a UI that asks a few structured questions about the stack, core features, and deployment, then feeds them into an LLM prompt.
+## Overview
+README Maker is a small React side project that lets you assemble a GitHub profile README without hand-writing markdown. You pick one of several templates (minimal, badge-heavy, timeline, statistics), fill a short form for each content block, and instantly preview the final README before exporting it to your clipboard or downloading the `.md` file.
 
-## Stack
-- Next.js App Router with server actions  
-- OpenAI API for copy generation + diffing  
-- Markdown preview with syntax highlighting
+## Template System
+- Template cards show live previews so you can compare layouts before selecting one.  
+- Each template defines slots (bio, stacks, badges, pinned projects, GitHub stats). Form fields map to those slots so the UI guides what to fill in.  
+- Markdown rendered preview updates on every keystroke and includes copy/download buttons so you can ship immediately.
 
-## Result
-In the first week more than 200 README files were generated. Teams now start mentorship sessions with a complete project overview and setup instructions.
+## Technologies
+- React with hooks for component state and live preview rendering  
+- Redux Toolkit to persist template selections and form data across steps  
+- React Router for multi-step flow between template gallery, editor, and export screens  
+- Tailwind CSS utility classes for quickly theming each template variant  
+- LocalStorage sync middleware so your answers survive refreshes
+
+## Outcome
+The tool has been shared with hackathon friends and helped dozens of students publish their first polished GitHub profiles. Because templates are simple JSON configs, I can add new layouts in minutes and the Redux store automatically supports the new slots.

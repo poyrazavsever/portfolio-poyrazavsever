@@ -15,14 +15,44 @@ links:
     target: "_blank"
 ---
 
+## Overview
+Reactive Image is an npm package I authored to give React and Next.js teams a drop-in way to animate otherwise static images. You wrap any `<img>`, `next/image`, or canvas element with `<ReactiveImage>` and the library layers glare, parallax, particle noise, and spotlight animations on top--no After Effects exports required. Because it ships as an ES module with automatic tree shaking, the same component can live in a landing page hero, a CMS-powered gallery, or a marketing email embed without bloating bundles.
+
 ## Why I built it
-Most portfolio sites crave motion but ship heavy video files. Reactive Image exposes a `<ReactiveImage>` component that layers gradients, noise, and cursor-aware parallax over any asset while keeping bundle size tiny.
+Most portfolio sites crave motion but end up shipping looping MP4s or Lottie files that crush performance metrics. I wanted a simpler alternative: let developers attach tasteful motion to any asset they already store in a CMS or CDN. The library exposes variants such as `float`, `tilt`, `pulse`, and `noise`, plus composable layers (gradients, blur, cursor-following hotspots) so designers can remix animations with just props instead of timelines.
+
+## Library Design
+- Written in TypeScript with strict generics to ensure prop safety and IntelliSense when selecting variants or motion layers.  
+- Bundled with `tsup` into ESM + CJS outputs, along with a `.d.ts` bundle, so it plugs into Vite, Next.js, or Create React App without extra config.  
+- Uses CSS custom properties for theme tokens, letting consumers override palettes from Tailwind, Chakra, or vanilla CSS.  
+- Optional peer dependency on `framer-motion` unlocks physics-based transitions, while a built-in requestAnimationFrame loop keeps the core footprint tiny (~5KB gzipped).
+
+```tsx
+import ReactiveImage from "reactive-image";
+import Image from "next/image";
+
+export function Hero() {
+  return (
+    <ReactiveImage
+      as={Image}
+      src="/images/ankara.jpg"
+      width={1200}
+      height={800}
+      variant="tilt"
+      glare
+      reduceMotionFallback="fade"
+    />
+  );
+}
+```
 
 ## Features
-- Theme tokens for light/dark palettes that sync to CSS variables  
-- Built-in motion presets (float, tilt, spotlight) configurable via props  
-- SSR friendly thanks to App Router safe checks  
-- Tree-shakable build published to npm
+- Theme tokens for light/dark palettes that sync to CSS variables or Next.js app router themes  
+- Built-in motion presets (float, tilt, spotlight, ripple) configurable via props with adjustable intensity and speed  
+- Cursor-aware parallax and scroll-linked animations that automatically disable when `prefers-reduced-motion` is detected  
+- SSR friendly thanks to App Router safe checks and hydration guards that prevent flashing on the server  
+- Tree-shakable build published to npm, verified via size-limit CI
+- CLI playground (`npx reactive-image playground`) for designers to tweak settings and export JSON configs
 
 ## Adoption
-The package has been installed over **5,000 times** and powers the hero on my own site plus a few agency landing pages. Feedback from the community helped prioritise TypeScript generics and reduced-motion fallbacks.
+The package has been installed over **5,000 times** and powers hero sections on my site, agency landing pages, and a few product dashboards. Community feedback led me to add Next.js `app/`-compatible lazy loading, TypeScript generics for custom variants, and reduced-motion fallbacks, while GitHub discussions continue to steer upcoming additions like background video blending.

@@ -15,13 +15,23 @@ links:
     target: "_blank"
 ---
 
+## Overview
+Ataturk Chronology is an open-source Next.js web application that presents Mustafa Kemal Ataturk's life as a richly illustrated, scroll-driven timeline. My focus was to make it feel like an interactive textbook: each event blends narrative, archival photography, and contextual metadata so students can understand how speeches, reforms, and battles connect.
+
+## Technical Approach
+- Next.js + TypeScript for statically generated timelines with SSG fallbacks for route-heavy sections  
+- Cloudinary-backed image pipeline with automatic DPR variants and alt-text enforcement at build time  
+- Lightweight state layer (Zustand) to sync the timeline cursor, map overlays, and accessibility features like high-contrast mode  
+- GitHub Actions workflow that lints data JSON, validates Cloudinary assets, and deploys to Vercel when pull requests land
+
 ## Data Sourcing
-I compiled more than 250 milestones from archival books, then normalised them into a JSON schema that supports filtering by theme (education, diplomacy, military). Images are stored on Cloudinary with accessible captions.
+I compiled more than 250 milestones from archival books, scanned letters, and the Turkish Historical Society's open data. Every entry is normalized so the UI can filter by theme (education, diplomacy, military), sentiment, and geography. The JSON schema also stores references to Cloudinary assets and bibliographic citations, which are surfaced in an expandable "Sources" drawer.
 
 ## UX Decisions
-- Timeline zoom that snaps to decades  
-- Keyboard-friendly navigation so classrooms can use it on projectors  
-- Print-friendly export for teachers preparing worksheets
+- Timeline zoom that snaps to decades plus a minimap overview when the user scrolls past 1938  
+- Keyboard-friendly navigation and ARIA live regions so classrooms can use it on projectors without a mouse  
+- Print-friendly export that generates paginated PDFs for teachers preparing worksheets  
+- Contextual "related events" cards that encourage students to discover reforms triggered by major battles
 
 ## Impact
-Teachers at Ostim Technical University cite it during history workshops, and the repo spawned several pull requests that added Ottoman Turkish translations of key speeches.
+Teachers at Ostim Technical University cite it during history workshops, the repository gathered dozens of stars, and the open-data schema inspired contributors to add Ottoman Turkish translations of key speeches. Because the project is public, I routinely mentor newcomers through issues like adding new milestones or fixing RTL layout regressions, growing a small but active community around Turkey's modern history.
