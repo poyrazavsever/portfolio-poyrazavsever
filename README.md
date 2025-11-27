@@ -1,4 +1,4 @@
-# Portfolio Obsidian
+# Portfolio
 
 <div align="right">
   <a href="#en-readme"><button type="button">Switch to English</button></a>
@@ -8,10 +8,10 @@
 
 ## Genel Bakış
 
-Portfolio-Obsidian, Next.js 16 App Router, React 19 ve TypeScript ile inşa edilmiş Obsidian benzeri çok kanallı bir çalışma alanıdır. `content/` klasöründeki MDX ve PDF dosyaları otomatik olarak kenar çubuğuna, bloga, proje detaylarına ve not rafına bağlanır. `app/layout.tsx` tek bir veri katmanı oluşturarak ActivityBar, komut paleti, kenar çubuğu ve sayfa içeriklerini senkron tutar.
+Portfolio, Next.js 16 App Router, React 19 ve TypeScript ile inşa edilmiş çok kanallı bir çalışma alanıdır. `content/` klasöründeki MDX ve PDF dosyaları otomatik olarak kenar çubuğuna, bloga, proje detaylarına ve not rafına bağlanır. `app/layout.tsx` tek bir veri katmanı oluşturarak ActivityBar, komut paleti, kenar çubuğu ve sayfa içeriklerini senkron tutar.
 
 ### Öne Çıkan Özellikler
-- **Obsidian tarzı UI**: `app/components/layout` altındaki ActivityBar, animasyonlu sosyal menü, komut paleti ve filtrelenebilir kenar çubuğu her cihazda çalışır.
+- **Workspace odaklı UI**: `app/components/layout` altındaki ActivityBar, animasyonlu sosyal menü, komut paleti ve filtrelenebilir kenar çubuğu her cihazda çalışır.
 - **Komut paleti & arama**: `SearchModal` + Fuse.js ile sayfa, proje, blog, PDF not ve sosyal bağlantılarda ⌘/Ctrl + K kısayolu; ayrıca tema döngüsü ve e-posta kopyalama gibi hızlı aksiyonlar.
 - **Zengin içerik akışı**: `lib/mdx`, `lib/blog`, `lib/projects` ve `lib/notes` tüm MDX/PDF kaynaklarını derleyip `rehype-highlight` ile kod bloklarını renklendirir.
 - **PDF rafı**: `PdfViewer` bileşeni pdfjs-dist ile ilk sayfa ön izlemesi çizer, modal okuyucu açar ve `/api/notes/[slug]` üzerinden PDF’i servis eder.
@@ -151,10 +151,10 @@ Bu üçlü `app/layout.tsx` içerisindeki `searchIndex` objesi ile senkronize ç
 
 ## Overview
 
-Portfolio-Obsidian is an Obsidian-inspired multi-channel workspace built with Next.js 16 App Router, React 19, and TypeScript. MDX and PDF files that live under `content/` automatically hydrate the sidebar, blog, project case studies, and note shelf. `app/layout.tsx` creates a single content index so that the ActivityBar, command palette, sidebar, and page body stay in sync.
+Portfolio is a multi-channel workspace built with Next.js 16 App Router, React 19, and TypeScript. MDX and PDF files that live under `content/` automatically hydrate the sidebar, blog, project case studies, and note shelf. `app/layout.tsx` creates a single content index so that the ActivityBar, command palette, sidebar, and page body stay in sync.
 
 ### Highlights
-- **Obsidian-like UI**: The ActivityBar, animated social dropdown, command palette, and filterable sidebar inside `app/components/layout` work across breakpoints.
+- **Workspace-grade UI**: The ActivityBar, animated social dropdown, command palette, and filterable sidebar inside `app/components/layout` work across breakpoints.
 - **Command palette & search**: `SearchModal` + Fuse.js let you discover pages, projects, blog posts, PDF notes, and social links with the ⌘/Ctrl + K shortcut plus quick actions (theme cycle, copy email).
 - **Rich content flow**: `lib/mdx`, `lib/blog`, `lib/projects`, and `lib/notes` compile every MDX/PDF source while `rehype-highlight` styles code blocks.
 - **PDF shelf**: `PdfViewer` renders a first-page preview via pdfjs-dist, opens a modal reader, and streams the binary from `/api/notes/[slug]`.
