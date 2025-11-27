@@ -21,9 +21,12 @@ export async function generateMetadata({ params }: { params: PageParams }): Prom
   }
 
   return {
-    title: post.meta.title,
+    title: `Poyraz Avsever - ${post.meta.title}`,
     description: post.meta.description,
     keywords: post.meta.tags,
+    icons: {
+      icon: "../favicon.ico",
+    },
   };
 }
 

@@ -3,8 +3,11 @@ import PdfViewer from "@/app/components/notes/pdf-viewer";
 import { getAllNoteFiles } from "@/lib/notes";
 
 export const metadata: Metadata = {
-  title: "My Notes",
+  title: "Poyraz Avsever - My Notes",
   description: "A focused reading space that collects my raw study notes and references as PDF files.",
+  icons: {
+    icon: "../favicon.ico",
+  },
 };
 
 export default async function NotesPage() {

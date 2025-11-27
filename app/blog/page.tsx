@@ -3,8 +3,12 @@ import type { Metadata } from "next";
 import { getAllBlogPostsMetadata } from "@/lib/blog";
 
 export const metadata: Metadata = {
-  title: "My Blog Posts",
-  description: "A curated list of my latest writing, notes, and engineering learnings.",
+  title: "Poyraz Avsever - My Blog Posts",
+  description:
+    "A curated list of my latest writing, notes, and engineering learnings.",
+  icons: {
+    icon: "../favicon.ico",
+  },
 };
 
 export default async function BlogIndexPage() {
