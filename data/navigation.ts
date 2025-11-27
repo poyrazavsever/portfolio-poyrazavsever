@@ -13,12 +13,42 @@ export type SocialLink = {
 };
 
 export const ACTIVITY_LINKS: ActivityLink[] = [
-  { id: "search", href: "/#search", label: "Search", icon: "solar:magnifer-line-duotone" },
-  { id: "rss", href: "/rss.xml", label: "RSS Feed", icon: "solar:feed-bold-duotone" },
-  { id: "resume", href: "/resume.pdf", label: "Resume", icon: "solar:inbox-archive-bold-duotone" },
-  { id: "ui-kit", href: "https://ui.poyrazavsever.com", label: "My UI Kit", icon: "solar:colour-tuneing-bold-duotone" },
-  { id: "status", href: "https://status.poyrazavsever.com", label: "Status", icon: "solar:chat-square-2-bold-duotone" },
-  { id: "freelance", href: "https://freelance.poyrazavsever.com", label: "Freelance", icon: "solar:case-round-minimalistic-bold-duotone" },
+  {
+    id: "search",
+    href: "/#search",
+    label: "⌘K ~ Ctrl+K",
+    icon: "solar:magnifer-line-duotone",
+  },
+  {
+    id: "rss",
+    href: "/rss.xml",
+    label: "RSS Feed",
+    icon: "solar:feed-bold-duotone",
+  },
+  {
+    id: "resume",
+    href: "/resume.pdf",
+    label: "Resume",
+    icon: "solar:inbox-archive-bold-duotone",
+  },
+  {
+    id: "ui-kit",
+    href: "https://ui.poyrazavsever.com",
+    label: "My UI Kit",
+    icon: "solar:colour-tuneing-bold-duotone",
+  },
+  {
+    id: "status",
+    href: "https://status.poyrazavsever.com",
+    label: "Status",
+    icon: "solar:chat-square-2-bold-duotone",
+  },
+  {
+    id: "freelance",
+    href: "https://freelance.poyrazavsever.com",
+    label: "Freelance",
+    icon: "solar:case-round-minimalistic-bold-duotone",
+  },
 ] as const;
 
 export const SOCIAL_LINKS: SocialLink[] = [

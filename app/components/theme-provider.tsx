@@ -138,6 +138,127 @@ export const APP_THEMES = [
       mood: "Light",
     },
   },
+
+  {
+    id: "slate",
+    label: "Slate Pulse",
+    description: "Lacivert taban uzerinde buz mavisi neon vurgular.",
+    preview: {"colors": ["#0a0f17", "#111927", "#5ea0ff"], "mood": "Dark"},
+  },
+  {
+    id: "ember",
+    label: "Ember Night",
+    description: "Kizil siyah zemin, kor turuncu isi vurgular.",
+    preview: {"colors": ["#120608", "#1f0b0f", "#ff6b5a"], "mood": "Warm"},
+  },
+  {
+    id: "abyss",
+    label: "Abyss Blue",
+    description: "Derin mavi katmanlar, serin neon deniz isi.",
+    preview: {"colors": ["#030712", "#0a1224", "#7296ff"], "mood": "Cool"},
+  },
+  {
+    id: "nocturne",
+    label: "Nocturne Violet",
+    description: "Gece moru taban ve lavanta parlamalari.",
+    preview: {"colors": ["#0d0616", "#160a24", "#b388ff"], "mood": "Mystic"},
+  },
+  {
+    id: "circuit",
+    label: "Circuit Mint",
+    description: "Yesil temelli tech noir, neon mint aksanlar.",
+    preview: {"colors": ["#04100a", "#061a0f", "#34d399"], "mood": "Neon"},
+  },
+  {
+    id: "bourbon",
+    label: "Bourbon Glow",
+    description: "Kehribar izleri, viski tonlari ve yumusak isi.",
+    preview: {"colors": ["#150b03", "#261207", "#f59e0b"], "mood": "Cozy"},
+  },
+  {
+    id: "lunar",
+    label: "Lunar Mist",
+    description: "Ay mavisi tonlar ve sisli gece atmosferi.",
+    preview: {"colors": ["#05070f", "#0c101f", "#99b7ff"], "mood": "Calm"},
+  },
+  {
+    id: "moss",
+    label: "Moss Dark",
+    description: "Toprak yesilleri, orman esintili koyu palet.",
+    preview: {"colors": ["#050c08", "#0a170f", "#76d28b"], "mood": "Earthy"},
+  },
+  {
+    id: "storm",
+    label: "Storm Drift",
+    description: "Gri-mavi firtina tabani, serin neon cizgiler.",
+    preview: {"colors": ["#080b11", "#101725", "#7da6ff"], "mood": "Moody"},
+  },
+  {
+    id: "ink",
+    label: "Ink Noir",
+    description: "Saf siyah uzerine mor-mavi elektro parlamalar.",
+    preview: {"colors": ["#050505", "#0f0f12", "#8b8cf4"], "mood": "Minimal"},
+  },
+  {
+    id: "alpine",
+    label: "Alpine Sky",
+    description: "Serin dag havasi, acik mavi ve kar beyazi tonlar.",
+    preview: {"colors": ["#f7fbff", "#edf5ff", "#3b82f6"], "mood": "Fresh"},
+  },
+  {
+    id: "lavender",
+    label: "Lavender Bloom",
+    description: "Yumusak leylak taban, toz pembe vurgular.",
+    preview: {"colors": ["#fcf8ff", "#f5edff", "#a855f7"], "mood": "Soft"},
+  },
+  {
+    id: "sandbar",
+    label: "Sandbar",
+    description: "Kum beji ve altin sarisi ile gunesli isik modu.",
+    preview: {"colors": ["#fffaf3", "#f6efe2", "#f59e0b"], "mood": "Warm"},
+  },
+  {
+    id: "citrus",
+    label: "Citrus Zest",
+    description: "Limon-amber palet, enerjik ve ferah.",
+    preview: {"colors": ["#fffdf5", "#fff7e6", "#fbbf24"], "mood": "Bright"},
+  },
+  {
+    id: "porcelain",
+    label: "Porcelain",
+    description: "Kucuk gri tonlar, notr ve derli toplu.",
+    preview: {"colors": ["#f8f9fb", "#f1f3f6", "#475569"], "mood": "Neutral"},
+  },
+  {
+    id: "meadow",
+    label: "Meadow Dew",
+    description: "Acik yesil cimler, ferah bahar hissi.",
+    preview: {"colors": ["#f6fff9", "#e9f7ee", "#22c55e"], "mood": "Calm"},
+  },
+  {
+    id: "horizon",
+    label: "Horizon",
+    description: "Pastel mavi ufuk, berrak ve dengeli.",
+    preview: {"colors": ["#f5f9ff", "#eaf2ff", "#4f82f8"], "mood": "Clear"},
+  },
+  {
+    id: "blossom",
+    label: "Blossom",
+    description: "Pembe cicekler, tatli ve canli isik palet.",
+    preview: {"colors": ["#fff8fb", "#ffeef6", "#ec4899"], "mood": "Playful"},
+  },
+  {
+    id: "lagoon",
+    label: "Lagoon",
+    description: "Turkuaz sular, serin ve parlak bir isik modu.",
+    preview: {"colors": ["#f3fbff", "#e7f5ff", "#0ea5e9"], "mood": "Cool"},
+  },
+  {
+    id: "parchment",
+    label: "Parchment",
+    description: "Krem kagidin, kucuk sari ve sicak tutamlar.",
+    preview: {"colors": ["#fffef8", "#f8f2e6", "#d4a15c"], "mood": "Cozy"},
+  },
 ] as const;
 
 export type ThemeId = (typeof APP_THEMES)[number]["id"];

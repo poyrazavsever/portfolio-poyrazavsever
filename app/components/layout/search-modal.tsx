@@ -39,14 +39,6 @@ type SearchEntity = {
 
 const SECTION_ORDER: ResultType[] = ["action", "project", "page", "blog", "note", "social"];
 
-const SECTION_LABELS: Record<ResultType, string> = {
-  action: "Quick Actions",
-  page: "Pages",
-  project: "Projects",
-  blog: "Blog Posts",
-  note: "Notes",
-  social: "Social",
-};
 
 const SECTION_ICONS: Record<ResultType, string> = {
   action: "solar:magic-stick-3-bold-duotone",
@@ -207,7 +199,7 @@ const SearchModal = ({ open, onClose, searchData }: SearchModalProps) => {
     [fuse, normalizedQuery],
   );
 
-  const groupedResults = useMemo(() => {
+  const groupedResults = useMemo<Partial<Record<ResultType, SearchEntity[]>>>(() => {
     if (!normalizedQuery) {
       return {};
     }
@@ -285,7 +277,7 @@ const SearchModal = ({ open, onClose, searchData }: SearchModalProps) => {
       {open && (
         <motion.div
           key="search-overlay"
-          className="fixed inset-0 z-40 flex items-center justify-center bg-black/70 px-4 backdrop-blur"
+          className="fixed inset-0 z-40 flex items-start justify-center bg-black/70 px-3 py-8 backdrop-blur sm:items-center sm:px-4 sm:py-0"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -295,23 +287,23 @@ const SearchModal = ({ open, onClose, searchData }: SearchModalProps) => {
             role="dialog"
             aria-modal="true"
             aria-label="Command palette"
-            className="flex w-full max-w-4xl flex-col items-center gap-8 rounded-[34px] border border-(--color-border) bg-(--color-background) px-10 py-12 text-center shadow-[0_50px_120px_rgba(0,0,0,0.55)] max-h-[85vh] overflow-y-auto"
+            className="flex w-full max-w-3xl flex-col items-center gap-6 rounded-[34px] border border-(--color-border) bg-(--color-background) px-4 py-6 text-center shadow-[0_50px_120px_rgba(0,0,0,0.55)] max-h-[90vh] overflow-y-auto sm:max-w-4xl sm:gap-8 sm:px-10 sm:py-12 sm:max-h-[85vh]"
             initial={{ opacity: 0, y: 24, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 24, scale: 0.98 }}
             onClick={(event) => event.stopPropagation()}
           >
-            <p className="max-w-2xl text-sm text-(--color-muted)">
+            <p className="max-w-2xl text-xs text-(--color-muted) sm:text-sm">
               Search across case studies, blog posts, study notes, and social links. Press <kbd>⌘K</kbd>/<kbd>Ctrl+K</kbd> anywhere to open this palette.
             </p>
 
-            <div className="flex w-full items-center gap-3 rounded-3xl border border-(--color-border) bg-(--color-surface) px-6 py-5">
-              <Icon icon="solar:magnifer-line-duotone" className="text-2xl text-(--color-muted)" />
+            <div className="flex w-full flex-col items-stretch gap-3 rounded-3xl border border-(--color-border) bg-(--color-surface) px-4 py-4 sm:flex-row sm:items-center sm:gap-3 sm:px-6 sm:py-5">
+              <Icon icon="solar:magnifer-line-duotone" className="text-2xl text-(--color-muted) sm:text-2xl" />
               <input
                 ref={inputRef}
                 type="search"
                 placeholder="Type a command or search..."
-                className="flex-1 bg-transparent text-lg text-(--color-text) placeholder:text-(--color-muted) focus:outline-none"
+                className="flex-1 bg-transparent text-base text-(--color-text) placeholder:text-(--color-muted) focus:outline-none sm:text-lg"
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
                 onKeyDown={(event) => {
@@ -338,9 +330,6 @@ const SearchModal = ({ open, onClose, searchData }: SearchModalProps) => {
                     }
                     return (
                       <div key={section}>
-                        <p className="mb-2 text-xs font-semibold uppercase tracking-[0.3em] text-(--color-muted)">
-                          {SECTION_LABELS[section]}
-                        </p>
                         <div className="space-y-2">{entries.map((entry) => renderResult(entry))}</div>
                       </div>
                     );
@@ -360,9 +349,6 @@ const SearchModal = ({ open, onClose, searchData }: SearchModalProps) => {
                   }
                   return (
                     <div key={section}>
-                      <p className="mb-2 text-xs font-semibold uppercase tracking-[0.3em] text-(--color-muted)">
-                        {SECTION_LABELS[section]}
-                      </p>
                       <div className="space-y-2">{entries.map((entry) => renderResult(entry))}</div>
                     </div>
                   );
