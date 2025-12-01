@@ -1,0 +1,121 @@
+---
+slug: "reactive-switcher"
+title: "Reactive Switcher"
+description: "Type-safe, zero-runtime theme switching toolkit for React and Tailwind CSS v4."
+tags:
+  - open-source
+  - npm
+  - react
+links:
+  - label: "Documentation"
+    href: "https://reactive-switcher-j9qb.vercel.app/"
+    target: "_blank"
+  - label: "GitHub"
+    href: "https://github.com/poyrazavsever/reactive-switcher"
+    target: "_blank"
+---
+
+## Overview
+Reactive Switcher is the npm package I ship whenever a React or Next.js app needs instant light/dark switching without repaint flicker. It injects typed CSS variables into the DOM, keeps Tailwind CSS v4 tokens in sync, and exposes ergonomic hooks plus ready-made toggles. Because the library adds zero runtime math beyond CSS custom properties, themes swap instantly even on low-end devices and stream through SSR without hydration flashes.
+
+## Why I built it
+Most theme toggles look easy on the surface but collapse once you mix Tailwind's new `@theme` definitions, persistent storage, and `prefers-color-scheme` fallbacks. Teams often hand-roll LocalStorage code, sprinkle inline styles, and fight hydration mismatches. I wanted a single provider that handles storage, system detection, scoped theming (think side-by-side previews), and TypeScript autocomplete so designers can add palettes safely.
+
+## Architecture & API
+- `ThemeProvider` accepts a strongly typed `ThemesConfig` object and outputs CSS variables scoped to `:root` or any selector, making nested providers trivial.
+- The provider ships with SSR-safe guards, optional LocalStorage persistence, and system theme detection so `"system"` resolves deterministically both on the server and client.
+- `useTheme()` surfaces imperative helpers (`setTheme`, `toggleTheme`, `themes`, `systemTheme`) and a resolved theme name so components can render on first paint.
+- Two headless-but-styled components, `ThemeSwitcher` and `ThemeToggle`, cover dropdowns, button groups, and binary toggles. Teams can replace their styles via Tailwind classes or plain CSS.
+
+```tsx
+import { ThemeProvider, ThemeToggle, useTheme, ThemesConfig } from "reactive-switcher";
+
+export const themes: ThemesConfig = {
+  light: {
+    name: "light",
+    type: "light",
+    colors: {
+      background: "#ffffff",
+      foreground: "#0f172a",
+      primary: { DEFAULT: "#3b82f6", foreground: "#ffffff", 600: "#2563eb" },
+    },
+  },
+  dark: {
+    name: "dark",
+    type: "dark",
+    colors: {
+      background: "#020617",
+      foreground: "#f8fafc",
+      primary: { DEFAULT: "#60a5fa", foreground: "#0f172a" },
+    },
+  },
+};
+
+export function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <body>
+        <ThemeProvider themes={themes} defaultTheme="light">
+          <Header />
+          {children}
+        </ThemeProvider>
+      </body>
+    </html>
+  );
+}
+
+function Header() {
+  const { theme, toggleTheme } = useTheme();
+
+  return (
+    <header className="bg-background text-foreground">
+      <span>Current theme: {theme}</span>
+      <ThemeToggle />
+      <button onClick={toggleTheme}>Cycle theme</button>
+    </header>
+  );
+}
+```
+
+```css
+/* globals.css */
+@import "tailwindcss";
+
+@theme {
+  --color-background: var(--color-background);
+  --color-foreground: var(--color-foreground);
+  --color-primary: var(--color-primary-DEFAULT);
+  --color-primary-foreground: var(--color-primary-foreground);
+  --color-secondary: var(--color-secondary-DEFAULT);
+  --color-surface-50: var(--color-surface-50);
+  --color-surface-100: var(--color-surface-100);
+  --color-surface-200: var(--color-surface-200);
+}
+
+@layer base {
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    transition: background-color 0.3s, color 0.3s;
+  }
+}
+```
+
+## Feature Highlights
+- **Zero Runtime Overhead** - relies purely on CSS custom properties so toggles render instantly and bundle size stays minimal.
+- **TypeScript First** - strict generics power IntelliSense while authoring theme tokens, drastically reducing typo-driven runtime bugs.
+- **Tailwind CSS v4 Ready** - published alongside the v4 `@theme` API to keep semantic tokens aligned with generated utilities.
+- **Persistent Themes** - opt-in LocalStorage support plus custom storage keys for multi-brand dashboards.
+- **System Theme Detection** - a `"system"` option respects `prefers-color-scheme` while still allowing manual overrides.
+- **No Flash** - SSR-safe with hydration guards so the app never flashes the wrong palette on initial load.
+- **Scoped Theming** - additional providers let product teams preview a light marketing site next to a dark analytics screen.
+- **Ready-to-use Components** - `ThemeSwitcher` (buttons, dropdown, toggle variants) and `ThemeToggle` cover most UI kits.
+
+## Developer Experience
+- Bundled with `tsup` into ESM + CJS outputs and ships `.d.ts` files, so it drops cleanly into Next.js App Router, Vite, or CRA.
+- Automated Storybook-style playground (hosted at `reactive-switcher.vercel.app`) demonstrates every variant, letting designers tweak palettes before copying JSON.
+- API reference documents every prop including `selector`, `styleId`, and `attribute`, making scoped theming possible without inspecting source.
+- Example repos show how to connect Tailwind CSS, Radix UI, and even email-safe CSS, which keeps support requests low.
+
+## Impact
+Reactive Switcher powers theme toggles across my portfolio, agency hand-off projects, and demo dashboards, and it continues to gain npm adoption thanks to its zero-config defaults. Community feedback through GitHub discussions led to better LocalStorage guards, improved TypeScript enums for theme names, and upcoming presets for multi-brand enterprise apps. The project remains MIT licensed to encourage pull requests and experimentation.
