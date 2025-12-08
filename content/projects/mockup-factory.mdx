@@ -1,0 +1,287 @@
+---
+title: "Mockup Factory"
+description: "Create stunning device mockups in seconds — 100% client-side, your images never leave your browser."
+date: "2024-12-01"
+tags:
+  - Next.js
+  - TypeScript
+  - Tailwind CSS
+  - Canvas API
+  - Privacy First
+  - Open Source
+links:
+  - label: "Live Demo"
+    href: "https://mockup-factory-mu.vercel.app/"
+    target: "_blank"
+  - label: "GitHub"
+    href: "https://github.com/poyrazavsever/mockup-factory"
+    target: "_blank"
+  - label: "Template Guide"
+    href: "https://github.com/poyrazavsever/mockup-factory/blob/main/TEMPLATE_GUIDE.md"
+    target: "_blank"
+---
+
+## Overview
+
+**Mockup Factory** is a web-based tool that allows users to create professional device mockups entirely in their browser. With privacy as the top priority, all image processing happens client-side using the Canvas API — no uploads, no servers, no tracking.
+
+---
+
+## ✨ Key Features
+
+### 🔒 Privacy First
+
+All image processing happens in your browser. Your images never leave your device, ensuring complete privacy and security.
+
+### 🖥️ Multiple Device Types
+
+Support for web browser frames, iPhone mockups, and Android device mockups with high-quality templates.
+
+### 🎨 Simple 4-Step Wizard
+
+Intuitive flow that guides users through:
+
+1. Select mockup type (Web or Mobile)
+2. Upload your image
+3. Choose a template
+4. Preview and download
+
+### ⚡ Instant Preview
+
+See your mockup in real-time before downloading with instant canvas rendering.
+
+### 📱 Fully Responsive
+
+Works seamlessly on desktop and mobile devices with touch-friendly controls.
+
+### ⌨️ Keyboard Navigation
+
+Navigate efficiently with Arrow keys, Enter, and Escape for power users.
+
+### 🔧 Extensible Templates
+
+Easy-to-add template system via simple JSON configuration.
+
+---
+
+## 🔧 Technical Stack
+
+| Technology         | Purpose                                     |
+| ------------------ | ------------------------------------------- |
+| **Next.js 15**     | App Router, React Server Components         |
+| **TypeScript**     | Type safety and better developer experience |
+| **Tailwind CSS 4** | Modern utility-first styling                |
+| **Canvas API**     | Client-side image composition               |
+| **@iconify/react** | Beautiful icon library                      |
+
+---
+
+## 🎯 How It Works
+
+Mockup Factory uses the **Canvas API** to composite images entirely in the browser:
+
+```
+User Image + Template PNG → Canvas API → Composed Mockup → Download
+    ↓            ↓              ↓              ↓
+FileReader   public/      Image Render    Data URL
+             templates/
+```
+
+### The Process
+
+1. **User uploads an image** → Read via FileReader API
+2. **Select a template** → Load template PNG from public folder
+3. **Canvas composition** → Draw template, then overlay user image with precise positioning
+4. **Download** → Convert canvas to data URL and trigger download
+
+**Key Advantage:** Everything happens in the browser. No server, no backend, no privacy concerns.
+
+---
+
+## 📁 Project Architecture
+
+```
+mockup-factory/
+├── app/
+│   ├── layout.tsx          # Root layout with Navbar & Footer
+│   ├── page.tsx            # Home page with Wizard
+│   └── templates/
+│       └── page.tsx        # Template gallery page
+├── components/
+│   ├── ui/
+│   │   ├── navbar.tsx      # Navigation bar
+│   │   └── footer.tsx      # Footer
+│   ├── shared/
+│   │   ├── Toast.tsx       # Notification system
+│   │   └── Loading.tsx     # Loading spinners
+│   └── wizard/
+│       ├── WizardContainer.tsx
+│       ├── Stepper.tsx
+│       ├── StepSelectType.tsx
+│       ├── StepUploadImage.tsx
+│       ├── StepSelectTemplate.tsx
+│       └── StepPreview.tsx
+├── lib/
+│   ├── types.ts            # TypeScript definitions
+│   ├── templates.ts        # Template manifest
+│   ├── composeMockup.ts    # Canvas composition logic
+│   ├── downloadImage.ts    # Download helpers
+│   └── hooks/
+│       ├── useWizard.ts    # Wizard state management
+│       └── useToast.ts     # Toast notifications
+└── public/
+    └── templates/          # Mockup PNG files
+```
+
+---
+
+## 🎨 Available Templates
+
+### Web Mockups
+
+- **Browser Light** - Modern light-themed browser frame (1920 × 1008 slot)
+- **Browser Dark** - Modern dark-themed browser frame (1920 × 1008 slot)
+
+### Mobile Mockups
+
+- **iPhone** - iPhone 14 Pro mockup (390 × 844 slot, 47px radius)
+- **Android** - Google Pixel mockup (424 × 915 slot, 36px radius)
+
+### Recommended Image Sizes
+
+- **Web:** 1920 × 1008 px (aspect ratio ≈ 1.9:1)
+- **Mobile:** 390 × 844 px (iPhone) or 424 × 915 px (Android)
+
+---
+
+## 🚀 Development Process
+
+### Initial Setup
+
+Started with Next.js 15 and TypeScript for type safety, then integrated Tailwind CSS 4 for modern styling.
+
+### Wizard Implementation
+
+Created a multi-step wizard using React hooks for state management:
+
+- `useWizard` - Manages step navigation and data flow
+- `useToast` - Handles user notifications
+- Component separation for each wizard step
+
+### Canvas Composition Logic
+
+The core feature uses Canvas API to composite images:
+
+```typescript
+// composeMockup.ts
+export async function composeMockup(
+  userImage: File,
+  template: Template
+): Promise<string> {
+  const canvas = document.createElement("canvas");
+  const ctx = canvas.getContext("2d");
+
+  // Load template
+  const templateImg = await loadImage(template.imagePath);
+  canvas.width = templateImg.width;
+  canvas.height = templateImg.height;
+
+  // Draw user image in slot
+  const userImg = await loadImage(URL.createObjectURL(userImage));
+  ctx.drawImage(
+    userImg,
+    template.slot.x,
+    template.slot.y,
+    template.slot.width,
+    template.slot.height
+  );
+
+  // Draw template on top
+  ctx.drawImage(templateImg, 0, 0);
+
+  return canvas.toDataURL("image/png");
+}
+```
+
+### Template System
+
+Created an extensible template configuration system in `lib/templates.ts`:
+
+```typescript
+export const templates: Template[] = [
+  {
+    id: "web-browser-light",
+    label: "Browser Light",
+    type: "web",
+    imagePath: "/templates/web-browser-light.png",
+    slot: { x: 0, y: 72, width: 1920, height: 1008 },
+    borderRadius: 0,
+  },
+  // ...more templates
+];
+```
+
+---
+
+## 🎯 Challenges & Solutions
+
+### Challenge 1: Image Quality
+
+**Problem:** Canvas rendering sometimes produced blurry outputs.  
+**Solution:** Ensured images are loaded at 1:1 scale and used `imageSmoothingEnabled = true` for better quality.
+
+### Challenge 2: Mobile Responsiveness
+
+**Problem:** Large canvas elements caused performance issues on mobile.  
+**Solution:** Implemented lazy loading and optimized canvas dimensions for mobile viewports.
+
+### Challenge 3: Template Positioning
+
+**Problem:** Different device mockups required precise positioning calculations.  
+**Solution:** Created a measurement guide and template configuration system with x, y, width, height, and borderRadius properties.
+
+---
+
+## 📊 Results & Impact
+
+- **100% Client-Side Processing** - Complete privacy and security
+- **4 Device Templates** - Web and mobile mockup options
+- **Instant Generation** - Real-time preview and download
+- **Open Source** - Available on GitHub for community contributions
+- **Extensible** - Easy to add new templates via configuration
+
+---
+
+## 🔮 Future Enhancements
+
+- [ ] Add more device templates (iPad, MacBook, etc.)
+- [ ] Custom background colors and gradients
+- [ ] Batch processing for multiple images
+- [ ] Export to different formats (JPEG, WebP)
+- [ ] Template creator tool for the community
+- [ ] Shadow and reflection effects
+- [ ] NPM package for programmatic usage
+
+---
+
+## 🎓 Lessons Learned
+
+- **Canvas API Mastery** - Deep dive into canvas rendering and image manipulation
+- **Privacy-First Design** - Building tools that respect user privacy
+- **Progressive Enhancement** - Ensuring functionality without JavaScript
+- **Template Architecture** - Creating extensible and maintainable configuration systems
+- **User Experience** - Designing intuitive multi-step workflows
+
+---
+
+## 🔗 Links
+
+- **Live Demo:** [https://mockup-factory-mu.vercel.app/](https://mockup-factory-mu.vercel.app/)
+- **Source Code:** [https://github.com/poyrazavsever/mockup-factory](https://github.com/poyrazavsever/mockup-factory)
+- **Template Guide:** [TEMPLATE_GUIDE.md](https://github.com/poyrazavsever/mockup-factory/blob/main/TEMPLATE_GUIDE.md)
+
+---
+
+<p align="center">
+  Made with ❤️ by <a href="https://www.poyrazavsever.com">Poyraz Avsever</a>
+</p>
