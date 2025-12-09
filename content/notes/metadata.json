@@ -1,4 +1,11 @@
 {
+  "uicompositionpatterns": {
+    "title": "UI Composition Patterns",
+    "description": "UI Composition Patterns overview and best practices. Includes Container/Presentational, Compound Components, Render Props, and Higher-Order Components.",
+    "tags": ["composition", "ui", "react", "patterns", "design"],
+    "date": "2025-12-09"
+  },
+  
   "atomicdesign": {
     "title": "Atomic Design Notları",
     "description": "Bileşen hiyerarşisini atomlardan sayfalara kadar parçalayan çalışma dökümü.",
