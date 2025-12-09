@@ -109,14 +109,14 @@ const ActivityBar = ({ searchData }: ActivityBarProps) => {
     <>
       <aside className="fixed left-0 top-0 z-30 hidden h-screen w-max flex-col justify-between gap-4 border-r border-(--color-border) bg-(--color-surface)/80 p-3 backdrop-blur-xl sm:flex">
         <div className="flex flex-col items-center gap-4">
-          <div className="h-12 w-12 rounded-2xl border border-(--color-border) bg-(--color-background)/60 p-1">
+          <div className="h-12 w-12 rounded-2xl border border-(--color-border) bg-(--color-accent)/10 p-0 shadow-[0_0_20px_rgba(var(--color-accent-rgb),0.15)]">
             <Image
-              src="/avatars/activitybar.jpeg"
+              src="/avatars/activitybar.png"
               alt="Poyraz Avsever avatar"
-              width={56}
-              height={56}
+              width={48}
+              height={48}
               priority
-              className="h-full w-full rounded-xl object-cover"
+              className="h-full w-full rounded-xl"
             />
           </div>
           <nav className="flex flex-col items-center gap-3">
@@ -318,7 +318,9 @@ const ActivityBar = ({ searchData }: ActivityBarProps) => {
         </button>
         <button
           type="button"
-          className={`flex flex-col items-center gap-1 rounded-lg border border-(--color-border) bg-(--color-surface)/70 p-1 ${socialOpen ? "text-(--color-accent)" : ""}`}
+          className={`flex flex-col items-center gap-1 rounded-lg border border-(--color-border) bg-(--color-surface)/70 p-1 ${
+            socialOpen ? "text-(--color-accent)" : ""
+          }`}
           onClick={() => setSocialOpen((prev) => !prev)}
         >
           <Icon icon="solar:hashtag-square-bold-duotone" className="text-xl" />
