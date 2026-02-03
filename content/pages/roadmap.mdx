@@ -1,0 +1,540 @@
+---
+slug: "roadmap"
+title: "52 Haftalık Plan"
+description: "Sıfırdan ileri seviyeye uzanan, her haftası 4 güne bölünmüş kapsamlı yazılım yol haritası."
+date: "2026-02-03"
+tags:
+  - roadmap
+  - software-engineering
+  - javascript
+  - system-design
+---
+
+<Roadmap>
+  <Week title="Hafta 1: JS Memory Management & Runtime">
+    <Day day="Gün 1">Stack vs Heap, Referans Tipleri ve Primitive Tiplerin bellek yönetimi.</Day>
+    <Day day="Gün 2">Garbage Collection (GC) algoritmaları (Mark-and-Sweep) ve GC'nin tetiklenme anları.</Day>
+    <Day day="Gün 3">Memory Leak tespiti, Chrome DevTools ile Heap Snapshot analizi.</Day>
+    <Day day="Gün 4">WeakMap, WeakSet kullanımı ve bellek optimizasyonu pratikleri.</Day>
+  </Week>
+
+<Week title="Hafta 2: Scope & Closures">
+  <Day day="Gün 1">
+    Lexical Environment, Execution Context ve Scope Chain mimarisi.
+  </Day>
+  <Day day="Gün 2">
+    Hoisting, Temporal Dead Zone (TDZ) ve `var` vs `let/const` farkları.
+  </Day>
+  <Day day="Gün 3">
+    IIFE (Immediately Invoked Function Expression) ve Module Pattern tarihçesi.
+  </Day>
+  <Day day="Gün 4">
+    Closure kavramı, bellek maliyeti ve pratik kullanım senaryoları
+    (Memoization).
+  </Day>
+</Week>
+
+<Week title="Hafta 3: Async JavaScript Deep Dive">
+  <Day day="Gün 1">
+    Event Loop mekanizması, Call Stack ve Web APIs ilişkisi.
+  </Day>
+  <Day day="Gün 2">
+    Macrotasks (setTimeout) vs Microtasks (Promise) kuyruk öncelikleri.
+  </Day>
+  <Day day="Gün 3">
+    Promise yapısının derinlemesine incelenmesi ve `Promise.all`, `race`,
+    `allSettled`.
+  </Day>
+  <Day day="Gün 4">Sıfırdan kendi Promise yapını (Polyfill) yazma pratiği.</Day>
+</Week>
+
+<Week title="Hafta 4: OOP & Prototypes">
+  <Day day="Gün 1">
+    `this` anahtar kelimesinin 4 kuralı (Implicit, Explicit, New, Window
+    binding).
+  </Day>
+  <Day day="Gün 2">
+    Prototype Chain, `__proto__` vs `prototype` ve Prototypal Inheritance.
+  </Day>
+  <Day day="Gün 3">
+    ES6 Class yapısı altında yatan prototip mantığı ve `super` kullanımı.
+  </Day>
+  <Day day="Gün 4">
+    Inheritance yerine Composition prensibi ve Factory Functions kullanımı.
+  </Day>
+</Week>
+
+<Week title="Hafta 5: Advanced TypeScript Giriş">
+  <Day day="Gün 1">
+    TypeScript derleme süreci, `tsconfig.json` ayarları ve temel tipler.
+  </Day>
+  <Day day="Gün 2">Interface vs Type Alias farkları, Declaration Merging.</Day>
+  <Day day="Gün 3">
+    Union, Intersection Types ve Literal Types ile daraltma (Narrowing).
+  </Day>
+  <Day day="Gün 4">
+    `unknown`, `never`, `any` farkları ve güvenli tip dönüşümleri.
+  </Day>
+</Week>
+
+<Week title="Hafta 6: Advanced TypeScript Derinlik">
+  <Day day="Gün 1">Generics mantığı ve Reusable Code yazımı.</Day>
+  <Day day="Gün 2">
+    Utility Types: `Partial`, `Pick`, `Omit`, `Record`, `Readonly`.
+  </Day>
+  <Day day="Gün 3">
+    Type Guards (User Defined Type Guards) ve `is` anahtar kelimesi.
+  </Day>
+  <Day day="Gün 4">Mapped Types, Conditional Types ve `infer` kullanımı.</Day>
+</Week>
+
+<Week title="Hafta 7: Node.js Internals">
+  <Day day="Gün 1">
+    V8 Engine mimarisi: Ignition (Interpreter) ve TurboFan (Compiler).
+  </Day>
+  <Day day="Gün 2">
+    Libuv kütüphanesi, Event Loop'un Node.js tarafındaki fazları.
+  </Day>
+  <Day day="Gün 3">Single Thread yapısı, Worker Threads ve Cluster modülü.</Day>
+  <Day day="Gün 4">Thread Pool mantığı ve CPU-bound vs I/O-bound işlemler.</Day>
+</Week>
+
+<Week title="Hafta 8: Raw Backend & Streams">
+  <Day day="Gün 1">
+    Frameworksüz `http` modülü ile sunucu oluşturma ve Request/Response analizi.
+  </Day>
+  <Day day="Gün 2">
+    Node.js Streams (Readable, Writable, Duplex, Transform) teorisi.
+  </Day>
+  <Day day="Gün 3">
+    `fs` modülü ile Stream kullanarak büyük dosya okuma/yazma (Chunked).
+  </Day>
+  <Day day="Gün 4">
+    Backpressure sorunu ve Pipe yöntemi ile verimli veri transferi.
+  </Day>
+</Week>
+
+<Week title="Hafta 9: Data Structures I">
+  <Day day="Gün 1">Big O Notation (Time & Space Complexity) analizi.</Day>
+  <Day day="Gün 2">
+    Array'lerin bellekteki tutuluşu ve temel operasyonların maliyeti.
+  </Day>
+  <Day day="Gün 3">
+    Linked List (Singly & Doubly) yapısı ve manuel implementasyonu.
+  </Day>
+  <Day day="Gün 4">
+    Array vs Linked List karşılaştırması ve kullanım senaryoları.
+  </Day>
+</Week>
+
+<Week title="Hafta 10: SQL & Relational Theory">
+  <Day day="Gün 1">
+    İlişkisel Veritabanı Teorisi ve Normalizasyon formları (1NF, 2NF, 3NF).
+  </Day>
+  <Day day="Gün 2">
+    ACID Kuralları: Atomicity, Consistency, Isolation, Durability.
+  </Day>
+  <Day day="Gün 3">
+    Temel SQL komutları (SELECT, JOINs, GROUP BY) ve çalışma mantığı.
+  </Day>
+  <Day day="Gün 4">
+    Transaction yönetimi, Deadlock kavramı ve Isolation Levels.
+  </Day>
+</Week>
+
+<Week title="Hafta 11: Database Indexing & Performance">
+  <Day day="Gün 1">
+    B-Tree ve B+ Tree veri yapılarının veritabanı indekslerindeki rolü.
+  </Day>
+  <Day day="Gün 2">Clustered vs Non-Clustered Index farkları.</Day>
+  <Day day="Gün 3">
+    Query Execution Plan okuma (Explain Analyze) ve darboğaz tespiti.
+  </Day>
+  <Day day="Gün 4">
+    Indexleme stratejileri ve yanlış index kullanımının zararları.
+  </Day>
+</Week>
+
+<Week title="Hafta 12: Algorithm Patterns I">
+  <Day day="Gün 1">
+    Sliding Window tekniği ve kullanım alanları (Subarray problemleri).
+  </Day>
+  <Day day="Gün 2">Two Pointers tekniği (Array/String manipülasyonu).</Day>
+  <Day day="Gün 3">Fast & Slow Pointers (Cycle Detection).</Day>
+  <Day day="Gün 4">
+    Pratik: LeetCode Easy/Medium seviyesinde desen soruları çözümü.
+  </Day>
+</Week>
+
+<Week title="Hafta 13: React Internals">
+  <Day day="Gün 1">
+    JSX'in `React.createElement`'e dönüşümü ve Virtual DOM mantığı.
+  </Day>
+  <Day day="Gün 2">Reconciliation algoritması ve Diffing stratejileri.</Day>
+  <Day day="Gün 3">
+    React Fiber mimarisi: İş parçacığı önceliklendirme ve kesilebilir render.
+  </Day>
+  <Day day="Gün 4">
+    React 18 Concurrent Mode özellikleri (useTransition, useDeferredValue).
+  </Day>
+</Week>
+
+<Week title="Hafta 14: Advanced Hooks & Performance">
+  <Day day="Gün 1">
+    `useMemo` ve `useCallback` ne zaman kullanılmalı? (Premature Optimization).
+  </Day>
+  <Day day="Gün 2">
+    Referential Equality kavramı ve Dependency Array tuzakları.
+  </Day>
+  <Day day="Gün 3">`useLayoutEffect` vs `useEffect` farkı ve Paint süreci.</Day>
+  <Day day="Gün 4">Custom Hooks mimarisi ve Logic ayrıştırma desenleri.</Day>
+</Week>
+
+<Week title="Hafta 15: State Management Patterns">
+  <Day day="Gün 1">
+    Flux Mimarisi ve Tek Yönlü Veri Akışı (Unidirectional Data Flow).
+  </Day>
+  <Day day="Gün 2">
+    Context API: Prop Drilling çözümü ve Re-render sorunları.
+  </Day>
+  <Day day="Gün 3">
+    Observer Pattern ve Proxy Pattern tabanlı state yönetimi (Zustand/Valtio).
+  </Day>
+  <Day day="Gün 4">
+    State Machine (XState) kavramı ve kompleks UI durumları.
+  </Day>
+</Week>
+
+<Week title="Hafta 16: Component Design Patterns">
+  <Day day="Gün 1">Higher Order Components (HOC) ve kullanım senaryoları.</Day>
+  <Day day="Gün 2">Render Props deseni ile mantık paylaşımı.</Day>
+  <Day day="Gün 3">Compound Components (Örn: Select.Item, Select.Trigger).</Day>
+  <Day day="Gün 4">Control Props ve Uncontrolled vs Controlled bileşenler.</Day>
+</Week>
+
+<Week title="Hafta 17: Rendering Architectures">
+  <Day day="Gün 1">
+    CSR (Client Side Rendering) avantajları ve dezavantajları (SEO, TTI).
+  </Day>
+  <Day day="Gün 2">
+    SSR (Server Side Rendering) çalışma akışı ve Hydration süreci.
+  </Day>
+  <Day day="Gün 3">
+    SSG (Static Site Generation) ve ISR (Incremental Static Regeneration).
+  </Day>
+  <Day day="Gün 4">Edge Rendering ve Streaming SSR kavramları.</Day>
+</Week>
+
+<Week title="Hafta 18: Next.js Internals">
+  <Day day="Gün 1">App Router mimarisi ve File-system based routing.</Day>
+  <Day day="Gün 2">React Server Components (RSC) vs Client Components.</Day>
+  <Day day="Gün 3">
+    Network Boundary ve Veri Fetching stratejileri (Server Actions).
+  </Day>
+  <Day day="Gün 4">Next.js Middleware ve Edge Runtime kısıtlamaları.</Day>
+</Week>
+
+<Week title="Hafta 19: API Design Standards">
+  <Day day="Gün 1">
+    RESTful API prensipleri (Resources, Verbs, Statelessness).
+  </Day>
+  <Day day="Gün 2">HTTP Metodları, Status Kodları ve doğru kullanımları.</Day>
+  <Day day="Gün 3">GraphQL temelleri: Schema, Query, Mutation, Resolver.</Day>
+  <Day day="Gün 4">Idempotency kavramı ve API versiyonlama stratejileri.</Day>
+</Week>
+
+<Week title="Hafta 20: Authentication & Security Theory">
+  <Day day="Gün 1">Authentication vs Authorization farkı.</Day>
+  <Day day="Gün 2">Session Based Auth vs Token Based Auth (JWT).</Day>
+  <Day day="Gün 3">OAuth 2.0 ve OIDC (OpenID Connect) akışları.</Day>
+  <Day day="Gün 4">
+    Token saklama güvenliği: HttpOnly Cookie vs LocalStorage.
+  </Day>
+</Week>
+
+<Week title="Hafta 21: Testing Methodologies">
+  <Day day="Gün 1">Yazılım Test Piramidi ve test maliyetleri.</Day>
+  <Day day="Gün 2">Unit Testing prensipleri ve Jest/Vitest kullanımı.</Day>
+  <Day day="Gün 3">
+    Integration Testing: Bileşenlerin ve servislerin birlikte çalışması.
+  </Day>
+  <Day day="Gün 4">
+    E2E Testing (Playwright/Cypress) ve Mocking/Stubbing kavramları.
+  </Day>
+</Week>
+
+<Week title="Hafta 22: Containerization (Docker)">
+  <Day day="Gün 1">Sanallaştırma vs Kontenerizasyon (VM vs Container).</Day>
+  <Day day="Gün 2">Docker Image katmanları (Layers) ve Dockerfile yazımı.</Day>
+  <Day day="Gün 3">Container yönetimi ve Docker CLI komutları.</Day>
+  <Day day="Gün 4">Docker Networking, Volumes ve veri kalıcılığı.</Day>
+</Week>
+
+<Week title="Hafta 23: CI/CD Pipelines">
+  <Day day="Gün 1">
+    Continuous Integration (CI) ve Continuous Deployment (CD) felsefesi.
+  </Day>
+  <Day day="Gün 2">Pipeline adımları: Linting, Unit Tests, Build, Scan.</Day>
+  <Day day="Gün 3">GitHub Actions YAML sözdizimi ve Workflow yapısı.</Day>
+  <Day day="Gün 4">Deployment stratejileri (Blue-Green, Canary).</Day>
+</Week>
+
+<Week title="Hafta 24: Web Security (OWASP)">
+  <Day day="Gün 1">
+    XSS (Cross Site Scripting) türleri ve korunma yöntemleri (CSP).
+  </Day>
+  <Day day="Gün 2">
+    CSRF (Cross-Site Request Forgery) ve SameSite Cookie ayarları.
+  </Day>
+  <Day day="Gün 3">SQL Injection ve NoSQL Injection saldırı vektörleri.</Day>
+  <Day day="Gün 4">Security Headers ve HTTPS (TLS/SSL) önemi.</Day>
+</Week>
+
+<Week title="Hafta 25: Mobile Runtime Environment">
+  <Day day="Gün 1">React Native mimarisi: JS Thread, UI (Main) Thread.</Day>
+  <Day day="Gün 2">The Bridge (Eski mimari) ve darboğazları.</Day>
+  <Day day="Gün 3">
+    New Architecture: JSI (JavaScript Interface) ve senkron iletişim.
+  </Day>
+  <Day day="Gün 4">Fabric (UI Rendering) ve TurboModules.</Day>
+</Week>
+
+<Week title="Hafta 26: Mobile UI Architecture">
+  <Day day="Gün 1">
+    Flexbox mimarisinin mobildeki karşılığı: Yoga Layout Engine.
+  </Day>
+  <Day day="Gün 2">Platforma özel (iOS vs Android) stil farklılıkları.</Day>
+  <Day day="Gün 3">Native Component yaşam döngüsü.</Day>
+  <Day day="Gün 4">
+    Listelenme performansı: FlatList vs FlashList (Recycling).
+  </Day>
+</Week>
+
+<Week title="Hafta 27: Native Modules">
+  <Day day="Gün 1">
+    JavaScript'ten Native (Java/Kotlin/Swift/Obj-C) koda erişim.
+  </Day>
+  <Day day="Gün 2">
+    Basit bir Native Module yazımı (Örn: Batarya seviyesi okuma).
+  </Day>
+  <Day day="Gün 3">
+    Native UI Components (Harita, Video Player entegrasyonu).
+  </Day>
+  <Day day="Gün 4">
+    Expo Modülleri ve konfigürasyon eklentileri (Config Plugins).
+  </Day>
+</Week>
+
+<Week title="Hafta 28: Offline Data Strategy">
+  <Day day="Gün 1">Async Storage limitleri ve kullanım alanları.</Day>
+  <Day day="Gün 2">SQLite ve Realm veritabanı entegrasyonu.</Day>
+  <Day day="Gün 3">Optimistic UI Updates ve veri senkronizasyonu.</Day>
+  <Day day="Gün 4">Conflict Resolution (Çakışma çözme) stratejileri.</Day>
+</Week>
+
+<Week title="Hafta 29: Desktop Architecture (Electron)">
+  <Day day="Gün 1">Electron.js mimarisi: Chromium + Node.js.</Day>
+  <Day day="Gün 2">Main Process vs Renderer Process ayrımı ve görevleri.</Day>
+  <Day day="Gün 3">
+    IPC (Inter-Process Communication): Main ve Renderer arası iletişim.
+  </Day>
+  <Day day="Gün 4">Preload Scripts ve Context Isolation (Güvenlik).</Day>
+</Week>
+
+<Week title="Hafta 30: Operating System Integration">
+  <Day day="Gün 1">Dosya sistemi (FileSystem) erişim izinleri ve yönetimi.</Day>
+  <Day day="Gün 2">Native OS menüleri ve System Tray (Tepsi) uygulamaları.</Day>
+  <Day day="Gün 3">İşletim sistemi bildirimleri (Notifications).</Day>
+  <Day day="Gün 4">Deep Linking ve protokol tanımlama.</Day>
+</Week>
+
+<Week title="Hafta 31: Monorepo Tooling">
+  <Day day="Gün 1">Monorepo vs Polyrepo avantaj/dezavantajları.</Day>
+  <Day day="Gün 2">Workspace mantığı (npm/yarn/pnpm workspaces).</Day>
+  <Day day="Gün 3">Turborepo/Nx ile Dependency Graph ve Task Caching.</Day>
+  <Day day="Gün 4">Paylaşımlı kütüphane (UI Kit, Utils) mimarisi.</Day>
+</Week>
+
+<Week title="Hafta 32: Network Protocols">
+  <Day day="Gün 1">TCP (Transmission Control Protocol) vs UDP farkları.</Day>
+  <Day day="Gün 2">WebSocket protokolü, Handshake süreci ve Frame yapısı.</Day>
+  <Day day="Gün 3">HTTP/2 ve HTTP/3 (QUIC) yenilikleri.</Day>
+  <Day day="Gün 4">Server-Sent Events (SSE) ve Polling ile karşılaştırma.</Day>
+</Week>
+
+<Week title="Hafta 33: Caching Strategies">
+  <Day day="Gün 1">Caching patternleri: Cache-Aside, Read-Through.</Day>
+  <Day day="Gün 2">Write-Through ve Write-Back stratejileri.</Day>
+  <Day day="Gün 3">Redis veri yapıları (String, Hash, List, Set).</Day>
+  <Day day="Gün 4">Cache Invalidation ve TTL (Time-to-Live) yönetimi.</Day>
+</Week>
+
+<Week title="Hafta 34: Message Brokers">
+  <Day day="Gün 1">Senkron vs Asenkron iletişim modelleri.</Day>
+  <Day day="Gün 2">Message Queue mantığı ve Publisher/Subscriber modeli.</Day>
+  <Day day="Gün 3">
+    RabbitMQ veya Kafka temel kavramları (Topic, Partition).
+  </Day>
+  <Day day="Gün 4">
+    Event Driven Architecture'da hata yönetimi (Dead Letter Queues).
+  </Day>
+</Week>
+
+<Week title="Hafta 35: Distributed Systems I">
+  <Day day="Gün 1">
+    Dağıtık sistemlerin zorlukları ve Fallacles of Distributed Computing.
+  </Day>
+  <Day day="Gün 2">
+    CAP Teoremi: Consistency, Availability, Partition Tolerance üçgeni.
+  </Day>
+  <Day day="Gün 3">Eventual Consistency vs Strong Consistency.</Day>
+  <Day day="Gün 4">Consensus Algoritmaları (Paxos, Raft) genel bakış.</Day>
+</Week>
+
+<Week title="Hafta 36: Distributed Systems II">
+  <Day day="Gün 1">
+    Load Balancing algoritmaları (Round Robin, Least Connection, IP Hash).
+  </Day>
+  <Day day="Gün 2">
+    Horizontal Scaling (Scale-out) vs Vertical Scaling (Scale-up).
+  </Day>
+  <Day day="Gün 3">Reverse Proxy ve API Gateway rolleri.</Day>
+  <Day day="Gün 4">Stateless mimari önemi ve Sticky Sessions kavramı.</Day>
+</Week>
+
+<Week title="Hafta 37: Data Structures II (Trees)">
+  <Day day="Gün 1">
+    Tree (Ağaç) veri yapısı terminolojisi (Root, Node, Leaf).
+  </Day>
+  <Day day="Gün 2">Binary Search Tree (BST) kuralları ve implementasyonu.</Day>
+  <Day day="Gün 3">
+    Tree Traversal yöntemleri: BFS (Level Order), DFS (In/Pre/Post-order).
+  </Day>
+  <Day day="Gün 4">Heap (Min/Max) yapısı ve Priority Queue kullanımı.</Day>
+</Week>
+
+<Week title="Hafta 38: Data Structures III (Graphs)">
+  <Day day="Gün 1">
+    Graph teorisi ve temsilleri: Adjacency Matrix vs Adjacency List.
+  </Day>
+  <Day day="Gün 2">Graph Gezintisi: Breadth First Search (BFS).</Day>
+  <Day day="Gün 3">Graph Gezintisi: Depth First Search (DFS).</Day>
+  <Day day="Gün 4">En kısa yol algoritmaları: Dijkstra mantığı.</Day>
+</Week>
+
+<Week title="Hafta 39: Algorithm Patterns II">
+  <Day day="Gün 1">
+    Dynamic Programming (DP) nedir? Recursive vs Iterative yaklaşım.
+  </Day>
+  <Day day="Gün 2">Memoization (Top-Down) tekniği.</Day>
+  <Day day="Gün 3">Tabulation (Bottom-Up) tekniği.</Day>
+  <Day day="Gün 4">Recursion derinliği ve Stack Overflow riskleri.</Day>
+</Week>
+
+<Week title="Hafta 40: Algorithm Patterns III">
+  <Day day="Gün 1">Greedy (Açgözlü) Algoritmalar ve mantığı.</Day>
+  <Day day="Gün 2">
+    Backtracking (Geri İzleme) tekniği ve Permütasyon/Kombinasyon.
+  </Day>
+  <Day day="Gün 3">Divide and Conquer (Böl ve Yönet) stratejisi.</Day>
+  <Day day="Gün 4">Karmaşık problemleri alt parçalara bölme pratiği.</Day>
+</Week>
+
+<Week title="Hafta 41: System Design: Scalability">
+  <Day day="Gün 1">Database Sharding (Yatay Bölümleme) stratejileri.</Day>
+  <Day day="Gün 2">Partitioning türleri (Key-based, Range-based).</Day>
+  <Day day="Gün 3">Replication: Master-Slave vs Master-Master mimarileri.</Day>
+  <Day day="Gün 4">Consistent Hashing algoritması.</Day>
+</Week>
+
+<Week title="Hafta 42: System Design: Microservices">
+  <Day day="Gün 1">Monolith vs Microservices mimari karşılaştırması.</Day>
+  <Day day="Gün 2">Service Discovery (Consul/Eureka) mekanizması.</Day>
+  <Day day="Gün 3">Circuit Breaker pattern (Hystrix/Resilience4j).</Day>
+  <Day day="Gün 4">Distributed Tracing ve Loglama stratejileri.</Day>
+</Week>
+
+<Week title="Hafta 43: System Design: Data Modeling">
+  <Day day="Gün 1">NoSQL veritabanı türleri: Document, Key-Value.</Day>
+  <Day day="Gün 2">
+    Column-family ve Graph veritabanları ne zaman kullanılır?.
+  </Day>
+  <Day day="Gün 3">SQL vs NoSQL seçim kriterleri.</Day>
+  <Day day="Gün 4">
+    Data Modeling pratikleri (Twitter/Instagram timeline tasarımı).
+  </Day>
+</Week>
+
+<Week title="Hafta 44: Web Performance Engineering">
+  <Day day="Gün 1">Critical Rendering Path ve Browser Rendering adımları.</Day>
+  <Day day="Gün 2">Layout Thrashing ve Reflow/Repaint minimizasyonu.</Day>
+  <Day day="Gün 3">Bundle Analizi: Webpack Bundle Analyzer kullanımı.</Day>
+  <Day day="Gün 4">Code Splitting ve Tree Shaking teknikleri.</Day>
+</Week>
+
+<Week title="Hafta 45: LeetCode Practice (Arrays/Strings)">
+  <Day day="Gün 1">Array üzerinde işlem yapan Medium seviye sorular.</Day>
+  <Day day="Gün 2">String manipülasyonu ve Anagram/Palindrome soruları.</Day>
+  <Day day="Gün 3">Prefix Sum ve Hashing teknikleri ile çözüm.</Day>
+  <Day day="Gün 4">Soru analizi ve Time/Space complexity optimizasyonu.</Day>
+</Week>
+
+<Week title="Hafta 46: LeetCode Practice (LinkedLists/Trees)">
+  <Day day="Gün 1">Linked List ters çevirme ve cycle tespiti soruları.</Day>
+  <Day day="Gün 2">Tree derinliği, simetri ve path toplamı soruları.</Day>
+  <Day day="Gün 3">Recursive çözümlerin iterative çözümlere dönüşümü.</Day>
+  <Day day="Gün 4">Edge case'lerin (Boş liste, tek düğüm) ele alınması.</Day>
+</Week>
+
+<Week title="Hafta 47: LeetCode Practice (DP/Graphs)">
+  <Day day="Gün 1">1D Dynamic Programming soruları (Climbing Stairs vb.).</Day>
+  <Day day="Gün 2">Grid tabanlı DP soruları (Path finding).</Day>
+  <Day day="Gün 3">
+    Adası sayısı (Number of Islands) ve benzeri Graph soruları.
+  </Day>
+  <Day day="Gün 4">Karmaşık optimizasyon problemleri analizi.</Day>
+</Week>
+
+<Week title="Hafta 48: Code Review & Quality">
+  <Day day="Gün 1">SOLID Prensipleri: Single Responsibility, Open/Closed.</Day>
+  <Day day="Gün 2">
+    Liskov Substitution, Interface Segregation, Dependency Inversion.
+  </Day>
+  <Day day="Gün 3">DRY (Don't Repeat Yourself), KISS, YAGNI prensipleri.</Day>
+  <Day day="Gün 4">Refactoring teknikleri ve Legacy Code ile başa çıkma.</Day>
+</Week>
+
+<Week title="Hafta 49: Open Source Contribution">
+  <Day day="Gün 1">Açık kaynak lisansları ve katkı kültürü.</Day>
+  <Day day="Gün 2">Büyük codebase'lerde gezinme ve structure'ı anlama.</Day>
+  <Day day="Gün 3">Issue takibi, Reproduce etme ve fixleme süreci.</Day>
+  <Day day="Gün 4">Pull Request (PR) açma ve Code Review süreçleri.</Day>
+</Week>
+
+<Week title="Hafta 50: Technical Writing">
+  <Day day="Gün 1">
+    Teknik blog yazısı nasıl planlanır? Hedef kitle analizi.
+  </Day>
+  <Day day="Gün 2">Karmaşık konuları basitleştirme (ELI5 tekniği).</Day>
+  <Day day="Gün 3">
+    Diyagram ve görselleştirme araçları (Mermaid, Excalidraw).
+  </Day>
+  <Day day="Gün 4">Dokümantasyon yazımı ve README standartları.</Day>
+</Week>
+
+<Week title="Hafta 51: Career & Interview Prep">
+  <Day day="Gün 1">Teknik CV hazırlama ve ATS uyumluluğu.</Day>
+  <Day day="Gün 2">
+    Behavioral Interview (Davranışsal Mülakat) ve STAR tekniği.
+  </Day>
+  <Day day="Gün 3">System Design mülakat simülasyonu çalışması.</Day>
+  <Day day="Gün 4">Mock Interview pratiği ve geri bildirim analizi.</Day>
+</Week>
+
+  <Week title="Hafta 52: RETROSPECTIVE & NEXT STEPS">
+    <Day day="Gün 1">Yıllık teknik gelişimin gözden geçirilmesi (Retrospective).</Day>
+    <Day day="Gün 2">Portfolyo projelerinin derlenmesi ve sunumu.</Day>
+    <Day day="Gün 3">Kariyer hedefleri güncellemesi: Uzmanlaşma alanı seçimi.</Day>
+    <Day day="Gün 4">Öğrenmeyi öğrenme yolculuğunun kutlanması ve Mezuniyet.</Day>
+  </Week>
+</Roadmap>

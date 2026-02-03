@@ -12,7 +12,11 @@ export async function generateStaticParams() {
   return pages.map((page) => ({ slug: page.slug }));
 }
 
-export async function generateMetadata({ params }: { params: PageParams }): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: PageParams;
+}): Promise<Metadata> {
   const { slug } = await params;
   const page = await getPageBySlug(slug);
   if (!page) {
@@ -29,6 +33,10 @@ export async function generateMetadata({ params }: { params: PageParams }): Prom
   };
 }
 
+import { Roadmap, Week, RoadmapHeader, Day } from "@/components/Roadmap";
+
+// ...
+
 export default async function ContentPage({ params }: { params: PageParams }) {
   const { slug } = await params;
   const page = await getPageBySlug(slug);
@@ -38,6 +46,13 @@ export default async function ContentPage({ params }: { params: PageParams }) {
 
   const { content } = await compileMDX({
     source: page.content,
+    components: {
+      Roadmap,
+      Week,
+      RoadmapHeader,
+      Day,
+      Icon,
+    },
     options: {
       parseFrontmatter: false,
       mdxOptions: {
@@ -84,9 +99,7 @@ export default async function ContentPage({ params }: { params: PageParams }) {
         )}
       </header>
 
-      <article className="mdx-content mt-10 max-w-none">
-        {content}
-      </article>
+      <article className="mdx-content mt-10 max-w-none">{content}</article>
     </main>
   );
 }

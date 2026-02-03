@@ -524,7 +524,9 @@ body {
   background-color: var(--color-background);
   color: var(--color-text);
   min-height: 100vh;
-  transition: background-color 320ms ease, color 320ms ease;
+  transition:
+    background-color 320ms ease,
+    color 320ms ease;
 }
 
 ::selection {
@@ -537,4 +539,51 @@ body {
   border: 1px solid color-mix(in srgb, var(--color-border) 70%, transparent);
   border-radius: var(--radius-card);
   box-shadow: var(--shadow-glow);
+}
+
+@media print {
+  @page {
+    margin: 2cm;
+  }
+
+  body {
+    background-color: white !important;
+    color: black !important;
+  }
+
+  header,
+  footer,
+  nav {
+    display: none !important;
+  }
+
+  .print\:hidden {
+    display: none !important;
+  }
+
+  .print\:block {
+    display: block !important;
+  }
+
+  .print\:max-w-none {
+    max-width: none !important;
+  }
+
+  .print\:border-black {
+    border-color: black !important;
+  }
+
+  .print\:shadow-none {
+    box-shadow: none !important;
+  }
+
+  /* Reset all custom colors for print */
+  * {
+    --color-background: white !important;
+    --color-surface: white !important;
+    --color-text: black !important;
+    --color-muted: #444 !important;
+    --color-border: #ddd !important;
+    text-shadow: none !important;
+  }
 }
