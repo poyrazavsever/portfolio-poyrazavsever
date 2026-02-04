@@ -24,7 +24,9 @@ export default function Sidebar({ links }: SidebarProps) {
     if (!normalized) {
       return links;
     }
-    return links.filter((item) => item.label.toLowerCase().includes(normalized));
+    return links.filter((item) =>
+      item.label.toLowerCase().includes(normalized),
+    );
   }, [query, links]);
 
   return (
@@ -35,7 +37,7 @@ export default function Sidebar({ links }: SidebarProps) {
         className="fixed left-4 top-4 z-40 flex h-10 w-10 items-center justify-center rounded-2xl border border-(--color-border) bg-(--color-background)/80 text-(--color-text) shadow-lg sm:hidden"
         onClick={() => setMobileOpen(true)}
       >
-          <span className="space-y-1">
+        <span className="space-y-1">
           <span className="block h-0.5 w-5 bg-(--color-text)"></span>
           <span className="block h-0.5 w-5 bg-(--color-text)"></span>
           <span className="block h-0.5 w-5 bg-(--color-text)"></span>
@@ -44,9 +46,6 @@ export default function Sidebar({ links }: SidebarProps) {
 
       <aside className="fixed left-[calc(56px+1rem)] top-0 hidden h-screen w-64 flex-col border-r border-(--color-border) bg-(--color-surface)/85 p-5 backdrop-blur-xl sm:flex">
         <div>
-          <label htmlFor="sidebar-search-desktop" className="text-xs font-semibold text-(--color-muted)">
-            Explorer
-          </label>
           <input
             id="sidebar-search-desktop"
             type="search"
@@ -67,7 +66,9 @@ export default function Sidebar({ links }: SidebarProps) {
                     href={item.href}
                     data-active={isActive}
                     className={`block rounded-lg px-3 py-2 transition hover:bg-(--color-overlay) hover:text-(--color-text) ${
-                      isActive ? "bg-(--color-overlay) text-(--color-text)" : "text-(--color-muted)"
+                      isActive
+                        ? "bg-(--color-overlay) text-(--color-text)"
+                        : "text-(--color-muted)"
                     }`}
                   >
                     {item.label}
@@ -75,7 +76,11 @@ export default function Sidebar({ links }: SidebarProps) {
                 </li>
               );
             })}
-            {filteredLinks.length === 0 && <li className="px-3 py-2 text-xs text-(--color-muted)">No results</li>}
+            {filteredLinks.length === 0 && (
+              <li className="px-3 py-2 text-xs text-(--color-muted)">
+                No results
+              </li>
+            )}
           </ul>
         </nav>
       </aside>
@@ -96,8 +101,7 @@ export default function Sidebar({ links }: SidebarProps) {
               exit={{ x: -80, opacity: 0 }}
               onClick={(event) => event.stopPropagation()}
             >
-              <div className="flex items-center justify-between">
-                <p className="text-sm font-semibold text-(--color-muted)">Explorer</p>
+              <div className="flex items-center justify-end">
                 <button
                   type="button"
                   className="rounded-full border border-(--color-border) px-2 py-1 text-xs text-(--color-muted)"
@@ -118,23 +122,29 @@ export default function Sidebar({ links }: SidebarProps) {
 
               <nav className="mt-6 flex-1 overflow-y-auto">
                 <ul className="space-y-2 text-sm text-(--color-muted)">
-            {filteredLinks.map((item) => {
-              const isActive = pathname === item.href;
-              return (
-                <li key={`mobile-${item.href}`}>
-                  <Link
-                    href={item.href}
-                    className={`block rounded-lg px-3 py-2 transition hover:bg-(--color-overlay) ${
-                      isActive ? "bg-(--color-overlay) text-(--color-text)" : "text-(--color-muted)"
-                    }`}
-                    onClick={() => setMobileOpen(false)}
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              );
-            })}
-                  {filteredLinks.length === 0 && <li className="px-3 py-2 text-xs text-(--color-muted)">No results</li>}
+                  {filteredLinks.map((item) => {
+                    const isActive = pathname === item.href;
+                    return (
+                      <li key={`mobile-${item.href}`}>
+                        <Link
+                          href={item.href}
+                          className={`block rounded-lg px-3 py-2 transition hover:bg-(--color-overlay) ${
+                            isActive
+                              ? "bg-(--color-overlay) text-(--color-text)"
+                              : "text-(--color-muted)"
+                          }`}
+                          onClick={() => setMobileOpen(false)}
+                        >
+                          {item.label}
+                        </Link>
+                      </li>
+                    );
+                  })}
+                  {filteredLinks.length === 0 && (
+                    <li className="px-3 py-2 text-xs text-(--color-muted)">
+                      No results
+                    </li>
+                  )}
                 </ul>
               </nav>
             </motion.aside>

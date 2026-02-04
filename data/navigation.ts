@@ -49,6 +49,12 @@ export const ACTIVITY_LINKS: ActivityLink[] = [
     label: "Freelance",
     icon: "solar:case-round-minimalistic-bold-duotone",
   },
+  {
+    id: "roadmap",
+    href: "/roadmap",
+    label: "52 Week Plan",
+    icon: "solar:calendar-mark-bold-duotone",
+  },
 ] as const;
 
 export const SOCIAL_LINKS: SocialLink[] = [
