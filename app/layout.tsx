@@ -10,10 +10,11 @@ import { getAllBlogPostsMetadata } from "@/lib/blog";
 import { getAllNoteFiles } from "@/lib/notes";
 import { getAllProjectMetadata } from "@/lib/projects";
 
-
 export const metadata: Metadata = {
-  title: "Poyraz Avsever - Portfolio - Freelancer - Fullstack Developer - Web Developer",
-  description: "Poyraz Avsever's personal portfolio website showcasing projects, skills, and services as a freelancer and fullstack web developer. A young person passionate about coding and technology.",
+  title:
+    "Poyraz Avsever - Portfolio - Freelancer - Fullstack Developer - Web Developer",
+  description:
+    "Poyraz Avsever's personal portfolio website showcasing projects, skills, and services as a freelancer and fullstack web developer. A young person passionate about coding and technology.",
   icons: {
     icon: "/favicon.ico",
   },
@@ -80,32 +81,44 @@ export default async function RootLayout({
     href: "/notes",
   };
 
-  const sidebarLinks = pages.reduce<{ label: string; href: string }[]>((acc, page) => {
-    acc.push({
-      label: page.title,
-      href: `/${page.slug}`,
-    });
+  const sidebarLinks = pages.reduce<{ label: string; href: string }[]>(
+    (acc, page) => {
+      if (page.slug === "roadmap") return acc;
 
-    if (page.slug === "about") {
-      acc.push(blogLink, notesLink);
-    }
+      acc.push({
+        label: page.title,
+        href: `/${page.slug}`,
+      });
 
-    return acc;
-  }, []);
+      if (page.slug === "about") {
+        acc.push(blogLink, notesLink);
+      }
+
+      return acc;
+    },
+    [],
+  );
 
   if (!sidebarLinks.some((link) => link.href === blogLink.href)) {
-    const contentIndex = sidebarLinks.findIndex((link) => link.href === "/content");
+    const contentIndex = sidebarLinks.findIndex(
+      (link) => link.href === "/content",
+    );
     const targetIndex = contentIndex >= 0 ? contentIndex : sidebarLinks.length;
     sidebarLinks.splice(targetIndex, 0, blogLink);
   }
 
   if (!sidebarLinks.some((link) => link.href === notesLink.href)) {
-    const blogIndex = sidebarLinks.findIndex((link) => link.href === blogLink.href);
+    const blogIndex = sidebarLinks.findIndex(
+      (link) => link.href === blogLink.href,
+    );
     if (blogIndex >= 0) {
       sidebarLinks.splice(blogIndex + 1, 0, notesLink);
     } else {
-      const contentIndex = sidebarLinks.findIndex((link) => link.href === "/content");
-      const targetIndex = contentIndex >= 0 ? contentIndex : sidebarLinks.length;
+      const contentIndex = sidebarLinks.findIndex(
+        (link) => link.href === "/content",
+      );
+      const targetIndex =
+        contentIndex >= 0 ? contentIndex : sidebarLinks.length;
       sidebarLinks.splice(targetIndex, 0, notesLink);
     }
   }
@@ -119,7 +132,12 @@ export default async function RootLayout({
   };
 
   return (
-    <html lang="en" data-theme="mint" className={nunito.variable} suppressHydrationWarning>
+    <html
+      lang="en"
+      data-theme="mint"
+      className={nunito.variable}
+      suppressHydrationWarning
+    >
       <body className="bg-(--color-background) text-(--color-text) antialiased">
         <ThemeProvider>
           <ActivityBar searchData={searchIndex} />
