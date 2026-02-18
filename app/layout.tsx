@@ -1,14 +1,5 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { ThemeProvider } from "./components/theme-provider";
-import ActivityBar from "./components/layout/activitybar";
-import Sidebar from "./components/layout/sidebar";
-import { nunito } from "./font";
-import { getAllPageMetadata } from "@/lib/mdx";
-import type { PageMeta } from "@/lib/mdx";
-import { getAllBlogPostsMetadata } from "@/lib/blog";
-import { getAllNoteFiles } from "@/lib/notes";
-import { getAllProjectMetadata } from "@/lib/projects";
 
 export const metadata: Metadata = {
   title:
@@ -50,100 +41,13 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const pages = await getAllPageMetadata();
-  const blogPosts = await getAllBlogPostsMetadata();
-  const notes = await getAllNoteFiles();
-  const projectDetails = await getAllProjectMetadata();
-  const blogPage: PageMeta = {
-    slug: "blog",
-    title: "My Blog Posts",
-    order: Number.MAX_SAFE_INTEGER,
-    tags: ["blog"],
-    description: "All of my writing collected in one place.",
-    links: [],
-  };
-
-  const notesPage: PageMeta = {
-    slug: "notes",
-    title: "My Notes",
-    order: Number.MAX_SAFE_INTEGER - 1,
-    tags: ["notes", "pdf"],
-    description: "A collection of study notes and references rendered as PDFs.",
-    links: [],
-  };
-
-  const blogLink = {
-    label: blogPage.title,
-    href: "/blog",
-  };
-  const notesLink = {
-    label: notesPage.title,
-    href: "/notes",
-  };
-
-  const sidebarLinks = pages.reduce<{ label: string; href: string }[]>(
-    (acc, page) => {
-      if (page.slug === "roadmap") return acc;
-
-      acc.push({
-        label: page.title,
-        href: `/${page.slug}`,
-      });
-
-      if (page.slug === "about") {
-        acc.push(blogLink, notesLink);
-      }
-
-      return acc;
-    },
-    [],
-  );
-
-  if (!sidebarLinks.some((link) => link.href === blogLink.href)) {
-    const contentIndex = sidebarLinks.findIndex(
-      (link) => link.href === "/content",
-    );
-    const targetIndex = contentIndex >= 0 ? contentIndex : sidebarLinks.length;
-    sidebarLinks.splice(targetIndex, 0, blogLink);
-  }
-
-  if (!sidebarLinks.some((link) => link.href === notesLink.href)) {
-    const blogIndex = sidebarLinks.findIndex(
-      (link) => link.href === blogLink.href,
-    );
-    if (blogIndex >= 0) {
-      sidebarLinks.splice(blogIndex + 1, 0, notesLink);
-    } else {
-      const contentIndex = sidebarLinks.findIndex(
-        (link) => link.href === "/content",
-      );
-      const targetIndex =
-        contentIndex >= 0 ? contentIndex : sidebarLinks.length;
-      sidebarLinks.splice(targetIndex, 0, notesLink);
-    }
-  }
-
-  const searchablePages = [...pages, blogPage, notesPage];
-  const searchIndex = {
-    pages: searchablePages,
-    blogPosts,
-    notes,
-    projects: projectDetails,
-  };
-
+  
   return (
     <html
       lang="en"
-      data-theme="mint"
-      className={nunito.variable}
-      suppressHydrationWarning
     >
-      <body className="bg-(--color-background) text-(--color-text) antialiased">
-        <ThemeProvider>
-          <ActivityBar searchData={searchIndex} />
-          <Sidebar links={sidebarLinks} />
-          {children}
-        </ThemeProvider>
+      <body>
+        {children}
       </body>
     </html>
   );
