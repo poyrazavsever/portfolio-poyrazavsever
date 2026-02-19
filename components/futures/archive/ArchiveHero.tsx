@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Badge, Typography } from "poyraz-ui/atoms";
+import { Badge, PatternGrid, Typography } from "poyraz-ui/atoms";
 
 interface ArchiveHeroProps {
   title?: string;
@@ -16,8 +16,14 @@ export function ArchiveHero({
 }: ArchiveHeroProps) {
   return (
     <section className="relative overflow-hidden bg-white border-b-2 border-dashed border-slate-200">
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-size-[24px_24px]"></div>
-
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <PatternGrid
+          className="w-full h-full opacity-[0.04]"
+          color="currentColor"
+          size={40}
+        />
+      </div>
+      
       <div className="container mx-auto px-4 py-24 md:py-32 relative z-10">
         <div className="max-w-4xl mx-auto text-center space-y-6">
           <motion.div
