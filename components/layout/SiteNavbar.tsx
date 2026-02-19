@@ -421,16 +421,6 @@ export function SiteNavbar() {
                 description="Software engineering degree journey"
                 href="/career/education"
               />
-              <NavbarMegaMenuItem
-                title="Interactive Resume"
-                description="Downloadable PDF and online CV"
-                href="/career/resume"
-              />
-              <NavbarMegaMenuItem
-                title="Contact Me"
-                description="Email, social links and booking"
-                href="/contact"
-              />
             </NavbarMegaMenu>
           </NavbarDropdown>
         </NavbarLinks>
@@ -446,7 +436,7 @@ export function SiteNavbar() {
             </a>
           </Button>
           <Button size="sm" asChild>
-            <a href="/contact">Let&apos;s Start</a>
+            <a href="/contact">Contact</a>
           </Button>
         </NavbarActions>
 
@@ -681,7 +671,7 @@ export function SiteNavbar() {
             </a>
           </Button>
           <Button className="w-full" asChild>
-            <a href="/contact">Let&apos;s Start</a>
+            <a href="/contact">Contact</a>
           </Button>
         </NavbarMobileActions>
       </NavbarMobileMenu>
