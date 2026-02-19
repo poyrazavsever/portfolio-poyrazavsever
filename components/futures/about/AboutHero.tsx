@@ -8,6 +8,7 @@ interface AboutHeroProps {
   highlight: string;
   description: string;
   badge?: string;
+  imageSrc?: string;
 }
 
 export function AboutHero({
@@ -15,6 +16,7 @@ export function AboutHero({
   highlight,
   description,
   badge = "About Me",
+  imageSrc = "/about/about.png",
 }: AboutHeroProps) {
   return (
     <section className="relative pt-16 overflow-hidden border-b-2 border-dashed border-red-200">
@@ -60,11 +62,7 @@ export function AboutHero({
         {/* Image Content - Positioned to sit on the red line */}
         <div className="w-full md:w-1/2 flex justify-center md:justify-end relative items-end">
           <div className="relative h-[200px] md:h-[450px]">
-            <img
-              src="/about/about.png"
-              alt="Poyraz Avsever"
-              className="h-full"
-            />
+            <img src={imageSrc} alt="Poyraz Avsever" className="h-full" />
           </div>
         </div>
       </div>
