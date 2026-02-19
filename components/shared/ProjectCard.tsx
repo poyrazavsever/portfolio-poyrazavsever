@@ -57,7 +57,7 @@ export function ProjectCard({
         </div>
       </CardHeader>
       <CardContent className="grow">
-        <CardDescription className="text-base text-slate-600 dark:text-slate-300 line-clamp-3">
+        <CardDescription className="text-base text-slate-600 line-clamp-3">
           {description}
         </CardDescription>
       </CardContent>

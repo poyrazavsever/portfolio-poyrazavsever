@@ -9,3 +9,5 @@ trigger: always_on
 - When using the typography component, do not make any extra font-weight or font-size adjustments.
 
 - In headings, highlight the key word using a secondary font and red-600.
+
+- We don't do dark designs. Only light designs.
