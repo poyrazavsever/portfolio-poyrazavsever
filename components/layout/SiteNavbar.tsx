@@ -272,6 +272,16 @@ export function SiteNavbar() {
                 href="https://portal.poyrazavsever.com"
               />
               <NavbarMegaMenuItem
+                title="SaaS Projects"
+                description="Software as a Service solutions"
+                href="/products/saas"
+              />
+              <NavbarMegaMenuItem
+                title="Mobile Applications"
+                description="iOS and Android apps built with React Native"
+                href="/products/mobile-apps"
+              />
+              <NavbarMegaMenuItem
                 title="Premium Figma Templates"
                 description="Ready-to-use UI design kits and templates"
                 href="/products/figma-templates"
@@ -285,11 +295,6 @@ export function SiteNavbar() {
                 title="Open APIs & Endpoints"
                 description="Public APIs and open data endpoints"
                 href="/products/apis"
-              />
-              <NavbarMegaMenuItem
-                title="Productivity / Notion Templates"
-                description="Workflows, dashboards and productivity systems"
-                href="/products/notion-templates"
               />
             </NavbarMegaMenu>
           </NavbarDropdown>
@@ -582,6 +587,12 @@ export function SiteNavbar() {
           <NavbarMobileLink href="https://portal.poyrazavsever.com">
             Freelancer & Agency Workspace ↗
           </NavbarMobileLink>
+          <NavbarMobileLink href="/products/saas">
+            SaaS Projects
+          </NavbarMobileLink>
+          <NavbarMobileLink href="/products/mobile-apps">
+            Mobile Applications
+          </NavbarMobileLink>
           <NavbarMobileLink href="/products/figma-templates">
             Premium Figma Templates
           </NavbarMobileLink>
@@ -590,9 +601,6 @@ export function SiteNavbar() {
           </NavbarMobileLink>
           <NavbarMobileLink href="/products/apis">
             Open APIs & Endpoints
-          </NavbarMobileLink>
-          <NavbarMobileLink href="/products/notion-templates">
-            Productivity / Notion Templates
           </NavbarMobileLink>
         </NavbarMobileGroup>
 
