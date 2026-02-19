@@ -1,5 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { TooltipProvider } from "poyraz-ui";
+import { Toaster } from "poyraz-ui/molecules";
+import { SiteNavbar } from "@/components/layout/SiteNavbar";
+import { SiteFooter } from "@/components/layout/SiteFooter";
 
 export const metadata: Metadata = {
   title:
@@ -41,13 +45,15 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  
   return (
-    <html
-      lang="en"
-    >
+    <html lang="en">
       <body>
-        {children}
+        <TooltipProvider>
+          <SiteNavbar />
+          <main className="min-h-screen">{children}</main>
+          <SiteFooter />
+          <Toaster />
+        </TooltipProvider>
       </body>
     </html>
   );
