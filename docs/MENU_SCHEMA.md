@@ -1,67 +1,78 @@
 # poyrazavsever.com - Main Hub Sitemap & Structure
 
 ## 🌐 Global Navigation (Header)
-- **Logo:** Poyraz Avsever (Link to `/`)
-- **Global CTA Button:** "Hemen Başla" (Pure #ffffff background, 1:1 format, redirects to `portal.poyrazavsever.com`)
+- **Logo:** Poyraz Avsever (Direct Link to `/`)
+- **Main Nav Links:** Showcase | Products | Client Portal | Media | Academy | About | Ecosystem
+- **Global CTA Button:** "Hemen Başla" (Pure #ffffff background, 1:1 format, directs to `portal.poyrazavsever.com`)
 
 ---
 
-## 📂 1. Showcase (Vitrin & Projeler)
-- Web Applications (Next.js & Node.js)
-- Mobile Applications (React Native)
-- Desktop Applications (Electron.js)
-- UI/UX Design Projects
-- Technical Case Studies
-- Open Source Contributions
-- Tech Stack & Arsenal
-- Poyraz UI Kit ↗ (`ui.poyrazavsever.com`)
+## 📂 1. Showcase (Dropdown)
+*Projelerin platformuna göre değil, niteliğine ve çözüm sunduğu alana göre ayrıldığı vitrin.*
 
-## 🚀 2. Products (Yayınlanmış Ürünler)
+- **Featured Works (Seçilmiş Projeler)**
+  - SaaS & Platform Solutions (Örn: Freelancer Portal)
+  - Global E-Commerce & B2B Solutions 
+- **Deep Dive Case Studies**
+  - Full-Stack Architecture (Veritabanı ve sunucu kurguları)
+  - UI/UX & Brand Identity (Kullanıcı deneyimi araştırmaları)
+- **Open Source & Packages**
+  - GitHub Contributions
+- **Design Systems**
+  - Poyraz UI Kit ↗ (`ui.poyrazavsever.com`)
+- **Archive**
+  - All Projects (Geçmişten bugüne tüm projelerin listelendiği sayfa)
+
+## 🚀 2. Products (Dropdown)
+*Bağımsız olarak geliştirdiğin, yayınlanmış ve kullanıcı kitlesi olan ürünler.*
+
 - Freelancer & Agency Workspace ↗ (`portal.poyrazavsever.com`)
-- Figma Design Templates
-- Mobile Utilities & Apps
-- Developer Micro-Tools
-- Open APIs & Endpoints
-- CLI Tools & Packages
-- Notion / Productivity Templates
-- Upcoming Beta Releases
+- Premium Figma Design Templates
+- Developer Micro-Tools (Topluluk için ufak araçlar)
+- Open APIs & Public Endpoints
+- Productivity / Notion Templates
 
-## 💼 3. Client Portal (Çözüm Ortaklığı & Hizmetler)
-- Client Login ↗ (`portal.poyrazavsever.com/login`)
-- Full-Stack Development Services
-- UI/UX & Brand Identity Design
-- System Architecture Consulting
-- Project Process & Workflow
-- Pricing & Packages
-- Book a Meeting (Calendly)
-- Request a Proposal Form
+## 💼 3. Client Portal (Dropdown)
+*Potansiyel müşterilerin seninle çalışma süreçlerini başlattığı iş alanı.*
 
-## 📝 4. Content & Research (İçerik & Araştırma)
-- Blog & Tech Articles (Medium)
-- System Design Researches
-- PoC (Proof of Concept) & R&D Notes
-- UI/UX Best Practices & Principles
-- "Poyraz ile Masa Başı" Series
-- Live Broadcast & Guest Schedule
-- Sponsorship & Collab Inquiries
-- Social Media Hub (YouTube, Instagram, LinkedIn)
+- **Client Login ↗** (`portal.poyrazavsever.com/login`)
+- **My Services** (Full-Stack Dev, UI/UX Design,)
+- **Workflow & Process** (Bir projeyi 0'dan canlıya nasıl alıyorum?)
+- **Pricing & Retainers** (Fiyatlandırma politikası)
+- **Book a Discovery Call** (Calendly üzerinden toplantı)
+- **Project Inquiry Form** (Detaylı teklif alma formu)
 
-## 🧠 5. Learning & Academy (Eğitim & Dijital Bahçe)
-- 52-Week Engineering Plan
-- Playgrounds & Labs ↗ (`js.poyrazavsever.com`)
-- Live Broadcast Clones ↗ (`meet.poyrazavsever.com` vb.)
-- BTK Akademi & Udemy Course Notes
-- Certifications & Badges
-- Technical English Learning Journey
-- My Reading & Watch List
-- Personal Coding Guidelines
+## 🎙️ 4. Media & Insights (Dropdown)
+*İçerik üreticisi kimliğinin ve araştırmalarının toplandığı merkez.*
 
-## ⚙️ 6. About (Kariyer & Altyapı)
+- **Poyraz ile Masa Başı (Live Series)**
+  - Upcoming Schedule (Çarşamba günleri 20:00 yayın takvimi)
+  - Past Episodes & Guests
+  - Apply to be a Guest
+- **Articles & Research**
+  - Tech & Engineering Blog (Medium)
+  - System Design Deep Dives
+  - UI/UX Principles & Trends
+- **Social Hub** (YouTube, Instagram, LinkedIn Feed'leri)
+
+## 🧠 5. Learning Center (Dropdown)
+*Kişisel gelişim yolculuğun ve başkalarına ilham veren açık kaynak notların.*
+
+- **The 52-Week Journey ↗** (Full-Stack ve System Design haftalık takip planı) (`js.poyrazavsever.com`)
+- **Course Notes & Certifications** (BTK, Udemy vb. eğitim notları)
+- **My Reading & Watch List** (Önerilen kaynaklar)
+
+## ⚙️ 6. Ecosystem (Single Link / Hover Info)
+*Kendi sunucularında koşan devasa yapının şeffaflık alanı. Dropdown olmak zorunda değil, tıklanınca tek bir "Command Center" sayfasına gidebilir.*
+
+- **System Status ↗** (`status.poyrazavsever.com`)
+- **Self-Hosted Architecture** (Coolify, Supabase, Monorepo ve Reverse Proxy mimarisini anlatan detaylı teknik doküman)
+
+## 👤 7. About (Dropdown)
+*Profesyonel geçmişin ve kişisel hikayen.*
+
 - My Story & Vision
-- Academic Education
-- Work Experience
-- Interactive Resume (CV)
-- System Status ↗ (`status.poyrazavsever.com`)
-- Infrastructure Architecture (Coolify & Supabase)
-- Brand Guidelines & Press Kit
-- Contact Information
+- Career & Experience
+- Academic Education 
+- Interactive Resume
+- Contact Me

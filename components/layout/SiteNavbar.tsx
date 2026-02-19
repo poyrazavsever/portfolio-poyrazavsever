@@ -231,44 +231,34 @@ export function SiteNavbar() {
           <NavbarDropdown label="Showcase">
             <NavbarMegaMenu>
               <NavbarMegaMenuItem
-                title="Web Applications"
-                description="Next.js & Node.js full-stack projects"
-                href="/showcase/web"
+                title="Featured Projects"
+                description="End-to-end platforms like Freelancer Portal"
+                href="/showcase/portfolio"
               />
               <NavbarMegaMenuItem
-                title="Mobile Applications"
-                description="React Native cross-platform apps"
-                href="/showcase/mobile"
+                title="Full-Stack Architecture Cases"
+                description="Database and server architecture breakdowns"
+                href="/showcase/fullstack-cases"
               />
               <NavbarMegaMenuItem
-                title="Desktop Applications"
-                description="Electron.js desktop solutions"
-                href="/showcase/desktop"
+                title="UI/UX & Brand Identity Cases"
+                description="User experience research and design stories"
+                href="/showcase/design-cases"
               />
               <NavbarMegaMenuItem
-                title="UI/UX Design Projects"
-                description="Interface design and prototyping work"
-                href="/showcase/design"
-              />
-              <NavbarMegaMenuItem
-                title="Technical Case Studies"
-                description="In-depth breakdowns of real projects"
-                href="/showcase/case-studies"
-              />
-              <NavbarMegaMenuItem
-                title="Open Source Contributions"
-                description="GitHub repositories and community work"
+                title="Open Source & Packages"
+                description="GitHub contributions and community work"
                 href="/showcase/open-source"
               />
               <NavbarMegaMenuItem
-                title="Tech Stack & Arsenal"
-                description="Frontend, Backend & DevOps tools I use"
-                href="/showcase/tech-stack"
+                title="Poyraz UI Kit ↗"
+                description="ui.poyrazavsever.com — brutalist design system"
+                href="https://ui.poyrazavsever.com"
               />
               <NavbarMegaMenuItem
-                title="Poyraz UI Kit ↗"
-                description="ui.poyrazavsever.com — brutalist component kit"
-                href="https://ui.poyrazavsever.com"
+                title="All Projects (Archive)"
+                description="Complete project archive from past to present"
+                href="/showcase/archive"
               />
             </NavbarMegaMenu>
           </NavbarDropdown>
@@ -282,18 +272,13 @@ export function SiteNavbar() {
                 href="https://portal.poyrazavsever.com"
               />
               <NavbarMegaMenuItem
-                title="Figma Design Templates"
+                title="Premium Figma Templates"
                 description="Ready-to-use UI design kits and templates"
                 href="/products/figma-templates"
               />
               <NavbarMegaMenuItem
-                title="Mobile Utilities & Apps"
-                description="Utility apps published on app stores"
-                href="/products/mobile-apps"
-              />
-              <NavbarMegaMenuItem
                 title="Developer Micro-Tools"
-                description="Small utilities built for developers"
+                description="Small utilities built for the community"
                 href="/products/micro-tools"
               />
               <NavbarMegaMenuItem
@@ -302,19 +287,9 @@ export function SiteNavbar() {
                 href="/products/apis"
               />
               <NavbarMegaMenuItem
-                title="CLI Tools & Packages"
-                description="Command-line tools and npm packages"
-                href="/products/cli"
-              />
-              <NavbarMegaMenuItem
-                title="Notion / Productivity Templates"
+                title="Productivity / Notion Templates"
                 description="Workflows, dashboards and productivity systems"
                 href="/products/notion-templates"
-              />
-              <NavbarMegaMenuItem
-                title="Upcoming Beta Releases"
-                description="Products currently in active development"
-                href="/products/beta"
               />
             </NavbarMegaMenu>
           </NavbarDropdown>
@@ -328,136 +303,112 @@ export function SiteNavbar() {
                 href="https://portal.poyrazavsever.com/login"
               />
               <NavbarMegaMenuItem
-                title="Full-Stack Development Services"
-                description="End-to-end web & app development"
-                href="/services/fullstack"
+                title="My Services"
+                description="Full-Stack Development, UI/UX Design"
+                href="/services"
               />
               <NavbarMegaMenuItem
-                title="UI/UX & Brand Identity Design"
-                description="Design systems, branding and prototyping"
-                href="/services/design"
-              />
-              <NavbarMegaMenuItem
-                title="System Architecture Consulting"
-                description="Scalable, production-ready system design"
-                href="/services/architecture"
-              />
-              <NavbarMegaMenuItem
-                title="Project Process & Workflow"
-                description="How I manage projects from start to delivery"
+                title="Workflow & Process"
+                description="How I take a project from zero to production"
                 href="/services/workflow"
               />
               <NavbarMegaMenuItem
-                title="Pricing & Packages"
-                description="Transparent pricing for every scope"
+                title="Pricing & Retainers"
+                description="Transparent pricing policy and packages"
                 href="/pricing"
               />
               <NavbarMegaMenuItem
-                title="Book a Meeting"
-                description="Schedule a discovery call via Calendly"
+                title="Book a Discovery Call"
+                description="Schedule a meeting via Calendly"
                 href="/client/meeting"
               />
               <NavbarMegaMenuItem
-                title="Request a Proposal"
-                description="Submit your project brief for a custom quote"
+                title="Project Inquiry Form"
+                description="Submit your brief for a custom proposal"
                 href="/client/proposal"
               />
             </NavbarMegaMenu>
           </NavbarDropdown>
 
-          {/* ── 4. Content & Research ── */}
-          <NavbarDropdown label="Content">
+          {/* ── 4. Media & Insights ── */}
+          <NavbarDropdown label="Media">
             <NavbarMegaMenu>
               <NavbarMegaMenuItem
-                title="Blog & Tech Articles"
-                description="Software, design and engineering posts"
+                title="Poyraz ile Masa Başı"
+                description="Live series — every Wednesday at 20:00"
+                href="/media/masa-basi"
+              />
+              <NavbarMegaMenuItem
+                title="Past Episodes & Guests"
+                description="Archive of previous broadcasts"
+                href="/media/masa-basi/archive"
+              />
+              <NavbarMegaMenuItem
+                title="Apply to be a Guest"
+                description="Join a live session as a guest speaker"
+                href="/media/masa-basi/apply"
+              />
+              <NavbarMegaMenuItem
+                title="Tech & Engineering Blog"
+                description="Articles on software and engineering"
                 href="/blog"
               />
               <NavbarMegaMenuItem
-                title="System Design Researches"
-                description="Deep dives into architecture patterns"
+                title="System Design Deep Dives"
+                description="Architecture patterns and research"
                 href="/research/system-design"
               />
               <NavbarMegaMenuItem
-                title="PoC & R&D Notes"
-                description="Proof of concept experiments and findings"
-                href="/research/poc"
+                title="UI/UX Principles & Trends"
+                description="Design guidelines and industry trends"
+                href="/research/ui-ux"
               />
               <NavbarMegaMenuItem
-                title="UI/UX Best Practices"
-                description="Principles, patterns and design guidelines"
-                href="/research/ui-ux-practices"
-              />
-              <NavbarMegaMenuItem
-                title="Poyraz ile Masa Başı"
-                description="YouTube live series — every Sunday at 20:00"
-                href="/content/masa-basi"
-              />
-              <NavbarMegaMenuItem
-                title="Live Broadcast & Guest Schedule"
-                description="Upcoming streams and guest appearances"
-                href="/content/broadcast-schedule"
-              />
-              <NavbarMegaMenuItem
-                title="Sponsorship & Collab Inquiries"
-                description="Brand deals and collaboration opportunities"
-                href="/content/sponsorship"
-              />
-              <NavbarMegaMenuItem
-                title="Social Media Hub"
+                title="Social Hub"
                 description="YouTube, Instagram, LinkedIn and more"
-                href="/content/social"
+                href="/media/social"
               />
             </NavbarMegaMenu>
           </NavbarDropdown>
 
-          {/* ── 5. Learning & Academy ── */}
-          <NavbarDropdown label="Learning">
+          {/* ── 5. Academy ── */}
+          <NavbarDropdown label="Academy">
             <NavbarMegaMenu>
               <NavbarMegaMenuItem
-                title="52-Week Engineering Plan"
-                description="Weekly full-stack and system design goals"
-                href="/learning/52-week-plan"
-              />
-              <NavbarMegaMenuItem
-                title="Playgrounds & Labs ↗"
-                description="js.poyrazavsever.com — interactive code experiments"
+                title="The 52-Week Journey ↗"
+                description="js.poyrazavsever.com — weekly full-stack plan"
                 href="https://js.poyrazavsever.com"
               />
               <NavbarMegaMenuItem
-                title="Live Broadcast Clones ↗"
-                description="meet.poyrazavsever.com — projects built live"
-                href="https://meet.poyrazavsever.com"
-              />
-              <NavbarMegaMenuItem
-                title="BTK Akademi & Udemy Notes"
-                description="Course summaries and takeaways"
-                href="/learning/course-notes"
-              />
-              <NavbarMegaMenuItem
-                title="Certifications & Badges"
-                description="Earned certificates and achievements"
-                href="/learning/certifications"
-              />
-              <NavbarMegaMenuItem
-                title="Technical English Journey"
-                description="English learning progress and resources"
-                href="/learning/english"
+                title="Course Notes & Certifications"
+                description="BTK Akademi, Udemy and other course notes"
+                href="/academy/course-notes"
               />
               <NavbarMegaMenuItem
                 title="My Reading & Watch List"
-                description="Books, videos and resources I recommend"
-                href="/learning/reading-list"
-              />
-              <NavbarMegaMenuItem
-                title="Personal Coding Guidelines"
-                description="My conventions, standards and best practices"
-                href="/learning/coding-guidelines"
+                description="Books, videos and recommended resources"
+                href="/academy/reading-list"
               />
             </NavbarMegaMenu>
           </NavbarDropdown>
 
-          {/* ── 6. About ── */}
+          {/* ── 6. Ecosystem ── */}
+          <NavbarDropdown label="Ecosystem">
+            <NavbarMegaMenu>
+              <NavbarMegaMenuItem
+                title="System Status ↗"
+                description="status.poyrazavsever.com — uptime monitor"
+                href="https://status.poyrazavsever.com"
+              />
+              <NavbarMegaMenuItem
+                title="Self-Hosted Architecture"
+                description="Coolify, Supabase, Monorepo & Reverse Proxy"
+                href="/ecosystem/architecture"
+              />
+            </NavbarMegaMenu>
+          </NavbarDropdown>
+
+          {/* ── 7. About ── */}
           <NavbarDropdown label="About">
             <NavbarMegaMenu>
               <NavbarMegaMenuItem
@@ -466,37 +417,22 @@ export function SiteNavbar() {
                 href="/about"
               />
               <NavbarMegaMenuItem
+                title="Career & Experience"
+                description="Professional roles and positions"
+                href="/career/experience"
+              />
+              <NavbarMegaMenuItem
                 title="Academic Education"
                 description="Software engineering degree journey"
                 href="/career/education"
               />
               <NavbarMegaMenuItem
-                title="Work Experience"
-                description="Professional roles and positions"
-                href="/career/experience"
-              />
-              <NavbarMegaMenuItem
-                title="Interactive Resume (CV)"
+                title="Interactive Resume"
                 description="Downloadable PDF and online CV"
                 href="/career/resume"
               />
               <NavbarMegaMenuItem
-                title="System Status ↗"
-                description="status.poyrazavsever.com — uptime monitor"
-                href="https://status.poyrazavsever.com"
-              />
-              <NavbarMegaMenuItem
-                title="Infrastructure Architecture"
-                description="Coolify, Supabase & self-hosted stack"
-                href="/about/infrastructure"
-              />
-              <NavbarMegaMenuItem
-                title="Brand Guidelines & Press Kit"
-                description="Logos, colors, typography and media assets"
-                href="/about/brand"
-              />
-              <NavbarMegaMenuItem
-                title="Contact Information"
+                title="Contact Me"
                 description="Email, social links and booking"
                 href="/contact"
               />
@@ -619,29 +555,26 @@ export function SiteNavbar() {
         </div>
 
         <NavbarMobileGroup label="Showcase">
-          <NavbarMobileLink href="/showcase/web">
-            Web Applications
+          <NavbarMobileLink href="/showcase/saas">
+            SaaS & Platform Solutions
           </NavbarMobileLink>
-          <NavbarMobileLink href="/showcase/mobile">
-            Mobile Applications
+          <NavbarMobileLink href="/showcase/ecommerce">
+            Global E-Commerce & B2B
           </NavbarMobileLink>
-          <NavbarMobileLink href="/showcase/desktop">
-            Desktop Applications
+          <NavbarMobileLink href="/showcase/fullstack-cases">
+            Full-Stack Architecture Cases
           </NavbarMobileLink>
-          <NavbarMobileLink href="/showcase/design">
-            UI/UX Design Projects
-          </NavbarMobileLink>
-          <NavbarMobileLink href="/showcase/case-studies">
-            Technical Case Studies
+          <NavbarMobileLink href="/showcase/design-cases">
+            UI/UX & Brand Identity Cases
           </NavbarMobileLink>
           <NavbarMobileLink href="/showcase/open-source">
-            Open Source Contributions
-          </NavbarMobileLink>
-          <NavbarMobileLink href="/showcase/tech-stack">
-            Tech Stack & Arsenal
+            Open Source & Packages
           </NavbarMobileLink>
           <NavbarMobileLink href="https://ui.poyrazavsever.com">
             Poyraz UI Kit ↗
+          </NavbarMobileLink>
+          <NavbarMobileLink href="/showcase/archive">
+            All Projects (Archive)
           </NavbarMobileLink>
         </NavbarMobileGroup>
 
@@ -650,10 +583,7 @@ export function SiteNavbar() {
             Freelancer & Agency Workspace ↗
           </NavbarMobileLink>
           <NavbarMobileLink href="/products/figma-templates">
-            Figma Design Templates
-          </NavbarMobileLink>
-          <NavbarMobileLink href="/products/mobile-apps">
-            Mobile Utilities & Apps
+            Premium Figma Templates
           </NavbarMobileLink>
           <NavbarMobileLink href="/products/micro-tools">
             Developer Micro-Tools
@@ -661,14 +591,8 @@ export function SiteNavbar() {
           <NavbarMobileLink href="/products/apis">
             Open APIs & Endpoints
           </NavbarMobileLink>
-          <NavbarMobileLink href="/products/cli">
-            CLI Tools & Packages
-          </NavbarMobileLink>
           <NavbarMobileLink href="/products/notion-templates">
-            Notion / Productivity Templates
-          </NavbarMobileLink>
-          <NavbarMobileLink href="/products/beta">
-            Upcoming Beta Releases
+            Productivity / Notion Templates
           </NavbarMobileLink>
         </NavbarMobileGroup>
 
@@ -676,104 +600,76 @@ export function SiteNavbar() {
           <NavbarMobileLink href="https://portal.poyrazavsever.com/login">
             Client Login ↗
           </NavbarMobileLink>
-          <NavbarMobileLink href="/services/fullstack">
-            Full-Stack Development Services
-          </NavbarMobileLink>
-          <NavbarMobileLink href="/services/design">
-            UI/UX & Brand Identity Design
-          </NavbarMobileLink>
-          <NavbarMobileLink href="/services/architecture">
-            System Architecture Consulting
-          </NavbarMobileLink>
+          <NavbarMobileLink href="/services">My Services</NavbarMobileLink>
           <NavbarMobileLink href="/services/workflow">
-            Project Process & Workflow
+            Workflow & Process
           </NavbarMobileLink>
           <NavbarMobileLink href="/pricing">
-            Pricing & Packages
+            Pricing & Retainers
           </NavbarMobileLink>
           <NavbarMobileLink href="/client/meeting">
-            Book a Meeting
+            Book a Discovery Call
           </NavbarMobileLink>
           <NavbarMobileLink href="/client/proposal">
-            Request a Proposal
+            Project Inquiry Form
           </NavbarMobileLink>
         </NavbarMobileGroup>
 
-        <NavbarMobileGroup label="Content">
-          <NavbarMobileLink href="/blog">Blog & Tech Articles</NavbarMobileLink>
-          <NavbarMobileLink href="/research/system-design">
-            System Design Researches
-          </NavbarMobileLink>
-          <NavbarMobileLink href="/research/poc">
-            PoC & R&D Notes
-          </NavbarMobileLink>
-          <NavbarMobileLink href="/research/ui-ux-practices">
-            UI/UX Best Practices
-          </NavbarMobileLink>
-          <NavbarMobileLink href="/content/masa-basi">
+        <NavbarMobileGroup label="Media">
+          <NavbarMobileLink href="/media/masa-basi">
             Poyraz ile Masa Başı
           </NavbarMobileLink>
-          <NavbarMobileLink href="/content/broadcast-schedule">
-            Live Broadcast & Guest Schedule
+          <NavbarMobileLink href="/media/masa-basi/archive">
+            Past Episodes & Guests
           </NavbarMobileLink>
-          <NavbarMobileLink href="/content/sponsorship">
-            Sponsorship & Collab Inquiries
+          <NavbarMobileLink href="/media/masa-basi/apply">
+            Apply to be a Guest
           </NavbarMobileLink>
-          <NavbarMobileLink href="/content/social">
-            Social Media Hub
+          <NavbarMobileLink href="/blog">
+            Tech & Engineering Blog
+          </NavbarMobileLink>
+          <NavbarMobileLink href="/research/system-design">
+            System Design Deep Dives
+          </NavbarMobileLink>
+          <NavbarMobileLink href="/research/ui-ux">
+            UI/UX Principles & Trends
+          </NavbarMobileLink>
+          <NavbarMobileLink href="/media/social">Social Hub</NavbarMobileLink>
+        </NavbarMobileGroup>
+
+        <NavbarMobileGroup label="Academy">
+          <NavbarMobileLink href="https://js.poyrazavsever.com">
+            The 52-Week Journey ↗
+          </NavbarMobileLink>
+          <NavbarMobileLink href="/academy/course-notes">
+            Course Notes & Certifications
+          </NavbarMobileLink>
+          <NavbarMobileLink href="/academy/reading-list">
+            My Reading & Watch List
           </NavbarMobileLink>
         </NavbarMobileGroup>
 
-        <NavbarMobileGroup label="Learning">
-          <NavbarMobileLink href="/learning/52-week-plan">
-            52-Week Engineering Plan
+        <NavbarMobileGroup label="Ecosystem">
+          <NavbarMobileLink href="https://status.poyrazavsever.com">
+            System Status ↗
           </NavbarMobileLink>
-          <NavbarMobileLink href="https://js.poyrazavsever.com">
-            Playgrounds & Labs ↗
-          </NavbarMobileLink>
-          <NavbarMobileLink href="https://meet.poyrazavsever.com">
-            Live Broadcast Clones ↗
-          </NavbarMobileLink>
-          <NavbarMobileLink href="/learning/course-notes">
-            BTK Akademi & Udemy Notes
-          </NavbarMobileLink>
-          <NavbarMobileLink href="/learning/certifications">
-            Certifications & Badges
-          </NavbarMobileLink>
-          <NavbarMobileLink href="/learning/english">
-            Technical English Journey
-          </NavbarMobileLink>
-          <NavbarMobileLink href="/learning/reading-list">
-            My Reading & Watch List
-          </NavbarMobileLink>
-          <NavbarMobileLink href="/learning/coding-guidelines">
-            Personal Coding Guidelines
+          <NavbarMobileLink href="/ecosystem/architecture">
+            Self-Hosted Architecture
           </NavbarMobileLink>
         </NavbarMobileGroup>
 
         <NavbarMobileGroup label="About">
           <NavbarMobileLink href="/about">My Story & Vision</NavbarMobileLink>
+          <NavbarMobileLink href="/career/experience">
+            Career & Experience
+          </NavbarMobileLink>
           <NavbarMobileLink href="/career/education">
             Academic Education
           </NavbarMobileLink>
-          <NavbarMobileLink href="/career/experience">
-            Work Experience
-          </NavbarMobileLink>
           <NavbarMobileLink href="/career/resume">
-            Interactive Resume (CV)
+            Interactive Resume
           </NavbarMobileLink>
-          <NavbarMobileLink href="https://status.poyrazavsever.com">
-            System Status ↗
-          </NavbarMobileLink>
-          <NavbarMobileLink href="/about/infrastructure">
-            Infrastructure Architecture
-          </NavbarMobileLink>
-          <NavbarMobileLink href="/about/brand">
-            Brand Guidelines & Press Kit
-          </NavbarMobileLink>
-          <NavbarMobileLink href="/contact">
-            Contact Information
-          </NavbarMobileLink>
+          <NavbarMobileLink href="/contact">Contact Me</NavbarMobileLink>
         </NavbarMobileGroup>
 
         <NavbarMobileActions>
