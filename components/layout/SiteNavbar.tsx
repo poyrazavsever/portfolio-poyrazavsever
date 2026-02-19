@@ -336,17 +336,7 @@ export function SiteNavbar() {
               <NavbarMegaMenuItem
                 title="Tech & Engineering Blog"
                 description="Articles on software and engineering"
-                href="/blog"
-              />
-              <NavbarMegaMenuItem
-                title="System Design Deep Dives"
-                description="Architecture patterns and research"
-                href="/research/system-design"
-              />
-              <NavbarMegaMenuItem
-                title="UI/UX Principles & Trends"
-                description="Design guidelines and industry trends"
-                href="/research/ui-ux"
+                href="/media/blog"
               />
               <NavbarMegaMenuItem
                 title="Social Hub"
