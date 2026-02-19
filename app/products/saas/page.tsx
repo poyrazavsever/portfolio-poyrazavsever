@@ -2,25 +2,23 @@
 
 import { ProductHero } from "@/components/futures/products/ProductHero";
 import { ProjectGrid } from "@/components/shared/ProjectGrid";
-import { designProjects } from "@/data/design-data";
-import { fullstackCases } from "@/data/fullstack-data";
+import { projects } from "@/data/portfolio-data";
 import { Project } from "@/types/project";
 
 export default function SaaSProjectsPage() {
   // Aggregate and filter projects relevant to SaaS
-  const saasProjects: Project[] = [...designProjects, ...fullstackCases].filter(
-    (project) => {
-      const isSaaS =
-        project.category === "SaaS" ||
-        project.category === "Dashboard" ||
-        project.tags.includes("SaaS") ||
-        project.tags.includes("Dashboard") ||
-        project.tags.includes("Platform") ||
-        project.tags.includes("Microservices") ||
-        project.tags.includes("Design System"); // Design systems are often part of SaaS
-      return isSaaS;
-    },
-  );
+  const saasProjects: Project[] = projects.filter((project) => {
+    const isSaaS =
+      project.category === "SaaS Product" ||
+      project.category === "SaaS" ||
+      project.category === "Dashboard" ||
+      project.tags.includes("SaaS") ||
+      project.tags.includes("Dashboard") ||
+      project.tags.includes("Platform") ||
+      project.tags.includes("Microservices") ||
+      project.tags.includes("Design System"); // Design systems are often part of SaaS
+    return isSaaS;
+  });
 
   return (
     <div className="min-h-screen pb-24">

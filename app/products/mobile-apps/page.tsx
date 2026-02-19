@@ -2,16 +2,12 @@
 
 import { ProductHero } from "@/components/futures/products/ProductHero";
 import { ProjectGrid } from "@/components/shared/ProjectGrid";
-import { designProjects } from "@/data/design-data";
-import { fullstackCases } from "@/data/fullstack-data";
+import { projects } from "@/data/portfolio-data";
 import { Project } from "@/types/project";
 
 export default function MobileAppsPage() {
   // Aggregate and filter projects relevant to Mobile Apps
-  const mobileProjects: Project[] = [
-    ...designProjects,
-    ...fullstackCases,
-  ].filter((project) => {
+  const mobileProjects: Project[] = projects.filter((project) => {
     const isMobile =
       project.category === "Mobile App" ||
       project.tags.includes("Mobile App") ||

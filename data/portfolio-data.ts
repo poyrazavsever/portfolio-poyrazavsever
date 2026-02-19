@@ -156,4 +156,95 @@ graph TD
       repo: "https://github.com/poyrazavsever/saas-boilerplate",
     },
   },
+  {
+    title: "Zenith Fitness",
+    description:
+      "A comprehensive fitness tracking mobile application built with React Native and Expo. Features workout logging, progress visualization, and social sharing.",
+    coverImage: "https://placehold.co/600x400/10b981/white?text=Zenith+Fitness",
+    tags: ["React Native", "Expo", "Reanimated", "Supabase"],
+    year: "2024",
+    category: "Mobile App",
+    galleryImages: [
+      "https://placehold.co/1080x1920/10b981/white?text=Workout+Log",
+      "https://placehold.co/1080x1920/10b981/white?text=Progress+Chart",
+      "https://placehold.co/1080x1920/10b981/white?text=Profile+Screen",
+    ],
+    links: {
+      demo: "https://zenith.poyrazavsever.com",
+    },
+    problem:
+      "Fitness apps are often cluttered with ads or locked behind expensive subscriptions. Users needed a simple, privacy-focused way to track their progress.",
+    solution:
+      "Zenith Fitness offers a clean, distraction-free interface that focuses solely on your performance. Data is stored locally or synced via Supabase.",
+    role: "Mobile Developer & UI Designer",
+    features: [
+      "Offline-first Architecture",
+      "Biometric Authentication",
+      "Custom Chart Components",
+      "Dark Mode Support",
+    ],
+  },
+  {
+    title: "Roam Travel Guide",
+    description:
+      "An AI-powered travel companion app that suggests itineraries based on your interests and budget. Built with Flutter and OpenAI API.",
+    coverImage: "https://placehold.co/600x400/3b82f6/white?text=Roam+Travel",
+    tags: ["Flutter", "Dart", "OpenAI", "Google Maps"],
+    year: "2023",
+    category: "Mobile App",
+    galleryImages: [
+      "https://placehold.co/1080x1920/3b82f6/white?text=Itinerary",
+      "https://placehold.co/1080x1920/3b82f6/white?text=Map+View",
+      "https://placehold.co/1080x1920/3b82f6/white?text=AI+Chat",
+    ],
+    links: {
+      demo: "https://roam.poyrazavsever.com",
+    },
+  },
+  {
+    title: "Nexus Dashboard Kit",
+    description:
+      "A premium, high-fidelity SaaS dashboard UI kit for Figma. Includes 50+ screens, 200+ components, and a comprehensive style guide.",
+    coverImage:
+      "https://placehold.co/600x400/6366f1/white?text=Nexus+Dashboard",
+    tags: ["Figma", "UI Kit", "Design System", "Auto Layout"],
+    year: "2024",
+    category: "Figma Template",
+    galleryImages: [
+      "https://placehold.co/1920x1080/6366f1/white?text=Dashboard+Home",
+      "https://placehold.co/1920x1080/6366f1/white?text=Analytics+View",
+      "https://placehold.co/1920x1080/6366f1/white?text=Settings+Panel",
+    ],
+    links: {
+      demo: "https://gumroad.com/poyrazavsever/nexus",
+    },
+    problem:
+      "Designing complex SaaS dashboards from scratch is time-consuming. Developers and localized designers often struggle with consistent spacing and typography.",
+    solution:
+      "Nexus provides a solid foundation with a strict grid system and accessible color palette, saving hours of design time.",
+    role: "UI/UX Designer",
+    features: [
+      "50+ High-Fidelity Screens",
+      "Global Style Guide",
+      "Dark & Light Mode",
+      "Component Variants",
+    ],
+  },
+  {
+    title: "Orbit E-commerce Kit",
+    description:
+      "A modern, mobile-first e-commerce UI kit optimized for conversion. Perfect for fashion and lifestyle brands.",
+    coverImage: "https://placehold.co/600x400/ec4899/white?text=Orbit+Commerce",
+    tags: ["Figma", "Mobile Design", "E-commerce", "Prototyping"],
+    year: "2023",
+    category: "Figma Template",
+    galleryImages: [
+      "https://placehold.co/1080x1920/ec4899/white?text=Product+Listing",
+      "https://placehold.co/1080x1920/ec4899/white?text=Checkout+Flow",
+      "https://placehold.co/1080x1920/ec4899/white?text=User+Profile",
+    ],
+    links: {
+      demo: "https://gumroad.com/poyrazavsever/orbit",
+    },
+  },
 ];
