@@ -1,4 +1,4 @@
-import { ShowcaseProject } from "@/types/showcase";
+import { Project } from "@/types/project";
 
 export const fullstackPageData = {
   title: "Full-Stack Architecture",
@@ -7,7 +7,7 @@ export const fullstackPageData = {
     "Explore complex server-side logic, database schema designs, and microservices architecture. Real-world solutions for real-world problems.",
 };
 
-export const fullstackCases: ShowcaseProject[] = [
+export const fullstackCases: Project[] = [
   {
     title: "Microservices with NestJS",
     description:

@@ -1,14 +1,14 @@
 "use client";
 
 import { ProductHero } from "@/components/futures/products/ProductHero";
-import { ShowcaseGrid } from "@/components/shared/ShowcaseGrid";
+import { ProjectGrid } from "@/components/shared/ProjectGrid";
 import { designProjects } from "@/data/design-data";
 import { fullstackCases } from "@/data/fullstack-data";
-import { ShowcaseProject } from "@/types/showcase";
+import { Project } from "@/types/project";
 
 export default function MobileAppsPage() {
   // Aggregate and filter projects relevant to Mobile Apps
-  const mobileProjects: ShowcaseProject[] = [
+  const mobileProjects: Project[] = [
     ...designProjects,
     ...fullstackCases,
   ].filter((project) => {
@@ -33,7 +33,7 @@ export default function MobileAppsPage() {
 
       <div className="container mx-auto px-4 max-w-6xl mt-16 md:mt-24">
         {mobileProjects.length > 0 ? (
-          <ShowcaseGrid projects={mobileProjects} />
+          <ProjectGrid projects={mobileProjects} />
         ) : (
           <div className="text-center py-20 text-slate-500">
             <p>No mobile application projects found at the moment.</p>

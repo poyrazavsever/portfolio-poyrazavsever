@@ -1,6 +1,6 @@
 import { FullstackHero } from "@/components/futures/fullstack-cases/FullstackHero";
 import { fullstackPageData, fullstackCases } from "@/data/fullstack-data";
-import { ShowcaseGrid } from "@/components/shared/ShowcaseGrid";
+import { ProjectGrid } from "@/components/shared/ProjectGrid";
 
 export default function FullstackCasesPage() {
   return (
@@ -12,7 +12,7 @@ export default function FullstackCasesPage() {
       />
 
       <div className="container mx-auto px-4 max-w-6xl mt-16 md:mt-24">
-        <ShowcaseGrid projects={fullstackCases} />
+        <ProjectGrid projects={fullstackCases} />
       </div>
     </div>
   );

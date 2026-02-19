@@ -1,6 +1,6 @@
 import { PortfolioHero } from "@/components/futures/portfolio/PortfolioHero";
 import { projects } from "@/data/portfolio-data";
-import { ShowcaseGrid } from "@/components/shared/ShowcaseGrid";
+import { ProjectGrid } from "@/components/shared/ProjectGrid";
 
 export default function PortfolioPage() {
   return (
@@ -8,7 +8,7 @@ export default function PortfolioPage() {
       <PortfolioHero />
 
       <div className="container mx-auto px-4 max-w-6xl mt-16 md:mt-24">
-        <ShowcaseGrid projects={projects} />
+        <ProjectGrid projects={projects} />
       </div>
     </div>
   );

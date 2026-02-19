@@ -1,4 +1,4 @@
-import { ShowcaseProject } from "@/types/showcase";
+import { Project } from "@/types/project";
 
 export const designPageData = {
   title: "Design",
@@ -7,7 +7,7 @@ export const designPageData = {
     "A collection of user interface designs, design systems, and brand identities. Crafted with attention to detail and usability.",
 };
 
-export const designProjects: ShowcaseProject[] = [
+export const designProjects: Project[] = [
   {
     id: "1",
     title: "Fintech Dashboard UI",

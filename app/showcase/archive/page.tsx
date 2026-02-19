@@ -1,15 +1,15 @@
 "use client";
 
 import { ArchiveHero } from "@/components/futures/archive/ArchiveHero";
-import { ShowcaseGrid } from "@/components/shared/ShowcaseGrid";
+import { ProjectGrid } from "@/components/shared/ProjectGrid";
 import { projects as portfolioProjects } from "@/data/portfolio-data";
 import { fullstackCases } from "@/data/fullstack-data";
 import { designProjects } from "@/data/design-data";
-import { ShowcaseProject } from "@/types/showcase";
+import { Project } from "@/types/project";
 
 export default function ArchivePage() {
   // Combine all projects
-  const allProjects: ShowcaseProject[] = [
+  const allProjects: Project[] = [
     ...portfolioProjects,
     ...fullstackCases,
     ...designProjects,
@@ -28,7 +28,7 @@ export default function ArchivePage() {
       <ArchiveHero />
 
       <div className="container mx-auto px-4 max-w-6xl mt-16 md:mt-24">
-        <ShowcaseGrid projects={allProjects} />
+        <ProjectGrid projects={allProjects} />
       </div>
     </div>
   );

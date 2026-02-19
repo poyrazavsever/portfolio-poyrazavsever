@@ -13,19 +13,15 @@ import { Typography } from "poyraz-ui/atoms";
 import { Button } from "poyraz-ui/atoms";
 import { cn } from "poyraz-ui";
 import { ArrowRight, Layers } from "lucide-react";
-import { ShowcaseProject } from "@/types/showcase";
+import { Project } from "@/types/project";
 
-interface ShowcaseCardProps {
-  project: ShowcaseProject;
+interface ProjectCardProps {
+  project: Project;
   onClick: () => void;
   className?: string;
 }
 
-export function ShowcaseCard({
-  project,
-  onClick,
-  className,
-}: ShowcaseCardProps) {
+export function ProjectCard({ project, onClick, className }: ProjectCardProps) {
   return (
     <Card
       className={cn(
