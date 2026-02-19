@@ -12,6 +12,7 @@ import {
   AvatarFallback,
 } from "poyraz-ui/atoms";
 import { Icon } from "@iconify/react";
+import { HorizontalScroll } from "@/components/shared/HorizontalScroll";
 
 const courses = [
   {
@@ -153,11 +154,11 @@ export function CoursesSection() {
 
       {/* Horizontal scroll cards */}
       <div className="max-w-6xl mx-auto px-4">
-        <div className="flex gap-5 overflow-x-auto pb-6 pt-2 px-2 -mx-2 scrollbar-none">
+        <HorizontalScroll className="flex gap-5 overflow-x-auto pb-6 pt-2 px-2 -mx-2 scrollbar-none">
           {courses.map((course) => (
             <CourseCard key={course.title} course={course} />
           ))}
-        </div>
+        </HorizontalScroll>
       </div>
     </section>
   );
