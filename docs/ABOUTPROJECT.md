@@ -1,24 +1,33 @@
-Kendime şu şekilde bir portal + portfolio + hub web sitesi yapacağım.
-Temel Özellikler:
+Şimdi seninle beraber planlama yapacağız.
 
-- Dynamic Portfolio: Full-stack projelerin ve UI/UX çalışmalarının sergilendiği modern vitrin.
-- Freelance Hub: Teklif yönetimi, iş takvimi ve müşteri geri bildirimleri için modüller.
-- Content Library: YouTube videoları, Medium yazıları ve teknik notların merkezi arşivi.
-- Sponsorship & Planning: Marka iş birlikleri ve kamuya açık yol haritası (roadmap).
-- Learning Center: Takipçilerim için hazırladığım mini kurslar ve kaynaklar.
+Ben kendi ekosistemimi kurmak istiyorum. 
+Bu ekosistem içersinde şunlar olacak:
+
+- Ana portfolio+tanıtım+hub web sitem. (poyrazavsever.com)
+- Freelancerlar ve sponsorlar ile çalışmalarımı yürüttüğüm Portal (portal.poyrazavsever.com)
+- Projelerimin status dashboard' (Örneğin vercel'in status sayfasında servislerin durumu tarzında ) (status.poyrazavsever.com)
+- Poyraz UI Kit adlı kendi tasarım kitim. (Tamamlandı. Bütün projelerin benim olduğu ilk bakışta anlaşılsın diye bu kit ile yapacağım.) (ui.poyrazavsever.com)
+- Learning Journey için açılmış projeler:  -> Burada aldığım notları ve lab dosyalarını paylaşacağım siteler. (Örneğin js.poyrazavsever.com)
+- Direkt öğrenme/gelişim/deneme amaçlı yapılmış projeler: (Örneğin google meet klonu meet.poyrazavsever.com)
+
+---
+
+Amacım dediğim gibi kendi ekosistemimi kurgulamak. Oldukça detaylı bir yapı istiyorum.
+
+---
+
+İlk önce mevcut bulunduğumuz proje poyrazavsever.com ile başlayacağız.
+
+Buradan bütün servislere (portal'a, status'e, ui kit'e vs. gidebilecekler.)
+
+Örneğin hemen başla dediğinde portal.poyrazavsever.com'a yönlendirmesini istiyorum.
+
+poyrazavsever.com'da detaylı bir şekilde structure yapısını planlayalım. Ben sana linklerin üst başlığını vereyim. Sen dropdown açıldığındaki alt linkleri çok detaylı bir şekilde çıkart.
+
+- Showcase (Portfolio, Case Studies, Tech Stack, Open Source gibi...)
+- Client Portal
+- Products (Mobile apps gibi gibi)
+- Career & Life (About me, education gibi)
+- Learning gibi. 
 
 
-Buranın amacı kişisel markamı güçlendirmek, freelance işlerimi, sponsorluklarımı, planlamalarımı, notlarımı, videolarımı, kurslarımı vs. paylaşabileceğim bir alan olacak.
-
---- Bu proje ana kısım olan portfolio kısmı. 
-
-İçersinde olacaklar
-- Showcase (portfolio, case studies, tech stack, open source...)
-- Client Portal (Buradaki linkler daha sonra portal.poyrazavsever.com'a gidecek. Şimdilik farazi bırakabiliriz.)
-- Products (Kendi ürünlerimi, npm kütüphanelerimi, vs. sergilediğim alan. Linkleri detaylı bir konseptte oluştur.)
-- Resources (Okuduğum kitaplar, yazılar, bookmarklar vs. şeklinde linkleri detaylı şekilde planla)
-- Content (Youtube, Blog yazılarım, makalelerim, araştırmalarım, içerik takvimim vs.)
-- Career & Life (Hakkımda, eğitim durumu, referanslar, testimoniallar, sertifikalar, hobiler vs.)
-- Learning (Bunlar sub domain olacak. Ama kesin olacaklar: 52 weeks of javascript, angular journey)
-- Pricing
-- Contact
