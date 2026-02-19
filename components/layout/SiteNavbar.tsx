@@ -286,16 +286,6 @@ export function SiteNavbar() {
                 description="Ready-to-use UI design kits and templates"
                 href="/products/figma-templates"
               />
-              <NavbarMegaMenuItem
-                title="Developer Micro-Tools"
-                description="Small utilities built for the community"
-                href="/products/micro-tools"
-              />
-              <NavbarMegaMenuItem
-                title="Open APIs & Endpoints"
-                description="Public APIs and open data endpoints"
-                href="/products/apis"
-              />
             </NavbarMegaMenu>
           </NavbarDropdown>
 
