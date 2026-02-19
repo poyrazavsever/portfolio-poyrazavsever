@@ -74,3 +74,52 @@ Kodlamaya geçmeden önce, ne inşa edeceğimizin kusursuz bir planını çiziyo
 Tasarımın hayata geçtiği ve projenin canlıya alındığı final aşaması.
 * **Aksiyon:** Geliştirme sprintleri başlar. Portal üzerinden hangi görevlerin tamamlandığını şeffaf bir şekilde takip edebilirsiniz. Proje, test sunucularına yüklenir ve birlikte son kalite kontrol (QA) testlerini yaparız.
 * **Çıktı:** Tüm testler geçildikten sonra proje ana sunucuda (Production) canlıya alınır. Kaynak kodlar ve sistem dokümantasyonu size teslim edilir. (İsteğe bağlı olarak aylık bakım/Retainer sürecine geçiş yapılır).
+
+
+---
+
+# Pricing & Retainers: Değer Odaklı Fiyatlandırma ve Ödeme Politikası
+
+Projelerimde saatlik ücretlendirme yerine, sunduğum çözüme ve yarattığım değere odaklanan "Proje Bazlı Fiyatlandırma" modelini benimsiyorum. Şeffaflık, iş yapış şeklimin temelidir; sürpriz maliyetlere veya gizli ücretlere yer yoktur.
+
+## 1. Fiyatlandırma Modelleri (Pricing Models)
+
+Her projenin dinamiği farklı olsa da, genel hizmet çerçevem şu üç ana model etrafında şekillenir:
+
+### A. Custom Development (Full-Stack & Mobile)
+Sıfırdan tasarlanıp geliştirilecek, ölçeklenebilir SaaS, E-ticaret veya mobil uygulama projeleri.
+* **Kapsam:** UI/UX Tasarım, Frontend (Next.js / React Native), Backend (Node.js / Supabase), Sunucu Kurulumu (Coolify).
+* **Başlangıç:** Projeler minimum [Minimum Bütçe Örn: $X.XXX / XX.XXX ₺] bütçesinden başlamaktadır. Kesin fiyatlandırma *Discovery Call* sonrası iletilen teklifte (Proposal) netleşir.
+
+### B. UI/UX Design Sprints
+Henüz kodlama aşamasına geçmeden, fikrini görselleştirmek ve kullanıcı deneyimini test etmek isteyenler için.
+* **Kapsam:** Kullanıcı araştırması, wireframe çizimleri, Figma üzerinde yüksek sadakatli (high-fidelity) prototipleme ve marka kimliği.
+* **Süreç:** 1 veya 2 haftalık sabit fiyatlı tasarım sprintleri.
+
+### C. Retainers (Aylık Bakım & Geliştirme)
+Canlıya alınan projelerin sağlıklı bir şekilde yaşamaya devam etmesi ve büyümesi için sunulan düzenli destek paketi.
+* **Kapsam:** Sunucu (Coolify) bakımı, veritabanı yedeklemeleri, SSL güncellemeleri, bug çözümleri ve aylık taahhüt edilen "X" saatlik yeni özellik geliştirme.
+* **Ödeme:** Sabit aylık abonelik modeli.
+
+---
+
+## 2. Ödeme Takvimi ve Koşullar (Payment Terms)
+
+Projelerin hem benim hem de müşterim için güvenli ve kesintisiz ilerlemesi adına, şeffaf ve aşama bazlı (milestone) bir tahsilat süreci uyguluyorum:
+
+* **Adım 1: %40-50 Başlangıç Peşinatı (Deposit)**
+  Anlaşma sağlandığında ve Portal'da müşteri hesabınız açıldığında ödenir. Bu ödeme tahsil edilmeden tasarım veya geliştirme sürecine geçilmez. Projenin resmi başlangıç adımıdır.
+* **Adım 2: %30-40 Milestone Ödemesi (Ara Ödeme)**
+  Projenin kritik bir aşaması bittiğinde talep edilir (Örneğin; Figma tasarımları onaylandığında veya uygulamanın ilk çalışan MVP versiyonu test sunucusuna yüklendiğinde). Somut çıktıları gördüğünüz ve sürecin ilerlediğini onayladığınız adımdır.
+* **Adım 3: %20 Teslimat Bakiyesi (Launch & Handover)**
+  Proje tamamlanıp canlı ana sunucuya (Production) alınmadan hemen önce son bakiye kapatılır. Bakiye kapanmadan kaynak kodlar (Source Code) teslim edilmez ve mülkiyet devri yapılmaz.
+
+---
+
+## 3. Portal Üzerinden Finansal Yönetim
+
+E-postalarda kaybolan faturalara ve dekontlara son. Tüm finansal süreç, size özel açılan `portal.poyrazavsever.com` müşteri hesabı üzerinden yönetilir.
+
+* **Dijital Faturalandırma:** Tüm peşinat ve bakiye faturalarınız PDF olarak doğrudan Portal panelinize düşer.
+* **Kolay Bildirim:** Ödemenizi (Banka Transferi, Wise vb. ile) gerçekleştirdiğinizde, tek tıkla sistem üzerinden dekontunuzu yükleyip onay sürecini başlatabilirsiniz.
+* **Dijital Sözleşmeler:** Hizmet şartları ve proje kapsamı, ödeme adımından önce Portal üzerinden dijital olarak onaylanır.

@@ -41,11 +41,6 @@ export function ServiceCard({ service }: ServiceCardProps) {
           >
             {service.category}
           </Badge>
-          {service.startingPrice && (
-            <span className="text-xs font-mono font-medium text-red-600 bg-red-50 px-2 py-1 rounded-sm border border-red-100">
-              From {service.startingPrice}
-            </span>
-          )}
         </div>
         <CardTitle className="text-xl group-hover/card:text-red-600 transition-colors">
           {service.title}

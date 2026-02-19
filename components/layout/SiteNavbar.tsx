@@ -310,17 +310,7 @@ export function SiteNavbar() {
               <NavbarMegaMenuItem
                 title="Pricing & Retainers"
                 description="Transparent pricing policy and packages"
-                href="/pricing"
-              />
-              <NavbarMegaMenuItem
-                title="Book a Discovery Call"
-                description="Schedule a meeting via Calendly"
-                href="/client/meeting"
-              />
-              <NavbarMegaMenuItem
-                title="Project Inquiry Form"
-                description="Submit your brief for a custom proposal"
-                href="/client/proposal"
+                href="/services/pricing"
               />
             </NavbarMegaMenu>
           </NavbarDropdown>
