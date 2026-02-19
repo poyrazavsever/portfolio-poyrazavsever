@@ -12,6 +12,7 @@ import {
   FooterBottomLinks,
 } from "poyraz-ui/organisms";
 import { Logo, Separator } from "poyraz-ui/atoms";
+import { Icon } from "@iconify/react";
 
 export function SiteFooter() {
   return (
@@ -27,37 +28,35 @@ export function SiteFooter() {
             height={44}
           />
           <p className="text-sm text-slate-500 mt-3 leading-relaxed max-w-xs">
-            Fullstack Developer & UI/UX Designer. Ankara&apos;dan çalışan,
-            ölçeklenebilir sistemler ve kullanıcı odaklı arayüzler üzerine
-            uzmanlaşmış freelancer yazılımcı.
+            Fullstack Developer &amp; UI/UX Designer. Freelance developer based
+            in Ankara, specializing in scalable systems and user-focused
+            interfaces.
           </p>
           <FooterSocials>
             <FooterSocialLink href="https://github.com/poyrazavsever">
-              GH
+              <Icon icon="mdi:github" className="h-5 w-5" />
             </FooterSocialLink>
             <FooterSocialLink href="https://linkedin.com/in/poyrazavsever">
-              LN
+              <Icon icon="mdi:linkedin" className="h-5 w-5" />
             </FooterSocialLink>
             <FooterSocialLink href="https://youtube.com/@poyrazavsever">
-              YT
+              <Icon icon="mdi:youtube" className="h-5 w-5" />
             </FooterSocialLink>
-            <FooterSocialLink href="https://instagram.com/poyrazavsever">
-              IG
+            <FooterSocialLink href="https://instagram.com/poyraz_avsever">
+              <Icon icon="mdi:instagram" className="h-5 w-5" />
             </FooterSocialLink>
           </FooterSocials>
         </FooterBrand>
 
-        {/* Showcase */}
+        {/* Explore */}
         <FooterSection>
-          <FooterHeading>Showcase</FooterHeading>
-          <FooterLink href="/showcase/portfolio">Portfolio</FooterLink>
+          <FooterHeading>Explore</FooterHeading>
+          <FooterLink href="/showcase/web">Web Applications</FooterLink>
           <FooterLink href="/showcase/case-studies">Case Studies</FooterLink>
-          <FooterLink href="/showcase/tech-stack">
-            Tech Stack & Arsenal
-          </FooterLink>
           <FooterLink href="/showcase/open-source">Open Source</FooterLink>
+          <FooterLink href="/showcase/tech-stack">Tech Stack</FooterLink>
           <FooterLink href="https://ui.poyrazavsever.com">
-            Design System ↗
+            Poyraz UI Kit ↗
           </FooterLink>
         </FooterSection>
 
@@ -68,28 +67,25 @@ export function SiteFooter() {
             Full-Stack Development
           </FooterLink>
           <FooterLink href="/services/design">
-            UI/UX Design & Prototyping
+            UI/UX & Brand Identity
           </FooterLink>
-          <FooterLink href="/services/architecture">
-            System Architecture
+          <FooterLink href="/pricing">Pricing & Packages</FooterLink>
+          <FooterLink href="/client/meeting">Book a Meeting</FooterLink>
+          <FooterLink href="https://portal.poyrazavsever.com">
+            Client Portal ↗
           </FooterLink>
-          <FooterLink href="/products/tools">Micro-Tools & APIs</FooterLink>
-          <FooterLink href="/client/proposal">Request a Proposal</FooterLink>
-          <FooterLink href="/client/meeting">Schedule a Meeting</FooterLink>
         </FooterSection>
 
-        {/* Explore */}
+        {/* Company */}
         <FooterSection>
-          <FooterHeading>Explore</FooterHeading>
-          <FooterLink href="/blog">Blog & Articles</FooterLink>
-          <FooterLink href="/research">Research & Deep Dives</FooterLink>
-          <FooterLink href="/content/youtube">Masa Başı — YouTube</FooterLink>
-          <FooterLink href="/learning/52-week-plan">
-            52-Week Engineering Plan
-          </FooterLink>
-          <FooterLink href="/about">About Me</FooterLink>
+          <FooterHeading>Company</FooterHeading>
+          <FooterLink href="/about">About</FooterLink>
+          <FooterLink href="/blog">Blog</FooterLink>
           <FooterLink href="/career/resume">Resume / CV</FooterLink>
-          <FooterLink href="/pricing">Pricing</FooterLink>
+          <FooterLink href="/contact">Contact</FooterLink>
+          <FooterLink href="https://status.poyrazavsever.com">
+            System Status ↗
+          </FooterLink>
         </FooterSection>
       </FooterGrid>
 
