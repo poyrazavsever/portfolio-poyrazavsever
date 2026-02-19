@@ -1,0 +1,9 @@
+---
+trigger: always_on
+---
+
+- Our main color is red-600
+
+- Always use poyraz-ui components when designing your page layouts. If a component isn't available, create a custom one and specify this.
+
+- When using the typography component, do not make any extra font-weight or font-size adjustments.
