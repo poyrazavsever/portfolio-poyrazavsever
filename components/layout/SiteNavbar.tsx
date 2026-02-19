@@ -282,7 +282,7 @@ export function SiteNavbar() {
                 href="/products/mobile-apps"
               />
               <NavbarMegaMenuItem
-                title="Premium Figma Templates"
+                title="Figma Templates"
                 description="Ready-to-use UI design kits and templates"
                 href="/products/figma-templates"
               />
