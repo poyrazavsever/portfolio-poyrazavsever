@@ -40,3 +40,37 @@ Bu doküman, poyrazavsever.com ana sitesindeki global navigasyon yapısını ve 
 2.  Çalışma prensiplerini ve `Pricing` kısmındaki bütçe aralıklarını kabul eder.
 3.  Eğer müsaitlik durumun (Availability) açıksa, `Book a Discovery Call` veya `Project Inquiry Form` üzerinden sana ulaşır.
 4.  Görüşme olumlu geçer ve anlaşma sağlanırsa, ona özel açılan hesap ile `Client Login` üzerinden portal sistemine dahil olur.
+
+
+---
+
+# Workflow & Process: Sıfırdan Canlıya Proje Yönetimi
+
+Bir projenin başarılı olması, yazılan kodun kalitesi kadar sürecin nasıl yönetildiğine de bağlıdır. E-posta zincirlerinde kaybolan revizyonlar veya belirsiz teslim tarihlerini ortadan kaldırmak için, tüm süreci kendi ekosistemim üzerinden uçtan uca yönetiyorum. 
+
+İşte fikrinizi canlı bir ürüne dönüştürme yolculuğumuz:
+
+### 1. Tanışalım (Discovery & Alignment)
+Her harika proje, doğru bir iletişimle başlar. Sizin vizyonunuzu ve benim teknik altyapımın uyumunu test ettiğimiz ilk aşamadır.
+* **Aksiyon:** `Project Inquiry Form` üzerinden projenizin detaylarını iletirsiniz veya doğrudan 15-30 dakikalık bir `Discovery Call` (tanışma toplantısı) ayarlarsınız.
+* **Çıktı:** Projenin hedefleri, tahmini bütçe aralığı ve teknoloji yığınımız (Web, Mobil, Sistem Mimarisi) hakkında ortak bir karara varılır.
+
+### 2. Sipariş Oluştur (Proposal & Agreement)
+Beklentilerin netleştiği ve profesyonel çerçevenin çizildiği adımdır. Sürpriz maliyetlere veya uzayan takvimlere yer bırakmıyoruz.
+* **Aksiyon:** Toplantı sonrası size özel, detaylı bir proje teklifi (Proposal) sunulur. Bu teklifte zaman çizelgesi, kullanılacak teknolojiler ve ödeme takvimi şeffafça yer alır.
+* **Çıktı:** Teklif onaylanır, başlangıç ödemesi (deposit) yapılır ve geliştirme takvimi kilitlenir.
+
+### 3. Portala Giriş Yap (The Onboarding)
+İşte bu aşamada standart bir "freelancer" deneyiminden ayrılıyoruz. Tüm projenin komuta merkezine adım atıyorsunuz.
+* **Aksiyon:** Anlaşma sağlandığı an, size özel `portal.poyrazavsever.com` üzerinden bir müşteri hesabı (Client Login) oluşturulur.
+* **Çıktı:** Artık tüm sözleşmeleriniz, faturalarınız, toplantı notlarınız ve proje ilerleyişiniz tek bir güvenli panel üzerinden erişilebilir hale gelir.
+
+### 4. Brief Gönder & Tasarım (Requirements & UI/UX)
+Kodlamaya geçmeden önce, ne inşa edeceğimizin kusursuz bir planını çiziyoruz.
+* **Aksiyon:** Portal içerisindeki sistem üzerinden elinizdeki marka materyallerini (logo, metinler, renk paleti) ve detaylı brief'i iletirsiniz.
+* **Çıktı:** İhtiyaca göre Figma üzerinden yüksek sadakatli (high-fidelity) ekran tasarımları ve prototipler hazırlanır. Kod yazılmadan önce projenin bitmiş halini görür ve onaylarsınız.
+
+### 5. Teslim Al (Development, QA & Launch)
+Tasarımın hayata geçtiği ve projenin canlıya alındığı final aşaması.
+* **Aksiyon:** Geliştirme sprintleri başlar. Portal üzerinden hangi görevlerin tamamlandığını şeffaf bir şekilde takip edebilirsiniz. Proje, test sunucularına yüklenir ve birlikte son kalite kontrol (QA) testlerini yaparız.
+* **Çıktı:** Tüm testler geçildikten sonra proje ana sunucuda (Production) canlıya alınır. Kaynak kodlar ve sistem dokümantasyonu size teslim edilir. (İsteğe bağlı olarak aylık bakım/Retainer sürecine geçiş yapılır).
