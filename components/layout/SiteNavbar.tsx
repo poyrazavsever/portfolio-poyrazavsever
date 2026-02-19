@@ -17,7 +17,74 @@ import {
   NavbarMobileGroup,
   NavbarMobileActions,
 } from "poyraz-ui/organisms";
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+  DrawerFooter,
+} from "poyraz-ui/molecules";
 import { Button, Badge, Logo } from "poyraz-ui/atoms";
+import { Icon } from "@iconify/react";
+
+const SOCIAL_LINKS = [
+  {
+    id: "email",
+    label: "E-Mail",
+    href: "mailto:poyrazavsever@gmail.com",
+    icon: "mdi:email",
+  },
+  {
+    id: "linkedin",
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/poyrazavsever/",
+    icon: "mdi:linkedin",
+  },
+  {
+    id: "github",
+    label: "GitHub",
+    href: "https://github.com/poyrazavsever",
+    icon: "mdi:github",
+  },
+  {
+    id: "instagram",
+    label: "Instagram",
+    href: "https://instagram.com/poyraz_avsever",
+    icon: "mdi:instagram",
+  },
+  {
+    id: "youtube",
+    label: "YouTube",
+    href: "https://youtube.com/@poyrazavsever",
+    icon: "mdi:youtube",
+  },
+  {
+    id: "medium",
+    label: "Medium",
+    href: "https://medium.com/@poyrazavsever",
+    icon: "mdi:medium",
+  },
+  {
+    id: "x",
+    label: "X",
+    href: "https://x.com/poyrazavsever",
+    icon: "ri:twitter-x-fill",
+  },
+  {
+    id: "behance",
+    label: "Behance",
+    href: "https://behance.net/poyrazavsever",
+    icon: "mdi:behance",
+  },
+  {
+    id: "spotify",
+    label: "Spotify",
+    href: "https://open.spotify.com/user/3136fdjkc5p4cbzmuxhvqdd4b2hu",
+    icon: "mdi:spotify",
+  },
+] as const;
 
 function TopBarClock() {
   const [time, setTime] = useState("");
@@ -57,13 +124,42 @@ export function SiteNavbar() {
         <div className="flex items-center justify-between w-full text-xs py-0.5">
           <TopBarClock />
           <div className="hidden md:flex items-center gap-2 ml-auto">
-            <a
-              href="https://linktr.ee/poyrazavsever"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Badge className="cursor-pointer">Social Links</Badge>
-            </a>
+            <Drawer>
+              <DrawerTrigger asChild>
+                <Badge className="cursor-pointer">Social Links</Badge>
+              </DrawerTrigger>
+              <DrawerContent>
+                <div className="mx-auto w-full max-w-sm">
+                  <DrawerHeader>
+                    <DrawerTitle>Social Links</DrawerTitle>
+                  </DrawerHeader>
+                  <div className="grid grid-cols-3 gap-3 px-4 pb-2">
+                    {SOCIAL_LINKS.map((link) => (
+                      <a
+                        key={link.id}
+                        href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex flex-col items-center gap-1.5 border border-dashed border-neutral-300 dark:border-neutral-700 p-3 hover:border-red-600 hover:text-red-600 transition-colors"
+                      >
+                        <Icon icon={link.icon} width={24} height={24} />
+                        <span className="text-xs font-medium">
+                          {link.label}
+                        </span>
+                      </a>
+                    ))}
+                  </div>
+                  <DrawerFooter>
+                    <DrawerClose asChild>
+                      <Button variant="outline" className="w-full">
+                        Close
+                      </Button>
+                    </DrawerClose>
+                  </DrawerFooter>
+                </div>
+              </DrawerContent>
+            </Drawer>
+
             <a href="/rss.xml">
               <Badge className="cursor-pointer text-xs">RSS</Badge>
             </a>
@@ -74,9 +170,46 @@ export function SiteNavbar() {
             >
               <Badge className="cursor-pointer text-xs">Status</Badge>
             </a>
-            <a href="/settings">
-              <Badge className="cursor-pointer text-xs">Settings</Badge>
-            </a>
+
+            <Drawer>
+              <DrawerTrigger asChild>
+                <Badge className="cursor-pointer text-xs">Settings</Badge>
+              </DrawerTrigger>
+              <DrawerContent>
+                <div className="mx-auto w-full max-w-sm">
+                  <DrawerHeader>
+                    <DrawerTitle>Settings</DrawerTitle>
+                  </DrawerHeader>
+                  <div className="flex flex-col gap-4 px-4 pb-2">
+                    <div className="flex items-center justify-between border border-dashed border-neutral-300 dark:border-neutral-700 p-3">
+                      <div className="flex items-center gap-2">
+                        <Icon
+                          icon="mdi:theme-light-dark"
+                          width={20}
+                          height={20}
+                        />
+                        <span className="text-sm font-medium">Theme</span>
+                      </div>
+                      <Badge>System</Badge>
+                    </div>
+                    <div className="flex items-center justify-between border border-dashed border-neutral-300 dark:border-neutral-700 p-3">
+                      <div className="flex items-center gap-2">
+                        <Icon icon="mdi:translate" width={20} height={20} />
+                        <span className="text-sm font-medium">Language</span>
+                      </div>
+                      <Badge>EN</Badge>
+                    </div>
+                  </div>
+                  <DrawerFooter>
+                    <DrawerClose asChild>
+                      <Button variant="outline" className="w-full">
+                        Close
+                      </Button>
+                    </DrawerClose>
+                  </DrawerFooter>
+                </div>
+              </DrawerContent>
+            </Drawer>
           </div>
         </div>
       </NavbarTopBar>
@@ -392,13 +525,40 @@ export function SiteNavbar() {
       {/* ── Mobile Menu ── */}
       <NavbarMobileMenu>
         <div className="flex flex-wrap gap-2 px-4 py-3">
-          <a
-            href="https://linktr.ee/poyrazavsever"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Badge className="cursor-pointer">Social Links</Badge>
-          </a>
+          <Drawer>
+            <DrawerTrigger asChild>
+              <Badge className="cursor-pointer">Social Links</Badge>
+            </DrawerTrigger>
+            <DrawerContent>
+              <div className="mx-auto w-full max-w-sm">
+                <DrawerHeader>
+                  <DrawerTitle>Social Links</DrawerTitle>
+                </DrawerHeader>
+                <div className="grid grid-cols-3 gap-3 px-4 pb-2">
+                  {SOCIAL_LINKS.map((link) => (
+                    <a
+                      key={link.id}
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex flex-col items-center gap-1.5 border border-dashed border-neutral-300 dark:border-neutral-700 p-3 hover:border-red-600 hover:text-red-600 transition-colors"
+                    >
+                      <Icon icon={link.icon} width={24} height={24} />
+                      <span className="text-xs font-medium">{link.label}</span>
+                    </a>
+                  ))}
+                </div>
+                <DrawerFooter>
+                  <DrawerClose asChild>
+                    <Button variant="outline" className="w-full">
+                      Close
+                    </Button>
+                  </DrawerClose>
+                </DrawerFooter>
+              </div>
+            </DrawerContent>
+          </Drawer>
+
           <a href="/rss.xml">
             <Badge className="cursor-pointer">RSS</Badge>
           </a>
@@ -409,9 +569,53 @@ export function SiteNavbar() {
           >
             <Badge className="cursor-pointer">Status</Badge>
           </a>
-          <a href="/settings">
-            <Badge className="cursor-pointer">Settings</Badge>
-          </a>
+
+          <Drawer>
+            <DrawerTrigger asChild>
+              <Badge className="cursor-pointer">Settings</Badge>
+            </DrawerTrigger>
+            <DrawerContent>
+              <div className="mx-auto w-full max-w-sm">
+                <DrawerHeader>
+                  <DrawerTitle>Settings</DrawerTitle>
+                </DrawerHeader>
+                <div className="flex flex-col gap-4 px-4 pb-2">
+                  <div className="flex items-center justify-between border border-dashed border-neutral-300 dark:border-neutral-700 p-3">
+                    <div className="flex items-center gap-2">
+                      <Icon
+                        icon="mdi:theme-light-dark"
+                        width={20}
+                        height={20}
+                      />
+                      <span className="text-sm font-medium">Theme</span>
+                    </div>
+                    <Badge>System</Badge>
+                  </div>
+                  <div className="flex items-center justify-between border border-dashed border-neutral-300 dark:border-neutral-700 p-3">
+                    <div className="flex items-center gap-2">
+                      <Icon icon="mdi:translate" width={20} height={20} />
+                      <span className="text-sm font-medium">Language</span>
+                    </div>
+                    <Badge>EN</Badge>
+                  </div>
+                  <div className="flex items-center justify-between border border-dashed border-neutral-300 dark:border-neutral-700 p-3">
+                    <div className="flex items-center gap-2">
+                      <Icon icon="mdi:format-font" width={20} height={20} />
+                      <span className="text-sm font-medium">Font Size</span>
+                    </div>
+                    <Badge>Default</Badge>
+                  </div>
+                </div>
+                <DrawerFooter>
+                  <DrawerClose asChild>
+                    <Button variant="outline" className="w-full">
+                      Close
+                    </Button>
+                  </DrawerClose>
+                </DrawerFooter>
+              </div>
+            </DrawerContent>
+          </Drawer>
         </div>
 
         <NavbarMobileGroup label="Showcase">
