@@ -8,9 +8,9 @@ export default async function Home() {
   return (
     <div>
       <HeroSection />
-      <YoutubeSection />
-      <CoursesSection />
       <HowItWorksSection />
+      <CoursesSection />
+      <YoutubeSection />
       <BlogSection />
     </div>
   );
