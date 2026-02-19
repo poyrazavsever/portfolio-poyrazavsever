@@ -1,8 +1,8 @@
-import { HeroSection } from "@/components/home/HeroSection";
-import { YoutubeSection } from "@/components/home/YoutubeSection";
-import { CoursesSection } from "@/components/home/CoursesSection";
-import { HowItWorksSection } from "@/components/home/HowItWorksSection";
-import { BlogSection } from "@/components/home/BlogSection";
+import { HeroSection } from "@/components/futures/home/HeroSection";
+import { YoutubeSection } from "@/components/futures/home/YoutubeSection";
+import { CoursesSection } from "@/components/futures/home/CoursesSection";
+import { HowItWorksSection } from "@/components/futures/home/HowItWorksSection";
+import { BlogSection } from "@/components/futures/home/BlogSection";
 
 export default async function Home() {
   return (
