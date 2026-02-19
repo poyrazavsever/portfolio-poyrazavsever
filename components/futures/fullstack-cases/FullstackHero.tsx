@@ -28,10 +28,12 @@ export function FullstackHero({
 
       <div className="relative z-10 container mx-auto px-4 max-w-6xl">
         <div className="flex flex-col items-start md:items-center text-left md:text-center max-w-4xl mx-auto space-y-6">
-          <Badge variant="outline" className="mb-2 uppercase tracking-widest">
+          <Badge
+            variant="outline"
+            className="mb-2 uppercase tracking-widest border-red-600/30 text-red-600 bg-red-50"
+          >
             Case Studies
           </Badge>
-
           <Typography
             variant="h1"
             className="text-5xl md:text-7xl font-black tracking-tight"

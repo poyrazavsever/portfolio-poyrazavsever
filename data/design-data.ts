@@ -1,13 +1,4 @@
-export interface DesignProject {
-  id: string;
-  title: string;
-  description: string;
-  client?: string;
-  year?: string;
-  coverImage: string;
-  galleryImages: string[];
-  tags: string[];
-}
+import { ShowcaseProject } from "@/types/showcase";
 
 export const designPageData = {
   title: "Design",
@@ -16,7 +7,7 @@ export const designPageData = {
     "A collection of user interface designs, design systems, and brand identities. Crafted with attention to detail and usability.",
 };
 
-export const designProjects: DesignProject[] = [
+export const designProjects: ShowcaseProject[] = [
   {
     id: "1",
     title: "Fintech Dashboard UI",
@@ -32,6 +23,7 @@ export const designProjects: DesignProject[] = [
       "https://placehold.co/1200x800/1e293b/white?text=Settings",
     ],
     tags: ["UI/UX", "Dashboard", "Figma", "Dark Mode"],
+    category: "UI Design",
   },
   {
     id: "2",
@@ -48,6 +40,7 @@ export const designProjects: DesignProject[] = [
       "https://placehold.co/600x1200/0ea5e9/white?text=Booking+Flow",
     ],
     tags: ["Mobile App", "iOS", "Prototyping"],
+    category: "Mobile App",
   },
   {
     id: "3",
@@ -64,5 +57,6 @@ export const designProjects: DesignProject[] = [
       "https://placehold.co/1200x800/10b981/white?text=Button+States",
     ],
     tags: ["Design System", "Documentation", "Accessibility"],
+    category: "Design System",
   },
 ];

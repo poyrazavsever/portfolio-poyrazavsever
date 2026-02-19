@@ -1,16 +1,18 @@
-"use client";
-
 import { OpenSourceHero } from "@/components/futures/open-source/OpenSourceHero";
 import { PackageCard } from "@/components/futures/open-source/PackageCard";
 import { RepoCard } from "@/components/futures/open-source/RepoCard";
-import {
-  openSourcePageData,
-  packages,
-  repositories,
-} from "@/data/open-source-data";
+import { AllReposList } from "@/components/futures/open-source/AllReposList";
+import { openSourcePageData } from "@/data/open-source-data";
 import { Typography, Separator } from "poyraz-ui/atoms";
+import { fetchNPMPackages } from "@/lib/npm";
+import { fetchGitHubRepos } from "@/lib/github";
 
-export default function OpenSourcePage() {
+export const revalidate = 3600; // Revalidate every hour
+
+export default async function OpenSourcePage() {
+  const packages = await fetchNPMPackages();
+  const { featured, all } = await fetchGitHubRepos();
+
   return (
     <div className="min-h-screen pb-24">
       <OpenSourceHero
@@ -33,13 +35,17 @@ export default function OpenSourcePage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {packages.map((pkg) => (
-              <PackageCard key={pkg.name} item={pkg} />
-            ))}
+            {packages.length > 0 ? (
+              packages.map((pkg) => <PackageCard key={pkg.name} item={pkg} />)
+            ) : (
+              <div className="col-span-full text-center text-slate-500 py-8">
+                No packages found.
+              </div>
+            )}
           </div>
         </section>
 
-        {/* Repositories Section */}
+        {/* Featured Repositories Section */}
         <section>
           <div className="mb-8 flex items-center gap-4">
             <Typography
@@ -52,11 +58,18 @@ export default function OpenSourcePage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {repositories.map((repo) => (
-              <RepoCard key={repo.name} item={repo} />
-            ))}
+            {featured.length > 0 ? (
+              featured.map((repo) => <RepoCard key={repo.name} item={repo} />)
+            ) : (
+              <div className="col-span-full text-center text-slate-500 py-8">
+                No featured repositories found.
+              </div>
+            )}
           </div>
         </section>
+
+        {/* All Repositories Section - Client Component with Pagination */}
+        <AllReposList repos={all} />
       </div>
     </div>
   );
