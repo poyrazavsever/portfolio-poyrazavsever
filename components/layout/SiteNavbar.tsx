@@ -329,9 +329,9 @@ export function SiteNavbar() {
                 href="/media/masa-basi/archive"
               />
               <NavbarMegaMenuItem
-                title="Apply to be a Guest"
-                description="Join a live session as a guest speaker"
-                href="/media/masa-basi/apply"
+                title="Poyraz ile Yazılıma Dair"
+                description="Podcast series - Tech & Engineering"
+                href="/media/yazilima-dair"
               />
               <NavbarMegaMenuItem
                 title="Tech & Engineering Blog"
