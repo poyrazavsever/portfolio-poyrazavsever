@@ -14,6 +14,73 @@
     "description": "Sektörden değerli isimlerle beraber yazılım dünyasını masaya yatırıyoruz."
   },
   "archive": {
-    "viewPast": "Geçmiş Bölümleri İncele"
+    "viewPast": "Geçmiş Bölümleri İncele",
+    "backToLive": "Canlıya Dön",
+    "hero": {
+      "title": "Geçmiş Bölümler",
+      "subtitle": "Tüm geçmiş Masa Başı bölümlerini keşfedin.",
+      "badge": "Arşiv"
+    },
+    "episodes": [
+      {
+        "id": "06",
+        "title": "Yazılım Mühendisliğinde Yapay Zekanın Geleceği",
+        "guest": "Burak Selim Şenyurt",
+        "date": "24 Kas 2024",
+        "duration": "1sa 15dk",
+        "description": "GitHub Copilot ve ChatGPT gibi yapay zeka araçlarının geliştirici iş akışını nasıl dönüştürdüğünü ve geleceğin neler getireceğini konuştuk.",
+        "topics": [
+          "Yapay Zeka",
+          "Copilot",
+          "Geliştirici Araçları",
+          "Kodlamanın Geleceği"
+        ]
+      },
+      {
+        "id": "05",
+        "title": "Micro-Frontend: Pratikte Mimari",
+        "guest": "Ahmet Kuşdemir",
+        "date": "10 Kas 2024",
+        "duration": "58dk",
+        "description": "Micro-frontend mimarilerini, module federation'ı ve gerçek dünya uygulama zorluklarını derinlemesine inceledik.",
+        "topics": ["Micro-Frontend", "Module Federation", "Mimari"]
+      },
+      {
+        "id": "04",
+        "title": "Juniordan Seniora: Geliştirici Yolculuğu",
+        "guest": "Selin Çınar",
+        "date": "27 Eki 2024",
+        "duration": "1sa 05dk",
+        "description": "Selin kariyer yolculuğunu, junior geliştiricilere önerilerini ve yazılım mühendisi olarak büyümenin gerçekte ne anlama geldiğini paylaştı.",
+        "topics": ["Kariyer", "Gelişim", "Mentorluk", "İletişim"]
+      },
+      {
+        "id": "03",
+        "title": "Açık Kaynak Toplulukları Oluşturmak",
+        "guest": "Fatih Kadir Akın",
+        "date": "13 Eki 2024",
+        "duration": "1sa 22dk",
+        "description": "Açık kaynak projeleri nasıl başlatılır, büyütülür ve sürdürülür, etrafında nasıl bir topluluk oluşturulur konuştuk.",
+        "topics": ["Açık Kaynak", "Topluluk", "GitHub", "İş Birliği"]
+      },
+      {
+        "id": "02",
+        "title": "Temiz Kod ve Yazılım Zanaatkarlığı",
+        "guest": "Eser Özvataf",
+        "date": "29 Eyl 2024",
+        "duration": "1sa 10dk",
+        "description": "Temiz kod prensipleri, yazılım zanaatkarlığı ve uzun ömürlü, bakımı kolay kod yazma üzerine sohbet ettik.",
+        "topics": ["Temiz Kod", "En İyi Uygulamalar", "Zanaatkarlık"]
+      },
+      {
+        "id": "01",
+        "title": "Neden TypeScript? Derinlemesine Bakış",
+        "guest": "Doğukan Güven Nomak",
+        "date": "15 Eyl 2024",
+        "duration": "52dk",
+        "description": "İlk bölümümüz! TypeScript'in JavaScript ekosistemini neden ele geçirdiğini keşfettik.",
+        "topics": ["TypeScript", "JavaScript", "Tip Güvenliği"]
+      }
+    ]
   }
 }

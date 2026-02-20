@@ -14,6 +14,68 @@
     "description": "Join us as we explore deep topics in engineering."
   },
   "archive": {
-    "viewPast": "View Past Episodes"
+    "viewPast": "View Past Episodes",
+    "backToLive": "Back to Live",
+    "hero": {
+      "title": "Past Episodes",
+      "subtitle": "Browse all past Masa Başı episodes.",
+      "badge": "Archive"
+    },
+    "episodes": [
+      {
+        "id": "06",
+        "title": "The Future of AI in Software Engineering",
+        "guest": "Burak Selim Şenyurt",
+        "date": "24 Nov 2024",
+        "duration": "1h 15m",
+        "description": "We discussed how AI tools like GitHub Copilot and ChatGPT are reshaping the developer workflow and what the future holds.",
+        "topics": ["AI", "Copilot", "Developer Tools", "Future of Coding"]
+      },
+      {
+        "id": "05",
+        "title": "Micro-Frontends: Architecture in Practice",
+        "guest": "Ahmet Kuşdemir",
+        "date": "10 Nov 2024",
+        "duration": "58m",
+        "description": "An in-depth look at micro-frontend architectures, module federation, and real-world implementation challenges.",
+        "topics": ["Micro-Frontends", "Module Federation", "Architecture"]
+      },
+      {
+        "id": "04",
+        "title": "From Junior to Senior: The Developer Journey",
+        "guest": "Selin Çınar",
+        "date": "27 Oct 2024",
+        "duration": "1h 05m",
+        "description": "Selin shared her career journey, tips for junior developers, and what it really takes to grow as a software engineer.",
+        "topics": ["Career", "Growth", "Mentoring", "Soft Skills"]
+      },
+      {
+        "id": "03",
+        "title": "Building Open Source Communities",
+        "guest": "Fatih Kadir Akın",
+        "date": "13 Oct 2024",
+        "duration": "1h 22m",
+        "description": "How to start, grow, and sustain open source projects and build a community around them.",
+        "topics": ["Open Source", "Community", "GitHub", "Collaboration"]
+      },
+      {
+        "id": "02",
+        "title": "Clean Code & Software Craftsmanship",
+        "guest": "Eser Özvataf",
+        "date": "29 Sep 2024",
+        "duration": "1h 10m",
+        "description": "We talked about clean code principles, software craftsmanship, and writing maintainable code that lasts.",
+        "topics": ["Clean Code", "Best Practices", "Craftsmanship"]
+      },
+      {
+        "id": "01",
+        "title": "Why TypeScript? A Deep Dive",
+        "guest": "Doğukan Güven Nomak",
+        "date": "15 Sep 2024",
+        "duration": "52m",
+        "description": "Our very first episode! We explored why TypeScript is taking over the JavaScript ecosystem.",
+        "topics": ["TypeScript", "JavaScript", "Type Safety"]
+      }
+    ]
   }
 }
