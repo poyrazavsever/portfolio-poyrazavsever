@@ -29,6 +29,7 @@ import {
 import { Button, Badge, Logo, Typography } from "poyraz-ui/atoms";
 import { Icon } from "@iconify/react";
 import { Dictionary } from "@/types/dictionary";
+import Link from "next/link";
 
 const SOCIAL_LINKS = [
   {
@@ -518,7 +519,7 @@ export function SiteNavbar({
             </a>
           </Button>
           <Button size="sm" asChild>
-            <a href="/contact">{t.actions.contact}</a>
+            <Link href="/contact">{t.actions.contact}</Link>
           </Button>
         </NavbarActions>
 
