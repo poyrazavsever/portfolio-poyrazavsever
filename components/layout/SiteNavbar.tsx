@@ -268,19 +268,6 @@ export function SiteNavbar({
                   <div className="flex flex-col gap-4 px-4 pb-2">
                     <div className="flex items-center justify-between border border-dashed border-neutral-300 dark:border-neutral-700 p-3">
                       <div className="flex items-center gap-2">
-                        <Icon
-                          icon="mdi:theme-light-dark"
-                          width={20}
-                          height={20}
-                        />
-                        <Typography variant="small" className="font-medium">
-                          {t.topbar.settings.theme}
-                        </Typography>
-                      </div>
-                      <Badge>{t.topbar.settings.system}</Badge>
-                    </div>
-                    <div className="flex items-center justify-between border border-dashed border-neutral-300 dark:border-neutral-700 p-3">
-                      <div className="flex items-center gap-2">
                         <Icon icon="mdi:translate" width={20} height={20} />
                         <Typography variant="small" className="font-medium">
                           {t.topbar.settings.language}
@@ -292,15 +279,6 @@ export function SiteNavbar({
                       >
                         {currentLocale.toUpperCase()}
                       </Badge>
-                    </div>
-                    <div className="flex items-center justify-between border border-dashed border-neutral-300 dark:border-neutral-700 p-3">
-                      <div className="flex items-center gap-2">
-                        <Icon icon="mdi:format-font" width={20} height={20} />
-                        <Typography variant="small" className="font-medium">
-                          {t.topbar.settings.fontSize}
-                        </Typography>
-                      </div>
-                      <Badge>{t.topbar.settings.default}</Badge>
                     </div>
                   </div>
                   <DrawerFooter>
