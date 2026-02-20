@@ -59,42 +59,43 @@ Review of feature-specific components.
 
 **Pages:**
 
-- [ ] `app/academy/certifications/page.tsx`
-- [ ] `app/academy/reading-list/page.tsx`
-- [ ] `app/academy/page.tsx` (Eğer varsa - Mevcut taramada bulunamadı, alt klasörler var)
+- [x] `app/academy/certifications/page.tsx`
+- [x] `app/academy/reading-list/page.tsx`
+- [x] `app/academy/page.tsx` (Eğer varsa - Mevcut taramada bulunamadı, alt klasörler var)
 
 **Components:** (`components/futures/academy`)
 
-- [ ] `AcademyHero.tsx`
-- [ ] `CertificationsList.tsx`
-- [ ] `ReadingList.tsx`
+- [x] `AcademyHero.tsx`
+- [x] `CertificationsList.tsx`
+- [x] `ReadingList.tsx`
 
 ### 💼 Career
 
 **Pages:**
 
-- [ ] `app/career/education/page.tsx`
-- [ ] `app/career/experience/page.tsx`
+- [x] `app/career/education/page.tsx`
+- [x] `app/career/experience/page.tsx`
 
 **Components:** (`components/futures/career`)
 
-- [ ] `Timeline.tsx`
+- [x] `Timeline.tsx`
 
 ### 📞 Contact
 
 **Page:** `app/contact/page.tsx`
 **Components:** (`components/futures/contact`)
 
-- [ ] `ContactForm.tsx`
-- [ ] `ContactHero.tsx`
+- [x] `ContactForm.tsx`
+- [x] `ContactHero.tsx`
 
 ### 🌐 Ecosystem
 
 **Page:** `app/ecosystem/architecture/page.tsx`
 **Components:** (`components/futures/ecosystem`)
 
-- [ ] `ArchitectureDiagram.tsx`
-- [ ] `ArchitectureHero.tsx`
+- [x] `ArchitectureDiagram.tsx`
+- [x] `ArchitectureHero.tsx`
+- [x] `app/ecosystem/architecture/ArchitecturePageClient.tsx`
 
 ### 🎙️ Media
 

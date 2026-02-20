@@ -253,4 +253,212 @@ export interface Dictionary {
       }[];
     };
   };
+  academy: {
+    hero: {
+      title: string;
+      highlight: string;
+      description: string;
+      badge: string;
+    };
+    certifications: {
+      hero: {
+        title: string;
+        highlight: string;
+        description: string;
+        badge: string;
+      };
+      labels: {
+        issued: string;
+        showCredential: string;
+      };
+      items: {
+        title: string;
+        organization: string;
+        issueDate: string;
+        tags: string[];
+      }[];
+    };
+    readingList: {
+      hero: {
+        title: string;
+        highlight: string;
+        description: string;
+        badge: string;
+      };
+      tabs: {
+        books: string;
+        videos: string;
+      };
+      labels: {
+        viewOnAmazon: string;
+        status: {
+          read: string;
+          reading: string;
+          queue: string;
+          watched: string;
+          watching: string;
+        };
+      };
+      books: {
+        title: string;
+        author: string;
+        category: string;
+      }[];
+      videos: {
+        title: string;
+        author: string;
+        platform: string;
+      }[];
+    };
+  };
+  career: {
+    education: {
+      hero: {
+        title: string;
+        highlight: string;
+        description: string;
+        badge: string;
+      };
+      title: string;
+      titleHighlight: string;
+      items: {
+        id: string;
+        role: string;
+        company: string;
+        date: string;
+        description?: string[];
+        skills?: string[];
+      }[];
+    };
+    experience: {
+      hero: {
+        title: string;
+        highlight: string;
+        description: string;
+        badge: string;
+      };
+      workTitle: string;
+      workTitleHighlight: string;
+      volunteerTitle: string;
+      volunteerTitleHighlight: string;
+      work: {
+        id: string;
+        role: string;
+        company: string;
+        date: string;
+        location?: string;
+        type?: string;
+        description?: string[];
+        skills?: string[];
+      }[];
+      volunteer: {
+        id: string;
+        role: string;
+        company: string;
+        date: string;
+        type?: string;
+        description?: string[];
+        skills?: string[];
+      }[];
+    };
+  };
+  contact: {
+    hero: {
+      title: string;
+      highlight: string;
+      description: string;
+      badge: string;
+    };
+    info: {
+      title: string;
+      description: string;
+      emailLabel: string;
+      locationLabel: string;
+      locationValue: string;
+      availabilityLabel: string;
+      availabilityValue: string;
+    };
+    form: {
+      title: string;
+      description: string;
+      labels: {
+        name: string;
+        email: string;
+        topic: string;
+        date: string;
+        time: string;
+        message: string;
+      };
+      placeholders: {
+        name: string;
+        email: string;
+        topic: string;
+        date: string;
+        time: string;
+        message: string;
+      };
+      topics: {
+        project: string;
+        consulting: string;
+        speaking: string;
+        other: string;
+      };
+      buttonText: string;
+    };
+  };
+  ecosystem: {
+    hero: {
+      title: string;
+      highlight?: string;
+      subtitle: string;
+      meta: string;
+      badge: string;
+    };
+    vision: {
+      title: string;
+      description: string;
+    };
+    hub: {
+      title: string;
+      description: string;
+      caption: string;
+    };
+    subdomains: {
+      title: string;
+      items: {
+        name: string;
+        description: string;
+      }[];
+    };
+    journeys: {
+      title: string;
+      description: string;
+      caption: string;
+    };
+    plan: {
+      title: string;
+      description: string;
+    };
+    diagrams: {
+      ecosystem: {
+        user: string;
+        hub: string;
+        subdomains: string;
+      };
+      journeys: {
+        user: string;
+        hub: string;
+        portal: string;
+        labs: string;
+        step1: string;
+        step2: string;
+        clientOpt: string;
+        login: string;
+        tracking: string;
+        learnerOpt: string;
+        access: string;
+        examples: string;
+      };
+    };
+  };
 }

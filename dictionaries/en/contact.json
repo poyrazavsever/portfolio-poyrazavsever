@@ -1,0 +1,44 @@
+{
+  "hero": {
+    "title": "Let's Build Something",
+    "highlight": "Great",
+    "description": "Whether you have a question, a project idea, or just want to say hi, I'm always open to discussing new opportunities.",
+    "badge": "Contact & Support"
+  },
+  "info": {
+    "title": "Contact Information",
+    "description": "Fill out the form to schedule a meeting or send a direct message. I usually respond within 24 hours.",
+    "emailLabel": "Email",
+    "locationLabel": "Location",
+    "locationValue": "Istanbul, Turkey (Remote Available)",
+    "availabilityLabel": "Availability",
+    "availabilityValue": "Mon - Fri, 09:00 - 18:00 (GMT+3)"
+  },
+  "form": {
+    "title": "Send a Message",
+    "description": "Schedule a meeting or ask a question.",
+    "labels": {
+      "name": "Full Name",
+      "email": "Email Address",
+      "topic": "Topic",
+      "date": "Preferred Date",
+      "time": "Preferred Time",
+      "message": "Message"
+    },
+    "placeholders": {
+      "name": "John Doe",
+      "email": "john@example.com",
+      "topic": "Select a topic",
+      "date": "Pick a date",
+      "time": "Select time",
+      "message": "Tell me about your project or question..."
+    },
+    "topics": {
+      "project": "Project Inquiry",
+      "consulting": "Consulting",
+      "speaking": "Speaking Request",
+      "other": "Other"
+    },
+    "buttonText": "Send Message"
+  }
+}

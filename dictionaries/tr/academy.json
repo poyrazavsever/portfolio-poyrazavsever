@@ -1,0 +1,91 @@
+{
+  "hero": {
+    "title": "Akademi",
+    "highlight": "Merkezi",
+    "description": "Akademi bölümüne hoş geldiniz.",
+    "badge": "Akademi"
+  },
+  "certifications": {
+    "hero": {
+      "title": "Benim",
+      "highlight": "Sertifikalarım",
+      "description": "Teknik becerilerimin ve sürekli öğrenme yolculuğumun resmi onayı.",
+      "badge": "Sertifikalar"
+    },
+    "labels": {
+      "issued": "Veriliş:",
+      "showCredential": "Sertifikayı Göster"
+    },
+    "items": [
+      {
+        "title": "BTK Akademi - React ile Web Programcılığı",
+        "organization": "BTK Akademi",
+        "issueDate": "Ağustos 2023",
+        "tags": ["React", "Web Geliştirme", "Frontend"]
+      },
+      {
+        "title": "Udemy - Advanced Node.js Bootcamp",
+        "organization": "Udemy",
+        "issueDate": "Temmuz 2023",
+        "tags": ["Node.js", "Backend", "Mikroservisler"]
+      },
+      {
+        "title": "Turkcell Geleceği Yazanlar - Flutter",
+        "organization": "Turkcell",
+        "issueDate": "Haziran 2023",
+        "tags": ["Flutter", "Mobil", "Dart"]
+      }
+    ]
+  },
+  "readingList": {
+    "hero": {
+      "title": "Okuma &",
+      "highlight": "İzleme Listem",
+      "description": "Teknik bakış açımı şekillendiren kitapların, kursların ve videoların özenle seçilmiş bir koleksiyonu.",
+      "badge": "Kütüphane"
+    },
+    "tabs": {
+      "books": "Kitaplar",
+      "videos": "Videolar & Kurslar"
+    },
+    "labels": {
+      "viewOnAmazon": "Amazon'da Gör",
+      "status": {
+        "read": "Okundu",
+        "reading": "Okunuyor",
+        "queue": "Sırada",
+        "watched": "İzlendi",
+        "watching": "İzleniyor"
+      }
+    },
+    "books": [
+      {
+        "title": "Clean Code",
+        "author": "Robert C. Martin",
+        "category": "Yazılım Mühendisliği"
+      },
+      {
+        "title": "The Pragmatic Programmer",
+        "author": "Andrew Hunt & David Thomas",
+        "category": "Kariyer"
+      },
+      {
+        "title": "Design Patterns",
+        "author": "Erich Gamma ve ark.",
+        "category": "Mimari"
+      }
+    ],
+    "videos": [
+      {
+        "title": "Namaste JavaScript",
+        "author": "Akshay Saini",
+        "platform": "YouTube"
+      },
+      {
+        "title": "System Design Primer",
+        "author": "Gaurav Sen",
+        "platform": "YouTube"
+      }
+    ]
+  }
+}

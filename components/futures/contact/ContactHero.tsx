@@ -1,6 +1,13 @@
 import { PatternGrid, Badge, Typography } from "poyraz-ui/atoms";
+import { Dictionary } from "@/types/dictionary";
 
-export function ContactHero() {
+interface ContactHeroProps {
+  dictionary: Dictionary;
+}
+
+export function ContactHero({ dictionary }: ContactHeroProps) {
+  const { hero } = dictionary.contact;
+
   return (
     <div className="relative w-full py-16 md:py-24 border-b-2 border-dashed border-slate-300">
       {/* Background Pattern */}
@@ -18,23 +25,24 @@ export function ContactHero() {
             variant="outline"
             className="mb-2 uppercase tracking-widest border-red-600/30 text-red-600 bg-red-50"
           >
-            Contact & Support
+            {hero.badge}
           </Badge>
 
           <Typography
             variant="h1"
             className="text-5xl md:text-7xl font-black tracking-tight"
           >
-            Let's Build Something{" "}
-            <span className="text-red-600 font-secondary">Great</span>
+            {hero.title}{" "}
+            <span className="text-red-600 font-secondary">
+              {hero.highlight}
+            </span>
           </Typography>
 
           <Typography
             variant="lead"
             className="text-xl md:text-2xl text-slate-600 max-w-2xl"
           >
-            Whether you have a question, a project idea, or just want to say hi,
-            I'm always open to discussing new opportunities.
+            {hero.description}
           </Typography>
         </div>
       </div>

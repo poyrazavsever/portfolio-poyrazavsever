@@ -1,6 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
-"use client";
-
 import {
   Card,
   CardHeader,
@@ -12,45 +9,41 @@ import {
   Button,
 } from "poyraz-ui/atoms";
 import { Icon } from "@iconify/react";
-import Image from "next/image";
+import { Dictionary } from "@/types/dictionary";
 
-const certifications = [
+const staticCertifications = [
   {
-    title: "BTK Akademi - React ile Web Programcılığı",
-    organization: "BTK Akademi",
-    issueDate: "Ağustos 2023",
     credentialId: "BTK-123456",
     link: "#",
-    image:
-      "https://www.color-hex.com/palettes/36931.png",
-    tags: ["React", "Web Development", "Frontend"],
+    image: "https://www.color-hex.com/palettes/36931.png",
   },
   {
-    title: "Udemy - Advanced Node.js Bootcamp",
-    organization: "Udemy",
-    issueDate: "Temmuz 2023",
     credentialId: "UC-554123",
     link: "#",
-    image:
-      "https://www.color-hex.com/palettes/36931.png",
-    tags: ["Node.js", "Backend", "Microservices"],
+    image: "https://www.color-hex.com/palettes/36931.png",
   },
   {
-    title: "Turkcell Geleceği Yazanlar - Flutter",
-    organization: "Turkcell",
-    issueDate: "Haziran 2023",
     credentialId: "TGY-98765",
     link: "#",
-    image:
-      "https://www.color-hex.com/palettes/36931.png",
-    tags: ["Flutter", "Mobile", "Dart"],
+    image: "https://www.color-hex.com/palettes/36931.png",
   },
 ];
 
-export function CertificationsList() {
+interface CertificationsListProps {
+  dictionary: Dictionary;
+}
+
+export function CertificationsList({ dictionary }: CertificationsListProps) {
+  const { certifications: certsDict } = dictionary.academy;
+
+  const mergedCertifications = staticCertifications.map((cert, index) => ({
+    ...cert,
+    ...certsDict.items[index],
+  }));
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {certifications.map((cert) => (
+      {mergedCertifications.map((cert) => (
         <Card
           key={cert.title}
           variant="default"
@@ -92,7 +85,9 @@ export function CertificationsList() {
                   icon="mdi:calendar-blank-outline"
                   className="w-4 h-4 text-slate-400"
                 />
-                <span>Issued: {cert.issueDate}</span>
+                <span>
+                  {certsDict.labels.issued} {cert.issueDate}
+                </span>
               </div>
               <div className="flex items-center gap-2">
                 <Icon
@@ -113,7 +108,7 @@ export function CertificationsList() {
             >
               <a href={cert.link} target="_blank" rel="noopener noreferrer">
                 <Icon icon="mdi:open-in-new" className="w-4 h-4" />
-                Show Credential
+                {certsDict.labels.showCredential}
               </a>
             </Button>
           </CardFooter>

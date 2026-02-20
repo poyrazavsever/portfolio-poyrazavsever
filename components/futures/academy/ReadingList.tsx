@@ -1,6 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
-"use client";
-
 import {
   Card,
   CardHeader,
@@ -13,67 +10,68 @@ import {
 } from "poyraz-ui/atoms";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "poyraz-ui/molecules";
 import { Icon } from "@iconify/react";
-import Image from "next/image";
+import { Dictionary } from "@/types/dictionary";
 
-const books = [
+const staticBooks = [
   {
-    title: "Clean Code",
-    author: "Robert C. Martin",
-    category: "Software Engineering",
     link: "#",
     image: "https://www.color-hex.com/palettes/36931.png",
-    status: "Read",
+    statusKey: "read",
   },
   {
-    title: "The Pragmatic Programmer",
-    author: "Andrew Hunt & David Thomas",
-    category: "Career",
     link: "#",
     image: "https://www.color-hex.com/palettes/36931.png",
-    status: "Reading",
+    statusKey: "reading",
   },
   {
-    title: "Design Patterns",
-    author: "Erich Gamma et al.",
-    category: "Architecture",
     link: "#",
     image: "https://www.color-hex.com/palettes/36931.png",
-    status: "Queue",
+    statusKey: "queue",
   },
 ];
 
-const videos = [
+const staticVideos = [
   {
-    title: "Namaste JavaScript",
-    author: "Akshay Saini",
-    platform: "YouTube",
     link: "#",
     image: "https://www.color-hex.com/palettes/36931.png",
-    status: "Watched",
+    statusKey: "watched",
   },
   {
-    title: "System Design Primer",
-    author: "Gaurav Sen",
-    platform: "YouTube",
     link: "#",
     image: "https://www.color-hex.com/palettes/36931.png",
-    status: "Watching",
+    statusKey: "watching",
   },
 ];
 
-export function ReadingList() {
+interface ReadingListProps {
+  dictionary: Dictionary;
+}
+
+export function ReadingList({ dictionary }: ReadingListProps) {
+  const { readingList: rDict } = dictionary.academy;
+
+  const mergedBooks = staticBooks.map((book, index) => ({
+    ...book,
+    ...rDict.books[index],
+  }));
+
+  const mergedVideos = staticVideos.map((video, index) => ({
+    ...video,
+    ...rDict.videos[index],
+  }));
+
   return (
     <Tabs defaultValue="books" className="w-full">
       <div className="flex justify-center mb-8">
         <TabsList>
-          <TabsTrigger value="books">Books</TabsTrigger>
-          <TabsTrigger value="videos">Videos & Courses</TabsTrigger>
+          <TabsTrigger value="books">{rDict.tabs.books}</TabsTrigger>
+          <TabsTrigger value="videos">{rDict.tabs.videos}</TabsTrigger>
         </TabsList>
       </div>
 
       <TabsContent value="books">
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {books.map((book) => (
+          {mergedBooks.map((book) => (
             <Card
               key={book.title}
               variant="default"
@@ -87,14 +85,18 @@ export function ReadingList() {
                 />
                 <Badge
                   className={`absolute top-2 right-2 ${
-                    book.status === "Read"
+                    book.statusKey === "read"
                       ? "bg-emerald-500"
-                      : book.status === "Reading"
+                      : book.statusKey === "reading"
                         ? "bg-amber-500"
                         : "bg-slate-500"
                   } text-white border-none`}
                 >
-                  {book.status}
+                  {
+                    rDict.labels.status[
+                      book.statusKey as keyof typeof rDict.labels.status
+                    ]
+                  }
                 </Badge>
               </CardImage>
 
@@ -119,7 +121,7 @@ export function ReadingList() {
                   asChild
                 >
                   <a href={book.link} target="_blank" rel="noopener noreferrer">
-                    View on Amazon{" "}
+                    {rDict.labels.viewOnAmazon}{" "}
                     <Icon icon="mdi:open-in-new" className="w-4 h-4" />
                   </a>
                 </Button>
@@ -131,7 +133,7 @@ export function ReadingList() {
 
       <TabsContent value="videos">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {videos.map((video) => (
+          {mergedVideos.map((video) => (
             <Card
               key={video.title}
               variant="default"
@@ -156,12 +158,16 @@ export function ReadingList() {
                   <Badge
                     variant="outline"
                     className={
-                      video.status === "Watched"
+                      video.statusKey === "watched"
                         ? "text-emerald-600 border-emerald-200 bg-emerald-50"
                         : "text-amber-600 border-amber-200 bg-amber-50"
                     }
                   >
-                    {video.status}
+                    {
+                      rDict.labels.status[
+                        video.statusKey as keyof typeof rDict.labels.status
+                      ]
+                    }
                   </Badge>
                 </div>
                 <CardTitle className="text-xl group-hover:text-red-600 transition-colors">

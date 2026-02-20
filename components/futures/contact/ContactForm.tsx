@@ -22,20 +22,23 @@ import {
   DatePicker,
 } from "poyraz-ui/molecules";
 import { Icon } from "@iconify/react";
+import { Dictionary } from "@/types/dictionary";
 
-export function ContactForm() {
+interface ContactFormProps {
+  dictionary: Dictionary;
+}
+
+export function ContactForm({ dictionary }: ContactFormProps) {
   const [date, setDate] = useState<Date>();
+  const { info, form } = dictionary.contact;
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
       {/* Left Column: Contact Info */}
       <div className="space-y-8">
         <div className="space-y-4">
-          <h3 className="text-2xl font-bold">Contact Information</h3>
-          <p className="text-slate-600">
-            Fill out the form to schedule a meeting or send a direct message. I
-            usually respond within 24 hours.
-          </p>
+          <h3 className="text-2xl font-bold">{info.title}</h3>
+          <p className="text-slate-600">{info.description}</p>
         </div>
 
         <div className="space-y-6">
@@ -44,7 +47,7 @@ export function ContactForm() {
               <Icon icon="mdi:email-outline" className="w-5 h-5" />
             </div>
             <div>
-              <h4 className="font-semibold">Email</h4>
+              <h4 className="font-semibold">{info.emailLabel}</h4>
               <p className="text-slate-600">contact@poyrazavsever.com</p>
             </div>
           </div>
@@ -54,10 +57,8 @@ export function ContactForm() {
               <Icon icon="mdi:map-marker-outline" className="w-5 h-5" />
             </div>
             <div>
-              <h4 className="font-semibold">Location</h4>
-              <p className="text-slate-600">
-                Istanbul, Turkey (Remote Available)
-              </p>
+              <h4 className="font-semibold">{info.locationLabel}</h4>
+              <p className="text-slate-600">{info.locationValue}</p>
             </div>
           </div>
 
@@ -66,8 +67,8 @@ export function ContactForm() {
               <Icon icon="mdi:calendar-check-outline" className="w-5 h-5" />
             </div>
             <div>
-              <h4 className="font-semibold">Availability</h4>
-              <p className="text-slate-600">Mon - Fri, 09:00 - 18:00 (GMT+3)</p>
+              <h4 className="font-semibold">{info.availabilityLabel}</h4>
+              <p className="text-slate-600">{info.availabilityValue}</p>
             </div>
           </div>
         </div>
@@ -76,55 +77,59 @@ export function ContactForm() {
       {/* Right Column: Form */}
       <Card variant="bordered" className="w-full">
         <CardHeader>
-          <CardTitle>Send a Message</CardTitle>
-          <CardDescription>
-            Schedule a meeting or ask a question.
-          </CardDescription>
+          <CardTitle>{form.title}</CardTitle>
+          <CardDescription>{form.description}</CardDescription>
         </CardHeader>
 
         <CardContent className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="name">Full Name</Label>
-              <Input id="name" placeholder="John Doe" />
+              <Label htmlFor="name">{form.labels.name}</Label>
+              <Input id="name" placeholder={form.placeholders.name} />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="email">Email Address</Label>
-              <Input id="email" type="email" placeholder="john@example.com" />
+              <Label htmlFor="email">{form.labels.email}</Label>
+              <Input
+                id="email"
+                type="email"
+                placeholder={form.placeholders.email}
+              />
             </div>
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="topic">Topic</Label>
+            <Label htmlFor="topic">{form.labels.topic}</Label>
             <Select>
               <SelectTrigger>
-                <SelectValue placeholder="Select a topic" />
+                <SelectValue placeholder={form.placeholders.topic} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="project">Project Inquiry</SelectItem>
-                <SelectItem value="consulting">Consulting</SelectItem>
-                <SelectItem value="speaking">Speaking Request</SelectItem>
-                <SelectItem value="other">Other</SelectItem>
+                <SelectItem value="project">{form.topics.project}</SelectItem>
+                <SelectItem value="consulting">
+                  {form.topics.consulting}
+                </SelectItem>
+                <SelectItem value="speaking">{form.topics.speaking}</SelectItem>
+                <SelectItem value="other">{form.topics.other}</SelectItem>
               </SelectContent>
             </Select>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2 flex flex-col">
-              <Label className="mb-2">Preferred Date</Label>
+              <Label className="mb-2">{form.labels.date}</Label>
               <DatePicker
                 selected={date}
                 onSelect={setDate}
-                placeholder="Pick a date"
+                placeholder={form.placeholders.date}
                 minDate={new Date()}
                 className="w-full"
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="time">Preferred Time</Label>
+              <Label htmlFor="time">{form.labels.time}</Label>
               <Select>
                 <SelectTrigger>
-                  <SelectValue placeholder="Select time" />
+                  <SelectValue placeholder={form.placeholders.time} />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="09:00">09:00 - 10:00</SelectItem>
@@ -140,10 +145,10 @@ export function ContactForm() {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="message">Message</Label>
+            <Label htmlFor="message">{form.labels.message}</Label>
             <Textarea
               id="message"
-              placeholder="Tell me about your project or question..."
+              placeholder={form.placeholders.message}
               rows={4}
             />
           </div>
@@ -151,7 +156,7 @@ export function ContactForm() {
 
         <CardFooter className="flex justify-end pt-4 border-t border-dashed border-slate-200">
           <Button size="lg" className="w-full md:w-auto">
-            Send Message{" "}
+            {form.buttonText}{" "}
             <Icon icon="mdi:send-variant-outline" className="ml-2 w-4 h-4" />
           </Button>
         </CardFooter>

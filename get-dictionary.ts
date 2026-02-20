@@ -4,26 +4,43 @@ import type { Dictionary } from "./types/dictionary";
 
 // Helper to load dictionary parts for a locale
 const loadDictionary = async (locale: Locale): Promise<Dictionary> => {
-  const [layout, shared, home, about] = await Promise.all([
-    import(`./dictionaries/${locale}/layout.json`).then(
-      (module) => module.default,
-    ),
-    import(`./dictionaries/${locale}/shared.json`).then(
-      (module) => module.default,
-    ),
-    import(`./dictionaries/${locale}/home.json`).then(
-      (module) => module.default,
-    ),
-    import(`./dictionaries/${locale}/about.json`).then(
-      (module) => module.default,
-    ),
-  ]);
+  const [layout, shared, home, about, academy, career, contact, ecosystem] =
+    await Promise.all([
+      import(`./dictionaries/${locale}/layout.json`).then(
+        (module) => module.default,
+      ),
+      import(`./dictionaries/${locale}/shared.json`).then(
+        (module) => module.default,
+      ),
+      import(`./dictionaries/${locale}/home.json`).then(
+        (module) => module.default,
+      ),
+      import(`./dictionaries/${locale}/about.json`).then(
+        (module) => module.default,
+      ),
+      import(`./dictionaries/${locale}/academy.json`).then(
+        (module) => module.default,
+      ),
+      import(`./dictionaries/${locale}/career.json`).then(
+        (module) => module.default,
+      ),
+      import(`./dictionaries/${locale}/contact.json`).then(
+        (module) => module.default,
+      ),
+      import(`./dictionaries/${locale}/ecosystem.json`).then(
+        (module) => module.default,
+      ),
+    ]);
 
   return {
     layout: layout.layout,
     shared,
     home,
     about,
+    academy,
+    career,
+    contact,
+    ecosystem,
   } as Dictionary;
 };
 

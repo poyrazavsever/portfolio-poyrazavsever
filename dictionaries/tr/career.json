@@ -1,0 +1,174 @@
+{
+  "education": {
+    "hero": {
+      "title": "Akademik",
+      "highlight": "Geçmiş",
+      "description": "Eğitim yolculuğum ve akademik başarılarım.",
+      "badge": "Eğitim"
+    },
+    "title": "Üniversite",
+    "titleHighlight": "Derecesi",
+    "items": [
+      {
+        "id": "ostimtech-software",
+        "role": "Yazılım Mühendisliği (Lisans)",
+        "company": "OSTİM Teknik Üniversitesi",
+        "date": "Ağu 2024 - Haz 2028",
+        "description": [
+          "Münazara ve Hitabet Kulübü Kurucu Başkanı.",
+          "Ottoqua Teknoloji Takımı Çekirdek Ekibi (2024-2025).",
+          "Google Developers Group Çekirdek Ekibi (2024-2025).",
+          "Huawei Student Developers Çekirdek Ekibi (2024-2025)."
+        ],
+        "skills": [
+          "Yazılım Mühendisliği",
+          "Algoritmalar",
+          "Veri Yapıları",
+          "Sistem Tasarımı"
+        ]
+      }
+    ]
+  },
+  "experience": {
+    "hero": {
+      "title": "Profesyonel",
+      "highlight": "Deneyim",
+      "description": "Stajlar, işler ve gönüllü çalışmaları da içeren profesyonel yolculuğumun bir zaman çizelgesi.",
+      "badge": "Kariyer"
+    },
+    "workTitle": "İş",
+    "workTitleHighlight": "Geçmişi",
+    "volunteerTitle": "Gönüllü",
+    "volunteerTitleHighlight": "Geçmişi",
+    "work": [
+      {
+        "id": "omedya-fullstack",
+        "role": "Fullstack Developer",
+        "company": "Omedya A.Ş. | Dijital Ajans",
+        "date": "Tem 2025 - Günümüz",
+        "location": "Ankara, Türkiye - Hibrit",
+        "type": "Yarı Zamanlı",
+        "description": [
+          "Kurumsal ölçekli web uygulamaları geliştirdim ve yönettim.",
+          "AI Agent'lar oluşturdum ve bunları uygulamalara entegre ettim.",
+          "Frontend: Angular, Next.js, Astro.js, Tailwind, Material UI.",
+          "Backend: C# .NET 10, Node.js (Nest.js & Express.js), PostgreSQL, Supabase, Firebase, MongoDB."
+        ],
+        "skills": [
+          "Next.js",
+          "Express.js",
+          "Supabase",
+          "MongoDB",
+          "Figma",
+          ".NET 10"
+        ]
+      },
+      {
+        "id": "omedya-intern",
+        "role": "Fullstack Developer (Stajyer)",
+        "company": "Omedya A.Ş. | Dijital Ajans",
+        "date": "Haz 2025 - Tem 2025",
+        "location": "Ankara, Türkiye - Yerinde",
+        "type": "Staj",
+        "description": [
+          "Next.js ve AI Agent'lar ile pratik deneyim kazandım.",
+          "Web Servisleri API'leri ve genel yazılım geliştirme üzerine çalıştım."
+        ],
+        "skills": [
+          "Next.js",
+          "AI Agent",
+          "JavaScript",
+          "Web Servis API",
+          "Google Gemini"
+        ]
+      },
+      {
+        "id": "arc-fullstack",
+        "role": "Full Stack Developer",
+        "company": "ARC Dış Ticaret",
+        "date": "Şub 2025 - Haz 2025",
+        "location": "Ankara, Türkiye - Yerinde",
+        "type": "Yarı Zamanlı",
+        "description": [
+          "Kurumsal web siteleri ve açılış sayfaları tasarladım ve kodladım.",
+          "Web sitelerine Sohbet Botları (Gemini, ChatGPT) entegre ettim."
+        ],
+        "skills": [
+          "React",
+          "Next.js",
+          "Express.js",
+          "Supabase",
+          "Firebase",
+          "MongoDB",
+          "Tailwind"
+        ]
+      },
+      {
+        "id": "tarvina-intern",
+        "role": "Fullstack Developer (Stajyer)",
+        "company": "Tarvina Yazılım Teknoloji",
+        "date": "Eki 2024 - Ara 2024",
+        "location": "Ankara, Türkiye - Uzaktan",
+        "type": "Staj",
+        "description": [
+          "Agile/Scrum metodolojileri ile çalışmayı öğrendim.",
+          "UI/UX becerilerini geliştirmek için çeşitli web uygulamaları ve akışlar tasarladım.",
+          "Next.js, Express.js ve MongoDB kullanarak uçtan uca projeler geliştirdim."
+        ],
+        "skills": [
+          "Next.js",
+          "Angular",
+          "Nest.js",
+          "MongoDB",
+          "Figma",
+          "React Native",
+          "Redux"
+        ]
+      }
+    ],
+    "volunteer": [
+      {
+        "id": "huawei-hsd",
+        "role": "Proje Komitesi Başkanı",
+        "company": "Huawei Student Developers",
+        "date": "Nis 2025 - Ara 2025",
+        "type": "Gönüllü",
+        "description": [
+          "OSTİM Teknik Üniversitesi'nde yeni kurulan HSD topluluğunun Çekirdek Ekibine seçildim."
+        ],
+        "skills": ["Liderlik", "Proje Yönetimi", "Topluluk Oluşturma"]
+      },
+      {
+        "id": "gdsc-core",
+        "role": "Teknoloji Dept. Çekirdek Ekip",
+        "company": "OSTIMTECH GDSC",
+        "date": "Şub 2025 - Tem 2025",
+        "type": "Gönüllü",
+        "description": [],
+        "skills": ["Teknoloji", "Takım Çalışması"]
+      },
+      {
+        "id": "ottoqua",
+        "role": "Yazılım Geliştirici Üye",
+        "company": "OTTOQUA Teknoloji Takımı",
+        "date": "Kas 2024 - Ara 2025",
+        "type": "Gönüllü",
+        "description": [
+          "Tübitak ve Teknofest yarışmaları için takım arkadaşlarımla yazılım görevlerini üstlendim.",
+          "Çeşitli projelerde UI/UX alanlarında takım arkadaşlarıma destek oldum.",
+          "Toplantılara aktif olarak katıldım ve sunumlar yaptım."
+        ],
+        "skills": ["Takım Çalışması", "UI/UX", "Sunumlar", "Yarışmalar"]
+      },
+      {
+        "id": "ostimtech-munazara",
+        "role": "Kurucu Başkan",
+        "company": "OstimTech Münazara & Hitabet",
+        "date": "Kas 2024 - Günümüz",
+        "type": "Kulüp",
+        "description": ["Münazara ve Hitabet kulübünün kurucu başkanı."],
+        "skills": ["Liderlik", "Topluluk Önünde Konuşma", "Yönetim"]
+      }
+    ]
+  }
+}

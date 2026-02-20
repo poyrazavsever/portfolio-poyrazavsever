@@ -1,0 +1,91 @@
+{
+  "hero": {
+    "title": "Academy",
+    "highlight": "Center",
+    "description": "Welcome to my academy section.",
+    "badge": "Academy"
+  },
+  "certifications": {
+    "hero": {
+      "title": "My",
+      "highlight": "Certifications",
+      "description": "Formal recognition of my technical skills and continuous learning journey.",
+      "badge": "Certifications"
+    },
+    "labels": {
+      "issued": "Issued:",
+      "showCredential": "Show Credential"
+    },
+    "items": [
+      {
+        "title": "BTK Akademi - React ile Web Programcılığı",
+        "organization": "BTK Akademi",
+        "issueDate": "August 2023",
+        "tags": ["React", "Web Development", "Frontend"]
+      },
+      {
+        "title": "Udemy - Advanced Node.js Bootcamp",
+        "organization": "Udemy",
+        "issueDate": "July 2023",
+        "tags": ["Node.js", "Backend", "Microservices"]
+      },
+      {
+        "title": "Turkcell Geleceği Yazanlar - Flutter",
+        "organization": "Turkcell",
+        "issueDate": "June 2023",
+        "tags": ["Flutter", "Mobile", "Dart"]
+      }
+    ]
+  },
+  "readingList": {
+    "hero": {
+      "title": "My Reading &",
+      "highlight": "Watch List",
+      "description": "A curated collection of books, courses, and videos that shape my technical perspective.",
+      "badge": "Library"
+    },
+    "tabs": {
+      "books": "Books",
+      "videos": "Videos & Courses"
+    },
+    "labels": {
+      "viewOnAmazon": "View on Amazon",
+      "status": {
+        "read": "Read",
+        "reading": "Reading",
+        "queue": "Queue",
+        "watched": "Watched",
+        "watching": "Watching"
+      }
+    },
+    "books": [
+      {
+        "title": "Clean Code",
+        "author": "Robert C. Martin",
+        "category": "Software Engineering"
+      },
+      {
+        "title": "The Pragmatic Programmer",
+        "author": "Andrew Hunt & David Thomas",
+        "category": "Career"
+      },
+      {
+        "title": "Design Patterns",
+        "author": "Erich Gamma et al.",
+        "category": "Architecture"
+      }
+    ],
+    "videos": [
+      {
+        "title": "Namaste JavaScript",
+        "author": "Akshay Saini",
+        "platform": "YouTube"
+      },
+      {
+        "title": "System Design Primer",
+        "author": "Gaurav Sen",
+        "platform": "YouTube"
+      }
+    ]
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "hero": {
+    "title": "Harika Şeyler",
+    "highlight": "İnşa Edelim",
+    "description": "Bir sorunuz, bir proje fikriniz varsa veya sadece merhaba demek isterseniz, her zaman yeni fırsatları görüşmeye açığım.",
+    "badge": "İletişim & Destek"
+  },
+  "info": {
+    "title": "İletişim Bilgileri",
+    "description": "Bir toplantı planlamak veya doğrudan mesaj göndermek için formu doldurun. Genellikle 24 saat içinde yanıt veririm.",
+    "emailLabel": "E-posta",
+    "locationLabel": "Konum",
+    "locationValue": "İstanbul, Türkiye (Uzaktan Çalışma Uygundur)",
+    "availabilityLabel": "Müsaitlik",
+    "availabilityValue": "Pzt - Cum, 09:00 - 18:00 (GMT+3)"
+  },
+  "form": {
+    "title": "Mesaj Gönder",
+    "description": "Bir toplantı planlayın veya soru sorun.",
+    "labels": {
+      "name": "Ad Soyad",
+      "email": "E-posta Adresi",
+      "topic": "Konu",
+      "date": "Tercih Edilen Tarih",
+      "time": "Tercih Edilen Saat",
+      "message": "Mesaj"
+    },
+    "placeholders": {
+      "name": "Ahmet Yılmaz",
+      "email": "ahmet@ornek.com",
+      "topic": "Bir konu seçin",
+      "date": "Bir tarih seçin",
+      "time": "Saat seçin",
+      "message": "Projenizden veya sorunuzdan bahsedin..."
+    },
+    "topics": {
+      "project": "Proje Talebi",
+      "consulting": "Danışmanlık",
+      "speaking": "Konuşmacı Talebi",
+      "other": "Diğer"
+    },
+    "buttonText": "Mesaj Gönder"
+  }
+}

@@ -1,20 +1,23 @@
-"use client";
-
 import { PatternGrid, Badge, Typography } from "poyraz-ui/atoms";
+import { Dictionary } from "@/types/dictionary";
 
 interface AcademyHeroProps {
-  title: string;
-  headerHighlight: string;
-  description: string;
+  dictionary: Dictionary;
+  title?: string;
+  headerHighlight?: string;
+  description?: string;
   badge?: string;
 }
 
 export function AcademyHero({
+  dictionary,
   title,
   headerHighlight,
   description,
-  badge = "Academy",
+  badge,
 }: AcademyHeroProps) {
+  const { hero } = dictionary.academy;
+
   return (
     <div className="relative w-full py-20 md:py-32 border-b-2 border-dashed border-slate-300">
       {/* Background Pattern */}
@@ -32,16 +35,16 @@ export function AcademyHero({
             variant="outline"
             className="mb-2 uppercase tracking-widest border-red-600/30 text-red-600 bg-red-50"
           >
-            {badge}
+            {badge || hero.badge}
           </Badge>
 
           <Typography
             variant="h1"
             className="text-5xl md:text-7xl font-black tracking-tight"
           >
-            {title}{" "}
+            {title || hero.title}{" "}
             <span className="text-red-600 font-secondary">
-              {headerHighlight}
+              {headerHighlight || hero.highlight}
             </span>
           </Typography>
 
@@ -49,7 +52,7 @@ export function AcademyHero({
             variant="lead"
             className="text-xl md:text-2xl text-slate-600 max-w-2xl"
           >
-            {description}
+            {description || hero.description}
           </Typography>
         </div>
       </div>

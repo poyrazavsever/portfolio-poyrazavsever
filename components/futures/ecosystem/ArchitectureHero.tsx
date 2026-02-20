@@ -1,19 +1,13 @@
-"use client";
-
 import { PatternGrid, Typography, Badge } from "poyraz-ui/atoms";
-// import { cn } from "poyraz-ui";
+import { Dictionary } from "@/types/dictionary";
 
 interface ArchitectureHeroProps {
-  title: string;
-  subtitle: string;
-  meta: string;
+  dictionary: Dictionary;
 }
 
-export function ArchitectureHero({
-  title,
-  subtitle,
-  meta,
-}: ArchitectureHeroProps) {
+export function ArchitectureHero({ dictionary }: ArchitectureHeroProps) {
+  const { hero } = dictionary.ecosystem;
+
   return (
     <section className="relative pt-24 pb-16 md:pt-32 md:pb-24 overflow-hidden border-b border-dashed border-slate-200 bg-slate-50/50">
       {/* Background Pattern */}
@@ -28,22 +22,27 @@ export function ArchitectureHero({
           variant="outline"
           className="mb-6 uppercase tracking-widest border-red-600/30 text-red-600 bg-red-50"
         >
-          Engineering Blog
+          {hero.badge}
         </Badge>
         <Typography
           variant="h1"
           className="text-4xl md:text-6xl font-black tracking-tight mb-6 text-slate-900"
         >
-          {title}
+          {hero.title}{" "}
+          {hero.highlight && (
+            <span className="text-red-600 font-secondary">
+              {hero.highlight}
+            </span>
+          )}
         </Typography>
         <Typography
           variant="lead"
           className="text-xl md:text-2xl text-slate-600 max-w-2xl mx-auto mb-8 font-light"
         >
-          {subtitle}
+          {hero.subtitle}
         </Typography>
         <div className="flex items-center justify-center gap-2 text-sm text-slate-400 font-mono">
-          <span>{meta}</span>
+          <span>{hero.meta}</span>
         </div>
       </div>
     </section>

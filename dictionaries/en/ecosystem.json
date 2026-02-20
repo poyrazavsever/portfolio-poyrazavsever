@@ -1,0 +1,68 @@
+{
+  "hero": {
+    "title": "The Ecosystem Strategy",
+    "subtitle": "Building a comprehensive digital universe, not just a portfolio.",
+    "meta": "Feb 2026 • 7 min read • Ecosystem",
+    "badge": "Engineering Blog"
+  },
+  "vision": {
+    "title": "The Vision",
+    "description": "My goal is to build a complete digital ecosystem. It's not enough to just have a static portfolio. I wanted a structure that supports my freelance work, my learning journey, and my experimental side projects, all interconnected."
+  },
+  "hub": {
+    "title": "The Central Hub",
+    "description": "At the center of everything lies poyrazavsever.com. This is the gateway. It serves as the main showcase for my work, case studies, and professional identity. From here, users are routed to specialized subdomains based on their intent.",
+    "caption": "Fig 1. The Hub-and-Spoke Topology of the Ecosystem."
+  },
+  "subdomains": {
+    "title": "Specialized Subdomains",
+    "items": [
+      {
+        "name": "portal.poyrazavsever.com",
+        "description": "The client interface. Here, freelancers and sponsors can log in to track project progress, view invoices, and manage collaboration."
+      },
+      {
+        "name": "status.poyrazavsever.com",
+        "description": "Transparency is key. This dashboard monitors the health of all my services and APIs in real-time."
+      },
+      {
+        "name": "ui.poyrazavsever.com",
+        "description": "Poyraz UI Kit. A dedicated space for my custom design system. Every component used in my projects is documented here to ensure brand consistency."
+      },
+      {
+        "name": "js.poyrazavsever.com",
+        "description": "My learning garden. This is where I share my notes, lab experiments, and code snippets from my ongoing learning journey."
+      }
+    ]
+  },
+  "journeys": {
+    "title": "User Journeys",
+    "description": "Different users interact with the ecosystem in different ways. A client needs streamlined access to project data, while a developer might be interested in my open-source contributions or learning notes.",
+    "caption": "Fig 2. User Journey flows for Clients and Learners."
+  },
+  "plan": {
+    "title": "Detailed Structure Plan",
+    "description": "We are currently fleshing out the detailed navigation for the Hub. Sections like Showcase, Client Portal, Products, and Career & Life will organize the vast content of this ecosystem."
+  },
+  "diagrams": {
+    "ecosystem": {
+      "user": "User",
+      "hub": "The Hub",
+      "subdomains": "Subdomains (Specialized Services)"
+    },
+    "journeys": {
+      "user": "User",
+      "hub": "Hub (poyrazavsever.com)",
+      "portal": "Portal",
+      "labs": "Learning/Labs",
+      "step1": "Lands on Portfolio",
+      "step2": "Showcases Work & Skills",
+      "clientOpt": "opt Client / Sponsor",
+      "login": "Login to Portal",
+      "tracking": "Project Tracking & Invoices",
+      "learnerOpt": "opt Learner / Developer",
+      "access": "Access Notes & Labs (js.poyrazavsever.com)",
+      "examples": "Interactive Examples"
+    }
+  }
+}

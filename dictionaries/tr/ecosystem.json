@@ -1,0 +1,69 @@
+{
+  "hero": {
+    "title": "Ekosistem Stratejisi",
+    "highlight": "İnşa Ediyoruz",
+    "subtitle": "Sadece bir portfolyo değil, kapsamlı bir dijital evren inşa ediyoruz.",
+    "meta": "Şub 2026 • 7 dk okuma • Ekosistem",
+    "badge": "Mühendislik Blogu"
+  },
+  "vision": {
+    "title": "Vizyon",
+    "description": "Amacım eksiksiz bir dijital ekosistem kurmak. Sadece statik bir portfolyoya sahip olmak yeterli değil. Serbest çalışmalarımı, öğrenme yolculuğumu ve deneysel yan projelerimi destekleyen, hepsinin birbiriyle bağlantılı olduğu bir yapı istedim."
+  },
+  "hub": {
+    "title": "Merkezi Düğüm (Hub)",
+    "description": "Her şeyin merkezinde poyrazavsever.com yer alıyor. Burası giriş kapısıdır. Çalışmalarım, vaka incelemelerim ve profesyonel kimliğim için ana vitrin görevi görür. Buradan kullanıcılar, amaçlarına göre özel alt alan adlarına yönlendirilir.",
+    "caption": "Şekil 1. Ekosistemin Merkez-Çevre (Hub-and-Spoke) Topolojisi."
+  },
+  "subdomains": {
+    "title": "Özelleştirilmiş Alt Alan Adları",
+    "items": [
+      {
+        "name": "portal.poyrazavsever.com",
+        "description": "Müşteri arayüzü. Burada, serbest çalışanlar ve sponsorlar proje ilerlemesini takip etmek, faturaları görüntülemek ve iş birliğini yönetmek için giriş yapabilirler."
+      },
+      {
+        "name": "status.poyrazavsever.com",
+        "description": "Şeffaflık anahtardır. Bu panel, tüm hizmetlerimin ve API'lerimin durumunu gerçek zamanlı olarak izler."
+      },
+      {
+        "name": "ui.poyrazavsever.com",
+        "description": "Poyraz UI Kit. Özel tasarım sistemim için ayrılmış bir alan. Marka tutarlılığını sağlamak için projelerimde kullanılan her bileşen burada belgelenmiştir."
+      },
+      {
+        "name": "js.poyrazavsever.com",
+        "description": "Öğrenme bahçem. Burası, devam eden öğrenme yolculuğumdan notlarımı, laboratuvar deneylerimi ve kod parçacıklarımı paylaştığım yerdir."
+      }
+    ]
+  },
+  "journeys": {
+    "title": "Kullanıcı Yolculukları",
+    "description": "Farklı kullanıcılar ekosistemle farklı şekillerde etkileşime girer. Bir müşterinin proje verilerine hızlı erişime ihtiyacı varken, bir geliştirici açık kaynak katkılarımla veya öğrenme notlarımla ilgilenebilir.",
+    "caption": "Şekil 2. Müşteriler ve Öğrenenler İçin Kullanıcı Yolculuğu Akışları."
+  },
+  "plan": {
+    "title": "Detaylı Yapı Planı",
+    "description": "Şu anda Merkez (Hub) için detaylı navigasyonu şekillendiriyoruz. Vitrin, Müşteri Portalı, Ürünler ve Kariyer & Yaşam gibi bölümler, bu ekosistemin geniş içeriğini organize edecek."
+  },
+  "diagrams": {
+    "ecosystem": {
+      "user": "Kullanıcı",
+      "hub": "Merkez (Hub)",
+      "subdomains": "Alt Alan Adları (Özel Hizmetler)"
+    },
+    "journeys": {
+      "user": "Kullanıcı",
+      "hub": "Merkez (poyrazavsever.com)",
+      "portal": "Portal",
+      "labs": "Öğrenme/Laboratuvar",
+      "step1": "Portfolyoya Giriş Yapar",
+      "step2": "Çalışmaları ve Yetenekleri İnceler",
+      "clientOpt": "seçenek: Müşteri / Sponsor",
+      "login": "Portala Giriş",
+      "tracking": "Proje Takibi ve Faturalar",
+      "learnerOpt": "seçenek: Öğrenen / Geliştirici",
+      "access": "Notlara ve Laboratuvarlara Erişim (js.poyrazavsever.com)",
+      "examples": "İnteraktif Örnekler"
+    }
+  }
+}
