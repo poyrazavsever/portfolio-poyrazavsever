@@ -1,19 +1,17 @@
-"use client";
-
 import { PatternGrid, Badge, Typography } from "poyraz-ui/atoms";
 
 interface ProductHeroProps {
   title: string;
   headerHighlight: string;
   description: string;
-  badge?: string;
+  badge: string;
 }
 
 export function ProductHero({
   title,
   headerHighlight,
   description,
-  badge = "Products",
+  badge,
 }: ProductHeroProps) {
   return (
     <div className="relative w-full py-20 md:py-32 border-b-2 border-dashed border-slate-300">

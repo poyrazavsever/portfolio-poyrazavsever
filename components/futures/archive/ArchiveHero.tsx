@@ -4,15 +4,17 @@ import { motion } from "framer-motion";
 import { Badge, PatternGrid, Typography } from "poyraz-ui/atoms";
 
 interface ArchiveHeroProps {
-  title?: string;
-  headerHighlight?: string;
-  description?: string;
+  title: string;
+  headerHighlight: string;
+  description: string;
+  badge: string;
 }
 
 export function ArchiveHero({
-  title = "Project",
-  headerHighlight = "Archive",
-  description = "A comprehensive collection of all my works across design, development, and engineering.",
+  title,
+  headerHighlight,
+  description,
+  badge,
 }: ArchiveHeroProps) {
   return (
     <section className="relative overflow-hidden bg-white border-b-2 border-dashed border-slate-200">
@@ -23,7 +25,7 @@ export function ArchiveHero({
           size={40}
         />
       </div>
-      
+
       <div className="container mx-auto px-4 py-24 md:py-32 relative z-10">
         <div className="max-w-4xl mx-auto text-center space-y-6">
           <motion.div
@@ -35,7 +37,7 @@ export function ArchiveHero({
               variant="outline"
               className="mb-2 uppercase tracking-widest border-red-600/30 text-red-600 bg-red-50"
             >
-              Community First
+              {badge}
             </Badge>
             <Typography
               variant="h1"

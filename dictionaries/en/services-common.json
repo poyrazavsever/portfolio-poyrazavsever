@@ -1,0 +1,18 @@
+{
+  "hero": {
+    "title": "My",
+    "highlight": "Services",
+    "description": "Specialized engineering and design solutions tailored for scalable growth. Choose the service that fits your needs."
+  },
+  "search": {
+    "placeholder": "Search services (e.g., 'SaaS', 'Mobile', 'Design')...",
+    "noResults": "No services found.",
+    "tryAdjusting": "Try adjusting your search query."
+  },
+  "labels": {
+    "startingFrom": "Starting from",
+    "features": "Features",
+    "viewDetails": "View Details",
+    "contactMe": "Contact Me"
+  }
+}

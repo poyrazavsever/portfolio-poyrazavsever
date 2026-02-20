@@ -1,0 +1,28 @@
+{
+  "hero": {
+    "title": "Full-Stack Architecture",
+    "highlight": "Deep Dives",
+    "description": "Explore complex server-side logic, database schema designs, and microservices architecture. Real-world solutions for real-world problems.",
+    "badge": "Case Studies"
+  },
+  "projects": [
+    {
+      "id": "microservices-nestjs",
+      "title": "Microservices with NestJS",
+      "description": "A deep dive into building scalable microservices using NestJS, RabbitMQ, and Docker. Covers inter-service communication and fault tolerance.",
+      "category": "Architecture"
+    },
+    {
+      "id": "realtime-chat",
+      "title": "Real-time Chat Application",
+      "description": "Architecture of a high-concurrency chat application using Socket.io, Redis adapter, and React. Optimized for low latency.",
+      "category": "Real-time"
+    },
+    {
+      "id": "ecommerce-db-schema",
+      "title": "E-commerce Database Schema",
+      "description": "Designing a robust PostgreSQL schema for a multi-tenant e-commerce platform. Includes complex relationships, indexing strategies, and PL/pgSQL functions.",
+      "category": "Database"
+    }
+  ]
+}

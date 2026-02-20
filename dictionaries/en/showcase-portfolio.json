@@ -1,0 +1,102 @@
+{
+  "hero": {
+    "title": "Featured",
+    "highlight": "Works",
+    "description": "A selection of my featured works, open source contributions, and personal projects. Built with passion and precision.",
+    "badge": "Showcase"
+  },
+  "projects": [
+    {
+      "id": "poyraz-ui",
+      "title": "Poyraz UI Kit",
+      "description": "A brutalist, open-source React component library built with Tailwind CSS and Radix UI. Features square corners, dashed borders, and bold typography. Designed to provide a unique, raw aesthetic while maintaining high accessibility and usability standards.",
+      "category": "Design System",
+      "problem": "Modern UI libraries often look too similar, suffering from \"Bootstrap\" or \"Tailwind\" fatigue. Developers crave a design system that feels raw, authentic, and stands out without sacrificing the developer experience or accessibility.",
+      "solution": "Poyraz UI Kit bridges this gap by offering a brutalist aesthetic built on top of the headless primitives of Radix UI.",
+      "role": "Lead Designer & Main Maintainer. Responsible for the entire lifecycle from Figma design to React architecture and documentation.",
+      "features": [
+        "20+ Accessible Primitive Components",
+        "Fully typed with TypeScript",
+        "Dark Mode Support (Optional)",
+        "Customizable Tailwind Plugin",
+        "Comprehensive Documentation",
+        "Figma Design Kit Included"
+      ],
+      "designProcess": "The design process began with an exploration of neo-brutalist and retro-web aesthetics. 1. Moodboarding: Collected references from poster designs and architectural brutalism. 2. Tokens: Defined design tokens for spacing, typography, and high-contrast colors. 3. Component Design: Prototyped in Figma, iterating on border widths and shadow offsets. 4. Implementation: Translated Figma designs into Tailwind CSS utility classes.",
+      "technicalDetails": "The library is structured as a monorepo using Turborepo to manage the core package, documentation site, and example apps. Built with React 18 and Radix UI primitives. Uses tsup for bundling to ESM and CJS formats.",
+      "lessonsLearned": "Headless UI separation allows for rapid visual iteration without breaking functionality. Configuring bundlers for ESM/CJS compatibility across Next.js versions is a significant challenge."
+    },
+    {
+      "id": "client-portal",
+      "title": "Client Portal",
+      "description": "A comprehensive dashboard for freelancers and agencies to manage client projects, invoices, and deliverables. Integrated with Stripe and Supabase.",
+      "category": "SaaS Product"
+    },
+    {
+      "id": "system-status",
+      "title": "System Status",
+      "description": "Real-time status monitoring for all services in the ecosystem. Tracks uptime, response times, and incident history.",
+      "category": "Microservice"
+    },
+    {
+      "id": "js-journey",
+      "title": "The 52-Week Journey",
+      "description": "Documentation and learning roadmap for a 52-week full-stack development challenge. Includes notes, code snippets, and resources.",
+      "category": "Education"
+    },
+    {
+      "id": "ecommerce-starter",
+      "title": "Ecommerce Starter",
+      "description": "A high-performance headless e-commerce starter kit with Shopify integration, optimized for SEO and Core Web Vitals.",
+      "category": "Starter Kit"
+    },
+    {
+      "id": "saas-boilerplate",
+      "title": "SaaS Boilerplate",
+      "description": "A production-ready SaaS boilerplate with authentication, subscription management, and email transactional system.",
+      "category": "Starter Kit"
+    },
+    {
+      "id": "zenith-fitness",
+      "title": "Zenith Fitness",
+      "description": "A comprehensive fitness tracking mobile application built with React Native and Expo. Features workout logging, progress visualization, and social sharing.",
+      "category": "Mobile App",
+      "problem": "Fitness apps are often cluttered with ads or locked behind expensive subscriptions. Users needed a simple, privacy-focused way to track their progress.",
+      "solution": "Zenith Fitness offers a clean, distraction-free interface that focuses solely on your performance. Data is stored locally or synced via Supabase.",
+      "role": "Mobile Developer & UI Designer",
+      "features": [
+        "Offline-first Architecture",
+        "Biometric Authentication",
+        "Custom Chart Components",
+        "Dark Mode Support"
+      ]
+    },
+    {
+      "id": "roam-travel-guide",
+      "title": "Roam Travel Guide",
+      "description": "An AI-powered travel companion app that suggests itineraries based on your interests and budget. Built with Flutter and OpenAI API.",
+      "category": "Mobile App"
+    },
+    {
+      "id": "nexus-dashboard-kit",
+      "title": "Nexus Dashboard Kit",
+      "description": "A premium, high-fidelity SaaS dashboard UI kit for Figma. Includes 50+ screens, 200+ components, and a comprehensive style guide.",
+      "category": "Figma Template",
+      "problem": "Designing complex SaaS dashboards from scratch is time-consuming. Developers often struggle with consistent spacing and typography.",
+      "solution": "Nexus provides a solid foundation with a strict grid system and accessible color palette, saving hours of design time.",
+      "role": "UI/UX Designer",
+      "features": [
+        "50+ High-Fidelity Screens",
+        "Global Style Guide",
+        "Dark & Light Mode",
+        "Component Variants"
+      ]
+    },
+    {
+      "id": "orbit-ecommerce-kit",
+      "title": "Orbit E-commerce Kit",
+      "description": "A modern, mobile-first e-commerce UI kit optimized for conversion. Perfect for fashion and lifestyle brands.",
+      "category": "Figma Template"
+    }
+  ]
+}

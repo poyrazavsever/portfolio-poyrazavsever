@@ -1,10 +1,20 @@
-"use client";
-
 import { Typography } from "poyraz-ui/atoms";
 import { PatternGrid } from "poyraz-ui/atoms";
 import { Badge } from "poyraz-ui/atoms";
 
-export function PortfolioHero() {
+interface PortfolioHeroProps {
+  title: string;
+  highlight: string;
+  description: string;
+  badge: string;
+}
+
+export function PortfolioHero({
+  title,
+  highlight,
+  description,
+  badge,
+}: PortfolioHeroProps) {
   return (
     <div className="relative w-full py-20 md:py-32 border-b-2 border-dashed border-slate-300">
       {/* Background Pattern */}
@@ -22,22 +32,22 @@ export function PortfolioHero() {
             variant="outline"
             className="mb-2 uppercase tracking-widest border-red-600/30 text-red-600 bg-red-50"
           >
-            Showcase
+            {badge}
           </Badge>
 
           <Typography
             variant="h1"
             className="text-5xl md:text-7xl font-black tracking-tight"
           >
-            Featured <span className="text-red-600 font-secondary">Works</span>
+            {title}{" "}
+            <span className="text-red-600 font-secondary">{highlight}</span>
           </Typography>
 
           <Typography
             variant="lead"
             className="text-xl md:text-2xl text-slate-600 max-w-2xl"
           >
-            A selection of my featured works, open source contributions, and
-            personal projects. Built with passion and precision.
+            {description}
           </Typography>
 
           <div className="flex gap-4 pt-4">

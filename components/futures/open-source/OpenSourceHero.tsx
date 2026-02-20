@@ -1,5 +1,3 @@
-"use client";
-
 import { Typography } from "poyraz-ui/atoms";
 import { PatternGrid } from "poyraz-ui/atoms";
 import { Badge } from "poyraz-ui/atoms";
@@ -8,12 +6,14 @@ interface OpenSourceHeroProps {
   title: string;
   headerHighlight: string;
   description: string;
+  badge: string;
 }
 
 export function OpenSourceHero({
   title,
   headerHighlight,
   description,
+  badge,
 }: OpenSourceHeroProps) {
   return (
     <div className="relative w-full py-20 md:py-32 border-b-2 border-dashed border-slate-300 overflow-hidden bg-slate-50/50">
@@ -32,7 +32,7 @@ export function OpenSourceHero({
             variant="outline"
             className="mb-2 uppercase tracking-widest border-red-600/30 text-red-600 bg-red-50"
           >
-            Community First
+            {badge}
           </Badge>
 
           <Typography

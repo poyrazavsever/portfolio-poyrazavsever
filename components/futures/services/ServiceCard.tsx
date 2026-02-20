@@ -1,5 +1,3 @@
-"use client";
-
 import {
   Card,
   CardHeader,
@@ -12,6 +10,7 @@ import {
 } from "poyraz-ui/atoms";
 import { ArrowRight, Check } from "lucide-react";
 import { cn } from "poyraz-ui";
+import { Dictionary } from "@/types/dictionary";
 
 export interface Service {
   id: string;
@@ -25,9 +24,12 @@ export interface Service {
 
 interface ServiceCardProps {
   service: Service;
+  dictionary: Dictionary;
 }
 
-export function ServiceCard({ service }: ServiceCardProps) {
+export function ServiceCard({ service, dictionary }: ServiceCardProps) {
+  const { labels } = dictionary.servicesCommon;
+
   return (
     <Card
       variant="elevated"
@@ -91,7 +93,7 @@ export function ServiceCard({ service }: ServiceCardProps) {
           asChild
         >
           <a href={`/contact?service=${service.id}`}>
-            Get Started
+            {labels.viewDetails}
             <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
           </a>
         </Button>

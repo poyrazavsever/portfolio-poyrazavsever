@@ -1,0 +1,17 @@
+{
+  "labels": {
+    "loadMore": "Load More Repositories",
+    "viewDetails": "View Details",
+    "viewOnRegistry": "View on Registry",
+    "downloads": "downloads",
+    "noItems": "No items found.",
+    "adjustSearch": "Try adjusting your search query.",
+    "communityFirst": "Community First",
+    "visualCraft": "Visual Craft",
+    "caseStudies": "Case Studies",
+    "process": "The Process",
+    "publishedPackages": "Published Packages",
+    "featuredRepos": "Featured Repositories",
+    "allRepos": "All Repositories"
+  }
+}

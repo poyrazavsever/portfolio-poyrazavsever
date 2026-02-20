@@ -1,5 +1,3 @@
-"use client";
-
 import {
   Card,
   CardHeader,
@@ -13,12 +11,19 @@ import {
 import { Project } from "@/types/project";
 import Link from "next/link";
 import { ArrowRight, Layers, Layout, Palette } from "lucide-react";
+import { Dictionary } from "@/types/dictionary";
 
 interface FigmaTemplateCardProps {
   project: Project;
+  dictionary: Dictionary;
 }
 
-export function FigmaTemplateCard({ project }: FigmaTemplateCardProps) {
+export function FigmaTemplateCard({
+  project,
+  dictionary,
+}: FigmaTemplateCardProps) {
+  const { labels } = dictionary.productsCommon;
+
   return (
     <Link
       href={project.links?.demo || "#"}
@@ -42,7 +47,7 @@ export function FigmaTemplateCard({ project }: FigmaTemplateCardProps) {
                 variant="default"
                 className="font-mono text-xs uppercase tracking-wider shadow-sm"
               >
-                Premium
+                {labels.premium}
               </Badge>
             </div>
           )}
@@ -66,19 +71,19 @@ export function FigmaTemplateCard({ project }: FigmaTemplateCardProps) {
           <div className="grid grid-cols-2 gap-2 text-xs text-slate-600 font-medium">
             <div className="flex items-center gap-1.5 p-1.5 bg-slate-50 border border-dashed border-slate-200">
               <Layout className="w-3.5 h-3.5 text-red-600" />
-              <span>Auto Layout</span>
+              <span>{labels.autoLayout}</span>
             </div>
             <div className="flex items-center gap-1.5 p-1.5 bg-slate-50 border border-dashed border-slate-200">
               <Palette className="w-3.5 h-3.5 text-red-600" />
-              <span>Components</span>
+              <span>{labels.components}</span>
             </div>
             <div className="flex items-center gap-1.5 p-1.5 bg-slate-50 border border-dashed border-slate-200">
               <Layers className="w-3.5 h-3.5 text-red-600" />
-              <span>Variants</span>
+              <span>{labels.variants}</span>
             </div>
             <div className="flex items-center gap-1.5 p-1.5 bg-slate-50 border border-dashed border-slate-200">
               <span className="font-bold text-red-600">50+</span>
-              <span>Screens</span>
+              <span>{labels.screens}</span>
             </div>
           </div>
 
@@ -97,7 +102,7 @@ export function FigmaTemplateCard({ project }: FigmaTemplateCardProps) {
 
         <CardFooter className="pt-4 flex justify-end">
           <div className="text-sm font-medium flex items-center text-red-600 group-hover/card:translate-x-1 transition-transform">
-            Open in Figma <ArrowRight className="w-4 h-4 ml-1" />
+            {labels.openInFigma} <ArrowRight className="w-4 h-4 ml-1" />
           </div>
         </CardFooter>
       </Card>

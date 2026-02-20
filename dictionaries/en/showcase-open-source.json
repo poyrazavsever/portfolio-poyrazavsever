@@ -1,0 +1,40 @@
+{
+  "hero": {
+    "title": "Open Source",
+    "highlight": "Contributions",
+    "description": "Libraries, tools, and experiments shared with the community. Believing in the power of open collaboration.",
+    "badge": "Community First"
+  },
+  "packages": [
+    {
+      "name": "poyraz-ui",
+      "description": "A brutalist, accessibility-first React component library built on top of Radix UI and Tailwind CSS."
+    },
+    {
+      "name": "nestjs-easy-log",
+      "description": "Zero-config structured logging module for NestJS applications with support for multiple transports."
+    },
+    {
+      "name": "Poyraz.Extensions",
+      "description": "Common extension methods and utilities for .NET 8+ applications to boost productivity."
+    }
+  ],
+  "repositories": [
+    {
+      "name": "portfolio-obsidian",
+      "description": "The source code for this very portfolio. Built with Next.js 14, Tailwind CSS, and Framer Motion."
+    },
+    {
+      "name": "go-microservice-template",
+      "description": "A production-ready Go microservice template with gRPC, REST, Swagger, and Docker support."
+    },
+    {
+      "name": "react-native-brutal",
+      "description": "Experimental brutalist UI components for React Native. Sharp edges, bold typography."
+    },
+    {
+      "name": "rust-cli-tools",
+      "description": "A collection of CLI tools written in Rust for daily developer tasks and file manipulation."
+    }
+  ]
+}

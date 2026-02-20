@@ -1,0 +1,28 @@
+{
+  "hero": {
+    "title": "Tasarım",
+    "highlight": "Vitrin",
+    "description": "Kullanıcı arayüzü tasarımları, tasarım sistemleri ve marka kimliklerinden oluşan bir koleksiyon. Detaylara ve kullanılabilirliğe odaklanılarak hazırlandı.",
+    "badge": "Görsel Zanaat"
+  },
+  "projects": [
+    {
+      "id": "1",
+      "title": "Fintech Kontrol Paneli UI",
+      "description": "Modern bir fintech uygulaması için kapsamlı bir dashboard tasarımı. Veri görselleştirme, temiz tipografi ve karanlık mod arayüzüne odaklanır.",
+      "category": "UI Tasarımı"
+    },
+    {
+      "id": "2",
+      "title": "Seyahat Uygulaması Konsepti",
+      "description": "Bir seyahat rezervasyon platformu için mobil uygulama konsepti. Kart tabanlı bir düzen, sürükleyici görseller ve pürüzsüz mikro etkileşimler içerir.",
+      "category": "Mobil Uygulama"
+    },
+    {
+      "id": "3",
+      "title": "E-Ticaret Tasarım Sistemi",
+      "description": "Büyük ölçekli bir e-ticaret platformu için modüler bir tasarım sistemi. Atomik bileşenler, renk belirteçleri ve erişilebilirlik kılavuzları içerir.",
+      "category": "Tasarım Sistemi"
+    }
+  ]
+}

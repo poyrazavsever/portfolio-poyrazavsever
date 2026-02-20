@@ -1,0 +1,28 @@
+{
+  "hero": {
+    "title": "Design",
+    "highlight": "Showcase",
+    "description": "A collection of user interface designs, design systems, and brand identities. Crafted with attention to detail and usability.",
+    "badge": "Visual Craft"
+  },
+  "projects": [
+    {
+      "id": "1",
+      "title": "Fintech Dashboard UI",
+      "description": "A comprehensive dashboard design for a modern fintech application. Focuses on data visualization, clean typography, and a dark mode interface.",
+      "category": "UI Design"
+    },
+    {
+      "id": "2",
+      "title": "Travel App Concept",
+      "description": "Mobile application concept for a travel booking platform. Features a card-based layout, immersive imagery, and smooth micro-interactions.",
+      "category": "Mobile App"
+    },
+    {
+      "id": "3",
+      "title": "E-Commerce Design System",
+      "description": "A modular design system for a large-scale e-commerce platform. Includes atomic components, color tokens, and accessibility guidelines.",
+      "category": "Design System"
+    }
+  ]
+}

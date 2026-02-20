@@ -1,0 +1,9 @@
+{
+  "hero": {
+    "title": "Mobil",
+    "highlight": "Uygulamalar",
+    "description": "React Native ve yerel teknolojilerle oluşturulmuş yüksek performanslı iOS ve Android uygulamaları.",
+    "badge": "Uygulama Geliştirme"
+  },
+  "empty": "Şu anda mobil uygulama projesi bulunamadı."
+}

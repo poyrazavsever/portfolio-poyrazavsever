@@ -1,0 +1,78 @@
+{
+  "hero": {
+    "title": "Fiyatlandırma",
+    "highlight": "Modelleri",
+    "description": "Basit, şeffaf ve değer odaklı fiyatlandırma. Proje ölçeğinize ve hedeflerinize uygun bir model seçin.",
+    "badge": "Hizmet Bedelleri"
+  },
+  "models": {
+    "custom": {
+      "title": "Özel Geliştirme",
+      "description": "Büyüme için inşa edilmiş uçtan uca ölçeklenebilir web ve mobil uygulamalar.",
+      "scope": [
+        "UI/UX Tasarım ve Prototipleme",
+        "Önyüz (Next.js / React Native)",
+        "Arkayüz (NestJS / Supabase)",
+        "Sunucu Kurulumu (Coolify)",
+        "Kaynak Kod Teslimi"
+      ],
+      "priceInfo": "$X,XXX'den başlayan fiyatlarla"
+    },
+    "design": {
+      "title": "UI/UX Tasarım Sprintleri",
+      "description": "Kodlamadan önce fikrinizi yüksek kaliteli prototiplerle görselleştirin.",
+      "scope": [
+        "Kullanıcı Araştırması ve Tel Kafes",
+        "Yüksek Kaliteli UI Tasarımı",
+        "Etkileşimli Prototipler (Figma)",
+        "Tasarım Sistemi ve Stil Rehberi",
+        "2 Haftalık Sprint Teslimatı"
+      ],
+      "priceInfo": "Sabit Sprint Fiyatı"
+    },
+    "retainer": {
+      "title": "Bakım ve Destek",
+      "description": "Ürününüzün sağlıklı kalmasını ve büyümesini sağlamak için sürekli bakım.",
+      "scope": [
+        "Aylık Sunucu Bakımı",
+        "Veritabanı Yedekleme ve Güvenlik",
+        "Kritik Hata Düzeltmeleri",
+        "X Saatlik Yeni Geliştirme",
+        "Öncelikli Destek"
+      ],
+      "priceInfo": "Aylık Abonelik"
+    }
+  },
+  "terms": {
+    "title": "Hizmet Bedeli ve Ödeme Şartları",
+    "description": "Karşılıklı güveni ve proje ivmesini sağlamak için güvenli ve kilometre taşı tabanlı ödemeler.",
+    "phases": [
+      {
+        "percentage": "%40",
+        "title": "Depozito",
+        "description": "Resmi proje başlangıcı. Sözleşme ve Portal hesabı oluşturulduğunda ödenir. Çalışmalar bu güvenli ödemeden sonra başlar."
+      },
+      {
+        "percentage": "%40",
+        "title": "Proje Ortası Kilometre Taşı",
+        "description": "Ana çıktıların onaylanması üzerine ödenir (örneğin; Final Tasarım Onayı veya çalışan MVP)."
+      },
+      {
+        "percentage": "%20",
+        "title": "Canlıya Geçiş",
+        "description": "Yayına alımdan ve kaynak kod tesliminden önceki son bakiye. Tam mülkiyet devri."
+      }
+    ]
+  },
+  "portal": {
+    "title": "Portal Üzerinden Finansal Yönetim",
+    "description": "E-posta zincirlerinde kaybolan faturalara veda edin. Tüm finansal süreçler size özel Müşteri Portalı üzerinden merkezi olarak yönetilir.",
+    "features": [
+      "Dijital Faturalama ve PDF'ler",
+      "Kolay Ödeme Onayı",
+      "Şeffaf Sözleşme İmzalama"
+    ],
+    "invoiceLabel": "Fatura",
+    "paidLabel": "Ödendi"
+  }
+}

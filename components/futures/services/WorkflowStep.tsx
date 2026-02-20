@@ -1,5 +1,3 @@
-"use client";
-
 import { Card, CardContent, Typography } from "poyraz-ui/atoms";
 import { CheckCircle2, Circle } from "lucide-react";
 
@@ -9,6 +7,8 @@ interface WorkflowStepProps {
   description: string;
   action: string;
   result: string;
+  actionLabel?: string;
+  resultLabel?: string;
   isLast?: boolean;
 }
 
@@ -18,6 +18,8 @@ export function WorkflowStep({
   description,
   action,
   result,
+  actionLabel = "Action",
+  resultLabel = "Result",
   isLast,
 }: WorkflowStepProps) {
   return (
@@ -60,7 +62,7 @@ export function WorkflowStep({
                   variant="muted"
                   className="font-bold uppercase tracking-wider block mb-1 text-xs"
                 >
-                  Action
+                  {actionLabel}
                 </Typography>
                 <Typography variant="small" className="m-0 leading-relaxed">
                   {action}
@@ -80,7 +82,7 @@ export function WorkflowStep({
                   variant="muted"
                   className="font-bold uppercase tracking-wider block mb-1 text-red-400 text-xs"
                 >
-                  Result
+                  {resultLabel}
                 </Typography>
                 <Typography variant="small" className="m-0 leading-relaxed">
                   {result}

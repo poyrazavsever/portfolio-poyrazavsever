@@ -1,8 +1,18 @@
-"use client";
-
 import { PatternGrid, Typography, Badge } from "poyraz-ui/atoms";
 
-export function PricingHero() {
+interface PricingHeroProps {
+  title: string;
+  highlight: string;
+  description: string;
+  badge: string;
+}
+
+export function PricingHero({
+  title,
+  highlight,
+  description,
+  badge,
+}: PricingHeroProps) {
   return (
     <section className="relative py-20 md:py-28 overflow-hidden border-b border-dashed border-slate-200">
       <PatternGrid
@@ -16,21 +26,20 @@ export function PricingHero() {
           variant="outline"
           className="mb-6 mx-auto w-fit uppercase tracking-widest border-red-600/30 text-red-600 bg-red-50"
         >
-          Transparent Pricing
+          {badge}
         </Badge>
         <Typography
           variant="h1"
           className="text-5xl md:text-7xl font-black tracking-tight mb-8"
         >
-          Value-Focused{" "}
-          <span className="text-red-600 font-secondary">Models</span>
+          {title}{" "}
+          <span className="text-red-600 font-secondary">{highlight}</span>
         </Typography>
         <Typography
           variant="lead"
           className="text-xl md:text-2xl text-slate-600 max-w-3xl mx-auto leading-relaxed"
         >
-          I prioritize project-based outcome over hourly billing. Here are the
-          structured engagement models designed for clarity and value.
+          {description}
         </Typography>
       </div>
     </section>

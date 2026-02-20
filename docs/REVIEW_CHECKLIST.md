@@ -126,31 +126,31 @@ Review of feature-specific components.
 
 **Pages:**
 
-- [ ] `app/products/figma-templates/page.tsx`
+- [x] `app/products/figma-templates/page.tsx`
 - [x] `app/products/mobile-apps/page.tsx`
 - [x] `app/products/saas/page.tsx`
 
 **Components:** (`components/futures/products`)
 
-- [ ] `FigmaTemplateCard.tsx`
-- [ ] `ProductHero.tsx`
+- [x] `FigmaTemplateCard.tsx`
+- [x] `ProductHero.tsx`
 
 ### 🛠️ Services
 
 **Pages:**
 
-- [ ] `app/services/page.tsx`
-- [ ] `app/services/pricing/page.tsx`
-- [ ] `app/services/workflow/page.tsx`
+- [x] `app/services/page.tsx`
+- [x] `app/services/pricing/page.tsx`
+- [x] `app/services/workflow/page.tsx`
 
 **Components:** (`components/futures/services`)
 
-- [ ] `PricingHero.tsx`
-- [ ] `PricingModelCard.tsx`
-- [ ] `ServiceCard.tsx`
-- [ ] `ServicesHero.tsx`
-- [ ] `WorkflowHero.tsx`
-- [ ] `WorkflowStep.tsx`
+- [x] `PricingHero.tsx`
+- [x] `PricingModelCard.tsx`
+- [x] `ServiceCard.tsx`
+- [x] `ServicesHero.tsx`
+- [x] `WorkflowHero.tsx`
+- [x] `WorkflowStep.tsx`
 
 ### 🎨 Showcase
 
@@ -159,16 +159,16 @@ Review of feature-specific components.
 - [x] `app/showcase/archive/page.tsx`
 - [x] `app/showcase/design-cases/page.tsx`
 - [x] `app/showcase/fullstack-cases/page.tsx`
-- [ ] `app/showcase/open-source/page.tsx`
+- [x] `app/showcase/open-source/page.tsx`
 - [x] `app/showcase/portfolio/page.tsx`
 
 **Components:** (`components/futures/...`)
 
-- [ ] `archive/ArchiveHero.tsx`
-- [ ] `design-cases/DesignHero.tsx`
-- [ ] `fullstack-cases/FullstackHero.tsx`
-- [ ] `open-source/AllReposList.tsx`
-- [ ] `open-source/OpenSourceHero.tsx`
-- [ ] `open-source/PackageCard.tsx`
-- [ ] `open-source/RepoCard.tsx`
-- [ ] `portfolio/PortfolioHero.tsx`
+- [x] `archive/ArchiveHero.tsx`
+- [x] `design-cases/DesignHero.tsx`
+- [x] `fullstack-cases/FullstackHero.tsx`
+- [x] `open-source/AllReposList.tsx`
+- [x] `open-source/OpenSourceHero.tsx`
+- [x] `open-source/PackageCard.tsx`
+- [x] `open-source/RepoCard.tsx`
+- [x] `portfolio/PortfolioHero.tsx`

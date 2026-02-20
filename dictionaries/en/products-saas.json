@@ -1,0 +1,9 @@
+{
+  "hero": {
+    "title": "SaaS",
+    "highlight": "Projects",
+    "description": "Scalable Software-as-a-Service solutions, administration panels, and complex web platforms.",
+    "badge": "SaaS & Platforms"
+  },
+  "empty": "No SaaS projects found at the moment."
+}

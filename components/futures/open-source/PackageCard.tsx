@@ -15,10 +15,12 @@ import { cn } from "poyraz-ui";
 
 interface PackageCardProps {
   item: PackageItem;
+  dictionary: any;
 }
 
-export function PackageCard({ item }: PackageCardProps) {
+export function PackageCard({ item, dictionary }: PackageCardProps) {
   const [copied, setCopied] = useState(false);
+  const labels = dictionary.showcaseCommon.labels;
 
   const handleCopy = () => {
     navigator.clipboard.writeText(item.installCommand);
@@ -85,7 +87,9 @@ export function PackageCard({ item }: PackageCardProps) {
         <div className="w-full flex justify-between items-center text-xs text-slate-500">
           <div className="flex items-center gap-1">
             <Download className="w-3.5 h-3.5" />
-            <span>{item.downloads} downloads</span>
+            <span>
+              {item.downloads} {labels.downloads}
+            </span>
           </div>
           <a
             href={item.url}
@@ -93,7 +97,7 @@ export function PackageCard({ item }: PackageCardProps) {
             rel="noreferrer"
             className="hover:text-blue-600 hover:underline transition-colors"
           >
-            View on Registry
+            {labels.viewOnRegistry}
           </a>
         </div>
       </CardFooter>

@@ -1,0 +1,40 @@
+{
+  "hero": {
+    "title": "Açık Kaynak",
+    "highlight": "Katkılar",
+    "description": "Toplulukla paylaşılan kütüphaneler, araçlar ve deneyler. Açık işbirliğinin gücüne inanıyorum.",
+    "badge": "Önce Topluluk"
+  },
+  "packages": [
+    {
+      "name": "poyraz-ui",
+      "description": "Radix UI ve Tailwind CSS üzerine inşa edilmiş brutalist, erişilebilirlik öncelikli bir React bileşen kütüphanesi."
+    },
+    {
+      "name": "nestjs-easy-log",
+      "description": "Birden fazla taşıma desteği ile NestJS uygulamaları için yapılandırma gerektirmeyen yapılandırılmış günlükleme modülü."
+    },
+    {
+      "name": "Poyraz.Extensions",
+      "description": "Verimliliği artırmak için .NET 8+ uygulamaları için ortak genişletme yöntemleri ve yardımcı programlar."
+    }
+  ],
+  "repositories": [
+    {
+      "name": "portfolio-obsidian",
+      "description": "Bu portfolyonun kaynak kodu. Next.js 14, Tailwind CSS ve Framer Motion ile oluşturulmuştur."
+    },
+    {
+      "name": "go-microservice-template",
+      "description": "gRPC, REST, Swagger ve Docker desteğine sahip üretime hazır bir Go mikro hizmet şablonu."
+    },
+    {
+      "name": "react-native-brutal",
+      "description": "React Native için deneysel brutalist UI bileşenleri. Keskin kenarlar, cesur tipografi."
+    },
+    {
+      "name": "rust-cli-tools",
+      "description": "Günlük geliştirici görevleri ve dosya işlemleri için Rust dilinde yazılmış CLI araçları koleksiyonu."
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "hero": {
+    "title": "İş",
+    "highlight": "Akışı",
+    "description": "Basit bir fikirden ölçeklenebilir bir üretim ortamına giden yüksek hassasiyetli bir yol. Şeffaflık her adımın temelidir.",
+    "badge": "Süreç"
+  },
+  "steps": [
+    {
+      "number": "01",
+      "title": "Keşif ve Uyum",
+      "description": "Her büyük proje doğru iletişimle başlar. Vizyonunuzun benim teknik uzmanlığımla uyumluluğunu burada test ediyoruz.",
+      "action": "Form aracılığıyla proje detaylarını gönderirsiniz veya 15-30 dakikalık bir Keşif Araması planlarsınız.",
+      "result": "Proje hedefleri, bütçe aralığı ve teknoloji yığını (Web, Mobil, Mimari) üzerinde anlaşırız."
+    },
+    {
+      "number": "02",
+      "title": "Teklif ve Sözleşme",
+      "description": "Kapsam belirlenir ve profesyonel çerçeve çizilir. Sürpriz maliyetlere veya uzayan sürelere yer yok.",
+      "action": "Zaman çizelgesi, teknoloji yığını ve ödeme programını içeren detaylı bir teklif alırsınız.",
+      "result": "Teklif onaylanır, depozito ödenir ve geliştirme takvimi kilitlenir."
+    },
+    {
+      "number": "03",
+      "title": "Biniş (Onboarding)",
+      "description": "Standart freelancer deneyiminden ayrıldığımız yer burasıdır. Projenin komuta merkezine adım atarsınız.",
+      "action": "Anlaşmadan hemen sonra portal.poyrazavsever.com adresinde sizin için bir müşteri hesabı oluşturulur.",
+      "result": "Tüm sözleşmeleriniz, faturalarınız, toplantı notlarınız ve proje ilerlemesi tek bir güvenli panelde erişilebilir hale gelir."
+    },
+    {
+      "number": "04",
+      "title": "Gereksinimler ve UI/UX",
+      "description": "Kod yazmadan önce, ne inşa ettiğimize dair kusursuz bir plan çizeriz.",
+      "action": "Marka varlıklarını (logo, metin, renkler) ve detaylı bir özeti Portal üzerinden gönderirsiniz.",
+      "result": "Yüksek kaliteli Figma tasarımları ve prototipleri hazırlanır. Kodlama başlamadan önce bitmiş görünümü görür ve onaylarsınız."
+    },
+    {
+      "number": "05",
+      "title": "Geliştirme, QA ve Lansman",
+      "description": "Tasarımın hayat bulduğu ve projenin yayına alındığı son aşama.",
+      "action": "Geliştirme sprintleri başlar. Portal üzerinden şeffaf bir şekilde takip edersiniz. Test sunucularında QA testleri yapıyoruz.",
+      "result": "Proje prodüksiyona alınır. Kaynak kod ve dokümantasyon teslim edilir. İsteğe bağlı olarak Bakım/Destek aşamasına geçilir."
+    }
+  ],
+  "cta": {
+    "title": "Bu yolculuğa başlamaya hazır mısınız?",
+    "description": "Nasıl çalıştığımızı öğrendiğinize göre, gelin projenizi konuşalım.",
+    "buttons": {
+      "start": "Projeyi Başlat",
+      "services": "Hizmetleri Görüntüle"
+    }
+  }
+}

@@ -7,6 +7,7 @@ import { i18n } from "@/i18n-config";
 
 export default async function SaaSProjectsPage() {
   const dictionary = await getDictionary(i18n.defaultLocale);
+  const { productsSaas: saas } = dictionary;
 
   // Aggregate and filter projects relevant to SaaS
   const saasProjects: Project[] = projects.filter((project) => {
@@ -25,10 +26,10 @@ export default async function SaaSProjectsPage() {
   return (
     <div className="min-h-screen pb-24">
       <ProductHero
-        title="SaaS"
-        headerHighlight="Projects"
-        description="Scalable Software-as-a-Service solutions, administration panels, and complex web platforms."
-        badge="SaaS & Platforms"
+        title={saas.hero.title}
+        headerHighlight={saas.hero.highlight}
+        description={saas.hero.description}
+        badge={saas.hero.badge}
       />
 
       <div className="container mx-auto px-4 max-w-6xl mt-16 md:mt-24">
@@ -36,7 +37,7 @@ export default async function SaaSProjectsPage() {
           <ProjectGrid projects={saasProjects} dictionary={dictionary} />
         ) : (
           <div className="text-center py-20 text-slate-500">
-            <p>No SaaS projects found at the moment.</p>
+            <p>{saas.empty}</p>
           </div>
         )}
       </div>

@@ -461,4 +461,162 @@ export interface Dictionary {
       };
     };
   };
+  productsCommon: {
+    badges: {
+      products: string;
+      designResources: string;
+      appDevelopment: string;
+      saasPlatforms: string;
+    };
+    labels: {
+      premium: string;
+      openInFigma: string;
+      autoLayout: string;
+      components: string;
+      variants: string;
+      screens: string;
+    };
+    emptyState: {
+      default: string;
+    };
+  };
+  productsFigma: {
+    hero: {
+      title: string;
+      highlight: string;
+      description: string;
+      badge: string;
+    };
+    empty: string;
+    cta: {
+      title: string;
+      description: string;
+      button: string;
+    };
+  };
+  productsMobile: {
+    hero: {
+      title: string;
+      highlight: string;
+      description: string;
+      badge: string;
+    };
+    empty: string;
+  };
+  productsSaas: {
+    hero: {
+      title: string;
+      highlight: string;
+      description: string;
+      badge: string;
+    };
+    empty: string;
+  };
+  servicesCommon: {
+    hero: {
+      title: string;
+      highlight: string;
+      description: string;
+    };
+    search: {
+      placeholder: string;
+      noResults: string;
+      tryAdjusting: string;
+    };
+    labels: {
+      startingFrom: string;
+      features: string;
+      viewDetails: string;
+      contactMe: string;
+    };
+  };
+  servicesMain: {
+    services: Array<{
+      id: string;
+      title: string;
+      category: string;
+      description: string;
+      features: string[];
+      startingPrice: string;
+    }>;
+    categories: {
+      web: string;
+      systems: string;
+      mobile: string;
+      design: string;
+    };
+  };
+  servicesPricing: {
+    hero: {
+      title: string;
+      highlight: string;
+      description: string;
+      badge: string;
+    };
+    models: {
+      custom: {
+        title: string;
+        description: string;
+        scope: string[];
+        priceInfo: string;
+      };
+      design: {
+        title: string;
+        description: string;
+        scope: string[];
+        priceInfo: string;
+      };
+      retainer: {
+        title: string;
+        description: string;
+        scope: string[];
+        priceInfo: string;
+      };
+    };
+    terms: {
+      title: string;
+      description: string;
+      phases: Array<{
+        percentage: string;
+        title: string;
+        description: string;
+      }>;
+    };
+    portal: {
+      title: string;
+      description: string;
+      features: string[];
+      invoiceLabel: string;
+      paidLabel: string;
+    };
+  };
+  servicesWorkflow: {
+    hero: {
+      title: string;
+      highlight: string;
+      description: string;
+      badge: string;
+    };
+    steps: Array<{
+      number: string;
+      title: string;
+      description: string;
+      action: string;
+      result: string;
+    }>;
+    cta: {
+      title: string;
+      description: string;
+      buttons: {
+        start: string;
+        services: string;
+      };
+    };
+  };
+  showcaseCommon: any;
+  showcasePortfolio: any;
+  showcaseOpenSource: any;
+  showcaseArchive: any;
+  showcaseDesign: any;
+  showcaseFullstack: any;
 }

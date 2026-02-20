@@ -1,0 +1,17 @@
+{
+  "labels": {
+    "loadMore": "Daha Fazla Depo Yükle",
+    "viewDetails": "Detayları Gör",
+    "viewOnRegistry": "Paketleme Sisteminde Gör",
+    "downloads": "indirme",
+    "noItems": "Öğe bulunamadı.",
+    "adjustSearch": "Arama sorgunuzu ayarlamayı deneyin.",
+    "communityFirst": "Önce Topluluk",
+    "visualCraft": "Görsel Zanaat",
+    "caseStudies": "Vaka Analizleri",
+    "process": "Süreç",
+    "publishedPackages": "Yayınlanan Paketler",
+    "featuredRepos": "Öne Çıkan Depolar",
+    "allRepos": "Tüm Depolar"
+  }
+}

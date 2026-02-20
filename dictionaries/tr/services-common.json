@@ -1,0 +1,18 @@
+{
+  "hero": {
+    "title": "Benim",
+    "highlight": "Hizmetlerim",
+    "description": "Ölçeklenebilir büyüme için özelleştirilmiş mühendislik ve tasarım çözümleri. İhtiyaçlarınıza uygun hizmeti seçin."
+  },
+  "search": {
+    "placeholder": "Hizmetlerde ara (örneğin; 'SaaS', 'Mobil', 'Tasarım')...",
+    "noResults": "Hizmet bulunamadı.",
+    "tryAdjusting": "Arama sorgunuzu değiştirmeyi deneyin."
+  },
+  "labels": {
+    "startingFrom": "Başlangıç",
+    "features": "Özellikler",
+    "viewDetails": "Detayları Gör",
+    "contactMe": "Benimle İletişime Geçin"
+  }
+}

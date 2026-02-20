@@ -1,0 +1,28 @@
+{
+  "hero": {
+    "title": "Full-Stack Mimari",
+    "highlight": "Derin Dalışlar",
+    "description": "Karmaşık sunucu tarafı mantığını, veritabanı şema tasarımlarını ve mikro hizmet mimarisini keşfedin. Gerçek dünya sorunları için gerçek dünya çözümleri.",
+    "badge": "Vaka Analizleri"
+  },
+  "projects": [
+    {
+      "id": "microservices-nestjs",
+      "title": "NestJS ile Mikro Hizmetler",
+      "description": "NestJS, RabbitMQ ve Docker kullanarak ölçeklenebilir mikro hizmetler oluşturmaya derinlemesine bir bakış. Hizmetler arası iletişimi ve hata toleransını kapsar.",
+      "category": "Mimari"
+    },
+    {
+      "id": "realtime-chat",
+      "title": "Gerçek Zamanlı Sohbet Uygulaması",
+      "description": "Socket.io, Redis adaptörü ve React kullanarak yüksek eşzamanlılıklı bir sohbet uygulamasının mimarisi. Düşük gecikme süresi için optimize edilmiştir.",
+      "category": "Gerçek Zamanlı"
+    },
+    {
+      "id": "ecommerce-db-schema",
+      "title": "E-Ticaret Veritabanı Şeması",
+      "description": "Çok kiracılı bir e-ticaret platformu için sağlam bir PostgreSQL şeması tasarlamak. Karmaşık ilişkileri, indeksleme stratejilerini ve PL/pgSQL fonksiyonlarını içerir.",
+      "category": "Veritabanı"
+    }
+  ]
+}

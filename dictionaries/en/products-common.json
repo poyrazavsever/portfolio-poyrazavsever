@@ -1,0 +1,19 @@
+{
+  "badges": {
+    "products": "Products",
+    "designResources": "Design Resources",
+    "appDevelopment": "App Development",
+    "saasPlatforms": "SaaS & Platforms"
+  },
+  "labels": {
+    "premium": "Premium",
+    "openInFigma": "Open in Figma",
+    "autoLayout": "Auto Layout",
+    "components": "Components",
+    "variants": "Variants",
+    "screens": "Screens"
+  },
+  "emptyState": {
+    "default": "No projects found at the moment."
+  }
+}

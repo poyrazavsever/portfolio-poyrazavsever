@@ -1,0 +1,102 @@
+{
+  "hero": {
+    "title": "Öne Çıkan",
+    "highlight": "Çalışmalar",
+    "description": "Öne çıkan çalışmalarım, açık kaynak katkılarım ve kişisel projelerimden oluşan bir seçki. Tutku ve hassasiyetle inşa edildi.",
+    "badge": "Vitrin"
+  },
+  "projects": [
+    {
+      "id": "poyraz-ui",
+      "title": "Poyraz UI Kit",
+      "description": "Tailwind CSS ve Radix UI ile oluşturulmuş brutalist, açık kaynaklı bir React bileşen kütüphanesi. Kare köşeler, kesikli kenarlıklar ve cesur tipografi içerir. Yüksek erişilebilirlik ve kullanılabilirlik standartlarını korurken benzersiz, ham bir estetik sunar.",
+      "category": "Tasarım Sistemi",
+      "problem": "Modern UI kütüphaneleri genellikle birbirine çok benziyor ve \"Bootstrap\" veya \"Tailwind\" yorgunluğundan muzdarip. Geliştiriciler, geliştirici deneyiminden veya erişilebilirlikten ödün vermeden ham, özgün ve öne çıkan bir tasarım sistemi arzuluyor.",
+      "solution": "Poyraz UI Kit, Radix UI'ın headless temelleri üzerine inşa edilmiş brutalist bir estetik sunarak bu açığı kapatır.",
+      "role": "Baş Tasarımcı ve Ana Bakımcı. Figma tasarımından React mimarisine ve dokümantasyona kadar tüm yaşam döngüsünden sorumlu.",
+      "features": [
+        "20+ Erişilebilir Temel Bileşen",
+        "TypeScript ile Tam Tip Güvenliği",
+        "Karanlık Mod Desteği (Opsiyonel)",
+        "Özelleştirilebilir Tailwind Eklentisi",
+        "Kapsamlı Dokümantasyon",
+        "Figma Tasarım Seti Dahil"
+      ],
+      "designProcess": "Tasarım süreci, neo-brutalist ve retro-web estetiğinin keşfiyle başladı. 1. Moodboarding: Poster tasarımlarından ve mimari brutalizmden referanslar toplandı. 2. Belirteçler (Tokens): Boşluk, tipografi ve yüksek kontrastlı renkler için tasarım belirteçleri tanımlandı. 3. Bileşen Tasarımı: Figma'da prototiplendi, kenarlık genişlikleri ve gölge ofsetleri üzerinde denemeler yapıldı. 4. Uygulama: Figma tasarımları Tailwind CSS yardımcı sınıflarına dönüştürüldü.",
+      "technicalDetails": "Kütüphane, çekirdek paketi, dokümantasyon sitesini ve örnek uygulamaları yönetmek için Turborepo kullanılarak bir monorepo olarak yapılandırılmıştır. React 18 ve Radix UI primitifleri ile inşa edilmiştir. ESM ve CJS formatlarında paketleme için tsup kullanır.",
+      "lessonsLearned": "Headless UI ayrımı, işlevselliği bozmadan hızlı görsel yinelemeye olanak tanır. Tüm Next.js sürümleriyle uyumlu ESM/CJS paketleme yapılandırması önemli bir zorluktur."
+    },
+    {
+      "id": "client-portal",
+      "title": "Müşteri Portalı",
+      "description": "Serbest çalışanlar ve ajansların müşteri projelerini, faturalarını ve çıktılarını yönetmeleri için kapsamlı bir kontrol paneli. Stripe ve Supabase ile entegre.",
+      "category": "SaaS Ürünü"
+    },
+    {
+      "id": "system-status",
+      "title": "Sistem Durumu",
+      "description": "Ekosistemdeki tüm hizmetler için gerçek zamanlı durum izleme. Çalışma süresini, yanıt sürelerini ve olay geçmişini izler.",
+      "category": "Mikro Hizmet"
+    },
+    {
+      "id": "js-journey",
+      "title": "52 Haftalık Yolculuk",
+      "description": "52 haftalık full-stack geliştirme mücadelesi için dokümantasyon ve öğrenme yol haritası. Notlar, kod parçacıkları ve kaynaklar içerir.",
+      "category": "Eğitim"
+    },
+    {
+      "id": "ecommerce-starter",
+      "title": "E-Ticaret Başlangıç Kiti",
+      "description": "Shopify entegrasyonlu, SEO ve Core Web Vitals için optimize edilmiş, yüksek performanslı bir headless e-ticaret başlangıç kiti.",
+      "category": "Başlangıç Kiti"
+    },
+    {
+      "id": "saas-boilerplate",
+      "title": "SaaS Şablonu",
+      "description": "Kimlik doğrulama, abonelik yönetimi ve e-posta işlem sistemi ile üretime hazır bir SaaS şablonu.",
+      "category": "Başlangıç Kiti"
+    },
+    {
+      "id": "zenith-fitness",
+      "title": "Zenith Fitness",
+      "description": "React Native ve Expo ile oluşturulmuş kapsamlı bir fitness takip mobil uygulaması. Antrenman kaydı, ilerleme görselleştirme ve sosyal paylaşım sunar.",
+      "category": "Mobil Uygulama",
+      "problem": "Fitness uygulamaları genellikle reklamlarla dolu veya pahalı aboneliklerin arkasına gizlenmiş durumda. Kullanıcıların ilerlemelerini takip etmek için basit, gizlilik odaklı bir yola ihtiyacı vardı.",
+      "solution": "Zenith Fitness, yalnızca performansınıza odaklanan temiz, dikkat dağıtmayan bir arayüz sunar. Veriler yerel olarak saklanır veya Supabase aracılığıyla senkronize edilir.",
+      "role": "Mobil Geliştirici ve UI Tasarımcısı",
+      "features": [
+        "Çevrimdışı Öncelikli Mimari",
+        "Biyometrik Kimlik Doğrulama",
+        "Özel Grafik Bileşenleri",
+        "Karanlık Mod Desteği"
+      ]
+    },
+    {
+      "id": "roam-travel-guide",
+      "title": "Roam Seyahat Rehberi",
+      "description": "İlgi alanlarınıza ve bütçenize göre güzergahlar öneren yapay zeka destekli bir seyahat arkadaşı uygulaması. Flutter ve OpenAI API ile oluşturuldu.",
+      "category": "Mobil Uygulama"
+    },
+    {
+      "id": "nexus-dashboard-kit",
+      "title": "Nexus Kontrol Paneli Seti",
+      "description": "Figma için premium, yüksek kaliteli bir SaaS kontrol paneli UI seti. 50'den fazla ekran, 200'den fazla bileşen ve kapsamlı bir stil rehberi içerir.",
+      "category": "Figma Şablonu",
+      "problem": "Sıfırdan karmaşık SaaS kontrol panelleri tasarlamak zaman alıcıdır. Geliştiriciler genellikle tutarlı boşluk ve tipografi konusunda zorluk çekerler.",
+      "solution": "Nexus, katı bir ızgara sistemi ve erişilebilir renk paleti ile sağlam bir temel sağlayarak tasarım süresinden saatlerce tasarruf sağlar.",
+      "role": "UI/UX Tasarımcısı",
+      "features": [
+        "50+ Yüksek Kaliteli Ekran",
+        "Global Stil Rehberi",
+        "Karanlık ve Aydınlık Mod",
+        "Bileşen Varyantları"
+      ]
+    },
+    {
+      "id": "orbit-ecommerce-kit",
+      "title": "Orbit E-Ticaret Seti",
+      "description": "Dönüşüm için optimize edilmiş modern, mobil öncelikli bir e-ticaret UI seti. Moda ve yaşam tarzı markaları için mükemmel.",
+      "category": "Figma Şablonu"
+    }
+  ]
+}

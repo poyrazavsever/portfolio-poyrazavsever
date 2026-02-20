@@ -1,0 +1,110 @@
+{
+  "services": [
+    {
+      "id": "static-landing-page",
+      "title": "Statik Açılış Sayfası",
+      "category": "Web Geliştirme",
+      "description": "Next.js veya Astro ile oluşturulmuş yüksek performanslı, SEO uyumlu açılış sayfaları. Pazarlama kampanyaları ve portfolyolar için idealdir.",
+      "features": [
+        "100/100 Lighthouse Skoru",
+        "Duyarlı Tasarım",
+        "Temel SEO Kurulumu"
+      ],
+      "startingPrice": "18.000 TL"
+    },
+    {
+      "id": "dynamic-landing-page",
+      "title": "Dinamik Açılış Sayfası (CMS)",
+      "category": "Web Geliştirme",
+      "description": "Entegre Headless CMS (Sanity/Strapi) ile düzenlenebilir açılış sayfaları. Kod dokunmadan içeriğinizi yönetin.",
+      "features": ["CMS Entegrasyonu", "Blog Sistemi", "Özel Bileşenler"],
+      "startingPrice": "28.000 TL"
+    },
+    {
+      "id": "saas-mvp",
+      "title": "SaaS MVP Geliştirme",
+      "category": "Web Geliştirme",
+      "description": "Girişim fikrinizi hızla hayata geçirin. Kimlik doğrulama, veritabanı ve ödeme sistemi entegrasyonu ile tam kapsamlı MVP.",
+      "features": [
+        "Kullanıcı Doğrulama",
+        "Abonelik Ödemeleri",
+        "Veritabanı Tasarımı"
+      ],
+      "startingPrice": "85.000 TL"
+    },
+    {
+      "id": "corporate-portal",
+      "title": "Kurumsal Web Portalı",
+      "category": "Web Geliştirme",
+      "description": "Karmaşık rol tabanlı erişim kontrolü ve dahili araç entegrasyonları ile ölçeklenebilir kurumsal portallar.",
+      "features": [
+        "Rol Tabanlı Erişim",
+        "SSO Entegrasyonu",
+        "Denetim Kayıtları"
+      ],
+      "startingPrice": "140.000 TL"
+    },
+    {
+      "id": "ecommerce-store",
+      "title": "Headless E-Ticaret",
+      "category": "Web Geliştirme",
+      "description": "Shopify veya Medusa tabanlı özel mağazalar. Tam tasarım özgürlüğü ile ışık hızında bir alışveriş deneyimi.",
+      "features": ["Özel Sepet/Ödeme", "Ürün Filtreleme", "Pazarlama için CMS"],
+      "startingPrice": "100.000 TL"
+    },
+    {
+      "id": "crm-system",
+      "title": "Özel CRM ve ERP Çözümü",
+      "category": "Sistemler",
+      "description": "İş operasyonlarınızı, müşterilerinizi ve dahili iş akışlarınızı verimli bir şekilde yönetmek için özel yazılımlar.",
+      "features": [
+        "Müşteri Yönetimi",
+        "İş Akışı Otomasyonu",
+        "Analiz Panelleri"
+      ],
+      "startingPrice": "170.000 TL"
+    },
+    {
+      "id": "api-development",
+      "title": "Backend API Geliştirme",
+      "category": "Sistemler",
+      "description": "NestJS veya Go ile oluşturulmuş sağlam REST veya GraphQL API'leri. Ölçeklenebilir mikro hizmet mimarisi.",
+      "features": ["Swagger Dokümantasyonu", "Hız Sınırlama", "Birim Testi"],
+      "startingPrice": "50.000 TL"
+    },
+    {
+      "id": "mobile-app",
+      "title": "Platformlar Arası Mobil Uygulama",
+      "category": "Mobil",
+      "description": "React Native ve Expo kullanarak iOS ve Android için yerel benzeri mobil uygulamalar.",
+      "features": ["Anlık Bildirimler", "Çevrimdışı Mod", "Market Gönderimi"],
+      "startingPrice": "120.000 TL"
+    },
+    {
+      "id": "design-system",
+      "title": "UI/UX Tasarım Sistemi",
+      "category": "Tasarım",
+      "description": "Tüm ürünlerde marka tutarlılığını sağlamak için Figma'da kapsamlı tasarım sistemleri ve UI kitleri.",
+      "features": ["Figma Değişkenleri", "Bileşen Kitaplığı", "Stil Rehberi"],
+      "startingPrice": "40.000 TL"
+    },
+    {
+      "id": "ui-audit",
+      "title": "UI/UX Denetimi ve Modernizasyon",
+      "category": "Tasarım",
+      "description": "Mevcut ürününüzün kullanılabilirlik ve görsel tasarımının uzman analizinden sonra uygulanabilir iyileştirmeler.",
+      "features": [
+        "Kullanılabilirlik Raporu",
+        "Erişilebilirlik Kontrolü",
+        "Görsel Yenileme"
+      ],
+      "startingPrice": "28.000 TL"
+    }
+  ],
+  "categories": {
+    "web": "Web Geliştirme",
+    "systems": "Sistemler",
+    "mobile": "Mobil",
+    "design": "Tasarım"
+  }
+}

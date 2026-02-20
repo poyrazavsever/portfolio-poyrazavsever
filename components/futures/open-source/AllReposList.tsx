@@ -7,12 +7,14 @@ import { Button, Separator, Typography } from "poyraz-ui/atoms";
 
 interface AllReposListProps {
   repos: RepoItem[];
+  dictionary: any;
 }
 
 const ITEMS_PER_PAGE = 6;
 
-export function AllReposList({ repos }: AllReposListProps) {
+export function AllReposList({ repos, dictionary }: AllReposListProps) {
   const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
+  const labels = dictionary.showcaseCommon.labels;
 
   const visibleRepos = repos.slice(0, visibleCount);
   const hasMore = visibleCount < repos.length;
@@ -24,7 +26,9 @@ export function AllReposList({ repos }: AllReposListProps) {
   return (
     <section>
       <div className="mb-8 flex items-center gap-4">
-        <Typography variant="h2">All Repositories ({repos.length})</Typography>
+        <Typography variant="h2">
+          {labels.allRepos} ({repos.length})
+        </Typography>
         <Separator className="flex-1 bg-slate-200" />
       </div>
 
@@ -42,7 +46,7 @@ export function AllReposList({ repos }: AllReposListProps) {
             className="min-w-[200px]"
             onClick={handleLoadMore}
           >
-            Load More Repositories
+            {labels.loadMore}
           </Button>
         </div>
       )}

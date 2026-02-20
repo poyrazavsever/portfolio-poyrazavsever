@@ -1,0 +1,78 @@
+{
+  "hero": {
+    "title": "Pricing",
+    "highlight": "Models",
+    "description": "Simple, transparent, and value-based pricing. Choose a model that aligns with your project scale and goals.",
+    "badge": "Pricing & Terms"
+  },
+  "models": {
+    "custom": {
+      "title": "Custom Development",
+      "description": "End-to-end scalable web & mobile apps built for growth.",
+      "scope": [
+        "UI/UX Design & Prototyping",
+        "Frontend (Next.js / React Native)",
+        "Backend (NestJS / Supabase)",
+        "Server Setup (Coolify)",
+        "Source Code Delivery"
+      ],
+      "priceInfo": "Starts from $X,XXX"
+    },
+    "design": {
+      "title": "UI/UX Design Sprints",
+      "description": "Visualize your idea with high-fidelity prototypes before coding.",
+      "scope": [
+        "User Research & Wireframing",
+        "High-Fidelity UI Design",
+        "Interactive Prototypes (Figma)",
+        "Design System & Style Guide",
+        "2-Week Sprint Delivery"
+      ],
+      "priceInfo": "Fixed Sprint Price"
+    },
+    "retainer": {
+      "title": "Retainers & Support",
+      "description": "Ongoing maintenance to keep your product healthy and growing.",
+      "scope": [
+        "Monthly Server Maintenance",
+        "Database Backups & Security",
+        "Critical Bug Fixes",
+        "X Hours of New Development",
+        "Priority Support"
+      ],
+      "priceInfo": "Monthly Subscription"
+    }
+  },
+  "terms": {
+    "title": "Payment Schedule & Terms",
+    "description": "Secure and milestone-based payments to ensure mutual trust and project momentum.",
+    "phases": [
+      {
+        "percentage": "40%",
+        "title": "Deposit",
+        "description": "Official project kickoff. Paid upon agreement and Portal account creation. Work begins after this secure payment."
+      },
+      {
+        "percentage": "40%",
+        "title": "Mid-Project Milestone",
+        "description": "Paid upon approval of key deliverables (e.g., Final Design Approval or Functional MVP on staging)."
+      },
+      {
+        "percentage": "20%",
+        "title": "Launch",
+        "description": "Final balance before Production deployment and Source Code handover. Complete ownership transfer."
+      }
+    ]
+  },
+  "portal": {
+    "title": "Financial Management via Portal",
+    "description": "Say goodbye to lost invoices in email threads. All financial aspects are managed centrally in your dedicated Client Portal.",
+    "features": [
+      "Digital Invoicing & PDFs",
+      "Easy Payment Confirmation",
+      "Transparent Contract Signing"
+    ],
+    "invoiceLabel": "Invoice",
+    "paidLabel": "Paid"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "badges": {
+    "products": "Ürünler",
+    "designResources": "Tasarım Kaynakları",
+    "appDevelopment": "Uygulama Geliştirme",
+    "saasPlatforms": "SaaS & Platformlar"
+  },
+  "labels": {
+    "premium": "Premium",
+    "openInFigma": "Figma'da Aç",
+    "autoLayout": "Otomatik Düzen",
+    "components": "Bileşenler",
+    "variants": "Varyantlar",
+    "screens": "Ekran"
+  },
+  "emptyState": {
+    "default": "Şu anda uygun proje bulunamadı."
+  }
+}

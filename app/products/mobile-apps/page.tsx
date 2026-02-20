@@ -7,6 +7,7 @@ import { i18n } from "@/i18n-config";
 
 export default async function MobileAppsPage() {
   const dictionary = await getDictionary(i18n.defaultLocale);
+  const { productsMobile: mobile } = dictionary;
 
   // Aggregate and filter projects relevant to Mobile Apps
   const mobileProjects: Project[] = projects.filter((project) => {
@@ -23,10 +24,10 @@ export default async function MobileAppsPage() {
   return (
     <div className="min-h-screen pb-24">
       <ProductHero
-        title="Mobile"
-        headerHighlight="Applications"
-        description="High-performance iOS and Android applications built with React Native and native technologies."
-        badge="App Development"
+        title={mobile.hero.title}
+        headerHighlight={mobile.hero.highlight}
+        description={mobile.hero.description}
+        badge={mobile.hero.badge}
       />
 
       <div className="container mx-auto px-4 max-w-6xl mt-16 md:mt-24">
@@ -34,7 +35,7 @@ export default async function MobileAppsPage() {
           <ProjectGrid projects={mobileProjects} dictionary={dictionary} />
         ) : (
           <div className="text-center py-20 text-slate-500">
-            <p>No mobile application projects found at the moment.</p>
+            <p>{mobile.empty}</p>
           </div>
         )}
       </div>
