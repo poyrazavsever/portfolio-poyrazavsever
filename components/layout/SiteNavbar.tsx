@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import {
   Navbar,
@@ -15,7 +15,6 @@ import {
   NavbarMobileToggle,
   NavbarMobileMenu,
   NavbarMobileLink,
-  NavbarMobileGroup,
   NavbarMobileActions,
 } from "poyraz-ui/organisms";
 import {
@@ -113,6 +112,66 @@ function TopBarClock({ city, basedIn }: { city: string; basedIn: string }) {
   );
 }
 
+function MobileAccordionGroup({
+  id,
+  label,
+  openGroup,
+  setOpenGroup,
+  children,
+}: {
+  id: string;
+  label: string;
+  openGroup: string | null;
+  setOpenGroup: (id: string | null) => void;
+  children: React.ReactNode;
+}) {
+  const isOpen = openGroup === id;
+  const contentRef = useRef<HTMLDivElement>(null);
+  const [height, setHeight] = useState(0);
+
+  useEffect(() => {
+    if (isOpen && contentRef.current) {
+      setHeight(contentRef.current.scrollHeight);
+    } else {
+      setHeight(0);
+    }
+  }, [isOpen]);
+
+  return (
+    <div className="mb-1 border-b border-dashed border-slate-200 last:border-b-0">
+      <button
+        type="button"
+        onClick={() => setOpenGroup(isOpen ? null : id)}
+        className="flex items-center justify-between w-full px-3 py-3 text-[10px] font-bold uppercase tracking-[0.15em] text-slate-400 hover:text-slate-600 transition-colors cursor-pointer"
+      >
+        {label}
+        <svg
+          className={`w-3.5 h-3.5 transition-transform duration-200 ${
+            isOpen ? "rotate-180" : ""
+          }`}
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth={2.5}
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M19 9l-7 7-7-7"
+          />
+        </svg>
+      </button>
+      <div
+        style={{ maxHeight: height }}
+        className="overflow-hidden transition-[max-height] duration-200 ease-in-out"
+      >
+        <div ref={contentRef} className="flex flex-col gap-0.5 pb-2">
+          {children}
+        </div>
+      </div>
+    </div>
+  );
+}
 export function SiteNavbar({
   dictionary,
   currentLocale,
@@ -122,6 +181,7 @@ export function SiteNavbar({
 }) {
   const t = dictionary.layout.navbar;
   const router = useRouter();
+  const [openGroup, setOpenGroup] = useState<string | null>(null);
 
   const switchLanguage = () => {
     const newLocale = currentLocale === "tr" ? "en" : "tr";
@@ -579,7 +639,12 @@ export function SiteNavbar({
           </Drawer>
         </div>
 
-        <NavbarMobileGroup label={t.menu.showcase.label}>
+        <MobileAccordionGroup
+          id="showcase"
+          label={t.menu.showcase.label}
+          openGroup={openGroup}
+          setOpenGroup={setOpenGroup}
+        >
           <NavbarMobileLink href="/showcase/saas">
             {t.menu.showcase.items.saas.title}
           </NavbarMobileLink>
@@ -601,9 +666,14 @@ export function SiteNavbar({
           <NavbarMobileLink href="/showcase/archive">
             {t.menu.showcase.items.archive.title}
           </NavbarMobileLink>
-        </NavbarMobileGroup>
+        </MobileAccordionGroup>
 
-        <NavbarMobileGroup label={t.menu.products.label}>
+        <MobileAccordionGroup
+          id="products"
+          label={t.menu.products.label}
+          openGroup={openGroup}
+          setOpenGroup={setOpenGroup}
+        >
           <NavbarMobileLink href="https://portal.poyrazavsever.com">
             {t.menu.products.items.workspace.title}
           </NavbarMobileLink>
@@ -622,9 +692,14 @@ export function SiteNavbar({
           <NavbarMobileLink href="/products/apis">
             {t.menu.products.items.apis.title}
           </NavbarMobileLink>
-        </NavbarMobileGroup>
+        </MobileAccordionGroup>
 
-        <NavbarMobileGroup label={t.menu.clientPortal.label}>
+        <MobileAccordionGroup
+          id="clientPortal"
+          label={t.menu.clientPortal.label}
+          openGroup={openGroup}
+          setOpenGroup={setOpenGroup}
+        >
           <NavbarMobileLink href="https://portal.poyrazavsever.com/login">
             {t.menu.clientPortal.items.login.title}
           </NavbarMobileLink>
@@ -643,9 +718,14 @@ export function SiteNavbar({
           <NavbarMobileLink href="/client/proposal">
             {t.menu.clientPortal.items.proposal.title}
           </NavbarMobileLink>
-        </NavbarMobileGroup>
+        </MobileAccordionGroup>
 
-        <NavbarMobileGroup label={t.menu.media.label}>
+        <MobileAccordionGroup
+          id="media"
+          label={t.menu.media.label}
+          openGroup={openGroup}
+          setOpenGroup={setOpenGroup}
+        >
           <NavbarMobileLink href="/media/masa-basi">
             {t.menu.media.items.masabasi.title}
           </NavbarMobileLink>
@@ -667,9 +747,14 @@ export function SiteNavbar({
           <NavbarMobileLink href="/media/social">
             {t.menu.media.items.social.title}
           </NavbarMobileLink>
-        </NavbarMobileGroup>
+        </MobileAccordionGroup>
 
-        <NavbarMobileGroup label={t.menu.academy.label}>
+        <MobileAccordionGroup
+          id="academy"
+          label={t.menu.academy.label}
+          openGroup={openGroup}
+          setOpenGroup={setOpenGroup}
+        >
           <NavbarMobileLink href="https://js.poyrazavsever.com">
             {t.menu.academy.items.journey.title}
           </NavbarMobileLink>
@@ -679,18 +764,28 @@ export function SiteNavbar({
           <NavbarMobileLink href="/academy/reading-list">
             {t.menu.academy.items.reading.title}
           </NavbarMobileLink>
-        </NavbarMobileGroup>
+        </MobileAccordionGroup>
 
-        <NavbarMobileGroup label={t.menu.ecosystem.label}>
+        <MobileAccordionGroup
+          id="ecosystem"
+          label={t.menu.ecosystem.label}
+          openGroup={openGroup}
+          setOpenGroup={setOpenGroup}
+        >
           <NavbarMobileLink href="https://status.poyrazavsever.com">
             {t.menu.ecosystem.items.status.title}
           </NavbarMobileLink>
           <NavbarMobileLink href="/ecosystem/architecture">
             {t.menu.ecosystem.items.architecture.title}
           </NavbarMobileLink>
-        </NavbarMobileGroup>
+        </MobileAccordionGroup>
 
-        <NavbarMobileGroup label={t.menu.about.label}>
+        <MobileAccordionGroup
+          id="about"
+          label={t.menu.about.label}
+          openGroup={openGroup}
+          setOpenGroup={setOpenGroup}
+        >
           <NavbarMobileLink href="/about">
             {t.menu.about.items.story.title}
           </NavbarMobileLink>
@@ -706,7 +801,7 @@ export function SiteNavbar({
           <NavbarMobileLink href="/contact">
             {t.menu.about.items.contact.title}
           </NavbarMobileLink>
-        </NavbarMobileGroup>
+        </MobileAccordionGroup>
 
         <NavbarMobileActions>
           <Button variant="outline" className="w-full" asChild>
