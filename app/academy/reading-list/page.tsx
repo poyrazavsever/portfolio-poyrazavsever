@@ -1,12 +1,12 @@
-import { cookies } from "next/headers";
+﻿import { cookies } from "next/headers";
 import { AcademyHero } from "@/components/futures/academy/AcademyHero";
 import { ReadingList } from "@/components/futures/academy/ReadingList";
 import { getDictionary } from "@/get-dictionary";
-import { i18n } from "@/i18n-config";
+import { i18n, type Locale } from "@/i18n-config";
 
 export default async function ReadingListPage() {
   const cookieStore = await cookies();
-  const locale = (cookieStore.get("NEXT_LOCALE")?.value || i18n.defaultLocale) as any;
+  const locale = (cookieStore.get("NEXT_LOCALE")?.value || i18n.defaultLocale) as Locale;
   const dictionary = await getDictionary(locale);
 
   return (
@@ -19,3 +19,4 @@ export default async function ReadingListPage() {
     </div>
   );
 }
+

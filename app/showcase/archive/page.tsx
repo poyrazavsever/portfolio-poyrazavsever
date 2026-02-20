@@ -1,4 +1,5 @@
-import { cookies } from "next/headers";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+﻿import { cookies } from "next/headers";
 import { ArchiveHero } from "@/components/futures/archive/ArchiveHero";
 import { ProjectGrid } from "@/components/shared/ProjectGrid";
 import { projects as portfolioProjects } from "@/data/portfolio-data";
@@ -6,11 +7,11 @@ import { fullstackCases } from "@/data/fullstack-data";
 import { designProjects } from "@/data/design-data";
 import { Project } from "@/types/project";
 import { getDictionary } from "@/get-dictionary";
-import { i18n } from "@/i18n-config";
+import { i18n, type Locale } from "@/i18n-config";
 
 export default async function ArchivePage() {
   const cookieStore = await cookies();
-  const locale = (cookieStore.get("NEXT_LOCALE")?.value || i18n.defaultLocale) as any;
+  const locale = (cookieStore.get("NEXT_LOCALE")?.value || i18n.defaultLocale) as Locale;
   const dictionary = await getDictionary(locale);
   const { showcaseArchive: archive } = dictionary;
 
@@ -70,3 +71,4 @@ export default async function ArchivePage() {
     </div>
   );
 }
+

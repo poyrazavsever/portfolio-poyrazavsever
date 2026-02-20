@@ -1,14 +1,14 @@
-import { cookies } from "next/headers";
+﻿import { cookies } from "next/headers";
 import { ProductHero } from "@/components/futures/products/ProductHero";
 import { ProjectGrid } from "@/components/shared/ProjectGrid";
 import { projects } from "@/data/portfolio-data";
 import { Project } from "@/types/project";
 import { getDictionary } from "@/get-dictionary";
-import { i18n } from "@/i18n-config";
+import { i18n, type Locale } from "@/i18n-config";
 
 export default async function MobileAppsPage() {
   const cookieStore = await cookies();
-  const locale = (cookieStore.get("NEXT_LOCALE")?.value || i18n.defaultLocale) as any;
+  const locale = (cookieStore.get("NEXT_LOCALE")?.value || i18n.defaultLocale) as Locale;
   const dictionary = await getDictionary(locale);
   const { productsMobile: mobile } = dictionary;
 
@@ -45,3 +45,4 @@ export default async function MobileAppsPage() {
     </div>
   );
 }
+

@@ -1,15 +1,16 @@
-import { cookies } from "next/headers";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+﻿import { cookies } from "next/headers";
 import { MediaHero } from "@/components/futures/media/MediaHero";
 import { UpcomingStreamCard } from "@/components/futures/media/UpcomingStreamCard";
 import { Button, Typography } from "poyraz-ui/atoms";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { getDictionary } from "@/get-dictionary";
-import { i18n } from "@/i18n-config";
+import { i18n, type Locale } from "@/i18n-config";
 
 export default async function MasaBasiPage() {
   const cookieStore = await cookies();
-  const locale = (cookieStore.get("NEXT_LOCALE")?.value || i18n.defaultLocale) as any;
+  const locale = (cookieStore.get("NEXT_LOCALE")?.value || i18n.defaultLocale) as Locale;
   const dictionary = await getDictionary(locale);
   const t = dictionary.mediaMasaBasi;
   const common = dictionary.mediaCommon.labels;
@@ -25,7 +26,7 @@ export default async function MasaBasiPage() {
       {/* Upcoming / Featured Stream */}
       <div className="container mx-auto px-4 max-w-6xl -mt-12 relative z-10 mb-20">
         <UpcomingStreamCard
-          guestName="Burak Selim Şenyurt"
+          guestName="Burak Selim Åenyurt"
           guestRole="Software Architect / MVP"
           topic={t.upcoming.topic}
           date={t.upcoming.date}
@@ -61,3 +62,4 @@ export default async function MasaBasiPage() {
     </div>
   );
 }
+

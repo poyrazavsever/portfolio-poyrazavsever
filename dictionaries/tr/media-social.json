@@ -1,8 +1,25 @@
 {
   "hero": {
-    "title": "Sosyal",
-    "highlight": "Ağ",
-    "description": "Tüm sosyal platformlarda benimle iletişimde kalın.",
+    "title": "Sosyal Ağ",
+    "subtitle": "Tüm sosyal platformlarda benimle iletişimde kalın.",
     "badge": "Sosyal"
-  }
+  },
+  "instagram_title": "Instagram'da Ben",
+  "instagram_description": "Günlük hayat, sahne arkası ve anlık düşüncelerim.",
+  "instagram": [
+    { "id": "1", "likes": "1.2B", "comments": "45" },
+    { "id": "2", "likes": "3.4B", "comments": "120" },
+    { "id": "3", "likes": "890", "comments": "23" },
+    { "id": "4", "likes": "2.1B", "comments": "78" }
+  ],
+  "youtube_title": "YouTube'da Ben",
+  "youtube_description": "Teknoloji eğitimleri, incelemeler ve detaylı analizler.",
+  "youtube": [
+    { "id": "1", "title": "Bu Videodan Sonra API Kafanda Oturacak" },
+    {
+      "id": "2",
+      "title": "Yazılıma Başlarken Yapılan Büyük Hatalar ve Çözümleri"
+    },
+    { "id": "3", "title": "Yazılım Öldü Mü? Bir Junior'ın Yüzleşmesi" }
+  ]
 }

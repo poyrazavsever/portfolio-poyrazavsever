@@ -1,4 +1,5 @@
-import { cookies } from "next/headers";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+﻿import { cookies } from "next/headers";
 import { OpenSourceHero } from "@/components/futures/open-source/OpenSourceHero";
 import { PackageCard } from "@/components/futures/open-source/PackageCard";
 import { RepoCard } from "@/components/futures/open-source/RepoCard";
@@ -9,13 +10,13 @@ import { fetchNPMPackages } from "@/lib/npm";
 import { fetchGitHubRepos } from "@/lib/github";
 
 import { getDictionary } from "@/get-dictionary";
-import { i18n } from "@/i18n-config";
+import { i18n, type Locale } from "@/i18n-config";
 
 export const revalidate = 3600; // Revalidate every hour
 
 export default async function OpenSourcePage() {
   const cookieStore = await cookies();
-  const locale = (cookieStore.get("NEXT_LOCALE")?.value || i18n.defaultLocale) as any;
+  const locale = (cookieStore.get("NEXT_LOCALE")?.value || i18n.defaultLocale) as Locale;
   const dictionary = await getDictionary(locale);
   const { showcaseOpenSource: os, showcaseCommon: common } = dictionary;
 
@@ -103,3 +104,4 @@ export default async function OpenSourcePage() {
     </div>
   );
 }
+

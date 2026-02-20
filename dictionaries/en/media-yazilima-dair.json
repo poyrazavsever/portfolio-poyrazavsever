@@ -1,9 +1,27 @@
 {
   "hero": {
-    "title": "Yazılıma",
-    "highlight": "Dair",
-    "description": "Deep dives, tutorials, and discussions about software engineering.",
+    "title": "Yazılıma Dair",
+    "subtitle": "Deep dives, tutorials, and discussions about software engineering.",
     "badge": "Tech Blog"
   },
-  "empty": "No posts yet."
+  "episodes": [
+    {
+      "id": "1",
+      "title": "Clean Architecture Explained",
+      "season": 1,
+      "episode": 1,
+      "duration": "45 min",
+      "date": "10 Oct 2023",
+      "description": "A comprehensive guide to clean architecture..."
+    },
+    {
+      "id": "2",
+      "title": "Understanding Design Patterns",
+      "season": 1,
+      "episode": 2,
+      "duration": "55 min",
+      "date": "17 Oct 2023",
+      "description": "Common design patterns in software..."
+    }
+  ]
 }

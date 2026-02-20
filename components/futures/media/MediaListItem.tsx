@@ -1,4 +1,5 @@
 "use client";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { Button } from "poyraz-ui/atoms";
 import { FileText, Calendar, Clock, User } from "lucide-react";

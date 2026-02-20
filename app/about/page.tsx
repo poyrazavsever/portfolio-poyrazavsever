@@ -1,15 +1,15 @@
-import { cookies } from "next/headers";
+﻿import { cookies } from "next/headers";
 import { AboutHero } from "@/components/futures/about/AboutHero";
 import { AboutJourney } from "@/components/futures/about/AboutJourney";
 import { AboutValues } from "@/components/futures/about/AboutValues";
 import { AboutEngineeringDesign } from "@/components/futures/about/AboutEngineeringDesign";
 import { AboutInterests } from "@/components/futures/about/AboutInterests";
 import { getDictionary } from "@/get-dictionary";
-import { i18n } from "@/i18n-config";
+import { i18n, type Locale } from "@/i18n-config";
 
 export default async function AboutPage() {
   const cookieStore = await cookies();
-  const locale = (cookieStore.get("NEXT_LOCALE")?.value || i18n.defaultLocale) as any;
+  const locale = (cookieStore.get("NEXT_LOCALE")?.value || i18n.defaultLocale) as Locale;
   const dictionary = await getDictionary(locale);
 
   return (
@@ -24,3 +24,4 @@ export default async function AboutPage() {
     </div>
   );
 }
+

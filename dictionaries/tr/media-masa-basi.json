@@ -1,9 +1,19 @@
 {
   "hero": {
-    "title": "Masa",
-    "highlight": "Başı",
-    "description": "Tartışmalar ve podcast bölümleri.",
+    "title": "Masa Başı",
+    "subtitle": "Muhabbetler, tartışmalar ve detaylı podcast bölümleri.",
     "badge": "Podcast"
   },
-  "empty": "Henüz bölüm yok."
+  "upcoming": {
+    "topic": "Yazılım Mühendisliğinde Yapay Zekanın Geleceği",
+    "date": "24 Kas 2023",
+    "time": "20:00 TSİ"
+  },
+  "intro": {
+    "title": "Masa Başı'na Hoşgeldiniz",
+    "description": "Sektörden değerli isimlerle beraber yazılım dünyasını masaya yatırıyoruz."
+  },
+  "archive": {
+    "viewPast": "Geçmiş Bölümleri İncele"
+  }
 }

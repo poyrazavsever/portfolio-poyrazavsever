@@ -1,4 +1,14 @@
 {
-  "readTime": "min read",
-  "publishedOn": "Published on"
+  "labels": {
+    "all": "All Categories",
+    "searchMakalelerde": "Search articles...",
+    "noContentsFound": "No articles found matching your criteria.",
+    "clearFilters": "Clear Filters",
+    "backToBlog": "Back to Blog",
+    "didYouLikePost": "Did you like this post?",
+    "follow": "Follow",
+    "subscribe": "Subscribe",
+    "readTime": "min read",
+    "publishedOn": "Published on"
+  }
 }

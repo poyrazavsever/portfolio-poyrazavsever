@@ -1,4 +1,14 @@
 {
-  "readTime": "dk okuma",
-  "publishedOn": "Yayınlanma tarihi"
+  "labels": {
+    "all": "Tüm Kategoriler",
+    "searchMakalelerde": "Makalelerde ara...",
+    "noContentsFound": "Kriterlerinize uygun içerik bulunamadı.",
+    "clearFilters": "Filtreleri Temizle",
+    "backToBlog": "Bloga Dön",
+    "didYouLikePost": "Bu yazıyı beğendin mi?",
+    "follow": "Takip Et",
+    "subscribe": "Abone Ol",
+    "readTime": "dk okuma",
+    "publishedOn": "Yayınlanma tarihi"
+  }
 }

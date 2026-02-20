@@ -1,9 +1,28 @@
 {
   "hero": {
-    "title": "Benim",
-    "highlight": "Blogum",
-    "description": "Teknoloji ve yaşam üzerine kişisel düşünceler.",
+    "title": "Blogum",
+    "subtitle": "Kişisel düşünceler, mühendislik notları ve teknoloji ile yaşama dair her şey.",
     "badge": "Blog"
   },
-  "empty": "Henüz blog yazısı yok."
+  "categories": {
+    "tech": "Teknoloji",
+    "design": "Tasarım",
+    "engineering": "Mühendislik"
+  },
+  "posts": [
+    {
+      "slug": "clean-code-principles",
+      "title": "React'te Temiz Kod Prensipleri",
+      "category": "Teknoloji",
+      "excerpt": "Sürdürülebilir ve ölçeklenebilir React uygulamaları yazmaya derinlemesine bir bakış...",
+      "content": "Temiz kod, uygulamanın sürdürülebilirliği açısından çok önemlidir..."
+    },
+    {
+      "slug": "figma-to-react",
+      "title": "Köprü Kurmak: Figma'dan React'e",
+      "category": "Tasarım",
+      "excerpt": "Tasarım özelliklerini kusursuz bileşenlere etkili bir şekilde dönüştürme rehberi...",
+      "content": "Tasarım teslim süreçleri başarı için esastır..."
+    }
+  ]
 }

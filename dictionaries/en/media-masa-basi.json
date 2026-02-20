@@ -1,9 +1,19 @@
 {
   "hero": {
-    "title": "Masa",
-    "highlight": "Başı",
-    "description": "Discussions and podcast episodes.",
+    "title": "Masa Başı",
+    "subtitle": "Discussions and podcast episodes.",
     "badge": "Podcast"
   },
-  "empty": "No episodes yet."
+  "upcoming": {
+    "topic": "The Future of AI in Software Engineering",
+    "date": "24 Nov 2023",
+    "time": "20:00 TRT"
+  },
+  "intro": {
+    "title": "Welcome to Masa Başı",
+    "description": "Join us as we explore deep topics in engineering."
+  },
+  "archive": {
+    "viewPast": "View Past Episodes"
+  }
 }

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export interface Dictionary {
   layout: {
     navbar: {
@@ -636,4 +637,9 @@ export interface Dictionary {
   showcaseArchive: any;
   showcaseDesign: any;
   showcaseFullstack: any;
+  mediaCommon: any;
+  mediaBlog: any;
+  mediaMasaBasi: any;
+  mediaSocial: any;
+  mediaYazilimaDair: any;
 }

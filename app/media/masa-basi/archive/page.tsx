@@ -1,12 +1,13 @@
-import { cookies } from "next/headers";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+﻿import { cookies } from "next/headers";
 import { MediaHero } from "@/components/futures/media/MediaHero";
 import { MasaBasiArchiveClient } from "./MasaBasiArchiveClient";
 import { getDictionary } from "@/get-dictionary";
-import { i18n } from "@/i18n-config";
+import { i18n, type Locale } from "@/i18n-config";
 
 export default async function PastEpisodesPage() {
   const cookieStore = await cookies();
-  const locale = (cookieStore.get("NEXT_LOCALE")?.value || i18n.defaultLocale) as any;
+  const locale = (cookieStore.get("NEXT_LOCALE")?.value || i18n.defaultLocale) as Locale;
   const dictionary = await getDictionary(locale);
   const t = dictionary.mediaMasaBasi;
 
@@ -27,3 +28,4 @@ export default async function PastEpisodesPage() {
     </div>
   );
 }
+

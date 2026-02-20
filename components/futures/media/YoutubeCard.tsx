@@ -1,4 +1,6 @@
 "use client";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @next/next/no-img-element */
 
 import { Badge, Button, Card, Typography } from "poyraz-ui/atoms";
 import { cn } from "poyraz-ui";

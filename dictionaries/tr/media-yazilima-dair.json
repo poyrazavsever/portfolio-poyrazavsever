@@ -1,9 +1,27 @@
 {
   "hero": {
-    "title": "Yazılıma",
-    "highlight": "Dair",
-    "description": "Yazılım mühendisliği üzerine derinlemesine incelemeler.",
+    "title": "Yazılıma Dair",
+    "subtitle": "Yazılım mühendisliği üzerine derinlemesine incelemeler.",
     "badge": "Teknoloji Blogu"
   },
-  "empty": "Henüz yazı yok."
+  "episodes": [
+    {
+      "id": "1",
+      "title": "Temiz Mimariyi Anlamak",
+      "season": 1,
+      "episode": 1,
+      "duration": "45 dk",
+      "date": "10 Eki 2023",
+      "description": "Temiz mimari hakkında kapsamlı bir rehber..."
+    },
+    {
+      "id": "2",
+      "title": "Tasarım Desenlerini Anlamak",
+      "season": 1,
+      "episode": 2,
+      "duration": "55 dk",
+      "date": "17 Eki 2023",
+      "description": "Yazılımda yaygın tasarım desenleri..."
+    }
+  ]
 }

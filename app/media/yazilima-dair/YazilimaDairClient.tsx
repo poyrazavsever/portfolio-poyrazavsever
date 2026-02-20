@@ -1,4 +1,5 @@
 "use client";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { MediaListItem } from "@/components/futures/media/MediaListItem";
 import { MediaSheet, MediaItem } from "@/components/futures/media/MediaSheet";

@@ -5,9 +5,11 @@ import { RepoItem } from "@/data/open-source-data";
 import { RepoCard } from "@/components/futures/open-source/RepoCard";
 import { Button, Separator, Typography } from "poyraz-ui/atoms";
 
+import { Dictionary } from "@/types/dictionary";
+
 interface AllReposListProps {
   repos: RepoItem[];
-  dictionary: any;
+  dictionary: Dictionary;
 }
 
 const ITEMS_PER_PAGE = 6;

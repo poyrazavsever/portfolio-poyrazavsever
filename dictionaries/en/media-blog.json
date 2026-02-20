@@ -1,9 +1,28 @@
 {
   "hero": {
-    "title": "My",
-    "highlight": "Blog",
-    "description": "Personal thoughts and reflections on technology and life.",
+    "title": "My Blog",
+    "subtitle": "Personal thoughts, engineering insights, and reflections on technology and life.",
     "badge": "Blog"
   },
-  "empty": "No blog posts yet."
+  "categories": {
+    "tech": "Technology",
+    "design": "Design",
+    "engineering": "Engineering"
+  },
+  "posts": [
+    {
+      "slug": "clean-code-principles",
+      "title": "Clean Code Principles in React",
+      "category": "Technology",
+      "excerpt": "A deep dive into writing maintainable and scalable React applications...",
+      "content": "Clean code is essential for maintainability..."
+    },
+    {
+      "slug": "figma-to-react",
+      "title": "Bridging the Gap: Figma to React",
+      "category": "Design",
+      "excerpt": "How to effectively translate design specifications into pixel-perfect components...",
+      "content": "Design handoff is important..."
+    }
+  ]
 }
