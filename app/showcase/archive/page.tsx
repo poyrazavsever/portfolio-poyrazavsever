@@ -1,13 +1,15 @@
-"use client";
-
 import { ArchiveHero } from "@/components/futures/archive/ArchiveHero";
 import { ProjectGrid } from "@/components/shared/ProjectGrid";
 import { projects as portfolioProjects } from "@/data/portfolio-data";
 import { fullstackCases } from "@/data/fullstack-data";
 import { designProjects } from "@/data/design-data";
 import { Project } from "@/types/project";
+import { getDictionary } from "@/get-dictionary";
+import { i18n } from "@/i18n-config";
 
-export default function ArchivePage() {
+export default async function ArchivePage() {
+  const dictionary = await getDictionary(i18n.defaultLocale);
+
   // Combine all projects
   const allProjects: Project[] = [
     ...portfolioProjects,
@@ -28,7 +30,7 @@ export default function ArchivePage() {
       <ArchiveHero />
 
       <div className="container mx-auto px-4 max-w-6xl mt-16 md:mt-24">
-        <ProjectGrid projects={allProjects} />
+        <ProjectGrid projects={allProjects} dictionary={dictionary} />
       </div>
     </div>
   );

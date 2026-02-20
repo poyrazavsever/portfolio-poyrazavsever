@@ -1,8 +1,8 @@
-"use client";
-
 import { AboutHero } from "@/components/futures/about/AboutHero";
 import { Timeline, TimelineItem } from "@/components/futures/career/Timeline";
 import { Typography } from "poyraz-ui/atoms";
+import { getDictionary } from "@/get-dictionary";
+import { i18n } from "@/i18n-config";
 
 const education: TimelineItem[] = [
   {
@@ -25,10 +25,13 @@ const education: TimelineItem[] = [
   },
 ];
 
-export default function EducationPage() {
+export default async function EducationPage() {
+  const dictionary = await getDictionary(i18n.defaultLocale);
+
   return (
     <div className="min-h-screen pb-24">
       <AboutHero
+        dictionary={dictionary}
         title="Academic"
         highlight="Background"
         description="My educational journey and academic achievements."

@@ -6,8 +6,8 @@ import {
   CardTitle,
   CardContent,
   Badge,
+  Typography,
 } from "poyraz-ui/atoms";
-import { cn } from "poyraz-ui";
 
 export interface TimelineItem {
   id: string;
@@ -47,7 +47,7 @@ export function Timeline({ items }: TimelineProps) {
             <CardHeader className="pb-3">
               <div className="flex flex-col gap-1">
                 <div className="flex justify-between items-start">
-                  <CardTitle className="text-xl font-bold text-slate-900 leading-tight">
+                  <CardTitle className="text-slate-900 leading-tight">
                     {item.role}
                   </CardTitle>
                   {item.type && (
@@ -65,9 +65,9 @@ export function Timeline({ items }: TimelineProps) {
                 </h4>
 
                 {item.location && (
-                  <span className="text-xs text-slate-400 font-medium">
+                  <Typography variant="muted" className="text-xs font-medium">
                     {item.location}
-                  </span>
+                  </Typography>
                 )}
               </div>
             </CardHeader>

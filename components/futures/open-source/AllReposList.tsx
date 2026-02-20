@@ -24,9 +24,7 @@ export function AllReposList({ repos }: AllReposListProps) {
   return (
     <section>
       <div className="mb-8 flex items-center gap-4">
-        <Typography variant="h2" className="text-2xl font-bold tracking-tight">
-          All Repositories ({repos.length})
-        </Typography>
+        <Typography variant="h2">All Repositories ({repos.length})</Typography>
         <Separator className="flex-1 bg-slate-200" />
       </div>
 

@@ -1,11 +1,13 @@
-"use client";
-
 import { ProductHero } from "@/components/futures/products/ProductHero";
 import { ProjectGrid } from "@/components/shared/ProjectGrid";
 import { projects } from "@/data/portfolio-data";
 import { Project } from "@/types/project";
+import { getDictionary } from "@/get-dictionary";
+import { i18n } from "@/i18n-config";
 
-export default function SaaSProjectsPage() {
+export default async function SaaSProjectsPage() {
+  const dictionary = await getDictionary(i18n.defaultLocale);
+
   // Aggregate and filter projects relevant to SaaS
   const saasProjects: Project[] = projects.filter((project) => {
     const isSaaS =
@@ -31,7 +33,7 @@ export default function SaaSProjectsPage() {
 
       <div className="container mx-auto px-4 max-w-6xl mt-16 md:mt-24">
         {saasProjects.length > 0 ? (
-          <ProjectGrid projects={saasProjects} />
+          <ProjectGrid projects={saasProjects} dictionary={dictionary} />
         ) : (
           <div className="text-center py-20 text-slate-500">
             <p>No SaaS projects found at the moment.</p>

@@ -1,11 +1,13 @@
-"use client";
-
 import { ProductHero } from "@/components/futures/products/ProductHero";
 import { ProjectGrid } from "@/components/shared/ProjectGrid";
 import { projects } from "@/data/portfolio-data";
 import { Project } from "@/types/project";
+import { getDictionary } from "@/get-dictionary";
+import { i18n } from "@/i18n-config";
 
-export default function MobileAppsPage() {
+export default async function MobileAppsPage() {
+  const dictionary = await getDictionary(i18n.defaultLocale);
+
   // Aggregate and filter projects relevant to Mobile Apps
   const mobileProjects: Project[] = projects.filter((project) => {
     const isMobile =
@@ -29,7 +31,7 @@ export default function MobileAppsPage() {
 
       <div className="container mx-auto px-4 max-w-6xl mt-16 md:mt-24">
         {mobileProjects.length > 0 ? (
-          <ProjectGrid projects={mobileProjects} />
+          <ProjectGrid projects={mobileProjects} dictionary={dictionary} />
         ) : (
           <div className="text-center py-20 text-slate-500">
             <p>No mobile application projects found at the moment.</p>

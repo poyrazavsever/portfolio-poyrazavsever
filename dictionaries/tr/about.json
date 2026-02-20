@@ -1,0 +1,95 @@
+{
+  "hero": {
+    "title": "Hikayem &",
+    "highlight": "Vizyonum",
+    "description": "Brütalist dürüst tasarıma ve temiz koda inanan bir tam yığın geliştirici ve tasarımcıyım. İşte benim yolculuğum.",
+    "badge": "Ben Kimim?"
+  },
+  "journey": {
+    "title": "Bugüne Kadarki",
+    "highlight": "Yolculuk",
+    "paragraphs": [
+      "Web'de işlerin nasıl yürüdüğüne dair bir merakla yolculuğuma başladım. Notepad'de HTML dosyalarını düzenlemekle başlayan şey, karmaşık, ölçeklenebilir ekosistemler oluşturma tutkusuna dönüştü.",
+      "Yıllar boyunca birçok şapka taktım: geliştirici, tasarımcı, içerik oluşturucu ve mentor. Sadece kod yazmıyorum; deneyimler yaratıyorum. Felsefem basit: **önemli olan şeyler inşa et ve onları iyi inşa et.**",
+      "Kendi ekosistemimi sadece çalışmalarımı sergilemek için değil, aynı zamanda yeni teknolojilerle (şu anda baktığınız gibi!) deneyler yapabileceğim ve bilgilerimi toplulukla paylaşabileceğim bir oyun alanı olması için yarattım."
+    ]
+  },
+  "engineeringDesign": {
+    "title": "Mühendislik &",
+    "highlight": "Tasarım",
+    "engineering": {
+      "title": "Mühendislik",
+      "description": "Kodu dijital dünyanın yapısal bütünlüğü olarak görüyorum. Yaklaşımımın temelleri:",
+      "list": [
+        "Ölçeklenebilir Mimari",
+        "Temiz & Bakımı Kolay Kod",
+        "Performans Optimizasyonu",
+        "Güvenlik En İyi Uygulamaları"
+      ]
+    },
+    "design": {
+      "title": "Tasarım",
+      "description": "Tasarım ruhtur. Sadece görünüşle ilgili değil; nasıl hissettirdiği ve çalıştığıyla ilgilidir. Şunlara odaklanıyorum:",
+      "list": [
+        "Kullanıcı Odaklı UI/UX",
+        "Brütalist & Modern Estetik",
+        "Erişilebilirlik (a11y)",
+        "Tutarlı Tasarım Sistemleri"
+      ]
+    },
+    "philosophy": "Bu iki alanın kesişimi benim en başarılı olduğum yer. Tasarımları geliştiricilere sadece teslim etmiyorum; tasarladığım şeyi inşa ediyorum ve vizyonun Figma'dan üretime kadar bozulmadan kalmasını sağlıyorum."
+  },
+  "values": {
+    "title": "Temel",
+    "highlight": "Değerler",
+    "subtitle": "İşimi ve hayatımı yönlendiren prensipler.",
+    "items": [
+      {
+        "title": "Amaç Odaklı",
+        "description": "Sadece yapmış olmak için yapmam. Her satır kod bir sorunu çözer."
+      },
+      {
+        "title": "Önce Performans",
+        "description": "Hız bir özelliktir. En iyi kullanıcı deneyimi için optimize ederim."
+      },
+      {
+        "title": "Tutku",
+        "description": "Yaptığım işi seviyorum ve bu enerji işimin kalitesine yansıyor."
+      },
+      {
+        "title": "Şeffaflık",
+        "description": "Açık kaynak ve açık süreç. Bilgiyi özgürce paylaşmaya inanıyorum."
+      },
+      {
+        "title": "İnovasyon",
+        "description": "Her zaman öğreniyor, eski sorunları çözmek için her zaman yeni yollar keşfediyorum."
+      },
+      {
+        "title": "Basitlik",
+        "description": "Karmaşıklık kolaydır. Basitlik zordur ama her zaman çabaya değer."
+      }
+    ]
+  },
+  "interests": {
+    "title": "Kişisel",
+    "highlight": "İlgi Alanları",
+    "items": [
+      {
+        "label": "Fotoğrafçılık",
+        "desc": "Sokak & Mimari"
+      },
+      {
+        "label": "Oyun",
+        "desc": "RPG & Strateji"
+      },
+      {
+        "label": "Okuma",
+        "desc": "Bilim Kurgu & Teknoloji"
+      },
+      {
+        "label": "Müzik",
+        "desc": "Indie & Elektronik"
+      }
+    ]
+  }
+}

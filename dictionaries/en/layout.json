@@ -1,0 +1,257 @@
+{
+  "layout": {
+    "navbar": {
+      "topbar": {
+        "basedIn": "Based in",
+        "city": "Ankara",
+        "socialLinks": "Social Links",
+        "rss": "RSS",
+        "status": "Status",
+        "settings": {
+          "title": "Settings",
+          "theme": "Theme",
+          "language": "Language",
+          "fontSize": "Font Size",
+          "close": "Close",
+          "system": "System",
+          "default": "Default"
+        }
+      },
+      "menu": {
+        "showcase": {
+          "label": "Showcase",
+          "items": {
+            "featured": {
+              "title": "Featured Projects",
+              "desc": "End-to-end platforms like Freelancer Portal"
+            },
+            "fullstack": {
+              "title": "Full-Stack Architecture Cases",
+              "desc": "Database and server architecture breakdowns"
+            },
+            "design": {
+              "title": "UI/UX & Brand Identity Cases",
+              "desc": "User experience research and design stories"
+            },
+            "opensource": {
+              "title": "Open Source & Packages",
+              "desc": "GitHub contributions and community work"
+            },
+            "uiKit": {
+              "title": "Poyraz UI Kit ↗",
+              "desc": "ui.poyrazavsever.com — brutalist design system"
+            },
+            "archive": {
+              "title": "All Projects (Archive)",
+              "desc": "Complete project archive from past to present"
+            },
+            "saas": {
+              "title": "SaaS & Platform Solutions",
+              "desc": "Software as a Service solutions"
+            },
+            "ecommerce": {
+              "title": "Global E-Commerce & B2B",
+              "desc": "Online stores and B2B platforms"
+            }
+          }
+        },
+        "products": {
+          "label": "Products",
+          "items": {
+            "workspace": {
+              "title": "Freelancer & Agency Workspace ↗",
+              "desc": "portal.poyrazavsever.com — project management hub"
+            },
+            "saas": {
+              "title": "SaaS Projects",
+              "desc": "Software as a Service solutions"
+            },
+            "mobile": {
+              "title": "Mobile Applications",
+              "desc": "iOS and Android apps built with React Native"
+            },
+            "figma": {
+              "title": "Figma Templates",
+              "desc": "Ready-to-use UI design kits and templates"
+            },
+            "microTools": {
+              "title": "Developer Micro-Tools",
+              "desc": "Quick and useful tools for developers"
+            },
+            "apis": {
+              "title": "Open APIs & Endpoints",
+              "desc": "Publicly available APIs"
+            }
+          }
+        },
+        "clientPortal": {
+          "label": "Client Portal",
+          "items": {
+            "login": {
+              "title": "Client Login ↗",
+              "desc": "portal.poyrazavsever.com/login"
+            },
+            "services": {
+              "title": "My Services",
+              "desc": "Full-Stack Development, UI/UX Design"
+            },
+            "workflow": {
+              "title": "Workflow & Process",
+              "desc": "How I take a project from zero to production"
+            },
+            "pricing": {
+              "title": "Pricing & Retainers",
+              "desc": "Transparent pricing policy and packages"
+            },
+            "meeting": {
+              "title": "Book a Discovery Call",
+              "desc": "Schedule a meeting to discuss your project"
+            },
+            "proposal": {
+              "title": "Project Inquiry Form",
+              "desc": "Tell me about your project needs"
+            }
+          }
+        },
+        "media": {
+          "label": "Media",
+          "items": {
+            "masabasi": {
+              "title": "Poyraz ile Masa Başı",
+              "desc": "Live series — every Wednesday at 20:00"
+            },
+            "archive": {
+              "title": "Past Episodes & Guests",
+              "desc": "Archive of previous broadcasts"
+            },
+            "podcast": {
+              "title": "Poyraz ile Yazılıma Dair",
+              "desc": "Podcast series - Tech & Engineering"
+            },
+            "blog": {
+              "title": "Tech & Engineering Blog",
+              "desc": "Articles on software and engineering"
+            },
+            "social": {
+              "title": "Social Hub",
+              "desc": "YouTube, Instagram, LinkedIn and more"
+            },
+            "apply": {
+              "title": "Apply to be a Guest",
+              "desc": "Join me on the show"
+            },
+            "systemDesign": {
+              "title": "System Design Deep Dives",
+              "desc": "Detailed analysis of system architectures"
+            },
+            "uiUx": {
+              "title": "UI/UX Principles & Trends",
+              "desc": "Design patterns and best practices"
+            }
+          }
+        },
+        "academy": {
+          "label": "Academy",
+          "items": {
+            "journey": {
+              "title": "The 52-Week Journey ↗",
+              "desc": "js.poyrazavsever.com — weekly full-stack plan"
+            },
+            "certs": {
+              "title": "Certifications",
+              "desc": "BTK Akademi, Udemy and other course notes"
+            },
+            "reading": {
+              "title": "My Reading & Watch List",
+              "desc": "Books, videos and recommended resources"
+            }
+          }
+        },
+        "ecosystem": {
+          "label": "Ecosystem",
+          "items": {
+            "status": {
+              "title": "System Status ↗",
+              "desc": "status.poyrazavsever.com — uptime monitor"
+            },
+            "architecture": {
+              "title": "Self-Hosted Architecture",
+              "desc": "Coolify, Supabase, Monorepo & Reverse Proxy"
+            }
+          }
+        },
+        "about": {
+          "label": "About",
+          "items": {
+            "story": {
+              "title": "My Story & Vision",
+              "desc": "Who I am and where I'm headed"
+            },
+            "experience": {
+              "title": "Career & Experience",
+              "desc": "Professional roles and positions"
+            },
+            "education": {
+              "title": "Academic Education",
+              "desc": "Software engineering degree journey"
+            },
+            "resume": {
+              "title": "Interactive Resume",
+              "desc": "Digital CV and skills overview"
+            },
+            "contact": { "title": "Contact Me", "desc": "Get in touch" }
+          }
+        }
+      },
+      "actions": {
+        "login": "Login",
+        "contact": "Contact"
+      }
+    },
+    "footer": {
+      "brand": {
+        "description": "Fullstack Developer & UI/UX Designer. Freelance developer based in Ankara, specializing in scalable systems and user-focused interfaces."
+      },
+      "sections": {
+        "explore": {
+          "title": "Explore",
+          "items": {
+            "featured": "Featured Projects",
+            "fullstack": "Full-Stack Cases",
+            "opensource": "Open Source",
+            "uiKit": "Poyraz UI Kit ↗"
+          }
+        },
+        "services": {
+          "title": "Services",
+          "items": {
+            "fullstack": "Full-Stack Development",
+            "uiux": "UI/UX & Brand Identity",
+            "pricing": "Pricing & Packages",
+            "meeting": "Book a Meeting",
+            "portal": "Client Portal ↗"
+          }
+        },
+        "company": {
+          "title": "Company",
+          "items": {
+            "about": "About",
+            "blog": "Blog",
+            "resume": "Resume / CV",
+            "contact": "Contact",
+            "status": "System Status ↗"
+          }
+        }
+      },
+      "bottom": {
+        "rights": "All rights reserved.",
+        "links": {
+          "contact": "Contact",
+          "privacy": "Privacy Policy",
+          "terms": "Terms of Service",
+          "sitemap": "Sitemap"
+        }
+      }
+    }
+  }
+}

@@ -4,38 +4,45 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import { Typography } from "poyraz-ui/atoms";
 import Image from "next/image";
 import { cn } from "poyraz-ui";
+import { Dictionary } from "@/types/dictionary";
 
-const steps = [
+const staticSteps = [
   {
     number: 1,
-    title: "Tanışalım!",
     image: "/howItWorks/1.png",
   },
   {
     number: 2,
-    title: "Sipariş Oluştur",
     image: "/howItWorks/2.png",
   },
   {
     number: 3,
-    title: "Brief Gönder",
     image: "/howItWorks/3.png",
   },
   {
     number: 4,
-    title: "Teslim Al",
     image: "/howItWorks/4.png",
   },
 ];
 
-export function HowItWorksSection() {
+interface HowItWorksSectionProps {
+  dictionary: Dictionary;
+}
+
+export function HowItWorksSection({ dictionary }: HowItWorksSectionProps) {
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
+  const { howItWorks } = dictionary.home;
+  const steps = staticSteps.map((step, i) => ({
+    ...step,
+    title: howItWorks.steps[i].title,
+  }));
+
   const next = useCallback(() => {
     setActive((prev) => (prev + 1) % steps.length);
-  }, []);
+  }, [steps.length]);
 
   // Auto-slide every 4 seconds, pause on hover
   useEffect(() => {
@@ -58,11 +65,13 @@ export function HowItWorksSection() {
         {/* Header */}
         <div className="text-center mb-12">
           <Typography variant="h2">
-            Sistem Nasıl{" "}
-            <span className="text-red-600 font-secondary">Çalışıyor</span>
+            {howItWorks.title}{" "}
+            <span className="text-red-600 font-secondary">
+              {howItWorks.highlight}
+            </span>
           </Typography>
           <Typography variant="muted" className="mt-2 text-slate-500">
-            Benimle nasıl çalışacaksın? Süreç çok basit.
+            {howItWorks.subtitle}
           </Typography>
         </div>
 

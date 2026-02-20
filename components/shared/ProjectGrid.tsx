@@ -5,11 +5,14 @@ import { Project } from "@/types/project";
 import { ProjectCard } from "@/components/shared/ProjectCard";
 import { ProjectSheet } from "@/components/shared/ProjectSheet";
 
+import { Dictionary } from "@/types/dictionary";
+
 interface ProjectGridProps {
   projects: Project[];
+  dictionary: Dictionary;
 }
 
-export function ProjectGrid({ projects }: ProjectGridProps) {
+export function ProjectGrid({ projects, dictionary }: ProjectGridProps) {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [sheetOpen, setSheetOpen] = useState(false);
 
@@ -26,6 +29,7 @@ export function ProjectGrid({ projects }: ProjectGridProps) {
             key={project.id || project.title + index}
             project={project}
             onClick={() => handleProjectClick(project)}
+            dictionary={dictionary}
           />
         ))}
       </div>
@@ -34,6 +38,7 @@ export function ProjectGrid({ projects }: ProjectGridProps) {
         project={selectedProject}
         open={sheetOpen}
         onOpenChange={setSheetOpen}
+        dictionary={dictionary}
       />
     </>
   );

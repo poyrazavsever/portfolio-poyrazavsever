@@ -1,27 +1,24 @@
 import { Typography } from "poyraz-ui/atoms";
 import Image from "next/image";
 import Link from "next/link";
+import { Dictionary } from "@/types/dictionary";
 
-const videos = [
-  {
-    id: "b3SL2S1zYwU",
-    title: "Bu Videodan Sonra API Kafanda Oturacak",
-  },
-  {
-    id: "W1b6K7C86HY",
-    title: "Yazılıma Başlarken Yapılan Büyük Hatalar ve Çözümleri",
-  },
-  {
-    id: "N17_NNAHgzk",
-    title: "Yazılım Öldü Mü? Bir Junior'ın Yüzleşmesi",
-  },
+const staticVideos = [
+  { id: "b3SL2S1zYwU" },
+  { id: "W1b6K7C86HY" },
+  { id: "N17_NNAHgzk" },
 ];
+
+interface VideoData {
+  id: string;
+  title: string;
+}
 
 function VideoCard({
   video,
   featured = false,
 }: {
-  video: (typeof videos)[number];
+  video: VideoData;
   featured?: boolean;
 }) {
   return (
@@ -64,7 +61,18 @@ function VideoCard({
   );
 }
 
-export function YoutubeSection() {
+interface YoutubeSectionProps {
+  dictionary: Dictionary;
+}
+
+export function YoutubeSection({ dictionary }: YoutubeSectionProps) {
+  const { youtube } = dictionary.home;
+
+  const videos: VideoData[] = staticVideos.map((v, i) => ({
+    ...v,
+    title: youtube.videos[i].title,
+  }));
+
   const [featured, ...rest] = videos;
 
   return (
@@ -76,13 +84,13 @@ export function YoutubeSection() {
         {/* Header */}
         <div className="text-center mb-10">
           <Typography variant="h2">
-            Benim Youtube{" "}
+            {youtube.title}{" "}
             <span className="text-red-600 font-secondary">
-              Video&apos;larım
+              {youtube.highlight}
             </span>
           </Typography>
           <Typography variant="muted" className="mt-2 text-slate-500">
-            Youtube kanalımı henüz görmedin mi?
+            {youtube.subtitle}
           </Typography>
         </div>
 

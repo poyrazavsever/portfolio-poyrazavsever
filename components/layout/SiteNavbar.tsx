@@ -26,8 +26,9 @@ import {
   DrawerTrigger,
   DrawerFooter,
 } from "poyraz-ui/molecules";
-import { Button, Badge, Logo } from "poyraz-ui/atoms";
+import { Button, Badge, Logo, Typography } from "poyraz-ui/atoms";
 import { Icon } from "@iconify/react";
+import { Dictionary } from "@/types/dictionary";
 
 const SOCIAL_LINKS = [
   {
@@ -86,7 +87,7 @@ const SOCIAL_LINKS = [
   },
 ] as const;
 
-function TopBarClock() {
+function TopBarClock({ city, basedIn }: { city: string; basedIn: string }) {
   const [time, setTime] = useState("");
 
   useEffect(() => {
@@ -105,13 +106,15 @@ function TopBarClock() {
   }, []);
 
   return (
-    <span>
-      Based in <strong>Ankara</strong>, {time}
-    </span>
+    <Typography variant="small">
+      {basedIn} <strong>{city}</strong>, {time}
+    </Typography>
   );
 }
 
-export function SiteNavbar() {
+export function SiteNavbar({ dictionary }: { dictionary: Dictionary }) {
+  const t = dictionary.layout.navbar;
+
   return (
     <Navbar
       variant="bordered"
@@ -122,16 +125,16 @@ export function SiteNavbar() {
       {/* ── Top Bar ── */}
       <NavbarTopBar>
         <div className="flex items-center justify-between w-full text-xs py-0.5">
-          <TopBarClock />
+          <TopBarClock basedIn={t.topbar.basedIn} city={t.topbar.city} />
           <div className="hidden md:flex items-center gap-2 ml-auto">
             <Drawer>
               <DrawerTrigger asChild>
-                <Badge className="cursor-pointer">Social Links</Badge>
+                <Badge className="cursor-pointer">{t.topbar.socialLinks}</Badge>
               </DrawerTrigger>
               <DrawerContent>
                 <div className="mx-auto w-full max-w-sm">
                   <DrawerHeader>
-                    <DrawerTitle>Social Links</DrawerTitle>
+                    <DrawerTitle>{t.topbar.socialLinks}</DrawerTitle>
                   </DrawerHeader>
                   <div className="grid grid-cols-3 gap-3 px-4 pb-2">
                     {SOCIAL_LINKS.map((link) => (
@@ -143,16 +146,19 @@ export function SiteNavbar() {
                         className="flex flex-col items-center gap-1.5 border border-dashed border-neutral-300 dark:border-neutral-700 p-3 hover:border-red-600 hover:text-red-600 transition-colors"
                       >
                         <Icon icon={link.icon} width={24} height={24} />
-                        <span className="text-xs font-medium">
+                        <Typography
+                          variant="muted"
+                          className="text-xs font-medium"
+                        >
                           {link.label}
-                        </span>
+                        </Typography>
                       </a>
                     ))}
                   </div>
                   <DrawerFooter>
                     <DrawerClose asChild>
                       <Button variant="outline" className="w-full">
-                        Close
+                        {t.topbar.settings.close}
                       </Button>
                     </DrawerClose>
                   </DrawerFooter>
@@ -161,24 +167,28 @@ export function SiteNavbar() {
             </Drawer>
 
             <a href="/rss.xml">
-              <Badge className="cursor-pointer text-xs">RSS</Badge>
+              <Badge className="cursor-pointer text-xs">{t.topbar.rss}</Badge>
             </a>
             <a
               href="https://stats.uptimerobot.com"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Badge className="cursor-pointer text-xs">Status</Badge>
+              <Badge className="cursor-pointer text-xs">
+                {t.topbar.status}
+              </Badge>
             </a>
 
             <Drawer>
               <DrawerTrigger asChild>
-                <Badge className="cursor-pointer text-xs">Settings</Badge>
+                <Badge className="cursor-pointer text-xs">
+                  {t.topbar.settings.title}
+                </Badge>
               </DrawerTrigger>
               <DrawerContent>
                 <div className="mx-auto w-full max-w-sm">
                   <DrawerHeader>
-                    <DrawerTitle>Settings</DrawerTitle>
+                    <DrawerTitle>{t.topbar.settings.title}</DrawerTitle>
                   </DrawerHeader>
                   <div className="flex flex-col gap-4 px-4 pb-2">
                     <div className="flex items-center justify-between border border-dashed border-neutral-300 dark:border-neutral-700 p-3">
@@ -188,22 +198,35 @@ export function SiteNavbar() {
                           width={20}
                           height={20}
                         />
-                        <span className="text-sm font-medium">Theme</span>
+                        <Typography variant="small" className="font-medium">
+                          {t.topbar.settings.theme}
+                        </Typography>
                       </div>
-                      <Badge>System</Badge>
+                      <Badge>{t.topbar.settings.system}</Badge>
                     </div>
                     <div className="flex items-center justify-between border border-dashed border-neutral-300 dark:border-neutral-700 p-3">
                       <div className="flex items-center gap-2">
                         <Icon icon="mdi:translate" width={20} height={20} />
-                        <span className="text-sm font-medium">Language</span>
+                        <Typography variant="small" className="font-medium">
+                          {t.topbar.settings.language}
+                        </Typography>
                       </div>
                       <Badge>EN</Badge>
+                    </div>
+                    <div className="flex items-center justify-between border border-dashed border-neutral-300 dark:border-neutral-700 p-3">
+                      <div className="flex items-center gap-2">
+                        <Icon icon="mdi:format-font" width={20} height={20} />
+                        <Typography variant="small" className="font-medium">
+                          {t.topbar.settings.fontSize}
+                        </Typography>
+                      </div>
+                      <Badge>{t.topbar.settings.default}</Badge>
                     </div>
                   </div>
                   <DrawerFooter>
                     <DrawerClose asChild>
                       <Button variant="outline" className="w-full">
-                        Close
+                        {t.topbar.settings.close}
                       </Button>
                     </DrawerClose>
                   </DrawerFooter>
@@ -228,177 +251,177 @@ export function SiteNavbar() {
 
         <NavbarLinks>
           {/* ── 1. Showcase ── */}
-          <NavbarDropdown label="Showcase">
+          <NavbarDropdown label={t.menu.showcase.label}>
             <NavbarMegaMenu>
               <NavbarMegaMenuItem
-                title="Featured Projects"
-                description="End-to-end platforms like Freelancer Portal"
+                title={t.menu.showcase.items.featured.title}
+                description={t.menu.showcase.items.featured.desc}
                 href="/showcase/portfolio"
               />
               <NavbarMegaMenuItem
-                title="Full-Stack Architecture Cases"
-                description="Database and server architecture breakdowns"
+                title={t.menu.showcase.items.fullstack.title}
+                description={t.menu.showcase.items.fullstack.desc}
                 href="/showcase/fullstack-cases"
               />
               <NavbarMegaMenuItem
-                title="UI/UX & Brand Identity Cases"
-                description="User experience research and design stories"
+                title={t.menu.showcase.items.design.title}
+                description={t.menu.showcase.items.design.desc}
                 href="/showcase/design-cases"
               />
               <NavbarMegaMenuItem
-                title="Open Source & Packages"
-                description="GitHub contributions and community work"
+                title={t.menu.showcase.items.opensource.title}
+                description={t.menu.showcase.items.opensource.desc}
                 href="/showcase/open-source"
               />
               <NavbarMegaMenuItem
-                title="Poyraz UI Kit ↗"
-                description="ui.poyrazavsever.com — brutalist design system"
+                title={t.menu.showcase.items.uiKit.title}
+                description={t.menu.showcase.items.uiKit.desc}
                 href="https://ui.poyrazavsever.com"
               />
               <NavbarMegaMenuItem
-                title="All Projects (Archive)"
-                description="Complete project archive from past to present"
+                title={t.menu.showcase.items.archive.title}
+                description={t.menu.showcase.items.archive.desc}
                 href="/showcase/archive"
               />
             </NavbarMegaMenu>
           </NavbarDropdown>
 
           {/* ── 2. Products ── */}
-          <NavbarDropdown label="Products">
+          <NavbarDropdown label={t.menu.products.label}>
             <NavbarMegaMenu>
               <NavbarMegaMenuItem
-                title="Freelancer & Agency Workspace ↗"
-                description="portal.poyrazavsever.com — project management hub"
+                title={t.menu.products.items.workspace.title}
+                description={t.menu.products.items.workspace.desc}
                 href="https://portal.poyrazavsever.com"
               />
               <NavbarMegaMenuItem
-                title="SaaS Projects"
-                description="Software as a Service solutions"
+                title={t.menu.products.items.saas.title}
+                description={t.menu.products.items.saas.desc}
                 href="/products/saas"
               />
               <NavbarMegaMenuItem
-                title="Mobile Applications"
-                description="iOS and Android apps built with React Native"
+                title={t.menu.products.items.mobile.title}
+                description={t.menu.products.items.mobile.desc}
                 href="/products/mobile-apps"
               />
               <NavbarMegaMenuItem
-                title="Figma Templates"
-                description="Ready-to-use UI design kits and templates"
+                title={t.menu.products.items.figma.title}
+                description={t.menu.products.items.figma.desc}
                 href="/products/figma-templates"
               />
             </NavbarMegaMenu>
           </NavbarDropdown>
 
           {/* ── 3. Client Portal ── */}
-          <NavbarDropdown label="Client Portal">
+          <NavbarDropdown label={t.menu.clientPortal.label}>
             <NavbarMegaMenu>
               <NavbarMegaMenuItem
-                title="Client Login ↗"
-                description="portal.poyrazavsever.com/login"
+                title={t.menu.clientPortal.items.login.title}
+                description={t.menu.clientPortal.items.login.desc}
                 href="https://portal.poyrazavsever.com/login"
               />
               <NavbarMegaMenuItem
-                title="My Services"
-                description="Full-Stack Development, UI/UX Design"
+                title={t.menu.clientPortal.items.services.title}
+                description={t.menu.clientPortal.items.services.desc}
                 href="/services"
               />
               <NavbarMegaMenuItem
-                title="Workflow & Process"
-                description="How I take a project from zero to production"
+                title={t.menu.clientPortal.items.workflow.title}
+                description={t.menu.clientPortal.items.workflow.desc}
                 href="/services/workflow"
               />
               <NavbarMegaMenuItem
-                title="Pricing & Retainers"
-                description="Transparent pricing policy and packages"
+                title={t.menu.clientPortal.items.pricing.title}
+                description={t.menu.clientPortal.items.pricing.desc}
                 href="/services/pricing"
               />
             </NavbarMegaMenu>
           </NavbarDropdown>
 
           {/* ── 4. Media & Insights ── */}
-          <NavbarDropdown label="Media">
+          <NavbarDropdown label={t.menu.media.label}>
             <NavbarMegaMenu>
               <NavbarMegaMenuItem
-                title="Poyraz ile Masa Başı"
-                description="Live series — every Wednesday at 20:00"
+                title={t.menu.media.items.masabasi.title}
+                description={t.menu.media.items.masabasi.desc}
                 href="/media/masa-basi"
               />
               <NavbarMegaMenuItem
-                title="Past Episodes & Guests"
-                description="Archive of previous broadcasts"
+                title={t.menu.media.items.archive.title}
+                description={t.menu.media.items.archive.desc}
                 href="/media/masa-basi/archive"
               />
               <NavbarMegaMenuItem
-                title="Poyraz ile Yazılıma Dair"
-                description="Podcast series - Tech & Engineering"
+                title={t.menu.media.items.podcast.title}
+                description={t.menu.media.items.podcast.desc}
                 href="/media/yazilima-dair"
               />
               <NavbarMegaMenuItem
-                title="Tech & Engineering Blog"
-                description="Articles on software and engineering"
+                title={t.menu.media.items.blog.title}
+                description={t.menu.media.items.blog.desc}
                 href="/media/blog"
               />
               <NavbarMegaMenuItem
-                title="Social Hub"
-                description="YouTube, Instagram, LinkedIn and more"
+                title={t.menu.media.items.social.title}
+                description={t.menu.media.items.social.desc}
                 href="/media/social-hub"
               />
             </NavbarMegaMenu>
           </NavbarDropdown>
 
           {/* ── 5. Academy ── */}
-          <NavbarDropdown label="Academy">
+          <NavbarDropdown label={t.menu.academy.label}>
             <NavbarMegaMenu>
               <NavbarMegaMenuItem
-                title="The 52-Week Journey ↗"
-                description="js.poyrazavsever.com — weekly full-stack plan"
+                title={t.menu.academy.items.journey.title}
+                description={t.menu.academy.items.journey.desc}
                 href="https://js.poyrazavsever.com"
               />
               <NavbarMegaMenuItem
-                title="Certifications"
-                description="BTK Akademi, Udemy and other course notes"
+                title={t.menu.academy.items.certs.title}
+                description={t.menu.academy.items.certs.desc}
                 href="/academy/certifications"
               />
               <NavbarMegaMenuItem
-                title="My Reading & Watch List"
-                description="Books, videos and recommended resources"
+                title={t.menu.academy.items.reading.title}
+                description={t.menu.academy.items.reading.desc}
                 href="/academy/reading-list"
               />
             </NavbarMegaMenu>
           </NavbarDropdown>
 
           {/* ── 6. Ecosystem ── */}
-          <NavbarDropdown label="Ecosystem">
+          <NavbarDropdown label={t.menu.ecosystem.label}>
             <NavbarMegaMenu>
               <NavbarMegaMenuItem
-                title="System Status ↗"
-                description="status.poyrazavsever.com — uptime monitor"
+                title={t.menu.ecosystem.items.status.title}
+                description={t.menu.ecosystem.items.status.desc}
                 href="https://status.poyrazavsever.com"
               />
               <NavbarMegaMenuItem
-                title="Self-Hosted Architecture"
-                description="Coolify, Supabase, Monorepo & Reverse Proxy"
+                title={t.menu.ecosystem.items.architecture.title}
+                description={t.menu.ecosystem.items.architecture.desc}
                 href="/ecosystem/architecture"
               />
             </NavbarMegaMenu>
           </NavbarDropdown>
 
           {/* ── 7. About ── */}
-          <NavbarDropdown label="About">
+          <NavbarDropdown label={t.menu.about.label}>
             <NavbarMegaMenu>
               <NavbarMegaMenuItem
-                title="My Story & Vision"
-                description="Who I am and where I'm headed"
+                title={t.menu.about.items.story.title}
+                description={t.menu.about.items.story.desc}
                 href="/about"
               />
               <NavbarMegaMenuItem
-                title="Career & Experience"
-                description="Professional roles and positions"
+                title={t.menu.about.items.experience.title}
+                description={t.menu.about.items.experience.desc}
                 href="/career/experience"
               />
               <NavbarMegaMenuItem
-                title="Academic Education"
-                description="Software engineering degree journey"
+                title={t.menu.about.items.education.title}
+                description={t.menu.about.items.education.desc}
                 href="/career/education"
               />
             </NavbarMegaMenu>
@@ -412,11 +435,11 @@ export function SiteNavbar() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Login
+              {t.actions.login}
             </a>
           </Button>
           <Button size="sm" asChild>
-            <a href="/contact">Contact</a>
+            <a href="/contact">{t.actions.contact}</a>
           </Button>
         </NavbarActions>
 
@@ -428,12 +451,12 @@ export function SiteNavbar() {
         <div className="flex flex-wrap gap-2 px-4 py-3">
           <Drawer>
             <DrawerTrigger asChild>
-              <Badge className="cursor-pointer">Social Links</Badge>
+              <Badge className="cursor-pointer">{t.topbar.socialLinks}</Badge>
             </DrawerTrigger>
             <DrawerContent>
               <div className="mx-auto w-full max-w-sm">
                 <DrawerHeader>
-                  <DrawerTitle>Social Links</DrawerTitle>
+                  <DrawerTitle>{t.topbar.socialLinks}</DrawerTitle>
                 </DrawerHeader>
                 <div className="grid grid-cols-3 gap-3 px-4 pb-2">
                   {SOCIAL_LINKS.map((link) => (
@@ -445,14 +468,19 @@ export function SiteNavbar() {
                       className="flex flex-col items-center gap-1.5 border border-dashed border-neutral-300 dark:border-neutral-700 p-3 hover:border-red-600 hover:text-red-600 transition-colors"
                     >
                       <Icon icon={link.icon} width={24} height={24} />
-                      <span className="text-xs font-medium">{link.label}</span>
+                      <Typography
+                        variant="muted"
+                        className="text-xs font-medium"
+                      >
+                        {link.label}
+                      </Typography>
                     </a>
                   ))}
                 </div>
                 <DrawerFooter>
                   <DrawerClose asChild>
                     <Button variant="outline" className="w-full">
-                      Close
+                      {t.topbar.settings.close}
                     </Button>
                   </DrawerClose>
                 </DrawerFooter>
@@ -461,24 +489,26 @@ export function SiteNavbar() {
           </Drawer>
 
           <a href="/rss.xml">
-            <Badge className="cursor-pointer">RSS</Badge>
+            <Badge className="cursor-pointer">{t.topbar.rss}</Badge>
           </a>
           <a
             href="https://stats.uptimerobot.com"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Badge className="cursor-pointer">Status</Badge>
+            <Badge className="cursor-pointer">{t.topbar.status}</Badge>
           </a>
 
           <Drawer>
             <DrawerTrigger asChild>
-              <Badge className="cursor-pointer">Settings</Badge>
+              <Badge className="cursor-pointer">
+                {t.topbar.settings.title}
+              </Badge>
             </DrawerTrigger>
             <DrawerContent>
               <div className="mx-auto w-full max-w-sm">
                 <DrawerHeader>
-                  <DrawerTitle>Settings</DrawerTitle>
+                  <DrawerTitle>{t.topbar.settings.title}</DrawerTitle>
                 </DrawerHeader>
                 <div className="flex flex-col gap-4 px-4 pb-2">
                   <div className="flex items-center justify-between border border-dashed border-neutral-300 dark:border-neutral-700 p-3">
@@ -488,29 +518,35 @@ export function SiteNavbar() {
                         width={20}
                         height={20}
                       />
-                      <span className="text-sm font-medium">Theme</span>
+                      <Typography variant="small" className="font-medium">
+                        {t.topbar.settings.theme}
+                      </Typography>
                     </div>
-                    <Badge>System</Badge>
+                    <Badge>{t.topbar.settings.system}</Badge>
                   </div>
                   <div className="flex items-center justify-between border border-dashed border-neutral-300 dark:border-neutral-700 p-3">
                     <div className="flex items-center gap-2">
                       <Icon icon="mdi:translate" width={20} height={20} />
-                      <span className="text-sm font-medium">Language</span>
+                      <Typography variant="small" className="font-medium">
+                        {t.topbar.settings.language}
+                      </Typography>
                     </div>
                     <Badge>EN</Badge>
                   </div>
                   <div className="flex items-center justify-between border border-dashed border-neutral-300 dark:border-neutral-700 p-3">
                     <div className="flex items-center gap-2">
                       <Icon icon="mdi:format-font" width={20} height={20} />
-                      <span className="text-sm font-medium">Font Size</span>
+                      <Typography variant="small" className="font-medium">
+                        {t.topbar.settings.fontSize}
+                      </Typography>
                     </div>
-                    <Badge>Default</Badge>
+                    <Badge>{t.topbar.settings.default}</Badge>
                   </div>
                 </div>
                 <DrawerFooter>
                   <DrawerClose asChild>
                     <Button variant="outline" className="w-full">
-                      Close
+                      {t.topbar.settings.close}
                     </Button>
                   </DrawerClose>
                 </DrawerFooter>
@@ -519,125 +555,133 @@ export function SiteNavbar() {
           </Drawer>
         </div>
 
-        <NavbarMobileGroup label="Showcase">
+        <NavbarMobileGroup label={t.menu.showcase.label}>
           <NavbarMobileLink href="/showcase/saas">
-            SaaS & Platform Solutions
+            {t.menu.showcase.items.saas.title}
           </NavbarMobileLink>
           <NavbarMobileLink href="/showcase/ecommerce">
-            Global E-Commerce & B2B
+            {t.menu.showcase.items.ecommerce.title}
           </NavbarMobileLink>
           <NavbarMobileLink href="/showcase/fullstack-cases">
-            Full-Stack Architecture Cases
+            {t.menu.showcase.items.fullstack.title}
           </NavbarMobileLink>
           <NavbarMobileLink href="/showcase/design-cases">
-            UI/UX & Brand Identity Cases
+            {t.menu.showcase.items.design.title}
           </NavbarMobileLink>
           <NavbarMobileLink href="/showcase/open-source">
-            Open Source & Packages
+            {t.menu.showcase.items.opensource.title}
           </NavbarMobileLink>
           <NavbarMobileLink href="https://ui.poyrazavsever.com">
-            Poyraz UI Kit ↗
+            {t.menu.showcase.items.uiKit.title}
           </NavbarMobileLink>
           <NavbarMobileLink href="/showcase/archive">
-            All Projects (Archive)
+            {t.menu.showcase.items.archive.title}
           </NavbarMobileLink>
         </NavbarMobileGroup>
 
-        <NavbarMobileGroup label="Products">
+        <NavbarMobileGroup label={t.menu.products.label}>
           <NavbarMobileLink href="https://portal.poyrazavsever.com">
-            Freelancer & Agency Workspace ↗
+            {t.menu.products.items.workspace.title}
           </NavbarMobileLink>
           <NavbarMobileLink href="/products/saas">
-            SaaS Projects
+            {t.menu.products.items.saas.title}
           </NavbarMobileLink>
           <NavbarMobileLink href="/products/mobile-apps">
-            Mobile Applications
+            {t.menu.products.items.mobile.title}
           </NavbarMobileLink>
           <NavbarMobileLink href="/products/figma-templates">
-            Premium Figma Templates
+            {t.menu.products.items.figma.title}
           </NavbarMobileLink>
           <NavbarMobileLink href="/products/micro-tools">
-            Developer Micro-Tools
+            {t.menu.products.items.microTools.title}
           </NavbarMobileLink>
           <NavbarMobileLink href="/products/apis">
-            Open APIs & Endpoints
+            {t.menu.products.items.apis.title}
           </NavbarMobileLink>
         </NavbarMobileGroup>
 
-        <NavbarMobileGroup label="Client Portal">
+        <NavbarMobileGroup label={t.menu.clientPortal.label}>
           <NavbarMobileLink href="https://portal.poyrazavsever.com/login">
-            Client Login ↗
+            {t.menu.clientPortal.items.login.title}
           </NavbarMobileLink>
-          <NavbarMobileLink href="/services">My Services</NavbarMobileLink>
+          <NavbarMobileLink href="/services">
+            {t.menu.clientPortal.items.services.title}
+          </NavbarMobileLink>
           <NavbarMobileLink href="/services/workflow">
-            Workflow & Process
+            {t.menu.clientPortal.items.workflow.title}
           </NavbarMobileLink>
           <NavbarMobileLink href="/pricing">
-            Pricing & Retainers
+            {t.menu.clientPortal.items.pricing.title}
           </NavbarMobileLink>
           <NavbarMobileLink href="/client/meeting">
-            Book a Discovery Call
+            {t.menu.clientPortal.items.meeting.title}
           </NavbarMobileLink>
           <NavbarMobileLink href="/client/proposal">
-            Project Inquiry Form
+            {t.menu.clientPortal.items.proposal.title}
           </NavbarMobileLink>
         </NavbarMobileGroup>
 
-        <NavbarMobileGroup label="Media">
+        <NavbarMobileGroup label={t.menu.media.label}>
           <NavbarMobileLink href="/media/masa-basi">
-            Poyraz ile Masa Başı
+            {t.menu.media.items.masabasi.title}
           </NavbarMobileLink>
           <NavbarMobileLink href="/media/masa-basi/archive">
-            Past Episodes & Guests
+            {t.menu.media.items.archive.title}
           </NavbarMobileLink>
           <NavbarMobileLink href="/media/masa-basi/apply">
-            Apply to be a Guest
+            {t.menu.media.items.apply.title}
           </NavbarMobileLink>
           <NavbarMobileLink href="/blog">
-            Tech & Engineering Blog
+            {t.menu.media.items.blog.title}
           </NavbarMobileLink>
           <NavbarMobileLink href="/research/system-design">
-            System Design Deep Dives
+            {t.menu.media.items.systemDesign.title}
           </NavbarMobileLink>
           <NavbarMobileLink href="/research/ui-ux">
-            UI/UX Principles & Trends
+            {t.menu.media.items.uiUx.title}
           </NavbarMobileLink>
-          <NavbarMobileLink href="/media/social">Social Hub</NavbarMobileLink>
+          <NavbarMobileLink href="/media/social">
+            {t.menu.media.items.social.title}
+          </NavbarMobileLink>
         </NavbarMobileGroup>
 
-        <NavbarMobileGroup label="Academy">
+        <NavbarMobileGroup label={t.menu.academy.label}>
           <NavbarMobileLink href="https://js.poyrazavsever.com">
-            The 52-Week Journey ↗
+            {t.menu.academy.items.journey.title}
           </NavbarMobileLink>
           <NavbarMobileLink href="/academy/course-notes">
-            Course Notes & Certifications
+            {t.menu.academy.items.certs.title}
           </NavbarMobileLink>
           <NavbarMobileLink href="/academy/reading-list">
-            My Reading & Watch List
+            {t.menu.academy.items.reading.title}
           </NavbarMobileLink>
         </NavbarMobileGroup>
 
-        <NavbarMobileGroup label="Ecosystem">
+        <NavbarMobileGroup label={t.menu.ecosystem.label}>
           <NavbarMobileLink href="https://status.poyrazavsever.com">
-            System Status ↗
+            {t.menu.ecosystem.items.status.title}
           </NavbarMobileLink>
           <NavbarMobileLink href="/ecosystem/architecture">
-            Self-Hosted Architecture
+            {t.menu.ecosystem.items.architecture.title}
           </NavbarMobileLink>
         </NavbarMobileGroup>
 
-        <NavbarMobileGroup label="About">
-          <NavbarMobileLink href="/about">My Story & Vision</NavbarMobileLink>
+        <NavbarMobileGroup label={t.menu.about.label}>
+          <NavbarMobileLink href="/about">
+            {t.menu.about.items.story.title}
+          </NavbarMobileLink>
           <NavbarMobileLink href="/career/experience">
-            Career & Experience
+            {t.menu.about.items.experience.title}
           </NavbarMobileLink>
           <NavbarMobileLink href="/career/education">
-            Academic Education
+            {t.menu.about.items.education.title}
           </NavbarMobileLink>
           <NavbarMobileLink href="/career/resume">
-            Interactive Resume
+            {t.menu.about.items.resume.title}
           </NavbarMobileLink>
-          <NavbarMobileLink href="/contact">Contact Me</NavbarMobileLink>
+          <NavbarMobileLink href="/contact">
+            {t.menu.about.items.contact.title}
+          </NavbarMobileLink>
         </NavbarMobileGroup>
 
         <NavbarMobileActions>
@@ -647,11 +691,11 @@ export function SiteNavbar() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Login
+              {t.actions.login}
             </a>
           </Button>
           <Button className="w-full" asChild>
-            <a href="/contact">Contact</a>
+            <a href="/contact">{t.actions.contact}</a>
           </Button>
         </NavbarMobileActions>
       </NavbarMobileMenu>

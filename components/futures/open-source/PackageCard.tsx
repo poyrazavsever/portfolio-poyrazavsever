@@ -48,7 +48,7 @@ export function PackageCard({ item }: PackageCardProps) {
               >
                 {item.type}
               </Typography>
-              <CardTitle className="text-xl font-bold">{item.name}</CardTitle>
+              <CardTitle>{item.name}</CardTitle>
             </div>
           </div>
           <Badge variant="secondary" className="font-mono text-xs">
@@ -58,9 +58,7 @@ export function PackageCard({ item }: PackageCardProps) {
       </CardHeader>
 
       <CardContent className="flex-1 pb-4">
-        <Typography variant="muted" className="text-sm">
-          {item.description}
-        </Typography>
+        <Typography variant="muted">{item.description}</Typography>
       </CardContent>
 
       <CardFooter className="pt-0 flex flex-col gap-3">

@@ -1,0 +1,68 @@
+{
+  "hero": {
+    "greeting": "Selam, Ben",
+    "name": "Poyraz",
+    "subtitle": "Teknolojiyi keşfeden genç bir geliştirici..",
+    "buttons": {
+      "start": "Projeye Başla",
+      "browse": "Mağazayı Gez"
+    }
+  },
+  "howItWorks": {
+    "title": "Sistem Nasıl",
+    "highlight": "Çalışıyor",
+    "subtitle": "Benimle nasıl çalışacaksın? Süreç çok basit.",
+    "steps": [
+      { "title": "Tanışalım!" },
+      { "title": "Sipariş Oluştur" },
+      { "title": "Brief Gönder" },
+      { "title": "Teslim Al" }
+    ]
+  },
+  "courses": {
+    "title": "Kurslarımı",
+    "highlight": "Gördün mü?",
+    "subtitle": "Gerçek dünya senaryoları ve endüstri standartlarıyla öğrenin.",
+    "buttons": {
+      "seeAll": "Tüm Kurslar",
+      "browse": "Mağazayı Gez",
+      "buy": "Satın Al"
+    },
+    "items": [
+      {
+        "titlePrefix": "0'dan React Dersleri - ",
+        "keyword": "React 101",
+        "titleSuffix": "",
+        "description": "Modern web yığınına kapsamlı bir yolculuk. React, State Yönetimi, Hook'lar..."
+      },
+      {
+        "titlePrefix": "0'dan Next.js Dersleri - ",
+        "keyword": "Next.js 101",
+        "titleSuffix": "",
+        "description": "Next.js ile production-ready uygulamalar geliştirin. Server components, API routes, SSR, ISR..."
+      },
+      {
+        "titlePrefix": "0'dan Node.js Dersleri - ",
+        "keyword": "Node.js 101",
+        "titleSuffix": "",
+        "description": "Node.js ile backend geliştirme. Express, REST API'ler, Kimlik Doğrulama, Veritabanı..."
+      },
+      {
+        "titlePrefix": "0'dan TypeScript Dersleri - ",
+        "keyword": "TypeScript 101",
+        "titleSuffix": "",
+        "description": "Sıfırdan tip güvenli geliştirme. Generics, utility types, ileri seviye desenler..."
+      }
+    ]
+  },
+  "youtube": {
+    "title": "Benim Youtube",
+    "highlight": "Video'larım",
+    "subtitle": "Youtube kanalımı henüz görmedin mi?",
+    "videos": [
+      { "title": "Bu Videodan Sonra API Kafanda Oturacak" },
+      { "title": "Yazılıma Başlarken Yapılan Büyük Hatalar ve Çözümleri" },
+      { "title": "Yazılım Öldü Mü? Bir Junior'ın Yüzleşmesi" }
+    ]
+  }
+}

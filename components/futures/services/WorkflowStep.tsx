@@ -30,7 +30,9 @@ export function WorkflowStep({
       {/* Number Badge */}
       <div className="relative z-10 shrink-0">
         <div className="flex h-14 w-14 items-center justify-center rounded-none border-2 border-slate-900 bg-white shadow-[4px_4px_0px_0px_rgba(15,23,42,1)]">
-          <span className="text-xl font-black">{number}</span>
+          <Typography variant="h3" className="font-black">
+            {number}
+          </Typography>
         </div>
       </div>
 
@@ -42,9 +44,9 @@ export function WorkflowStep({
           </Typography>
         </div>
 
-        <p className="text-slate-600 mb-6 text-lg leading-relaxed max-w-3xl">
+        <Typography variant="lead" className="mb-6 max-w-3xl">
           {description}
-        </p>
+        </Typography>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-6xl">
           {/* Action Card */}
@@ -54,12 +56,15 @@ export function WorkflowStep({
                 <Circle className="w-4 h-4 text-slate-500" />
               </div>
               <div>
-                <span className="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-1">
+                <Typography
+                  variant="muted"
+                  className="font-bold uppercase tracking-wider block mb-1 text-xs"
+                >
                   Action
-                </span>
-                <p className="text-sm text-slate-700 m-0 leading-relaxed">
+                </Typography>
+                <Typography variant="small" className="m-0 leading-relaxed">
                   {action}
-                </p>
+                </Typography>
               </div>
             </CardContent>
           </Card>
@@ -71,12 +76,15 @@ export function WorkflowStep({
                 <CheckCircle2 className="w-4 h-4 text-red-600" />
               </div>
               <div>
-                <span className="text-xs font-bold uppercase tracking-wider text-red-400 block mb-1">
+                <Typography
+                  variant="muted"
+                  className="font-bold uppercase tracking-wider block mb-1 text-red-400 text-xs"
+                >
                   Result
-                </span>
-                <p className="text-sm text-slate-700 m-0 leading-relaxed">
+                </Typography>
+                <Typography variant="small" className="m-0 leading-relaxed">
                   {result}
-                </p>
+                </Typography>
               </div>
             </CardContent>
           </Card>

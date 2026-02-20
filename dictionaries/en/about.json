@@ -1,0 +1,95 @@
+{
+  "hero": {
+    "title": "My Story &",
+    "highlight": "Vision",
+    "description": "I'm a full-stack developer and designer who believes in brutall honest design and clean code. Here is my journey.",
+    "badge": "Who am I?"
+  },
+  "journey": {
+    "title": "The Journey",
+    "highlight": "So Far",
+    "paragraphs": [
+      "I started my journey with a curiosity for how things work on the web. What began as editing HTML files in Notepad has evolved into a passion for building complex, scalable ecosystems.",
+      "Over the years, I've worn many hats: developer, designer, content creator, and mentor. I don't just write code; I craft experiences. My philosophy is simple: **build things that matter, and build them well.**",
+      "I created my own ecosystem not just to showcase my work, but to have a playground where I can experiment with new technologies (like the one you're looking at right now!) and share my knowledge with the community."
+    ]
+  },
+  "engineeringDesign": {
+    "title": "Engineering &",
+    "highlight": "Design",
+    "engineering": {
+      "title": "Engineering",
+      "description": "I view code as the structural integrity of the digital world. My approach is rooted in:",
+      "list": [
+        "Scalable Architecture",
+        "Clean & Maintainable Code",
+        "Performance Optimization",
+        "Security Best Practices"
+      ]
+    },
+    "design": {
+      "title": "Design",
+      "description": "Design is the soul. It's not just about looks; it's about how it feels and works. I focus on:",
+      "list": [
+        "User-Centric UI/UX",
+        "Brutalist & Modern Aesthetics",
+        "Accessibility (a11y)",
+        "Consistent Design Systems"
+      ]
+    },
+    "philosophy": "The intersection of these two fields is where I thrive. I don't just hand off designs to developers; I build what I design, ensuring the vision remains intact from Figma to production."
+  },
+  "values": {
+    "title": "Core",
+    "highlight": "Values",
+    "subtitle": "The principles that guide my work and life.",
+    "items": [
+      {
+        "title": "Purpose Driven",
+        "description": "I don't build just for the sake of it. Every line of code solves a problem."
+      },
+      {
+        "title": "Performance First",
+        "description": "Speed is a feature. I optimize for the best possible user experience."
+      },
+      {
+        "title": "Passion",
+        "description": "I love what I do, and that energy reflects in the quality of my work."
+      },
+      {
+        "title": "Transparency",
+        "description": "Open source and open process. I believe in sharing knowledge freely."
+      },
+      {
+        "title": "Innovation",
+        "description": "Always learning, always exploring new ways to solve old problems."
+      },
+      {
+        "title": "Simplicity",
+        "description": "Complexity is easy. Simplicity is hard, but it's always worth the effort."
+      }
+    ]
+  },
+  "interests": {
+    "title": "Personal",
+    "highlight": "Interests",
+    "items": [
+      {
+        "label": "Photography",
+        "desc": "Street & Architecture"
+      },
+      {
+        "label": "Gaming",
+        "desc": "RPG & Strategy"
+      },
+      {
+        "label": "Reading",
+        "desc": "Sci-Fi & Tech"
+      },
+      {
+        "label": "Music",
+        "desc": "Indie & Electronic"
+      }
+    ]
+  }
+}

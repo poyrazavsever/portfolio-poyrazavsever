@@ -1,0 +1,260 @@
+{
+  "layout": {
+    "navbar": {
+      "topbar": {
+        "basedIn": "Konum:",
+        "city": "Ankara",
+        "socialLinks": "Sosyal Medya",
+        "rss": "RSS",
+        "status": "Durum",
+        "settings": {
+          "title": "Ayarlar",
+          "theme": "Tema",
+          "language": "Dil",
+          "fontSize": "Yazı Boyutu",
+          "close": "Kapat",
+          "system": "Sistem",
+          "default": "Varsayılan"
+        }
+      },
+      "menu": {
+        "showcase": {
+          "label": "Vitrin",
+          "items": {
+            "featured": {
+              "title": "Öne Çıkan Projeler",
+              "desc": "Freelancer Portal gibi uçtan uca platformlar"
+            },
+            "fullstack": {
+              "title": "Full-Stack Mimari Örnekleri",
+              "desc": "Veritabanı ve sunucu mimarisi analizleri"
+            },
+            "design": {
+              "title": "UI/UX & Marka Kimliği",
+              "desc": "Kullanıcı deneyimi araştırmaları ve tasarım hikayeleri"
+            },
+            "opensource": {
+              "title": "Açık Kaynak & Paketler",
+              "desc": "GitHub katkıları ve topluluk çalışmaları"
+            },
+            "uiKit": {
+              "title": "Poyraz UI Kit ↗",
+              "desc": "ui.poyrazavsever.com — brutalist tasarım sistemi"
+            },
+            "archive": {
+              "title": "Tüm Projeler (Arşiv)",
+              "desc": "Geçmişten günümüze proje arşivi"
+            },
+            "saas": {
+              "title": "SaaS & Platform Çözümleri",
+              "desc": "Yazılım hizmeti çözümleri"
+            },
+            "ecommerce": {
+              "title": "Global E-Ticaret & B2B",
+              "desc": "Online mağazalar ve B2B platformları"
+            }
+          }
+        },
+        "products": {
+          "label": "Ürünler",
+          "items": {
+            "workspace": {
+              "title": "Freelancer & Ajans Paneli ↗",
+              "desc": "portal.poyrazavsever.com — proje yönetim merkezi"
+            },
+            "saas": {
+              "title": "SaaS Projeleri",
+              "desc": "Hizmet olarak yazılım çözümleri"
+            },
+            "mobile": {
+              "title": "Mobil Uygulamalar",
+              "desc": "React Native ile iOS ve Android uygulamaları"
+            },
+            "figma": {
+              "title": "Figma Şablonları",
+              "desc": "Kullanıma hazır UI tasarım kitleri"
+            },
+            "microTools": {
+              "title": "Geliştirici Araçları",
+              "desc": "Geliştiriciler için hızlı ve yararlı araçlar"
+            },
+            "apis": {
+              "title": "Açık API'ler",
+              "desc": "Herkese açık API uç noktaları"
+            }
+          }
+        },
+        "clientPortal": {
+          "label": "Müşteri Portalı",
+          "items": {
+            "login": {
+              "title": "Müşteri Girişi ↗",
+              "desc": "portal.poyrazavsever.com/login"
+            },
+            "services": {
+              "title": "Hizmetlerim",
+              "desc": "Full-Stack Geliştirme, UI/UX Tasarım"
+            },
+            "workflow": {
+              "title": "İş Akışı & Süreç",
+              "desc": "Bir projeyi sıfırdan canlıya nasıl taşıyorum"
+            },
+            "pricing": {
+              "title": "Fiyatlandırma & Paketler",
+              "desc": "Şeffaf fiyat politikası ve hizmet paketleri"
+            },
+            "meeting": {
+              "title": "Tanışma Toplantısı",
+              "desc": "Projenizi konuşmak için randevu alın"
+            },
+            "proposal": {
+              "title": "Proje Başvuru Formu",
+              "desc": "Proje ihtiyaçlarınızdan bahsedin"
+            }
+          }
+        },
+        "media": {
+          "label": "Medya",
+          "items": {
+            "masabasi": {
+              "title": "Poyraz ile Masa Başı",
+              "desc": "Canlı yayın serisi — her Çarşamba 20:00"
+            },
+            "archive": {
+              "title": "Geçmiş Bölümler",
+              "desc": "Önceki yayınların arşivi ve konuklar"
+            },
+            "podcast": {
+              "title": "Poyraz ile Yazılıma Dair",
+              "desc": "Podcast serisi - Teknoloji ve Mühendislik"
+            },
+            "blog": {
+              "title": "Teknoloji Blogu",
+              "desc": "Yazılım ve mühendislik üzerine makaleler"
+            },
+            "social": {
+              "title": "Sosyal Medya",
+              "desc": "YouTube, Instagram, LinkedIn ve dahası"
+            },
+            "apply": {
+              "title": "Konuk Olun",
+              "desc": "Yayına konuk olarak başvurun"
+            },
+            "systemDesign": {
+              "title": "Sistem Tasarımı Analizleri",
+              "desc": "Detaylı sistem mimarisi incelemeleri"
+            },
+            "uiUx": {
+              "title": "UI/UX Prensipleri",
+              "desc": "Tasarım kalıpları ve en iyi uygulamalar"
+            }
+          }
+        },
+        "academy": {
+          "label": "Akademi",
+          "items": {
+            "journey": {
+              "title": "52 Haftalık Serüven ↗",
+              "desc": "js.poyrazavsever.com — haftalık full-stack planı"
+            },
+            "certs": {
+              "title": "Sertifikalar",
+              "desc": "BTK Akademi, Udemy ve kurs notları"
+            },
+            "reading": {
+              "title": "Okuma & İzleme Listesi",
+              "desc": "Kitaplar, videolar ve önerilen kaynaklar"
+            }
+          }
+        },
+        "ecosystem": {
+          "label": "Ekosistem",
+          "items": {
+            "status": {
+              "title": "Sistem Durumu ↗",
+              "desc": "status.poyrazavsever.com — uptime monitörü"
+            },
+            "architecture": {
+              "title": "Self-Hosted Mimari",
+              "desc": "Coolify, Supabase, Monorepo ve Reverse Proxy"
+            }
+          }
+        },
+        "about": {
+          "label": "Hakkımda",
+          "items": {
+            "story": {
+              "title": "Hikayem & Vizyonum",
+              "desc": "Ben kimim ve nereye gidiyorum"
+            },
+            "experience": {
+              "title": "Kariyer & Deneyim",
+              "desc": "Profesyonel roller ve iş geçmişi"
+            },
+            "education": {
+              "title": "Akademik Eğitim",
+              "desc": "Yazılım mühendisliği eğitim yolculuğu"
+            },
+            "resume": {
+              "title": "İnteraktif Özgeçmiş",
+              "desc": "Dijital CV ve yetenek özeti"
+            },
+            "contact": {
+              "title": "İletişim",
+              "desc": "Benimle iletişime geçin"
+            }
+          }
+        }
+      },
+      "actions": {
+        "login": "Giriş Yap",
+        "contact": "İletişim"
+      }
+    },
+    "footer": {
+      "brand": {
+        "description": "Fullstack Geliştirici & UI/UX Tasarımcı. Ankara merkezli, ölçeklenebilir sistemler ve kullanıcı odaklı arayüzler geliştiren freelance yazılımcı."
+      },
+      "sections": {
+        "explore": {
+          "title": "Keşfet",
+          "items": {
+            "featured": "Öne Çıkanlar",
+            "fullstack": "Full-Stack Örnekleri",
+            "opensource": "Açık Kaynak",
+            "uiKit": "Poyraz UI Kit ↗"
+          }
+        },
+        "services": {
+          "title": "Hizmetler",
+          "items": {
+            "fullstack": "Full-Stack Geliştirme",
+            "uiux": "UI/UX & Marka Kimliği",
+            "pricing": "Fiyatlandırma",
+            "meeting": "Toplantı Ayarla",
+            "portal": "Müşteri Portalı ↗"
+          }
+        },
+        "company": {
+          "title": "Şirket",
+          "items": {
+            "about": "Hakkımda",
+            "blog": "Blog",
+            "resume": "Özgeçmiş / CV",
+            "contact": "İletişim",
+            "status": "Sistem Durumu ↗"
+          }
+        }
+      },
+      "bottom": {
+        "rights": "Tüm hakları saklıdır.",
+        "links": {
+          "contact": "İletişim",
+          "privacy": "Gizlilik Politikası",
+          "terms": "Kullanım Şartları",
+          "sitemap": "Site Haritası"
+        }
+      }
+    }
+  }
+}

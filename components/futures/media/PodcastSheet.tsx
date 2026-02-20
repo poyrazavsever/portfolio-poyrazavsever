@@ -44,9 +44,12 @@ export function PodcastSheet({
             <Badge variant="outline" className="bg-white">
               EPISODE #{episode.id}
             </Badge>
-            <span className="text-slate-400 font-mono text-sm flex items-center gap-1">
+            <Typography
+              variant="muted"
+              className="flex items-center gap-1 font-mono"
+            >
               <Calendar className="w-3 h-3" /> {episode.date}
-            </span>
+            </Typography>
           </div>
 
           <SheetTitle asChild>

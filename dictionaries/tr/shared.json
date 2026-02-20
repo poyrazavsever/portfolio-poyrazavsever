@@ -1,0 +1,26 @@
+{
+  "blogCard": {
+    "readTime": "dk okuma"
+  },
+  "projectCard": {
+    "year": "Yıl",
+    "viewDetails": "Detayları Gör"
+  },
+  "projectSheet": {
+    "problem": "Problem",
+    "solution": "Çözüm",
+    "designProcess": "Tasarım Süreci",
+    "technicalArchitecture": "Teknik Mimari ve Geliştirme",
+    "lessonsLearned": "Öğrenilenler",
+    "role": "Projedeki Rolüm",
+    "features": "Temel Özellikler",
+    "gallery": "Galeri",
+    "technologies": "Teknolojiler ve Araçlar",
+    "links": {
+      "demo": "Canlı Demo",
+      "repo": "Kaynak Kod",
+      "caseStudy": "Vaka Analizi"
+    },
+    "client": "Müşteri"
+  }
+}

@@ -11,10 +11,14 @@ import {
   FooterBottom,
   FooterBottomLinks,
 } from "poyraz-ui/organisms";
-import { Logo, Separator } from "poyraz-ui/atoms";
+import { Logo, Typography } from "poyraz-ui/atoms";
 import { Icon } from "@iconify/react";
 
-export function SiteFooter() {
+import { Dictionary } from "@/types/dictionary";
+
+export function SiteFooter({ dictionary }: { dictionary: Dictionary }) {
+  const t = dictionary.layout.footer;
+
   return (
     <Footer variant="full" containerClassName="max-w-6xl mx-auto px-4">
       <FooterGrid>
@@ -27,11 +31,9 @@ export function SiteFooter() {
             width={44}
             height={44}
           />
-          <p className="text-sm text-slate-500 mt-3 leading-relaxed max-w-xs">
-            Fullstack Developer &amp; UI/UX Designer. Freelance developer based
-            in Ankara, specializing in scalable systems and user-focused
-            interfaces.
-          </p>
+          <Typography variant="muted" className="mt-3 leading-relaxed max-w-xs">
+            {t.brand.description}
+          </Typography>
           <FooterSocials>
             <FooterSocialLink href="https://github.com/poyrazavsever">
               <Icon icon="mdi:github" className="h-5 w-5" />
@@ -50,41 +52,58 @@ export function SiteFooter() {
 
         {/* Explore */}
         <FooterSection>
-          <FooterHeading>Explore</FooterHeading>
-          <FooterLink href="/showcase/web">Web Applications</FooterLink>
-          <FooterLink href="/showcase/case-studies">Case Studies</FooterLink>
-          <FooterLink href="/showcase/open-source">Open Source</FooterLink>
-          <FooterLink href="/showcase/tech-stack">Tech Stack</FooterLink>
+          <FooterHeading>{t.sections.explore.title}</FooterHeading>
+          <FooterLink href="/showcase/portfolio">
+            {t.sections.explore.items.featured}
+          </FooterLink>
+          <FooterLink href="/showcase/fullstack-cases">
+            {t.sections.explore.items.fullstack}
+          </FooterLink>
+          <FooterLink href="/showcase/open-source">
+            {t.sections.explore.items.opensource}
+          </FooterLink>
           <FooterLink href="https://ui.poyrazavsever.com">
-            Poyraz UI Kit ↗
+            {t.sections.explore.items.uiKit}
           </FooterLink>
         </FooterSection>
 
         {/* Services */}
         <FooterSection>
-          <FooterHeading>Services</FooterHeading>
-          <FooterLink href="/services/fullstack">
-            Full-Stack Development
+          <FooterHeading>{t.sections.services.title}</FooterHeading>
+          <FooterLink href="/services">
+            {t.sections.services.items.fullstack}
           </FooterLink>
-          <FooterLink href="/services/design">
-            UI/UX & Brand Identity
+          <FooterLink href="/services">
+            {t.sections.services.items.uiux}
           </FooterLink>
-          <FooterLink href="/pricing">Pricing & Packages</FooterLink>
-          <FooterLink href="/client/meeting">Book a Meeting</FooterLink>
+          <FooterLink href="/services/pricing">
+            {t.sections.services.items.pricing}
+          </FooterLink>
+          <FooterLink href="/client/meeting">
+            {t.sections.services.items.meeting}
+          </FooterLink>
           <FooterLink href="https://portal.poyrazavsever.com">
-            Client Portal ↗
+            {t.sections.services.items.portal}
           </FooterLink>
         </FooterSection>
 
         {/* Company */}
         <FooterSection>
-          <FooterHeading>Company</FooterHeading>
-          <FooterLink href="/about">About</FooterLink>
-          <FooterLink href="/blog">Blog</FooterLink>
-          <FooterLink href="/career/resume">Resume / CV</FooterLink>
-          <FooterLink href="/contact">Contact</FooterLink>
+          <FooterHeading>{t.sections.company.title}</FooterHeading>
+          <FooterLink href="/about">
+            {t.sections.company.items.about}
+          </FooterLink>
+          <FooterLink href="/media/blog">
+            {t.sections.company.items.blog}
+          </FooterLink>
+          <FooterLink href="/career/resume">
+            {t.sections.company.items.resume}
+          </FooterLink>
+          <FooterLink href="/contact">
+            {t.sections.company.items.contact}
+          </FooterLink>
           <FooterLink href="https://status.poyrazavsever.com">
-            System Status ↗
+            {t.sections.company.items.status}
           </FooterLink>
         </FooterSection>
       </FooterGrid>
@@ -93,13 +112,13 @@ export function SiteFooter() {
 
       <FooterBottom>
         <p className="text-sm text-slate-500">
-          © {new Date().getFullYear()} Poyraz Avsever. All rights reserved.
+          © {new Date().getFullYear()} Poyraz Avsever. {t.bottom.rights}
         </p>
         <FooterBottomLinks>
-          <FooterLink href="/contact">Contact</FooterLink>
-          <FooterLink href="/privacy">Privacy Policy</FooterLink>
-          <FooterLink href="/terms">Terms of Service</FooterLink>
-          <FooterLink href="/sitemap.xml">Sitemap</FooterLink>
+          <FooterLink href="/contact">{t.bottom.links.contact}</FooterLink>
+          <FooterLink href="/privacy">{t.bottom.links.privacy}</FooterLink>
+          <FooterLink href="/terms">{t.bottom.links.terms}</FooterLink>
+          <FooterLink href="/sitemap.xml">{t.bottom.links.sitemap}</FooterLink>
         </FooterBottomLinks>
       </FooterBottom>
     </Footer>

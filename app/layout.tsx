@@ -40,18 +40,23 @@ export const metadata: Metadata = {
   ],
 };
 
+import { getDictionary } from "@/get-dictionary";
+import { i18n } from "@/i18n-config";
+
 export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const dictionary = await getDictionary(i18n.defaultLocale);
+
   return (
-    <html lang="en">
+    <html lang={i18n.defaultLocale}>
       <body>
         <TooltipProvider>
-          <SiteNavbar />
+          <SiteNavbar dictionary={dictionary} />
           <main className="min-h-screen">{children}</main>
-          <SiteFooter />
+          <SiteFooter dictionary={dictionary} />
           <Toaster />
         </TooltipProvider>
       </body>

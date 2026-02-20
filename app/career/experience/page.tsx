@@ -1,8 +1,8 @@
-"use client";
-
 import { AboutHero } from "@/components/futures/about/AboutHero";
 import { Timeline, TimelineItem } from "@/components/futures/career/Timeline";
 import { Typography } from "poyraz-ui/atoms";
+import { getDictionary } from "@/get-dictionary";
+import { i18n } from "@/i18n-config";
 
 const workExperience: TimelineItem[] = [
   {
@@ -135,10 +135,13 @@ const volunteerExperience: TimelineItem[] = [
   },
 ];
 
-export default function ExperiencePage() {
+export default async function ExperiencePage() {
+  const dictionary = await getDictionary(i18n.defaultLocale);
+
   return (
     <div className="min-h-screen pb-24">
       <AboutHero
+        dictionary={dictionary}
         title="Professional"
         highlight="Experience"
         description="A timeline of my professional journey, including internships, jobs, and volunteer work."

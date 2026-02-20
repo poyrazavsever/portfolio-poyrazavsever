@@ -1,0 +1,68 @@
+{
+  "hero": {
+    "greeting": "Hi, I'm",
+    "name": "Poyraz",
+    "subtitle": "A young person exploring technology..",
+    "buttons": {
+      "start": "Start a Project",
+      "browse": "Browse Store"
+    }
+  },
+  "howItWorks": {
+    "title": "How the System",
+    "highlight": "Works",
+    "subtitle": "How will you work with me? The process is very simple.",
+    "steps": [
+      { "title": "Meet!" },
+      { "title": "Create Order" },
+      { "title": "Send Brief" },
+      { "title": "Receive Delivery" }
+    ]
+  },
+  "courses": {
+    "title": "Did You See My",
+    "highlight": "Courses",
+    "subtitle": "Learn through real-world scenarios and industry standards.",
+    "buttons": {
+      "seeAll": "See All Courses",
+      "browse": "Browse Store",
+      "buy": "Buy Now"
+    },
+    "items": [
+      {
+        "titlePrefix": "React Lessons from Scratch - ",
+        "keyword": "React 101",
+        "titleSuffix": "",
+        "description": "A comprehensive journey through the modern web stack. Learn React, State Management, Hooks..."
+      },
+      {
+        "titlePrefix": "Next.js Lessons from Scratch - ",
+        "keyword": "Next.js 101",
+        "titleSuffix": "",
+        "description": "Build production-ready apps with Next.js. Server components, API routes, SSR, ISR..."
+      },
+      {
+        "titlePrefix": "Node.js Lessons from Scratch - ",
+        "keyword": "Node.js 101",
+        "titleSuffix": "",
+        "description": "Backend development with Node.js. Express, REST APIs, Authentication, Database..."
+      },
+      {
+        "titlePrefix": "TypeScript Lessons from Scratch - ",
+        "keyword": "TypeScript 101",
+        "titleSuffix": "",
+        "description": "Type-safe development from scratch. Generics, utility types, advanced patterns..."
+      }
+    ]
+  },
+  "youtube": {
+    "title": "My Youtube",
+    "highlight": "Videos",
+    "subtitle": "Haven't seen my Youtube channel yet?",
+    "videos": [
+      { "title": "API Concepts Explained" },
+      { "title": "Major Mistakes Beginners Make in Software & Solutions" },
+      { "title": "Is Software Dead? A Junior's Confrontation" }
+    ]
+  }
+}

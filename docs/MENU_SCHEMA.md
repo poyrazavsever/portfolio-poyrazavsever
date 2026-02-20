@@ -28,9 +28,8 @@
 
 - Freelancer & Agency Workspace ↗ (`portal.poyrazavsever.com`)
 - Premium Figma Design Templates
-- Developer Micro-Tools (Topluluk için ufak araçlar)
-- Open APIs & Public Endpoints
-- Productivity / Notion Templates
+- SaaS Projects
+- Mobile Projects
 
 ## 💼 3. Client Portal (Dropdown)
 *Potansiyel müşterilerin seninle çalışma süreçlerini başlattığı iş alanı.*
@@ -39,8 +38,6 @@
 - **My Services** (Full-Stack Dev, UI/UX Design,)
 - **Workflow & Process** (Bir projeyi 0'dan canlıya nasıl alıyorum?)
 - **Pricing & Retainers** (Fiyatlandırma politikası)
-- **Book a Discovery Call** (Calendly üzerinden toplantı)
-- **Project Inquiry Form** (Detaylı teklif alma formu)
 
 ## 🎙️ 4. Media & Insights (Dropdown)
 *İçerik üreticisi kimliğinin ve araştırmalarının toplandığı merkez.*
@@ -74,5 +71,3 @@
 - My Story & Vision
 - Career & Experience
 - Academic Education 
-- Interactive Resume
-- Contact Me

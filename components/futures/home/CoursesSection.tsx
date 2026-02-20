@@ -13,13 +13,10 @@ import {
 } from "poyraz-ui/atoms";
 import { Icon } from "@iconify/react";
 import { HorizontalScroll } from "@/components/shared/HorizontalScroll";
+import { Dictionary } from "@/types/dictionary";
 
-const courses = [
+const staticCourses = [
   {
-    title: "0'dan React Dersleri - React 101",
-    keyword: "React",
-    description:
-      "A comprehensive journey through the modern web stack. Learn React, State Management, Hooks...",
     rating: 4.7,
     students: [
       { name: "Ali", avatar: "/logo/logo.jpeg" },
@@ -30,10 +27,6 @@ const courses = [
     href: "https://www.udemy.com",
   },
   {
-    title: "0'dan Next.js Dersleri - Next.js 101",
-    keyword: "Next.js",
-    description:
-      "Build production-ready apps with Next.js. Server components, API routes, SSR, ISR...",
     rating: 4.8,
     students: [
       { name: "Can", avatar: "/logo/logo.jpeg" },
@@ -44,10 +37,6 @@ const courses = [
     href: "https://www.udemy.com",
   },
   {
-    title: "0'dan Node.js Dersleri - Node.js 101",
-    keyword: "Node.js",
-    description:
-      "Backend development with Node.js. Express, REST APIs, Authentication, Database...",
     rating: 4.6,
     students: [
       { name: "Selin", avatar: "/logo/logo.jpeg" },
@@ -58,10 +47,6 @@ const courses = [
     href: "https://www.udemy.com",
   },
   {
-    title: "0'dan TypeScript Dersleri - TypeScript 101",
-    keyword: "TypeScript",
-    description:
-      "Type-safe development from scratch. Generics, utility types, advanced patterns...",
     rating: 4.9,
     students: [
       { name: "Arda", avatar: "/logo/logo.jpeg" },
@@ -73,9 +58,23 @@ const courses = [
   },
 ];
 
-function CourseCard({ course }: { course: (typeof courses)[number] }) {
-  const titleParts = course.title.split(course.keyword);
+interface CourseData {
+  titlePrefix: string;
+  keyword: string;
+  titleSuffix: string;
+  description: string;
+  rating: number;
+  students: { name: string; avatar: string }[];
+  href: string;
+}
 
+function CourseCard({
+  course,
+  buyText,
+}: {
+  course: CourseData;
+  buyText: string;
+}) {
   return (
     <Card
       variant="elevated"
@@ -83,9 +82,9 @@ function CourseCard({ course }: { course: (typeof courses)[number] }) {
     >
       <CardHeader>
         <CardTitle>
-          {titleParts[0]}
+          {course.titlePrefix}
           <span className="text-red-600 font-secondary">{course.keyword}</span>
-          {titleParts[1]}
+          {course.titleSuffix}
         </CardTitle>
         <CardDescription className="line-clamp-3">
           {course.description}
@@ -120,7 +119,7 @@ function CourseCard({ course }: { course: (typeof courses)[number] }) {
       <CardFooter>
         <Button className="w-full" asChild>
           <a href={course.href} target="_blank" rel="noopener noreferrer">
-            Buy Now
+            {buyText}
           </a>
         </Button>
       </CardFooter>
@@ -128,25 +127,39 @@ function CourseCard({ course }: { course: (typeof courses)[number] }) {
   );
 }
 
-export function CoursesSection() {
+interface CoursesSectionProps {
+  dictionary: Dictionary;
+}
+
+export function CoursesSection({ dictionary }: CoursesSectionProps) {
+  const { courses: coursesDict } = dictionary.home;
+
+  const courses: CourseData[] = staticCourses.map((course, i) => ({
+    ...course,
+    ...coursesDict.items[i],
+  }));
+
   return (
     <section className="relative py-16 md:py-24 overflow-hidden">
       <div className="max-w-6xl mx-auto px-4">
         {/* Header — right aligned like the design */}
         <div className="text-right mb-10">
           <Typography variant="h2">
-            Did You See <br className="hidden sm:block" />
-            My <span className="text-red-600 font-secondary">Courses</span>
+            {coursesDict.title} <br className="hidden sm:block" />
+            {/* "My" word handling might be tricky with "Did You See My", but let's assume title covers the prefix */}
+            <span className="text-red-600 font-secondary">
+              {coursesDict.highlight}
+            </span>
           </Typography>
           <Typography variant="muted" className="mt-2 text-slate-500">
-            Learn through real-world scenarios and industry standards.
+            {coursesDict.subtitle}
           </Typography>
           <div className="flex items-center justify-end gap-3 mt-4">
             <Button size="sm" asChild>
-              <a href="/learning">See All Courses</a>
+              <a href="/learning">{coursesDict.buttons.seeAll}</a>
             </Button>
             <Button variant="outline" size="sm" asChild>
-              <a href="/products">Browse Store</a>
+              <a href="/products">{coursesDict.buttons.browse}</a>
             </Button>
           </div>
         </div>
@@ -156,7 +169,11 @@ export function CoursesSection() {
       <div className="max-w-6xl mx-auto px-4">
         <HorizontalScroll className="flex gap-5 overflow-x-auto pb-6 pt-2 px-2 -mx-2 scrollbar-none">
           {courses.map((course) => (
-            <CourseCard key={course.title} course={course} />
+            <CourseCard
+              key={course.keyword}
+              course={course}
+              buyText={coursesDict.buttons.buy}
+            />
           ))}
         </HorizontalScroll>
       </div>

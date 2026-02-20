@@ -1,0 +1,26 @@
+{
+  "blogCard": {
+    "readTime": "min read"
+  },
+  "projectCard": {
+    "year": "Year",
+    "viewDetails": "View Details"
+  },
+  "projectSheet": {
+    "problem": "Problem",
+    "solution": "Solution",
+    "designProcess": "Design Process",
+    "technicalArchitecture": "Technical Architecture",
+    "lessonsLearned": "Lessons Learned",
+    "role": "My Role",
+    "features": "Key Features",
+    "gallery": "Gallery",
+    "technologies": "Technologies & Tools",
+    "links": {
+      "demo": "Live Demo",
+      "repo": "Source Code",
+      "caseStudy": "Case Study"
+    },
+    "client": "Client"
+  }
+}

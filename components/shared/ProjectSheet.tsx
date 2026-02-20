@@ -29,18 +29,23 @@ const MermaidDiagram = dynamic(
   },
 );
 
+import { Dictionary } from "@/types/dictionary";
+
 interface ProjectSheetProps {
   project: Project | null;
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  dictionary: Dictionary;
 }
 
 export function ProjectSheet({
   project,
   open,
   onOpenChange,
+  dictionary,
 }: ProjectSheetProps) {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const t = dictionary.shared.projectSheet;
 
   if (!project) return null;
 
@@ -72,7 +77,7 @@ export function ProjectSheet({
                     variant="outline"
                     className="border-slate-300 text-slate-600"
                   >
-                    Client: {project.client}
+                    {t.client}: {project.client}
                   </Badge>
                 )}
                 <Button
@@ -85,14 +90,14 @@ export function ProjectSheet({
                 </Button>
               </div>
 
-              <Typography
-                variant="h2"
-                className="text-3xl font-bold tracking-tight"
-              >
+              <Typography variant="h2" className="font-bold tracking-tight">
                 {project.title}
               </Typography>
 
-              <Typography className="text-lg text-slate-600 leading-relaxed">
+              <Typography
+                variant="lead"
+                className="text-slate-600 leading-relaxed"
+              >
                 {project.description}
               </Typography>
 
@@ -106,7 +111,7 @@ export function ProjectSheet({
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        <Globe className="w-4 h-4 mr-2" /> Live Demo
+                        <Globe className="w-4 h-4 mr-2" /> {t.links.demo}
                       </a>
                     </Button>
                   )}
@@ -117,7 +122,7 @@ export function ProjectSheet({
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        <Github className="w-4 h-4 mr-2" /> Source Code
+                        <Github className="w-4 h-4 mr-2" /> {t.links.repo}
                       </a>
                     </Button>
                   )}
@@ -128,7 +133,8 @@ export function ProjectSheet({
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        <ExternalLink className="w-4 h-4 mr-2" /> Case Study
+                        <ExternalLink className="w-4 h-4 mr-2" />{" "}
+                        {t.links.caseStudy}
                       </a>
                     </Button>
                   )}
@@ -149,7 +155,7 @@ export function ProjectSheet({
                         className="font-bold flex items-center gap-2"
                       >
                         <span className="w-1.5 h-6 bg-red-600 rounded-full block"></span>{" "}
-                        Problem
+                        {t.problem}
                       </Typography>
                       <div className="text-slate-600 leading-relaxed text-sm">
                         <ReactMarkdown>{project.problem}</ReactMarkdown>
@@ -163,7 +169,7 @@ export function ProjectSheet({
                         className="font-bold flex items-center gap-2"
                       >
                         <span className="w-1.5 h-6 bg-green-600 rounded-full block"></span>{" "}
-                        Solution
+                        {t.solution}
                       </Typography>
                       <div className="text-slate-600 leading-relaxed text-sm">
                         <ReactMarkdown>{project.solution}</ReactMarkdown>
@@ -177,7 +183,7 @@ export function ProjectSheet({
               {project.designProcess && (
                 <div className="space-y-4">
                   <Typography variant="h4" className="font-bold border-b pb-2">
-                    Design Process
+                    {t.designProcess}
                   </Typography>
                   <div className="prose prose-sm prose-slate max-w-none text-slate-600">
                     <ReactMarkdown>{project.designProcess}</ReactMarkdown>
@@ -189,7 +195,7 @@ export function ProjectSheet({
               {(project.technicalDetails || project.mermaid) && (
                 <div className="space-y-4">
                   <Typography variant="h4" className="font-bold border-b pb-2">
-                    Teknik Mimari ve Geliştirme
+                    {t.technicalArchitecture}
                   </Typography>
                   {project.technicalDetails && (
                     <div className="prose prose-sm prose-slate max-w-none text-slate-600 mb-4">
@@ -208,7 +214,7 @@ export function ProjectSheet({
               {project.lessonsLearned && (
                 <div className="space-y-4">
                   <Typography variant="h4" className="font-bold border-b pb-2">
-                    Öğrenilenler
+                    {t.lessonsLearned}
                   </Typography>
                   <div className="prose prose-sm prose-slate max-w-none text-slate-600">
                     <ReactMarkdown>{project.lessonsLearned}</ReactMarkdown>
@@ -220,7 +226,7 @@ export function ProjectSheet({
               {project.role && (
                 <div className="space-y-4">
                   <Typography variant="h4" className="font-bold border-b pb-2">
-                    Projedeki Rolüm
+                    {t.role}
                   </Typography>
                   <Typography className="text-slate-600 leading-relaxed">
                     {project.role}
@@ -232,7 +238,7 @@ export function ProjectSheet({
               {project.features && project.features.length > 0 && (
                 <div className="space-y-4">
                   <Typography variant="h4" className="font-bold border-b pb-2">
-                    Temel Özellikler
+                    {t.features}
                   </Typography>
                   <ul className="grid sm:grid-cols-2 gap-3">
                     {project.features.map((feature, idx) => (
@@ -252,7 +258,7 @@ export function ProjectSheet({
               {project.galleryImages && project.galleryImages.length > 0 && (
                 <div className="space-y-4">
                   <Typography variant="h4" className="font-bold border-b pb-2">
-                    Gallery
+                    {t.gallery}
                   </Typography>
                   <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
                     {project.galleryImages.map((img, idx) => (
@@ -280,9 +286,9 @@ export function ProjectSheet({
               <div className="space-y-3 pt-4 border-t">
                 <Typography
                   variant="muted"
-                  className="font-semibold text-xs uppercase tracking-wider text-slate-500"
+                  className="font-semibold uppercase tracking-wider text-slate-500"
                 >
-                  Technologies & Tools
+                  {t.technologies}
                 </Typography>
                 <div className="flex flex-wrap gap-2">
                   {project.tags.map((tag) => (

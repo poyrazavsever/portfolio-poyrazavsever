@@ -54,7 +54,7 @@ export function UpcomingStreamCard({
 
           <Typography
             variant="h2"
-            className="text-3xl md:text-4xl font-black mb-6 leading-tight text-slate-900"
+            className="font-black mb-6 leading-tight text-slate-900"
           >
             {topic}
           </Typography>

@@ -1,31 +1,25 @@
-"use client";
-
 import { Typography } from "poyraz-ui/atoms";
 import { Camera, Gamepad2, BookOpen, Music } from "lucide-react";
+import { Dictionary } from "@/types/dictionary";
 
-export function AboutInterests() {
-  const interests = [
-    {
-      icon: <Camera className="w-5 h-5" />,
-      label: "Photography",
-      desc: "Street & Architecture",
-    },
-    {
-      icon: <Gamepad2 className="w-5 h-5" />,
-      label: "Gaming",
-      desc: "RPG & Strategy",
-    },
-    {
-      icon: <BookOpen className="w-5 h-5" />,
-      label: "Reading",
-      desc: "Sci-Fi & Tech",
-    },
-    {
-      icon: <Music className="w-5 h-5" />,
-      label: "Music",
-      desc: "Indie & Electronic",
-    },
+interface AboutInterestsProps {
+  dictionary: Dictionary;
+}
+
+export function AboutInterests({ dictionary }: AboutInterestsProps) {
+  const { interests: interestsDict } = dictionary.about;
+
+  const icons = [
+    <Camera key="camera" className="w-5 h-5" />,
+    <Gamepad2 key="gamepad" className="w-5 h-5" />,
+    <BookOpen key="book" className="w-5 h-5" />,
+    <Music key="music" className="w-5 h-5" />,
   ];
+
+  const interests = interestsDict.items.map((item, index) => ({
+    ...item,
+    icon: icons[index],
+  }));
 
   return (
     <section className="container mx-auto px-4 max-w-6xl py-12 md:py-20 border-t border-dashed border-slate-200">
@@ -33,7 +27,10 @@ export function AboutInterests() {
         variant="h2"
         className="text-3xl md:text-4xl font-bold mb-8 text-left"
       >
-        Personal <span className="text-red-600 font-secondary">Interests</span>
+        {interestsDict.title}{" "}
+        <span className="text-red-600 font-secondary">
+          {interestsDict.highlight}
+        </span>
       </Typography>
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">

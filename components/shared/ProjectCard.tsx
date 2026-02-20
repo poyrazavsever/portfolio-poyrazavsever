@@ -15,13 +15,22 @@ import { cn } from "poyraz-ui";
 import { ArrowRight, Layers } from "lucide-react";
 import { Project } from "@/types/project";
 
+import { Dictionary } from "@/types/dictionary";
+
 interface ProjectCardProps {
   project: Project;
   onClick: () => void;
   className?: string;
+  dictionary: Dictionary;
 }
 
-export function ProjectCard({ project, onClick, className }: ProjectCardProps) {
+export function ProjectCard({
+  project,
+  onClick,
+  className,
+  dictionary,
+}: ProjectCardProps) {
+  const t = dictionary.shared.projectCard;
   return (
     <Card
       className={cn(
@@ -53,7 +62,7 @@ export function ProjectCard({ project, onClick, className }: ProjectCardProps) {
             variant="secondary"
             className="translate-y-4 group-hover:translate-y-0 transition-transform duration-300"
           >
-            View Details <ArrowRight className="ml-2 w-4 h-4" />
+            {t.viewDetails} <ArrowRight className="ml-2 w-4 h-4" />
           </Button>
         </div>
       </CardImage>
@@ -63,11 +72,11 @@ export function ProjectCard({ project, onClick, className }: ProjectCardProps) {
           <div className="space-y-1">
             <Typography
               variant="muted"
-              className="text-xs uppercase tracking-wider font-semibold"
+              className="uppercase tracking-wider font-semibold"
             >
               {project.category}
             </Typography>
-            <CardTitle className="text-xl md:text-2xl group-hover:text-red-600 transition-colors line-clamp-1">
+            <CardTitle className="group-hover:text-red-600 transition-colors line-clamp-1">
               {project.title}
             </CardTitle>
           </div>
@@ -76,7 +85,7 @@ export function ProjectCard({ project, onClick, className }: ProjectCardProps) {
       </CardHeader>
 
       <CardContent className="pb-4 grow">
-        <Typography variant="muted" className="line-clamp-3 text-sm">
+        <Typography variant="muted" className="line-clamp-3">
           {project.description}
         </Typography>
       </CardContent>

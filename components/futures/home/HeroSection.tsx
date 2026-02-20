@@ -1,8 +1,15 @@
 import { Button, Typography } from "poyraz-ui/atoms";
 import { PatternGrid } from "poyraz-ui/atoms";
 import Image from "next/image";
+import { Dictionary } from "@/types/dictionary";
 
-export function HeroSection() {
+interface HeroSectionProps {
+  dictionary: Dictionary;
+}
+
+export function HeroSection({ dictionary }: HeroSectionProps) {
+  const { hero } = dictionary.home;
+
   return (
     <section className="relative overflow-hidden py-24 md:py-32">
       {/* Background Pattern */}
@@ -12,17 +19,17 @@ export function HeroSection() {
         {/* ── Text Block ── */}
         <div className="text-center max-w-3xl mx-auto">
           <Typography variant="h1">
-            Hi, I&apos;m{" "}
-            <span className="text-red-600 font-secondary">Poyraz</span>
+            {hero.greeting}{" "}
+            <span className="text-red-600 font-secondary">{hero.name}</span>
           </Typography>
 
           <Typography variant="lead" className="mt-4 text-slate-500">
-            A young person exploring technology..
+            {hero.subtitle}
           </Typography>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-8">
             <Button size="lg" className="w-full sm:w-auto" asChild>
-              <a href="/client/proposal">Start a Project</a>
+              <a href="/client/proposal">{hero.buttons.start}</a>
             </Button>
             <Button
               variant="outline"
@@ -30,7 +37,7 @@ export function HeroSection() {
               className="w-full sm:w-auto"
               asChild
             >
-              <a href="/products">Browse Store</a>
+              <a href="/products">{hero.buttons.browse}</a>
             </Button>
           </div>
         </div>

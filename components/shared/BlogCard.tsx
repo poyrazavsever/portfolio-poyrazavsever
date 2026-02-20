@@ -10,9 +10,12 @@ import {
   Avatar,
   AvatarImage,
   AvatarFallback,
+  Typography,
 } from "poyraz-ui/atoms";
 import Link from "next/link";
 import { Clock } from "lucide-react";
+
+import { Dictionary } from "@/types/dictionary";
 
 interface BlogCardProps {
   title: string;
@@ -26,6 +29,7 @@ interface BlogCardProps {
     avatar: string;
   };
   readTime: string | number;
+  dictionary: Dictionary;
 }
 
 export function BlogCard({
@@ -37,7 +41,10 @@ export function BlogCard({
   image,
   author,
   readTime,
+  dictionary,
 }: BlogCardProps) {
+  const t = dictionary.shared.blogCard;
+
   return (
     <Link href={`/media/blog/${slug}`} className="block group h-full">
       <Card
@@ -64,18 +71,18 @@ export function BlogCard({
               </>
             )}
             <span className="flex items-center gap-1">
-              <Clock className="w-3 h-3" /> {readTime} dk
+              <Clock className="w-3 h-3" /> {readTime} {t.readTime}
             </span>
           </div>
-          <CardTitle className="text-xl md:text-2xl transition-colors group-hover:text-red-600 line-clamp-2">
+          <CardTitle className="transition-colors group-hover:text-red-600 line-clamp-2">
             {title}
           </CardTitle>
         </CardHeader>
 
         <CardContent className="grow">
-          <p className="text-slate-500 line-clamp-3 leading-relaxed">
+          <Typography variant="muted" className="line-clamp-3 leading-relaxed">
             {excerpt}
-          </p>
+          </Typography>
         </CardContent>
 
         <CardFooter className="pt-4 border-t border-dashed border-slate-100">
@@ -84,9 +91,9 @@ export function BlogCard({
               <AvatarImage src={author?.avatar} />
               <AvatarFallback>{author?.name?.charAt(0) || "P"}</AvatarFallback>
             </Avatar>
-            <span className="text-sm font-bold text-slate-700">
+            <Typography variant="small" className="font-bold text-slate-700">
               {author?.name || "Poyraz Avsever"}
-            </span>
+            </Typography>
           </div>
         </CardFooter>
       </Card>

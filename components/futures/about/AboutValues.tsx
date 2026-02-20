@@ -1,5 +1,3 @@
-"use client";
-
 import {
   Card,
   CardContent,
@@ -15,8 +13,24 @@ import {
   Lightbulb,
   Puzzle,
 } from "lucide-react";
+import { Dictionary } from "@/types/dictionary";
 
-export function AboutValues() {
+interface AboutValuesProps {
+  dictionary: Dictionary;
+}
+
+export function AboutValues({ dictionary }: AboutValuesProps) {
+  const { values } = dictionary.about;
+
+  const icons = [
+    <Target key="target" className="w-6 h-6 text-red-600" />,
+    <Zap key="zap" className="w-6 h-6 text-red-600" />,
+    <Heart key="heart" className="w-6 h-6 text-red-600" />,
+    <ShieldCheck key="shield" className="w-6 h-6 text-red-600" />,
+    <Lightbulb key="lightbulb" className="w-6 h-6 text-red-600" />,
+    <Puzzle key="puzzle" className="w-6 h-6 text-red-600" />,
+  ];
+
   return (
     <section className="container mx-auto px-4 max-w-6xl py-12 md:py-20">
       <div className="text-left mb-12">
@@ -24,44 +38,25 @@ export function AboutValues() {
           variant="h2"
           className="text-3xl md:text-4xl font-bold mb-4"
         >
-          Core <span className="text-red-600 font-secondary">Values</span>
+          {values.title}{" "}
+          <span className="text-red-600 font-secondary">
+            {values.highlight}
+          </span>
         </Typography>
         <Typography variant="muted" className="text-slate-500 max-w-xl">
-          The principles that guide my work and life.
+          {values.subtitle}
         </Typography>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <ValueCard
-          icon={<Target className="w-6 h-6 text-red-600" />}
-          title="Purpose Driven"
-          description="I don't build just for the sake of it. Every line of code solves a problem."
-        />
-        <ValueCard
-          icon={<Zap className="w-6 h-6 text-red-600" />}
-          title="Performance First"
-          description="Speed is a feature. I optimize for the best possible user experience."
-        />
-        <ValueCard
-          icon={<Heart className="w-6 h-6 text-red-600" />}
-          title="Passion"
-          description="I love what I do, and that energy reflects in the quality of my work."
-        />
-        <ValueCard
-          icon={<ShieldCheck className="w-6 h-6 text-red-600" />}
-          title="Transparency"
-          description="Open source and open process. I believe in sharing knowledge freely."
-        />
-        <ValueCard
-          icon={<Lightbulb className="w-6 h-6 text-red-600" />}
-          title="Innovation"
-          description="Always learning, always exploring new ways to solve old problems."
-        />
-        <ValueCard
-          icon={<Puzzle className="w-6 h-6 text-red-600" />}
-          title="Simplicity"
-          description="Complexity is easy. Simplicity is hard, but it's always worth the effort."
-        />
+        {values.items.map((item, index) => (
+          <ValueCard
+            key={index}
+            icon={icons[index]}
+            title={item.title}
+            description={item.description}
+          />
+        ))}
       </div>
     </section>
   );

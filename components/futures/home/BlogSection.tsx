@@ -42,7 +42,17 @@ const posts = [
   },
 ];
 
-export function BlogSection() {
+import { Dictionary } from "@/types/dictionary";
+
+// ... (imports)
+
+// ... (posts array)
+
+interface BlogSectionProps {
+  dictionary: Dictionary;
+}
+
+export function BlogSection({ dictionary }: BlogSectionProps) {
   return (
     <section className="relative py-16 md:py-24">
       <div className="max-w-6xl mx-auto px-4">
@@ -71,7 +81,7 @@ export function BlogSection() {
         <HorizontalScroll className="flex gap-5 overflow-x-auto pb-8 pt-3 px-3 -mx-3 scrollbar-none">
           {posts.map((post) => (
             <div key={post.slug} className="min-w-[320px] w-[380px] shrink-0">
-              <BlogCard {...post} />
+              <BlogCard {...post} dictionary={dictionary} />
             </div>
           ))}
         </HorizontalScroll>

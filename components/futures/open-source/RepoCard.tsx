@@ -7,10 +7,9 @@ import {
   CardContent,
   CardFooter,
 } from "poyraz-ui/atoms";
-import { Badge, Button, Typography } from "poyraz-ui/atoms";
-import { Star, GitFork, ExternalLink, Circle } from "lucide-react";
+import { Typography } from "poyraz-ui/atoms";
+import { Star, GitFork, ExternalLink } from "lucide-react";
 import { RepoItem } from "@/data/open-source-data";
-import { cn } from "poyraz-ui";
 
 interface RepoCardProps {
   item: RepoItem;
@@ -31,16 +30,14 @@ export function RepoCard({ item }: RepoCardProps) {
               rel="noreferrer"
               className="hover:underline decoration-2 underline-offset-2"
             >
-              <CardTitle className="text-xl font-bold">{item.name}</CardTitle>
+              <CardTitle>{item.name}</CardTitle>
             </a>
           </div>
         </div>
       </CardHeader>
 
       <CardContent className="flex-1 pb-4">
-        <Typography variant="muted" className="text-sm">
-          {item.description}
-        </Typography>
+        <Typography variant="muted">{item.description}</Typography>
       </CardContent>
 
       <CardFooter className="pt-0 border-t border-dashed border-slate-200 mt-auto pt-4 flex justify-between items-center text-xs text-slate-500">
