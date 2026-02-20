@@ -27,6 +27,11 @@ const loadDictionary = async (locale: Locale): Promise<Dictionary> => {
     showcaseArchive,
     showcaseDesign,
     showcaseFullstack,
+    mediaCommon,
+    mediaBlog,
+    mediaMasaBasi,
+    mediaSocial,
+    mediaYazilimaDair,
   ] = await Promise.all([
     import(`./dictionaries/${locale}/layout.json`).then(
       (module) => module.default,
@@ -94,6 +99,21 @@ const loadDictionary = async (locale: Locale): Promise<Dictionary> => {
     import(`./dictionaries/${locale}/showcase-fullstack.json`).then(
       (module) => module.default,
     ),
+    import(`./dictionaries/${locale}/media-common.json`).then(
+      (module) => module.default,
+    ),
+    import(`./dictionaries/${locale}/media-blog.json`).then(
+      (module) => module.default,
+    ),
+    import(`./dictionaries/${locale}/media-masa-basi.json`).then(
+      (module) => module.default,
+    ),
+    import(`./dictionaries/${locale}/media-social.json`).then(
+      (module) => module.default,
+    ),
+    import(`./dictionaries/${locale}/media-yazilima-dair.json`).then(
+      (module) => module.default,
+    ),
   ]);
 
   return {
@@ -119,6 +139,11 @@ const loadDictionary = async (locale: Locale): Promise<Dictionary> => {
     showcaseArchive,
     showcaseDesign,
     showcaseFullstack,
+    mediaCommon,
+    mediaBlog,
+    mediaMasaBasi,
+    mediaSocial,
+    mediaYazilimaDair,
   } as Dictionary;
 };
 
@@ -130,4 +155,4 @@ const dictionaries = {
 };
 
 export const getDictionary = async (locale: Locale): Promise<Dictionary> =>
-  dictionaries[locale]?.() ?? dictionaries.en();
+  (await dictionaries[locale]?.()) ?? (await dictionaries.en());

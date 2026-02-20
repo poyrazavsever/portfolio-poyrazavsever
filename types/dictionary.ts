@@ -207,6 +207,23 @@ export interface Dictionary {
       subtitle: string;
       videos: { title: string }[];
     };
+    blog: {
+      title: string;
+      highlight: string;
+      subtitle: string;
+      buttons: {
+        seeAll: string;
+        browse: string;
+      };
+      posts: Record<
+        string,
+        {
+          title: string;
+          category: string;
+          excerpt: string;
+        }
+      >;
+    };
   };
   about: {
     hero: {

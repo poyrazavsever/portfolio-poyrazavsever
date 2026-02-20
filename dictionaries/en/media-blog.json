@@ -1,0 +1,9 @@
+{
+  "hero": {
+    "title": "My",
+    "highlight": "Blog",
+    "description": "Personal thoughts and reflections on technology and life.",
+    "badge": "Blog"
+  },
+  "empty": "No blog posts yet."
+}

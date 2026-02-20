@@ -1,3 +1,4 @@
+import { cookies } from "next/headers";
 import { OpenSourceHero } from "@/components/futures/open-source/OpenSourceHero";
 import { PackageCard } from "@/components/futures/open-source/PackageCard";
 import { RepoCard } from "@/components/futures/open-source/RepoCard";
@@ -13,7 +14,9 @@ import { i18n } from "@/i18n-config";
 export const revalidate = 3600; // Revalidate every hour
 
 export default async function OpenSourcePage() {
-  const dictionary = await getDictionary(i18n.defaultLocale);
+  const cookieStore = await cookies();
+  const locale = (cookieStore.get("NEXT_LOCALE")?.value || i18n.defaultLocale) as any;
+  const dictionary = await getDictionary(locale);
   const { showcaseOpenSource: os, showcaseCommon: common } = dictionary;
 
   const packages = await fetchNPMPackages();

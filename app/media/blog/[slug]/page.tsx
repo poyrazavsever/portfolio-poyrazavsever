@@ -1,3 +1,4 @@
+import { cookies } from "next/headers";
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { CommentSection } from "@/components/futures/media/CommentSection";
@@ -14,58 +15,10 @@ import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { dracula } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { getDictionary } from "@/get-dictionary";
+import { i18n } from "@/i18n-config";
 
-// Mock Data Lookup (In real app, fetch from CMS/API)
-const blogData: Record<string, any> = {
-  "nextjs-14-ile-server-actions": {
-    title: "Next.js 14 ile Server Actions'a Derinlemesine Bakış",
-    date: "25 Ekim 2023",
-    readTime: "8 dk",
-    category: "Frontend",
-    image:
-      "https://images.unsplash.com/photo-1618477247222-ac5913054c26?q=80&w=2070&auto=format&fit=crop",
-    content: `
-# Giriş
-
-Next.js 14 ile birlikte gelen **Server Actions**, React ekosisteminde veri mutasyonunu (data mutation) kökünden değiştiriyor. Artık ayrı bir API endpoint yazmak zorunda kalmadan, doğrudan sunucu tarafında çalışan fonksiyonları client bileşenlerinden tetikleyebiliyoruz.
-
-## Neden Server Actions?
-
-Geleneksel yöntemde bir formu göndermek için şunları yapardık:
-1. \`useState\` ile form verisini tut
-2. \`onSubmit\` handler yaz
-3. \`fetch\` ile API'ye istek at
-4. Loading ve Error state'lerini yönet
-
-Server actions ile bu süreç tek bir fonksiyona iniyor.
-
-\`\`\`tsx
-// actions.ts
-'use server'
-
-export async function createTodo(formData: FormData) {
-  const title = formData.get('title')
-  await db.todo.create({ data: { title } })
-  revalidatePath('/')
-}
-\`\`\`
-
-> "Server Actions, hem geliştirici deneyimini (DX) artırıyor hem de uygulamanın JavaScript bundle boyutunu küçültüyor."
-
-## Progressive Enhancement
-
-Server Actions, JavaScript devre dışı olsa bile çalışabilir (form submission sayesinde). Bu da uygulamanızın dayanıklılığını artırır.
-
-### Güvenlik Önlemleri
-
-Server Actions kullanırken dikkat etmeniz gereken en önemli nokta **Input Validation**. Zod gibi kütüphanelerle veriyi mutlaka doğrulayın.
-
-## Sonuç
-
-Next.js 14, full-stack React geliştirme deneyimini bir üst seviyeye taşıyor. Bu özelliği projelerinizde denemenizi şiddetle öneririm.
-    `,
-  },
-};
+// blogData is now loaded from dictionary
 
 export default async function BlogPostPage({
   params,
@@ -74,10 +27,24 @@ export default async function BlogPostPage({
 }) {
   // Await params for Next.js 15+
   const { slug } = await params;
-  const post = blogData[slug];
+  const cookieStore = await cookies();
+  const locale = (cookieStore.get("NEXT_LOCALE")?.value || i18n.defaultLocale) as any;
+  const dictionary = await getDictionary(locale);
+  const t = dictionary.mediaBlog;
+  const common = dictionary.mediaCommon.labels;
+
+  const post = t.posts.find((p: any) => p.slug === slug);
 
   // Default to logic or safe fallback
-  const safePost = post || blogData["nextjs-14-ile-server-actions"];
+  const safePost = post || t.posts[0];
+
+  // Add image/meta manually since it's missing in json but present in mock
+  const meta = {
+    image:
+      "https://images.unsplash.com/photo-1618477247222-ac5913054c26?q=80&w=2070&auto=format&fit=crop",
+    readTime: "8 dk",
+    date: "25 Oct 2023",
+  };
 
   return (
     <div className="min-h-screen pb-32 bg-white">
@@ -90,7 +57,7 @@ export default async function BlogPostPage({
         >
           <Link href="/media/blog">
             <ArrowLeft className="w-4 h-4" />
-            Blog&apos;a Dön
+            {common.backToBlog}
           </Link>
         </Button>
       </div>
@@ -107,11 +74,11 @@ export default async function BlogPostPage({
             </Badge>
             <div className="flex items-center gap-2 text-sm font-mono text-slate-400">
               <span className="flex items-center gap-1">
-                <Calendar className="w-3 h-3" /> {safePost.date}
+                <Calendar className="w-3 h-3" /> {meta.date}
               </span>
               <span className="w-1 h-1 bg-slate-300 rounded-full" />
               <span className="flex items-center gap-1">
-                <Clock className="w-3 h-3" /> {safePost.readTime}
+                <Clock className="w-3 h-3" /> {meta.readTime}
               </span>
             </div>
           </div>
@@ -152,7 +119,7 @@ export default async function BlogPostPage({
         <div className="mb-16 rounded-xl overflow-hidden border border-dashed border-slate-200 bg-slate-50 p-2">
           <div className="relative aspect-21/9 overflow-hidden rounded-lg">
             <img
-              src={safePost.image}
+              src={meta.image}
               alt={safePost.title}
               className="w-full h-full object-cover"
             />
@@ -264,13 +231,13 @@ export default async function BlogPostPage({
         <div className="flex justify-center mb-16">
           <div className="text-center">
             <p className="text-slate-400 mb-4 font-mono text-sm">
-              Makaleyi beğendiniz mi?
+              {common.didYouLikePost}
             </p>
             <LikeButton initialCount={42} />
           </div>
         </div>
 
-        <CommentSection />
+        <CommentSection dictionary={dictionary} />
       </article>
     </div>
   );

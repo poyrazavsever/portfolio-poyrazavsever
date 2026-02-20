@@ -20,28 +20,18 @@ interface Comment {
   likes: number;
 }
 
-const mockComments: Comment[] = [
-  {
-    id: "1",
-    author: "Mehmet Yılmaz",
-    date: "2 saat önce",
-    content:
-      "Harika bir yazı olmuş, özellikle Next.js 14 server actions kısmındaki örnekler çok açıklayıcı. Teşekkürler!",
-    likes: 5,
-  },
-  {
-    id: "2",
-    author: "Ayşe Demir",
-    date: "5 saat önce",
-    content:
-      "Deploy süreçlerinde Vercel dışında hangi platformları önerirsiniz bu yapı için?",
-    likes: 2,
-  },
-];
+interface CommentSectionProps {
+  dictionary: any;
+  initialComments?: Comment[];
+}
 
-export function CommentSection() {
+export function CommentSection({
+  dictionary,
+  initialComments = [],
+}: CommentSectionProps) {
+  const t = dictionary.mediaCommon.labels;
   const [commentText, setCommentText] = useState("");
-  const [comments, setComments] = useState<Comment[]>(mockComments);
+  const [comments, setComments] = useState<Comment[]>(initialComments);
 
   const handleSubmit = () => {
     if (!commentText.trim()) return;
@@ -61,7 +51,7 @@ export function CommentSection() {
   return (
     <div className="mt-16 pt-10 border-t border-dashed border-slate-200">
       <Typography variant="h3" className="mb-8 font-bold">
-        Yorumlar ({comments.length})
+        {t.comments} ({comments.length})
       </Typography>
 
       {/* Input Area */}
@@ -71,7 +61,7 @@ export function CommentSection() {
         </Avatar>
         <div className="flex-1">
           <Textarea
-            placeholder="Yorumunuzu buraya yazın..."
+            placeholder={t.comments}
             className="min-h-[100px] mb-3 bg-slate-50 focus:bg-white transition-colors"
             value={commentText}
             onChange={(e) => setCommentText(e.target.value)}
@@ -79,7 +69,7 @@ export function CommentSection() {
           <div className="flex justify-end">
             <Button onClick={handleSubmit} disabled={!commentText.trim()}>
               <Send className="w-4 h-4 mr-2" />
-              Gönder
+              {t.send || "Gönder"}
             </Button>
           </div>
         </div>

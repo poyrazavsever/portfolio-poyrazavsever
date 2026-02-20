@@ -1,3 +1,4 @@
+import { cookies } from "next/headers";
 import { PortfolioHero } from "@/components/futures/portfolio/PortfolioHero";
 import { projects } from "@/data/portfolio-data";
 import { ProjectGrid } from "@/components/shared/ProjectGrid";
@@ -5,7 +6,9 @@ import { getDictionary } from "@/get-dictionary";
 import { i18n } from "@/i18n-config";
 
 export default async function PortfolioPage() {
-  const dictionary = await getDictionary(i18n.defaultLocale);
+  const cookieStore = await cookies();
+  const locale = (cookieStore.get("NEXT_LOCALE")?.value || i18n.defaultLocale) as any;
+  const dictionary = await getDictionary(locale);
   const { showcasePortfolio: portfolio } = dictionary;
 
   // Localize projects

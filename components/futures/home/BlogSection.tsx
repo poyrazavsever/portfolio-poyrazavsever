@@ -59,18 +59,24 @@ export function BlogSection({ dictionary }: BlogSectionProps) {
         {/* Header — left aligned */}
         <div className="text-left mb-10">
           <Typography variant="h2">
-            Here is My <br className="hidden sm:block" />
-            <span className="text-red-600 font-secondary">Digital Garden</span>
+            {dictionary.home.blog.title} <br className="hidden sm:block" />
+            <span className="text-red-600 font-secondary">
+              {dictionary.home.blog.highlight}
+            </span>
           </Typography>
           <Typography variant="muted" className="mt-2">
-            Learn through real-world scenarios and industry standards.
+            {dictionary.home.blog.subtitle}
           </Typography>
           <div className="flex items-center justify-start gap-3 mt-4">
             <Button size="sm" asChild>
-              <Link href="/media/blog">See All Articles</Link>
+              <Link href="/media/blog">
+                {dictionary.home.blog.buttons.seeAll}
+              </Link>
             </Button>
             <Button variant="outline" size="sm" asChild>
-              <Link href="/products">Browse Store</Link>
+              <Link href="/products">
+                {dictionary.home.blog.buttons.browse}
+              </Link>
             </Button>
           </div>
         </div>
@@ -79,11 +85,23 @@ export function BlogSection({ dictionary }: BlogSectionProps) {
       {/* Horizontal scroll cards */}
       <div className="max-w-6xl mx-auto px-4">
         <HorizontalScroll className="flex gap-5 overflow-x-auto pb-8 pt-3 px-3 -mx-3 scrollbar-none">
-          {posts.map((post) => (
-            <div key={post.slug} className="min-w-[320px] w-[380px] shrink-0">
-              <BlogCard {...post} dictionary={dictionary} />
-            </div>
-          ))}
+          {posts.map((post) => {
+            const translatedPost =
+              dictionary.home.blog.posts[
+                post.slug as keyof typeof dictionary.home.blog.posts
+              ];
+            return (
+              <div key={post.slug} className="min-w-[320px] w-[380px] shrink-0">
+                <BlogCard
+                  {...post}
+                  title={translatedPost?.title || post.title}
+                  category={translatedPost?.category || post.category}
+                  excerpt={translatedPost?.excerpt || post.excerpt}
+                  dictionary={dictionary}
+                />
+              </div>
+            );
+          })}
         </HorizontalScroll>
       </div>
     </section>

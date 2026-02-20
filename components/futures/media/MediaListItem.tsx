@@ -10,6 +10,7 @@ interface MediaListItemProps {
   duration?: string;
   guest?: string;
   onDetailsClick: () => void;
+  dictionary: any;
 }
 
 export function MediaListItem({
@@ -19,7 +20,9 @@ export function MediaListItem({
   duration,
   guest,
   onDetailsClick,
+  dictionary,
 }: MediaListItemProps) {
+  const t = dictionary.mediaCommon.labels;
   return (
     <div className="group flex flex-col sm:flex-row sm:items-center justify-between p-5 bg-white border-b border-dashed border-slate-200 hover:bg-slate-50 transition-colors">
       <div className="flex gap-4">
@@ -62,7 +65,7 @@ export function MediaListItem({
           className="gap-2"
         >
           <FileText className="w-4 h-4" />
-          Detaylar
+          {t.details}
         </Button>
       </div>
     </div>

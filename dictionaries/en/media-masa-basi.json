@@ -1,0 +1,9 @@
+{
+  "hero": {
+    "title": "Masa",
+    "highlight": "Başı",
+    "description": "Discussions and podcast episodes.",
+    "badge": "Podcast"
+  },
+  "empty": "No episodes yet."
+}

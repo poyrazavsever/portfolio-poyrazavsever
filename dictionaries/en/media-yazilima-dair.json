@@ -1,0 +1,9 @@
+{
+  "hero": {
+    "title": "Yazılıma",
+    "highlight": "Dair",
+    "description": "Deep dives, tutorials, and discussions about software engineering.",
+    "badge": "Tech Blog"
+  },
+  "empty": "No posts yet."
+}

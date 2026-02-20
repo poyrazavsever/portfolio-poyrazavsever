@@ -1,0 +1,9 @@
+{
+  "hero": {
+    "title": "Benim",
+    "highlight": "Blogum",
+    "description": "Teknoloji ve yaşam üzerine kişisel düşünceler.",
+    "badge": "Blog"
+  },
+  "empty": "Henüz blog yazısı yok."
+}

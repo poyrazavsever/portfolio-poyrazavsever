@@ -19,6 +19,7 @@ interface UpcomingStreamCardProps {
   date: string; // e.g., "Oct 25, Wednesday"
   time: string; // e.g., "20:00"
   youtubeLink: string;
+  dictionary: any;
 }
 
 export function UpcomingStreamCard({
@@ -29,7 +30,10 @@ export function UpcomingStreamCard({
   date,
   time,
   youtubeLink,
+  dictionary,
 }: UpcomingStreamCardProps) {
+  const t = dictionary.mediaMasaBasi.upcoming;
+  const common = dictionary.mediaCommon.labels;
   return (
     <Card
       variant="default"
@@ -39,7 +43,7 @@ export function UpcomingStreamCard({
         {/* Left: Content Info */}
         <div className="flex-1 p-8 md:p-10 flex flex-col justify-center">
           <div className="flex items-center justify-between mb-6">
-            <Badge>CANLI YAYIN</Badge>
+            <Badge>{t.title}</Badge>
 
             <div className="flex flex-col sm:flex-row items-end sm:items-center gap-0 sm:gap-3 text-slate-500 text-sm font-mono font-medium">
               <span className="flex items-center gap-1.5">
@@ -76,12 +80,12 @@ export function UpcomingStreamCard({
             <Button asChild>
               <a href={youtubeLink} target="_blank" rel="noopener noreferrer">
                 <Youtube className="w-4 h-4" />
-                Youtube&apos;da İzle
+                {common.subscribe}
               </a>
             </Button>
             <Button variant="outline">
               <Bell className="w-4 h-4" />
-              Hatırlatıcı Kur
+              {common.follow}
             </Button>
           </div>
         </div>

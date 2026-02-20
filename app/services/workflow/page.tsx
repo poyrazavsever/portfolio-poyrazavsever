@@ -1,3 +1,4 @@
+import { cookies } from "next/headers";
 import { WorkflowHero } from "@/components/futures/services/WorkflowHero";
 import { WorkflowStep } from "@/components/futures/services/WorkflowStep";
 import { Button } from "poyraz-ui/atoms";
@@ -6,7 +7,9 @@ import { getDictionary } from "@/get-dictionary";
 import { i18n } from "@/i18n-config";
 
 export default async function WorkflowPage() {
-  const dictionary = await getDictionary(i18n.defaultLocale);
+  const cookieStore = await cookies();
+  const locale = (cookieStore.get("NEXT_LOCALE")?.value || i18n.defaultLocale) as any;
+  const dictionary = await getDictionary(locale);
   const { servicesWorkflow: workflow } = dictionary;
 
   return (

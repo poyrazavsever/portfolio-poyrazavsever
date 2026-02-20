@@ -1,10 +1,13 @@
+import { cookies } from "next/headers";
 import { ContactHero } from "@/components/futures/contact/ContactHero";
 import { ContactForm } from "@/components/futures/contact/ContactForm";
 import { getDictionary } from "@/get-dictionary";
 import { i18n } from "@/i18n-config";
 
 export default async function ContactPage() {
-  const dictionary = await getDictionary(i18n.defaultLocale);
+  const cookieStore = await cookies();
+  const locale = (cookieStore.get("NEXT_LOCALE")?.value || i18n.defaultLocale) as any;
+  const dictionary = await getDictionary(locale);
 
   return (
     <main className="min-h-screen bg-white">

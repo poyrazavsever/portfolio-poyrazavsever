@@ -1,3 +1,4 @@
+import { cookies } from "next/headers";
 import { ProductHero } from "@/components/futures/products/ProductHero";
 import { FigmaTemplateCard } from "@/components/futures/products/FigmaTemplateCard";
 import { projects } from "@/data/portfolio-data";
@@ -9,7 +10,9 @@ import { getDictionary } from "@/get-dictionary";
 import { i18n } from "@/i18n-config";
 
 export default async function FigmaTemplatesPage() {
-  const dictionary = await getDictionary(i18n.defaultLocale);
+  const cookieStore = await cookies();
+  const locale = (cookieStore.get("NEXT_LOCALE")?.value || i18n.defaultLocale) as any;
+  const dictionary = await getDictionary(locale);
   const { productsFigma: figma } = dictionary;
 
   // Aggregate and filter projects relevant to Figma Templates

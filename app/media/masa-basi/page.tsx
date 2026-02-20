@@ -1,18 +1,25 @@
-"use client";
-
+import { cookies } from "next/headers";
 import { MediaHero } from "@/components/futures/media/MediaHero";
 import { UpcomingStreamCard } from "@/components/futures/media/UpcomingStreamCard";
 import { Button, Typography } from "poyraz-ui/atoms";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
+import { getDictionary } from "@/get-dictionary";
+import { i18n } from "@/i18n-config";
 
-export default function MasaBasiPage() {
+export default async function MasaBasiPage() {
+  const cookieStore = await cookies();
+  const locale = (cookieStore.get("NEXT_LOCALE")?.value || i18n.defaultLocale) as any;
+  const dictionary = await getDictionary(locale);
+  const t = dictionary.mediaMasaBasi;
+  const common = dictionary.mediaCommon.labels;
+
   return (
     <div className="min-h-screen pb-32 bg-white">
       <MediaHero
-        title="Poyraz ile Masa Başı"
-        subtitle="Sektörden konuklarla teknoloji, kariyer ve yazılım dünyasını konuştuğumuz haftalık canlı yayın serisi."
-        badge="Her Çarşamba 20:00"
+        title={t.hero.title}
+        subtitle={t.hero.subtitle}
+        badge={t.hero.badge}
       />
 
       {/* Upcoming / Featured Stream */}
@@ -20,10 +27,11 @@ export default function MasaBasiPage() {
         <UpcomingStreamCard
           guestName="Burak Selim Şenyurt"
           guestRole="Software Architect / MVP"
-          topic=".NET Dünyasında Neler Oluyor?"
-          date="25 Ekim, Çarşamba"
-          time="20:00"
+          topic={t.upcoming.topic}
+          date={t.upcoming.date}
+          time={t.upcoming.time}
           youtubeLink="https://youtube.com/@TheCodeMan"
+          dictionary={dictionary}
           // guestImage="" // Using fallback for now
         />
       </div>
@@ -31,12 +39,10 @@ export default function MasaBasiPage() {
       {/* Intro / CTA Section */}
       <div className="container mx-auto px-4 max-w-3xl text-center mb-20">
         <Typography variant="h2" className="mb-4">
-          Yayın Konsepti
+          {t.intro.title}
         </Typography>
         <p className="text-lg text-slate-600 leading-relaxed mb-8">
-          &quot;Masa Başı&quot;, sadece teknik konuların değil, yazılımcıların gerçek
-          hayat hikayelerinin, sektördeki zorlukların ve başarıların konuşulduğu
-          samimi bir sohbet ortamıdır.
+          {t.intro.description}
         </p>
         <div className="flex justify-center flex-col sm:flex-row gap-4">
           <Button
@@ -46,7 +52,7 @@ export default function MasaBasiPage() {
             asChild
           >
             <Link href="/media/masa-basi/archive">
-              Geçmiş Bölümleri İncele
+              {t.archive.viewPast}
               <ArrowRight className="ml-2 w-4 h-4" />
             </Link>
           </Button>

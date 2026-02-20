@@ -1,3 +1,4 @@
+import { cookies } from "next/headers";
 import { ArchiveHero } from "@/components/futures/archive/ArchiveHero";
 import { ProjectGrid } from "@/components/shared/ProjectGrid";
 import { projects as portfolioProjects } from "@/data/portfolio-data";
@@ -8,7 +9,9 @@ import { getDictionary } from "@/get-dictionary";
 import { i18n } from "@/i18n-config";
 
 export default async function ArchivePage() {
-  const dictionary = await getDictionary(i18n.defaultLocale);
+  const cookieStore = await cookies();
+  const locale = (cookieStore.get("NEXT_LOCALE")?.value || i18n.defaultLocale) as any;
+  const dictionary = await getDictionary(locale);
   const { showcaseArchive: archive } = dictionary;
 
   // Localize projects helper (it's repeated, maybe I should share it, but for simplicity let's do it here)

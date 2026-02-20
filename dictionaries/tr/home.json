@@ -64,5 +64,36 @@
       { "title": "Yazılıma Başlarken Yapılan Büyük Hatalar ve Çözümleri" },
       { "title": "Yazılım Öldü Mü? Bir Junior'ın Yüzleşmesi" }
     ]
+  },
+  "blog": {
+    "title": "Burası Benim",
+    "highlight": "Dijital Bahçem",
+    "subtitle": "Gerçek dünya senaryoları ve endüstri standartlarıyla öğrenin.",
+    "buttons": {
+      "seeAll": "Tüm Makaleler",
+      "browse": "Mağazayı Gez"
+    },
+    "posts": {
+      "react-101": {
+        "title": "0'dan React Dersleri",
+        "category": "React",
+        "excerpt": "Modern web yığınına kapsamlı bir yolculuk. React, State Yönetimi, Hook'lar..."
+      },
+      "nextjs-ssr-isr": {
+        "title": "Next.js ile SSR ve ISR Rehberi",
+        "category": "Next.js",
+        "excerpt": "Server-side rendering ve incremental static regeneration konularını detaylıca inceliyoruz..."
+      },
+      "nodejs-rest-api": {
+        "title": "Node.js ile REST API Geliştirme",
+        "category": "Node.js",
+        "excerpt": "Express.js kullanarak production-ready REST API nasıl geliştirilir, adım adım anlatıyoruz..."
+      },
+      "typescript-advanced": {
+        "title": "TypeScript Advanced Patterns",
+        "category": "TypeScript",
+        "excerpt": "Generics, utility types ve conditional types ile ileri seviye TypeScript kullanımı..."
+      }
+    }
   }
 }

@@ -41,20 +41,24 @@ export const metadata: Metadata = {
 };
 
 import { getDictionary } from "@/get-dictionary";
-import { i18n } from "@/i18n-config";
+import { i18n, Locale } from "@/i18n-config";
+import { cookies } from "next/headers";
 
 export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const dictionary = await getDictionary(i18n.defaultLocale);
+  const cookieStore = await cookies();
+  const locale = (cookieStore.get("NEXT_LOCALE")?.value ||
+    i18n.defaultLocale) as Locale;
+  const dictionary = await getDictionary(locale);
 
   return (
-    <html lang={i18n.defaultLocale}>
+    <html lang={locale}>
       <body>
         <TooltipProvider>
-          <SiteNavbar dictionary={dictionary} />
+          <SiteNavbar dictionary={dictionary} currentLocale={locale} />
           <main className="min-h-screen">{children}</main>
           <SiteFooter dictionary={dictionary} />
           <Toaster />

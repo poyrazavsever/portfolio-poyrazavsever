@@ -26,6 +26,7 @@ interface MediaSheetProps {
   isOpen: boolean;
   onOpenChange: (open: boolean) => void;
   badgePrefix?: string; // e.g. "EPISODE"
+  dictionary: any;
 }
 
 export function MediaSheet({
@@ -33,6 +34,7 @@ export function MediaSheet({
   isOpen,
   onOpenChange,
   badgePrefix = "Media",
+  dictionary,
 }: MediaSheetProps) {
   if (!item) return null;
 

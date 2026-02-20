@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import {
   Navbar,
   NavbarTopBar,
@@ -112,8 +113,21 @@ function TopBarClock({ city, basedIn }: { city: string; basedIn: string }) {
   );
 }
 
-export function SiteNavbar({ dictionary }: { dictionary: Dictionary }) {
+export function SiteNavbar({
+  dictionary,
+  currentLocale,
+}: {
+  dictionary: Dictionary;
+  currentLocale: string;
+}) {
   const t = dictionary.layout.navbar;
+  const router = useRouter();
+
+  const switchLanguage = () => {
+    const newLocale = currentLocale === "tr" ? "en" : "tr";
+    document.cookie = `NEXT_LOCALE=${newLocale}; path=/; max-age=31536000`;
+    router.refresh();
+  };
 
   return (
     <Navbar
@@ -211,7 +225,12 @@ export function SiteNavbar({ dictionary }: { dictionary: Dictionary }) {
                           {t.topbar.settings.language}
                         </Typography>
                       </div>
-                      <Badge>EN</Badge>
+                      <Badge
+                        className="cursor-pointer hover:bg-neutral-800 hover:text-white transition-colors"
+                        onClick={switchLanguage}
+                      >
+                        {currentLocale.toUpperCase()}
+                      </Badge>
                     </div>
                     <div className="flex items-center justify-between border border-dashed border-neutral-300 dark:border-neutral-700 p-3">
                       <div className="flex items-center gap-2">
@@ -531,7 +550,12 @@ export function SiteNavbar({ dictionary }: { dictionary: Dictionary }) {
                         {t.topbar.settings.language}
                       </Typography>
                     </div>
-                    <Badge>EN</Badge>
+                    <Badge
+                      className="cursor-pointer hover:bg-neutral-800 hover:text-white transition-colors"
+                      onClick={switchLanguage}
+                    >
+                      {currentLocale.toUpperCase()}
+                    </Badge>
                   </div>
                   <div className="flex items-center justify-between border border-dashed border-neutral-300 dark:border-neutral-700 p-3">
                     <div className="flex items-center gap-2">

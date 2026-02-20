@@ -64,5 +64,36 @@
       { "title": "Major Mistakes Beginners Make in Software & Solutions" },
       { "title": "Is Software Dead? A Junior's Confrontation" }
     ]
+  },
+  "blog": {
+    "title": "Here is My",
+    "highlight": "Digital Garden",
+    "subtitle": "Learn through real-world scenarios and industry standards.",
+    "buttons": {
+      "seeAll": "See All Articles",
+      "browse": "Browse Store"
+    },
+    "posts": {
+      "react-101": {
+        "title": "React Lessons from Scratch",
+        "category": "React",
+        "excerpt": "A comprehensive journey through the modern web stack. Learn React, State Management, Hooks..."
+      },
+      "nextjs-ssr-isr": {
+        "title": "SSR and ISR Guide with Next.js",
+        "category": "Next.js",
+        "excerpt": "A detailed look into server-side rendering and incremental static regeneration..."
+      },
+      "nodejs-rest-api": {
+        "title": "REST API Development with Node.js",
+        "category": "Node.js",
+        "excerpt": "Step-by-step guide on developing a production-ready REST API using Express.js..."
+      },
+      "typescript-advanced": {
+        "title": "TypeScript Advanced Patterns",
+        "category": "TypeScript",
+        "excerpt": "Advanced TypeScript usage with generics, utility types, and conditional types..."
+      }
+    }
   }
 }

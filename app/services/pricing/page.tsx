@@ -1,3 +1,4 @@
+import { cookies } from "next/headers";
 import { PricingHero } from "@/components/futures/services/PricingHero";
 import { PricingModelCard } from "@/components/futures/services/PricingModelCard";
 import { Typography } from "poyraz-ui/atoms";
@@ -11,7 +12,9 @@ import { getDictionary } from "@/get-dictionary";
 import { i18n } from "@/i18n-config";
 
 export default async function PricingPage() {
-  const dictionary = await getDictionary(i18n.defaultLocale);
+  const cookieStore = await cookies();
+  const locale = (cookieStore.get("NEXT_LOCALE")?.value || i18n.defaultLocale) as any;
+  const dictionary = await getDictionary(locale);
   const { servicesPricing: pricing } = dictionary;
 
   return (

@@ -6,90 +6,50 @@ import { SearchInput, Button } from "poyraz-ui/atoms";
 import { useState, useMemo } from "react";
 import { Dictionary } from "@/types/dictionary";
 
-// Mock Data
-const blogPosts = [
-  {
-    slug: "clean-architecture-dotnet",
-    title: ".NET Core'da Clean Architecture Prensipleri",
-    excerpt:
-      "Sürdürülebilir ve ölçeklenebilir backend projeleri için Clean Architecture desenini nasıl uygulayabilirsiniz? Katmanlı mimarinin detayları.",
-    date: "18 Ekim 2023",
-    readTime: "12",
-    category: "Backend",
-    image:
-      "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop",
-    author: {
-      name: "Poyraz Avsever",
-      avatar: "",
-    },
-  },
-  {
-    slug: "figma-to-code-workflow",
-    title: "Figma'dan Koda: Tasarım Sistemlerini Yönetmek",
-    excerpt:
-      "Tasarımcı ve geliştirici arasındaki boşluğu kapatmak. Token'lar, component'ler ve otomatik kod üretimi üzerine pratik ipuçları.",
-    date: "10 Ekim 2023",
-    readTime: "6",
-    category: "Design",
-    image:
-      "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=2070&auto=format&fit=crop",
-    author: {
-      name: "Poyraz Avsever",
-      avatar: "",
-    },
-  },
-  {
-    slug: "microservices-vs-monolith",
-    title: "Mikroservisler vs Monolit: Doğru Seçimi Yapmak",
-    excerpt:
-      "Her proje mikroservis gerektirmez. Dağıtık sistemlerin maliyeti ve monolitik mimarinin avantajları üzerine bir karşılaştırma.",
-    date: "05 Ekim 2023",
-    readTime: "15",
-    category: "Architecture",
-    image:
-      "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop",
-    author: {
-      name: "Poyraz Avsever",
-      avatar: "",
-    },
-  },
-];
-
-const categories = [
-  "Tümü",
-  "Frontend",
-  "Backend",
-  "Design",
-  "Architecture",
-  "DevOps",
-];
+// categories are now from dictionary
 
 interface BlogListProps {
   dictionary: Dictionary;
 }
 
 export function BlogList({ dictionary }: BlogListProps) {
+  const t = dictionary.mediaBlog;
+  const common = dictionary.mediaCommon.labels;
+
+  const categories = Object.values(t.categories) as string[];
+  const blogPosts = (t.posts || []).map((post: any) => ({
+    ...post,
+    date: "18 Oct 2023", // Static for now or we could add to dict
+    readTime: "12",
+    image: post.slug.includes("clean")
+      ? "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop"
+      : post.slug.includes("figma")
+        ? "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=2070&auto=format&fit=crop"
+        : "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop",
+    author: { name: "Poyraz Avsever", avatar: "" },
+  }));
+
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("Tümü");
+  const [selectedCategory, setSelectedCategory] = useState(common.all);
 
   const filteredPosts = useMemo(() => {
-    return blogPosts.filter((post) => {
+    return blogPosts.filter((post: any) => {
       const matchesSearch =
         post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         post.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
       const matchesCategory =
-        selectedCategory === "Tümü" || post.category === selectedCategory;
+        selectedCategory === common.all || post.category === selectedCategory;
 
       return matchesSearch && matchesCategory;
     });
-  }, [searchQuery, selectedCategory]);
+  }, [searchQuery, selectedCategory, blogPosts, common.all]);
 
   return (
     <div className="min-h-screen pb-32 bg-white">
       <MediaHero
-        title="Tech & Engineering Blog"
-        subtitle="Yazılım mimarisi, modern frontend teknolojileri ve sektörel deneyimler üzerine derinlemesine makaleler."
-        badge="Insights"
+        title={t.hero.title}
+        subtitle={t.hero.subtitle}
+        badge={t.hero.badge}
       />
 
       <div className="container mx-auto px-4 max-w-6xl -mt-8 relative z-10">
@@ -117,7 +77,7 @@ export function BlogList({ dictionary }: BlogListProps) {
           {/* Search */}
           <div className="w-full md:w-72">
             <SearchInput
-              placeholder="Makalelerde ara..."
+              placeholder={common.searchMakalelerde}
               onSearch={(val) => setSearchQuery(val)}
               // Mocking onChange for real-time feel since SearchInput might only trigger on Enter
               // In a real app, I'd check the SearchInput implementation
@@ -128,23 +88,21 @@ export function BlogList({ dictionary }: BlogListProps) {
         {/* Blog Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredPosts.length > 0 ? (
-            filteredPosts.map((post) => (
+            filteredPosts.map((post: any) => (
               <BlogCard key={post.slug} {...post} dictionary={dictionary} />
             ))
           ) : (
             <div className="col-span-full py-20 text-center text-slate-400 border border-dashed border-slate-200 bg-slate-50">
-              <p className="text-lg">
-                Aradığınız kriterlere uygun içerik bulunamadı.
-              </p>
+              <p className="text-lg">{common.noContentsFound}</p>
               <Button
                 variant="link"
                 className="text-red-600 mt-2"
                 onClick={() => {
                   setSearchQuery("");
-                  setSelectedCategory("Tümü");
+                  setSelectedCategory(common.all);
                 }}
               >
-                Filtreleri Temizle
+                {common.clearFilters}
               </Button>
             </div>
           )}
