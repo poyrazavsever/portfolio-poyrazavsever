@@ -355,9 +355,9 @@ export function SiteNavbar() {
                 href="https://js.poyrazavsever.com"
               />
               <NavbarMegaMenuItem
-                title="Course Notes & Certifications"
+                title="Certifications"
                 description="BTK Akademi, Udemy and other course notes"
-                href="/academy/course-notes"
+                href="/academy/certifications"
               />
               <NavbarMegaMenuItem
                 title="My Reading & Watch List"

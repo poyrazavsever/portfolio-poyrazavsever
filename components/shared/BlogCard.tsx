@@ -1,6 +1,4 @@
 /* eslint-disable @next/next/no-img-element */
-"use client";
-
 import {
   Card,
   CardHeader,
@@ -19,15 +17,15 @@ import { Clock } from "lucide-react";
 interface BlogCardProps {
   title: string;
   excerpt: string;
-  date: string;
+  date?: string;
   category: string;
   slug: string;
   image: string;
-  author: {
+  author?: {
     name: string;
     avatar: string;
   };
-  readTime: string;
+  readTime: string | number;
 }
 
 export function BlogCard({
@@ -59,10 +57,14 @@ export function BlogCard({
 
         <CardHeader className="pb-2">
           <div className="flex items-center gap-2 text-xs font-mono text-slate-400 mb-3">
-            <span>{date}</span>
-            <span className="w-1 h-1 bg-slate-300 rounded-full" />
+            {date && (
+              <>
+                <span>{date}</span>
+                <span className="w-1 h-1 bg-slate-300 rounded-full" />
+              </>
+            )}
             <span className="flex items-center gap-1">
-              <Clock className="w-3 h-3" /> {readTime}
+              <Clock className="w-3 h-3" /> {readTime} dk
             </span>
           </div>
           <CardTitle className="text-xl md:text-2xl transition-colors group-hover:text-red-600 line-clamp-2">
@@ -79,11 +81,11 @@ export function BlogCard({
         <CardFooter className="pt-4 border-t border-dashed border-slate-100">
           <div className="flex items-center gap-3">
             <Avatar className="w-8 h-8 border border-dashed border-slate-300">
-              <AvatarImage src={author.avatar} />
-              <AvatarFallback>{author.name.charAt(0)}</AvatarFallback>
+              <AvatarImage src={author?.avatar} />
+              <AvatarFallback>{author?.name?.charAt(0) || "P"}</AvatarFallback>
             </Avatar>
             <span className="text-sm font-bold text-slate-700">
-              {author.name}
+              {author?.name || "Poyraz Avsever"}
             </span>
           </div>
         </CardFooter>

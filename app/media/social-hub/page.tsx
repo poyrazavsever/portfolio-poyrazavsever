@@ -93,7 +93,7 @@ export default function SocialHubPage() {
       />
 
       {/* Instagram Section */}
-      <section className="py-20 relative overflow-hidden">
+      <section className="py-20 relative overflow-hidden max-w-6xl mx-auto">
         {/* Background Pattern */}
         <PatternGrid
           className="absolute inset-0 text-slate-100 -z-10"
@@ -131,7 +131,7 @@ export default function SocialHubPage() {
       </section>
 
       {/* Youtube Section */}
-      <section className="py-20 bg-slate-50 border-t border-dashed border-slate-200">
+      <section className="py-20 border-t border-dashed border-slate-200 max-w-6xl mx-auto">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row items-end justify-between mb-12 gap-6">
             <div>

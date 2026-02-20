@@ -1,7 +1,7 @@
 "use client";
 
 import { MediaHero } from "@/components/futures/media/MediaHero";
-import { BlogCard } from "@/components/futures/media/BlogCard";
+import { BlogCard } from "@/components/shared/BlogCard";
 import { SearchInput, Button } from "poyraz-ui/atoms";
 import { useState, useMemo } from "react";
 // Mock Data
@@ -12,7 +12,7 @@ const blogPosts = [
     excerpt:
       "Sürdürülebilir ve ölçeklenebilir backend projeleri için Clean Architecture desenini nasıl uygulayabilirsiniz? Katmanlı mimarinin detayları.",
     date: "18 Ekim 2023",
-    readTime: "12 dk",
+    readTime: "12",
     category: "Backend",
     image:
       "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop",
@@ -27,7 +27,7 @@ const blogPosts = [
     excerpt:
       "Tasarımcı ve geliştirici arasındaki boşluğu kapatmak. Token'lar, component'ler ve otomatik kod üretimi üzerine pratik ipuçları.",
     date: "10 Ekim 2023",
-    readTime: "6 dk",
+    readTime: "6",
     category: "Design",
     image:
       "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=2070&auto=format&fit=crop",
@@ -42,7 +42,7 @@ const blogPosts = [
     excerpt:
       "Her proje mikroservis gerektirmez. Dağıtık sistemlerin maliyeti ve monolitik mimarinin avantajları üzerine bir karşılaştırma.",
     date: "05 Ekim 2023",
-    readTime: "15 dk",
+    readTime: "15",
     category: "Architecture",
     image:
       "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop",
