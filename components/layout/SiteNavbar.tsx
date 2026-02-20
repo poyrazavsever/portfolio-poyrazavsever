@@ -341,7 +341,7 @@ export function SiteNavbar() {
               <NavbarMegaMenuItem
                 title="Social Hub"
                 description="YouTube, Instagram, LinkedIn and more"
-                href="/media/social"
+                href="/media/social-hub"
               />
             </NavbarMegaMenu>
           </NavbarDropdown>
