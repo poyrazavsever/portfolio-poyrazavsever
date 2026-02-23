@@ -251,3 +251,50 @@ export interface AdminCertification {
   is_published: boolean;
   created_at: string;
 }
+
+// ── Reading List ──
+
+export type ReadingItemType = "book" | "video";
+export type ReadingStatus =
+  | "read"
+  | "reading"
+  | "queue"
+  | "watched"
+  | "watching";
+
+export interface AdminReadingItem {
+  id: string;
+  type: ReadingItemType;
+  status: ReadingStatus;
+
+  // Core (i18n)
+  title_tr: string;
+  title_en: string;
+  author_tr: string;
+  author_en: string;
+
+  // Structured
+  image?: string;
+  link?: string;
+  category_tr?: string;
+  category_en?: string;
+  platform?: string; // For videos
+
+  // Meta
+  sort_order: number;
+  is_published: boolean;
+  created_at: string;
+}
+
+export const READING_STATUS_LABELS: Record<ReadingStatus, string> = {
+  read: "Okundu",
+  reading: "Okunuyor",
+  queue: "Sırada",
+  watched: "İzlendi",
+  watching: "İzleniyor",
+};
+
+export const READING_ITEM_TYPE_LABELS: Record<ReadingItemType, string> = {
+  book: "Kitap",
+  video: "Video",
+};
