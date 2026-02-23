@@ -19,11 +19,7 @@ import {
   SelectContent,
   SelectItem,
 } from "poyraz-ui/molecules";
-import {
-  AdminSocialVideo,
-  SocialPlatform,
-  PLATFORM_LABELS,
-} from "@/types/admin";
+import { AdminSocialVideo, SocialPlatform } from "@/types/admin";
 import { Upload, X } from "lucide-react";
 
 interface SocialFormProps {

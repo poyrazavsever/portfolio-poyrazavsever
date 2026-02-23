@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { Badge, Button, Typography } from "poyraz-ui/atoms";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "poyraz-ui/molecules";
 import { DataTable } from "poyraz-ui/organisms";
@@ -58,6 +58,11 @@ export function CareerTable() {
   const [activeTab, setActiveTab] = useState("experience");
   const [editingItem, setEditingItem] = useState<AdminCareerItem | undefined>();
   const [formType, setFormType] = useState<CareerItemType>("work");
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const experienceItems = useMemo(
     () =>
@@ -109,69 +114,71 @@ export function CareerTable() {
         </Typography>
       </div>
 
-      <Tabs value={activeTab} onValueChange={setActiveTab}>
-        <TabsList>
-          <TabsTrigger value="experience">Deneyim</TabsTrigger>
-          <TabsTrigger value="education">Eğitim</TabsTrigger>
-          <TabsTrigger value="form">
-            {editingItem ? "Düzenle" : "Yeni Ekle"}
-          </TabsTrigger>
-        </TabsList>
+      {!isMounted ? null : (
+        <Tabs value={activeTab} onValueChange={setActiveTab}>
+          <TabsList>
+            <TabsTrigger value="experience">Deneyim</TabsTrigger>
+            <TabsTrigger value="education">Eğitim</TabsTrigger>
+            <TabsTrigger value="form">
+              {editingItem ? "Düzenle" : "Yeni Ekle"}
+            </TabsTrigger>
+          </TabsList>
 
-        <TabsContent value="experience" className="space-y-4">
-          <div className="flex justify-between items-center">
-            <Typography variant="h4">İş & Gönüllülük Deneyimi</Typography>
-            <div className="flex gap-2">
-              <Button
-                variant="outline"
-                onClick={() => handleAddNew("volunteer")}
-              >
-                Gönüllü Ekle
-              </Button>
-              <Button onClick={() => handleAddNew("work")}>
-                İş Deneyimi Ekle
+          <TabsContent value="experience" className="space-y-4">
+            <div className="flex justify-between items-center">
+              <Typography variant="h4">İş & Gönüllülük Deneyimi</Typography>
+              <div className="flex gap-2">
+                <Button
+                  variant="outline"
+                  onClick={() => handleAddNew("volunteer")}
+                >
+                  Gönüllü Ekle
+                </Button>
+                <Button onClick={() => handleAddNew("work")}>
+                  İş Deneyimi Ekle
+                </Button>
+              </div>
+            </div>
+            <DataTable
+              columns={columns}
+              data={experienceItems}
+              getRowId={(row) => row.id}
+              selectable
+              onSelectionChange={handleEdit}
+              searchPlaceholder="Deneyim ara..."
+              pageSize={10}
+              emptyMessage="Henüz bir deneyim eklenmemiş."
+            />
+          </TabsContent>
+
+          <TabsContent value="education" className="space-y-4">
+            <div className="flex justify-between items-center">
+              <Typography variant="h4">Eğitim Geçmişi</Typography>
+              <Button onClick={() => handleAddNew("education")}>
+                Eğitim Ekle
               </Button>
             </div>
-          </div>
-          <DataTable
-            columns={columns}
-            data={experienceItems}
-            getRowId={(row) => row.id}
-            selectable
-            onSelectionChange={handleEdit}
-            searchPlaceholder="Deneyim ara..."
-            pageSize={10}
-            emptyMessage="Henüz bir deneyim eklenmemiş."
-          />
-        </TabsContent>
+            <DataTable
+              columns={columns}
+              data={educationItems}
+              getRowId={(row) => row.id}
+              selectable
+              onSelectionChange={handleEdit}
+              searchPlaceholder="Eğitim ara..."
+              pageSize={10}
+              emptyMessage="Henüz bir eğitim eklenmemiş."
+            />
+          </TabsContent>
 
-        <TabsContent value="education" className="space-y-4">
-          <div className="flex justify-between items-center">
-            <Typography variant="h4">Eğitim Geçmişi</Typography>
-            <Button onClick={() => handleAddNew("education")}>
-              Eğitim Ekle
-            </Button>
-          </div>
-          <DataTable
-            columns={columns}
-            data={educationItems}
-            getRowId={(row) => row.id}
-            selectable
-            onSelectionChange={handleEdit}
-            searchPlaceholder="Eğitim ara..."
-            pageSize={10}
-            emptyMessage="Henüz bir eğitim eklenmemiş."
-          />
-        </TabsContent>
-
-        <TabsContent value="form">
-          <CareerForm
-            item={editingItem}
-            defaultType={formType}
-            onCancel={handleFormClose}
-          />
-        </TabsContent>
-      </Tabs>
+          <TabsContent value="form">
+            <CareerForm
+              item={editingItem}
+              defaultType={formType}
+              onCancel={handleFormClose}
+            />
+          </TabsContent>
+        </Tabs>
+      )}
     </div>
   );
 }

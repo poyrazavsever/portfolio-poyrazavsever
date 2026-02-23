@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Badge, Button, Typography } from "poyraz-ui/atoms";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "poyraz-ui/molecules";
 import { DataTable } from "poyraz-ui/organisms";
@@ -148,6 +148,11 @@ const commentColumns: DataTableColumnDef<AdminBlogComment>[] = [
 export function BlogTable() {
   const [editingPost, setEditingPost] = useState<AdminBlogPost | undefined>();
   const [activeTab, setActiveTab] = useState("posts");
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const handleEdit = (rows: AdminBlogPost[]) => {
     if (rows.length === 1) {
@@ -182,50 +187,52 @@ export function BlogTable() {
         </Typography>
       </div>
 
-      <Tabs value={activeTab} onValueChange={setActiveTab}>
-        <TabsList>
-          <TabsTrigger value="posts">Yazılar</TabsTrigger>
-          <TabsTrigger value="comments">
-            Yorumlar
-            {pendingCount > 0 && (
-              <Badge variant="default" className="ml-2 h-5 px-1.5 text-xs">
-                {pendingCount}
-              </Badge>
-            )}
-          </TabsTrigger>
-          <TabsTrigger value="form">
-            {editingPost ? "Yazıyı Düzenle" : "Yeni Yazı Ekle"}
-          </TabsTrigger>
-        </TabsList>
+      {!isMounted ? null : (
+        <Tabs value={activeTab} onValueChange={setActiveTab}>
+          <TabsList>
+            <TabsTrigger value="posts">Yazılar</TabsTrigger>
+            <TabsTrigger value="comments">
+              Yorumlar
+              {pendingCount > 0 && (
+                <Badge variant="default" className="ml-2 h-5 px-1.5 text-xs">
+                  {pendingCount}
+                </Badge>
+              )}
+            </TabsTrigger>
+            <TabsTrigger value="form">
+              {editingPost ? "Yazıyı Düzenle" : "Yeni Yazı Ekle"}
+            </TabsTrigger>
+          </TabsList>
 
-        <TabsContent value="posts">
-          <DataTable
-            columns={postColumns}
-            data={mockBlogPosts}
-            getRowId={(row) => row.id}
-            selectable
-            onSelectionChange={handleEdit}
-            searchPlaceholder="Yazı ara..."
-            pageSize={10}
-            emptyMessage="Yazı bulunamadı."
-          />
-        </TabsContent>
+          <TabsContent value="posts">
+            <DataTable
+              columns={postColumns}
+              data={mockBlogPosts}
+              getRowId={(row) => row.id}
+              selectable
+              onSelectionChange={handleEdit}
+              searchPlaceholder="Yazı ara..."
+              pageSize={10}
+              emptyMessage="Yazı bulunamadı."
+            />
+          </TabsContent>
 
-        <TabsContent value="comments">
-          <DataTable
-            columns={commentColumns}
-            data={mockBlogComments}
-            getRowId={(row) => row.id}
-            searchPlaceholder="Yorum ara..."
-            pageSize={10}
-            emptyMessage="Yorum bulunamadı."
-          />
-        </TabsContent>
+          <TabsContent value="comments">
+            <DataTable
+              columns={commentColumns}
+              data={mockBlogComments}
+              getRowId={(row) => row.id}
+              searchPlaceholder="Yorum ara..."
+              pageSize={10}
+              emptyMessage="Yorum bulunamadı."
+            />
+          </TabsContent>
 
-        <TabsContent value="form">
-          <BlogForm post={editingPost} onCancel={handleFormClose} />
-        </TabsContent>
-      </Tabs>
+          <TabsContent value="form">
+            <BlogForm post={editingPost} onCancel={handleFormClose} />
+          </TabsContent>
+        </Tabs>
+      )}
     </div>
   );
 }

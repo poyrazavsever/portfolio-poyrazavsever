@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { Badge, Button, Typography } from "poyraz-ui/atoms";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "poyraz-ui/molecules";
 import { DataTable } from "poyraz-ui/organisms";
@@ -96,6 +96,11 @@ export function ReadingListTable() {
     AdminReadingItem | undefined
   >();
   const [formType, setFormType] = useState<ReadingItemType>("book");
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const books = useMemo(
     () => mockReadingItems.filter((i) => i.type === "book"),
@@ -144,61 +149,63 @@ export function ReadingListTable() {
         </Typography>
       </div>
 
-      <Tabs value={activeTab} onValueChange={setActiveTab}>
-        <TabsList>
-          <TabsTrigger value="books">Kitaplar</TabsTrigger>
-          <TabsTrigger value="videos">Videolar</TabsTrigger>
-          <TabsTrigger value="form">
-            {editingItem ? "Düzenle" : "Yeni Ekle"}
-          </TabsTrigger>
-        </TabsList>
+      {!isMounted ? null : (
+        <Tabs value={activeTab} onValueChange={setActiveTab}>
+          <TabsList>
+            <TabsTrigger value="books">Kitaplar</TabsTrigger>
+            <TabsTrigger value="videos">Videolar</TabsTrigger>
+            <TabsTrigger value="form">
+              {editingItem ? "Düzenle" : "Yeni Ekle"}
+            </TabsTrigger>
+          </TabsList>
 
-        <TabsContent value="books" className="space-y-4">
-          <div className="flex justify-between items-center">
-            <Typography variant="h4">Kitap Listesi</Typography>
-            <Button onClick={() => handleAddNew("book")}>
-              Yeni Kitap Ekle
-            </Button>
-          </div>
-          <DataTable
-            columns={columns}
-            data={books}
-            getRowId={(row) => row.id}
-            selectable
-            onSelectionChange={handleEdit}
-            searchPlaceholder="Kitap ara..."
-            pageSize={10}
-            emptyMessage="Henüz bir kitap eklenmemiş."
-          />
-        </TabsContent>
+          <TabsContent value="books" className="space-y-4">
+            <div className="flex justify-between items-center">
+              <Typography variant="h4">Kitap Listesi</Typography>
+              <Button onClick={() => handleAddNew("book")}>
+                Yeni Kitap Ekle
+              </Button>
+            </div>
+            <DataTable
+              columns={columns}
+              data={books}
+              getRowId={(row) => row.id}
+              selectable
+              onSelectionChange={handleEdit}
+              searchPlaceholder="Kitap ara..."
+              pageSize={10}
+              emptyMessage="Henüz bir kitap eklenmemiş."
+            />
+          </TabsContent>
 
-        <TabsContent value="videos" className="space-y-4">
-          <div className="flex justify-between items-center">
-            <Typography variant="h4">Video Listesi</Typography>
-            <Button onClick={() => handleAddNew("video")}>
-              Yeni Video Ekle
-            </Button>
-          </div>
-          <DataTable
-            columns={columns}
-            data={videos}
-            getRowId={(row) => row.id}
-            selectable
-            onSelectionChange={handleEdit}
-            searchPlaceholder="Video ara..."
-            pageSize={10}
-            emptyMessage="Henüz bir video eklenmemiş."
-          />
-        </TabsContent>
+          <TabsContent value="videos" className="space-y-4">
+            <div className="flex justify-between items-center">
+              <Typography variant="h4">Video Listesi</Typography>
+              <Button onClick={() => handleAddNew("video")}>
+                Yeni Video Ekle
+              </Button>
+            </div>
+            <DataTable
+              columns={columns}
+              data={videos}
+              getRowId={(row) => row.id}
+              selectable
+              onSelectionChange={handleEdit}
+              searchPlaceholder="Video ara..."
+              pageSize={10}
+              emptyMessage="Henüz bir video eklenmemiş."
+            />
+          </TabsContent>
 
-        <TabsContent value="form">
-          <ReadingListForm
-            item={editingItem}
-            defaultType={formType}
-            onCancel={handleFormClose}
-          />
-        </TabsContent>
-      </Tabs>
+          <TabsContent value="form">
+            <ReadingListForm
+              item={editingItem}
+              defaultType={formType}
+              onCancel={handleFormClose}
+            />
+          </TabsContent>
+        </Tabs>
+      )}
     </div>
   );
 }

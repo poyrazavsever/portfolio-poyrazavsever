@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { Badge, Button, Typography } from "poyraz-ui/atoms";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "poyraz-ui/molecules";
 import { DataTable } from "poyraz-ui/organisms";
@@ -190,6 +190,11 @@ export function MediaTable() {
   >();
   const [activeTab, setActiveTab] = useState("masa_basi");
   const [activeSeries, setActiveSeries] = useState<EpisodeSeries>("masa_basi");
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   // Separated episodes by series
   const masaBasiEpisodes = useMemo(
@@ -263,137 +268,142 @@ export function MediaTable() {
         </Typography>
       </div>
 
-      <Tabs value={activeTab} onValueChange={setActiveTab}>
-        <TabsList>
-          <TabsTrigger
-            value="masa_basi"
-            onClick={() => setActiveSeries("masa_basi")}
-          >
-            Masa Başı
-          </TabsTrigger>
-          <TabsTrigger
-            value="yazilima_dair"
-            onClick={() => setActiveSeries("yazilima_dair")}
-          >
-            Yazılıma Dair
-          </TabsTrigger>
-          <TabsTrigger value="social">
-            Sosyal Medya
-            <span className="ml-1.5 text-xs text-slate-400 font-mono">
-              ({igCount}/{SOCIAL_LIMITS.instagram} IG · {ytCount}/
-              {SOCIAL_LIMITS.youtube} YT)
-            </span>
-          </TabsTrigger>
-          <TabsTrigger value="episode_form">
-            {editingEpisode ? "Bölüm Düzenle" : "Yeni Bölüm"}
-          </TabsTrigger>
-          <TabsTrigger value="social_form">
-            {editingSocial ? "İçerik Düzenle" : "Yeni İçerik"}
-          </TabsTrigger>
-        </TabsList>
-
-        {/* ── Masa Başı ── */}
-        <TabsContent value="masa_basi" className="space-y-4">
-          <div className="flex justify-between items-center">
-            <Typography variant="h4">Masa Başı Bölümleri</Typography>
-            <Button
-              onClick={() => {
-                setEditingEpisode(undefined);
-                setActiveTab("episode_form");
-              }}
+      {!isMounted ? null : (
+        <Tabs value={activeTab} onValueChange={setActiveTab}>
+          <TabsList>
+            <TabsTrigger
+              value="masa_basi"
+              onClick={() => setActiveSeries("masa_basi")}
             >
-              Yeni Bölüm Ekle
-            </Button>
-          </div>
-          <DataTable
-            columns={masaBasiColumns}
-            data={masaBasiEpisodes}
-            getRowId={(row) => row.id}
-            selectable
-            onSelectionChange={handleEditEpisode}
-            searchPlaceholder="Bölüm ara..."
-            pageSize={10}
-            emptyMessage="Masa Başı bölümü bulunamadı."
-          />
-        </TabsContent>
-
-        {/* ── Yazılıma Dair ── */}
-        <TabsContent value="yazilima_dair" className="space-y-4">
-          <div className="flex justify-between items-center">
-            <Typography variant="h4">Yazılıma Dair Bölümleri</Typography>
-            <Button
-              onClick={() => {
-                setEditingEpisode(undefined);
-                setActiveTab("episode_form");
-              }}
+              Masa Başı
+            </TabsTrigger>
+            <TabsTrigger
+              value="yazilima_dair"
+              onClick={() => setActiveSeries("yazilima_dair")}
             >
-              Yeni Bölüm Ekle
-            </Button>
-          </div>
-          <DataTable
-            columns={yazilimaDairColumns}
-            data={yazilimaDairEpisodes}
-            getRowId={(row) => row.id}
-            selectable
-            onSelectionChange={handleEditEpisode}
-            searchPlaceholder="Bölüm ara..."
-            pageSize={10}
-            emptyMessage="Yazılıma Dair bölümü bulunamadı."
-          />
-        </TabsContent>
+              Yazılıma Dair
+            </TabsTrigger>
+            <TabsTrigger value="social">
+              Sosyal Medya
+              <span className="ml-1.5 text-xs text-slate-400 font-mono">
+                ({igCount}/{SOCIAL_LIMITS.instagram} IG · {ytCount}/
+                {SOCIAL_LIMITS.youtube} YT)
+              </span>
+            </TabsTrigger>
+            <TabsTrigger value="episode_form">
+              {editingEpisode ? "Bölüm Düzenle" : "Yeni Bölüm"}
+            </TabsTrigger>
+            <TabsTrigger value="social_form">
+              {editingSocial ? "İçerik Düzenle" : "Yeni İçerik"}
+            </TabsTrigger>
+          </TabsList>
 
-        {/* ── Sosyal Medya ── */}
-        <TabsContent value="social" className="space-y-4">
-          <div className="flex justify-between items-center">
-            <div className="flex gap-3">
-              <Badge
-                variant="outline"
-                className="bg-pink-50 text-pink-700 border-pink-200"
+          {/* ── Masa Başı ── */}
+          <TabsContent value="masa_basi" className="space-y-4">
+            <div className="flex justify-between items-center">
+              <Typography variant="h4">Masa Başı Bölümleri</Typography>
+              <Button
+                onClick={() => {
+                  setEditingEpisode(undefined);
+                  setActiveTab("episode_form");
+                }}
               >
-                Instagram: {igCount}/{SOCIAL_LIMITS.instagram} Reel
-              </Badge>
-              <Badge
-                variant="outline"
-                className="bg-red-50 text-red-700 border-red-200"
-              >
-                YouTube: {ytCount}/{SOCIAL_LIMITS.youtube} Video
-              </Badge>
+                Yeni Bölüm Ekle
+              </Button>
             </div>
-            <Button
-              onClick={() => {
-                setEditingSocial(undefined);
-                setActiveTab("social_form");
-              }}
-            >
-              Yeni İçerik Ekle
-            </Button>
-          </div>
-          <DataTable
-            columns={socialColumns}
-            data={mockSocialVideos}
-            getRowId={(row) => row.id}
-            selectable
-            onSelectionChange={handleEditSocial}
-            searchPlaceholder="İçerik ara..."
-            pageSize={10}
-            emptyMessage="Sosyal medya içeriği bulunamadı."
-          />
-        </TabsContent>
+            <DataTable
+              columns={masaBasiColumns}
+              data={masaBasiEpisodes}
+              getRowId={(row) => row.id}
+              selectable
+              onSelectionChange={handleEditEpisode}
+              searchPlaceholder="Bölüm ara..."
+              pageSize={10}
+              emptyMessage="Masa Başı bölümü bulunamadı."
+            />
+          </TabsContent>
 
-        {/* ── Episode Form ── */}
-        <TabsContent value="episode_form">
-          <EpisodeForm
-            episode={editingEpisode}
-            defaultSeries={activeSeries}
-            onCancel={handleEpisodeFormClose}
-          />
-        </TabsContent>
+          {/* ── Yazılıma Dair ── */}
+          <TabsContent value="yazilima_dair" className="space-y-4">
+            <div className="flex justify-between items-center">
+              <Typography variant="h4">Yazılıma Dair Bölümleri</Typography>
+              <Button
+                onClick={() => {
+                  setEditingEpisode(undefined);
+                  setActiveTab("episode_form");
+                }}
+              >
+                Yeni Bölüm Ekle
+              </Button>
+            </div>
+            <DataTable
+              columns={yazilimaDairColumns}
+              data={yazilimaDairEpisodes}
+              getRowId={(row) => row.id}
+              selectable
+              onSelectionChange={handleEditEpisode}
+              searchPlaceholder="Bölüm ara..."
+              pageSize={10}
+              emptyMessage="Yazılıma Dair bölümü bulunamadı."
+            />
+          </TabsContent>
 
-        {/* ── Social Form ── */}
-        <TabsContent value="social_form">
-          <SocialForm video={editingSocial} onCancel={handleSocialFormClose} />
-        </TabsContent>
-      </Tabs>
+          {/* ── Sosyal Medya ── */}
+          <TabsContent value="social" className="space-y-4">
+            <div className="flex justify-between items-center">
+              <div className="flex gap-3">
+                <Badge
+                  variant="outline"
+                  className="bg-pink-50 text-pink-700 border-pink-200"
+                >
+                  Instagram: {igCount}/{SOCIAL_LIMITS.instagram} Reel
+                </Badge>
+                <Badge
+                  variant="outline"
+                  className="bg-red-50 text-red-700 border-red-200"
+                >
+                  YouTube: {ytCount}/{SOCIAL_LIMITS.youtube} Video
+                </Badge>
+              </div>
+              <Button
+                onClick={() => {
+                  setEditingSocial(undefined);
+                  setActiveTab("social_form");
+                }}
+              >
+                Yeni İçerik Ekle
+              </Button>
+            </div>
+            <DataTable
+              columns={socialColumns}
+              data={mockSocialVideos}
+              getRowId={(row) => row.id}
+              selectable
+              onSelectionChange={handleEditSocial}
+              searchPlaceholder="İçerik ara..."
+              pageSize={10}
+              emptyMessage="Sosyal medya içeriği bulunamadı."
+            />
+          </TabsContent>
+
+          {/* ── Episode Form ── */}
+          <TabsContent value="episode_form">
+            <EpisodeForm
+              episode={editingEpisode}
+              defaultSeries={activeSeries}
+              onCancel={handleEpisodeFormClose}
+            />
+          </TabsContent>
+
+          {/* ── Social Form ── */}
+          <TabsContent value="social_form">
+            <SocialForm
+              video={editingSocial}
+              onCancel={handleSocialFormClose}
+            />
+          </TabsContent>
+        </Tabs>
+      )}
     </div>
   );
 }

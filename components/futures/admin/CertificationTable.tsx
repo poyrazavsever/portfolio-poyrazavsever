@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Badge, Button, Typography } from "poyraz-ui/atoms";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "poyraz-ui/molecules";
 import { DataTable } from "poyraz-ui/organisms";
@@ -63,6 +63,11 @@ export function CertificationTable() {
   const [editingCertification, setEditingCertification] = useState<
     AdminCertification | undefined
   >();
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const handleEdit = (rows: AdminCertification[]) => {
     if (rows.length === 1) {
@@ -100,38 +105,40 @@ export function CertificationTable() {
         </Typography>
       </div>
 
-      <Tabs value={activeTab} onValueChange={setActiveTab}>
-        <TabsList>
-          <TabsTrigger value="list">Sertifikalar</TabsTrigger>
-          <TabsTrigger value="form">
-            {editingCertification ? "Düzenle" : "Yeni Ekle"}
-          </TabsTrigger>
-        </TabsList>
+      {!isMounted ? null : (
+        <Tabs value={activeTab} onValueChange={setActiveTab}>
+          <TabsList>
+            <TabsTrigger value="list">Sertifikalar</TabsTrigger>
+            <TabsTrigger value="form">
+              {editingCertification ? "Düzenle" : "Yeni Ekle"}
+            </TabsTrigger>
+          </TabsList>
 
-        <TabsContent value="list" className="space-y-4">
-          <div className="flex justify-between items-center">
-            <Typography variant="h4">Sertifika Listesi</Typography>
-            <Button onClick={handleAddNew}>Yeni Sertifika Ekle</Button>
-          </div>
-          <DataTable
-            columns={columns}
-            data={mockCertifications}
-            getRowId={(row) => row.id}
-            selectable
-            onSelectionChange={handleEdit}
-            searchPlaceholder="Sertifika ara..."
-            pageSize={10}
-            emptyMessage="Henüz bir sertifika eklenmemiş."
-          />
-        </TabsContent>
+          <TabsContent value="list" className="space-y-4">
+            <div className="flex justify-between items-center">
+              <Typography variant="h4">Sertifika Listesi</Typography>
+              <Button onClick={handleAddNew}>Yeni Sertifika Ekle</Button>
+            </div>
+            <DataTable
+              columns={columns}
+              data={mockCertifications}
+              getRowId={(row) => row.id}
+              selectable
+              onSelectionChange={handleEdit}
+              searchPlaceholder="Sertifika ara..."
+              pageSize={10}
+              emptyMessage="Henüz bir sertifika eklenmemiş."
+            />
+          </TabsContent>
 
-        <TabsContent value="form">
-          <CertificationForm
-            certification={editingCertification}
-            onCancel={handleFormClose}
-          />
-        </TabsContent>
-      </Tabs>
+          <TabsContent value="form">
+            <CertificationForm
+              certification={editingCertification}
+              onCancel={handleFormClose}
+            />
+          </TabsContent>
+        </Tabs>
+      )}
     </div>
   );
 }
