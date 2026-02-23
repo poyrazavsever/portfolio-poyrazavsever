@@ -226,3 +226,28 @@ export const CAREER_ITEM_TYPE_LABELS: Record<CareerItemType, string> = {
   volunteer: "Gönüllü",
   education: "Eğitim",
 };
+
+// ── Certifications ──
+
+export interface AdminCertification {
+  id: string;
+
+  // Core (i18n)
+  title_tr: string;
+  title_en: string;
+  organization_tr: string;
+  organization_en: string;
+  issue_date_tr: string; // e.g. "Haziran 2023"
+  issue_date_en: string; // e.g. "June 2023"
+
+  // Structured
+  credential_id?: string;
+  link?: string;
+  image?: string;
+  tags: string[];
+
+  // Meta
+  sort_order: number;
+  is_published: boolean;
+  created_at: string;
+}
