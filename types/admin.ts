@@ -115,3 +115,75 @@ export const BLOG_CATEGORY_LABELS: Record<BlogCategory, string> = {
   design: "Tasarım",
   engineering: "Mühendislik",
 };
+
+// ── Media ──
+
+export type EpisodeSeries = "masa_basi" | "yazilima_dair";
+
+export interface AdminEpisode {
+  id: string;
+  series: EpisodeSeries;
+  episode_number: number;
+  season: number;
+
+  title_tr: string;
+  title_en: string;
+  description_tr?: string;
+  description_en?: string;
+  content_tr?: string;
+  content_en?: string;
+
+  guest_name?: string;
+  guest_role?: string;
+  guest_image?: string;
+
+  date: string;
+  time?: string;
+  duration?: string;
+  topics: string[];
+
+  youtube_url?: string;
+  spotify_url?: string;
+
+  is_upcoming: boolean;
+  is_published: boolean;
+  created_at: string;
+}
+
+export type SocialPlatform = "youtube" | "instagram";
+
+export interface AdminSocialVideo {
+  id: string;
+  platform: SocialPlatform;
+
+  title?: string;
+  caption?: string;
+  external_id?: string;
+  thumbnail_url?: string;
+  video_url?: string;
+
+  likes_count?: string;
+  comments_count?: string;
+  views_count?: string;
+  duration?: string;
+  published_at?: string;
+
+  sort_order: number;
+  is_published: boolean;
+  created_at: string;
+}
+
+export const SERIES_LABELS: Record<EpisodeSeries, string> = {
+  masa_basi: "Masa Başı",
+  yazilima_dair: "Yazılıma Dair",
+};
+
+export const PLATFORM_LABELS: Record<SocialPlatform, string> = {
+  youtube: "YouTube",
+  instagram: "Instagram",
+};
+
+export const SOCIAL_LIMITS: Record<SocialPlatform, number> = {
+  instagram: 4,
+  youtube: 3,
+};

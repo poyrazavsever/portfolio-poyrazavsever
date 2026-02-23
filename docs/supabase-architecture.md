@@ -194,12 +194,15 @@ CREATE TABLE episodes (
   title_en        TEXT NOT NULL,
   description_tr  TEXT,
   description_en  TEXT,
+  content_tr      TEXT,                      -- Markdown episode notes
+  content_en      TEXT,
 
   guest_name      TEXT,
   guest_role      TEXT,
   guest_image     TEXT,
 
   date            DATE NOT NULL,
+  time            TEXT,                      -- "20:00" (for upcoming streams)
   duration        TEXT,                      -- "1h 15m"
   topics          TEXT[] DEFAULT '{}',
 
@@ -227,12 +230,16 @@ CREATE TABLE social_videos (
   platform        TEXT NOT NULL CHECK (platform IN ('youtube', 'instagram', 'tiktok')),
 
   title           TEXT,
+  caption         TEXT,                      -- Instagram caption
   external_id     TEXT,                      -- YouTube video ID, Instagram post ID
   thumbnail_url   TEXT,
   video_url       TEXT,
 
   likes_count     TEXT,                      -- "1.2K" format
   comments_count  TEXT,
+  views_count     TEXT,                      -- YouTube views "12K"
+  duration        TEXT,                      -- YouTube duration "12:34"
+  published_at    TEXT,                      -- "2 weeks ago"
 
   sort_order      INT DEFAULT 0,
   is_published    BOOLEAN DEFAULT true,
