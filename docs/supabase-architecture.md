@@ -99,6 +99,7 @@ CREATE TABLE projects (
   features        JSONB DEFAULT '[]',        -- ["Feature 1", "Feature 2"]
   tags            TEXT[] DEFAULT '{}',
   gallery_images  TEXT[] DEFAULT '{}',
+  mermaid         TEXT,                      -- Mermaid diagram syntax
   cover_image     TEXT,
   year            TEXT,
 

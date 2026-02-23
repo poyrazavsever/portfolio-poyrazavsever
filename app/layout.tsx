@@ -42,13 +42,18 @@ export const metadata: Metadata = {
 
 import { getDictionary } from "@/get-dictionary";
 import { i18n, Locale } from "@/i18n-config";
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 
 export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const headerStore = await headers();
+  const pathname =
+    headerStore.get("x-next-url") ?? headerStore.get("x-invoke-path") ?? "";
+  const isAdmin = pathname.startsWith("/admin");
+
   const cookieStore = await cookies();
   const locale = (cookieStore.get("NEXT_LOCALE")?.value ||
     i18n.defaultLocale) as Locale;
@@ -57,12 +62,16 @@ export default async function RootLayout({
   return (
     <html lang={locale}>
       <body>
-        <TooltipProvider>
-          <SiteNavbar dictionary={dictionary} currentLocale={locale} />
-          <main className="min-h-screen">{children}</main>
-          <SiteFooter dictionary={dictionary} />
-          <Toaster />
-        </TooltipProvider>
+        {isAdmin ? (
+          <>{children}</>
+        ) : (
+          <TooltipProvider>
+            <SiteNavbar dictionary={dictionary} currentLocale={locale} />
+            <main className="min-h-screen">{children}</main>
+            <SiteFooter dictionary={dictionary} />
+            <Toaster />
+          </TooltipProvider>
+        )}
       </body>
     </html>
   );

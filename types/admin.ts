@@ -1,0 +1,117 @@
+// Admin-specific types matching Supabase schema
+
+export type ProjectType =
+  | "portfolio"
+  | "fullstack_case"
+  | "design_case"
+  | "product_saas"
+  | "product_mobile"
+  | "product_figma";
+
+export interface AdminProject {
+  id: string;
+  slug: string;
+  type: ProjectType;
+
+  // Core (i18n)
+  title_tr: string;
+  title_en: string;
+  description_tr?: string;
+  description_en?: string;
+  category_tr?: string;
+  category_en?: string;
+
+  // Detail (i18n)
+  problem_tr?: string;
+  problem_en?: string;
+  solution_tr?: string;
+  solution_en?: string;
+  role_tr?: string;
+  role_en?: string;
+  design_process_tr?: string;
+  design_process_en?: string;
+  technical_details_tr?: string;
+  technical_details_en?: string;
+  lessons_learned_tr?: string;
+  lessons_learned_en?: string;
+
+  // Structured
+  features?: string[];
+  tags: string[];
+  gallery_images?: string[];
+  mermaid?: string;
+  cover_image?: string;
+  year?: string;
+
+  // Links
+  demo_url?: string;
+  repo_url?: string;
+  case_study_url?: string;
+
+  // Product specific
+  is_premium?: boolean;
+  price?: number;
+
+  // Figma specific
+  figma_url?: string;
+  screens_count?: number;
+  components_count?: number;
+
+  // Meta
+  sort_order: number;
+  is_published: boolean;
+  featured: boolean;
+  created_at: string;
+}
+
+export const PROJECT_TYPE_LABELS: Record<ProjectType, string> = {
+  portfolio: "Portfolio",
+  fullstack_case: "Fullstack Case",
+  design_case: "Design Case",
+  product_saas: "SaaS",
+  product_mobile: "Mobile",
+  product_figma: "Figma",
+};
+
+// ── Blog ──
+
+export type BlogCategory = "tech" | "design" | "engineering";
+
+export interface AdminBlogPost {
+  id: string;
+  slug: string;
+
+  title_tr: string;
+  title_en: string;
+  excerpt_tr?: string;
+  excerpt_en?: string;
+  content_tr?: string;
+  content_en?: string;
+
+  category?: BlogCategory;
+  cover_image?: string;
+  read_time_min?: number;
+  tags: string[];
+
+  is_published: boolean;
+  published_at?: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface AdminBlogComment {
+  id: string;
+  post_id: string;
+  post_title: string;
+  user_name: string;
+  user_avatar?: string;
+  content: string;
+  is_approved: boolean;
+  created_at: string;
+}
+
+export const BLOG_CATEGORY_LABELS: Record<BlogCategory, string> = {
+  tech: "Teknoloji",
+  design: "Tasarım",
+  engineering: "Mühendislik",
+};
