@@ -187,3 +187,42 @@ export const SOCIAL_LIMITS: Record<SocialPlatform, number> = {
   instagram: 4,
   youtube: 3,
 };
+
+// ── Career ──
+
+export type CareerItemType = "work" | "volunteer" | "education";
+
+export interface AdminCareerItem {
+  id: string;
+  type: CareerItemType;
+
+  // Core (i18n)
+  role_tr: string;
+  role_en: string;
+  company_tr: string;
+  company_en: string;
+  location_tr?: string;
+  location_en?: string;
+  date_tr: string; // e.g. "Haziran 2021 - Günümüz"
+  date_en: string; // e.g. "June 2021 - Present"
+
+  // Detailed
+  description_tr?: string[];
+  description_en?: string[];
+  skills?: string[];
+
+  // Display
+  employment_type_tr?: string; // e.g. "Tam Zamanlı"
+  employment_type_en?: string; // e.g. "Full-time"
+
+  // Meta
+  sort_order: number;
+  is_published: boolean;
+  created_at: string;
+}
+
+export const CAREER_ITEM_TYPE_LABELS: Record<CareerItemType, string> = {
+  work: "İş Tecrübesi",
+  volunteer: "Gönüllü",
+  education: "Eğitim",
+};
