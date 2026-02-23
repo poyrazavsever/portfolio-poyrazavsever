@@ -68,7 +68,7 @@ export function AdminSidebar() {
   const pathname = usePathname();
 
   return (
-    <Sidebar variant="collapsible">
+    <Sidebar variant="collapsible" className="h-screen sticky top-0 border-r">
       <SidebarHeader>
         <Logo width={40} height={40} />
         <SidebarTrigger action="collapse" />
