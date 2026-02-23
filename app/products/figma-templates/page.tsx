@@ -1,29 +1,70 @@
 ﻿import { cookies } from "next/headers";
 import { ProductHero } from "@/components/futures/products/ProductHero";
 import { FigmaTemplateCard } from "@/components/futures/products/FigmaTemplateCard";
-import { projects } from "@/data/portfolio-data";
 import { Project } from "@/types/project";
+import { AdminProject } from "@/types/admin";
 import { Button } from "poyraz-ui/atoms";
+import { Alert, AlertTitle, AlertDescription } from "poyraz-ui/molecules";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, AlertCircle } from "lucide-react";
 import { getDictionary } from "@/get-dictionary";
 import { i18n, type Locale } from "@/i18n-config";
+import { createClient } from "@/lib/supabase/server";
 
 export default async function FigmaTemplatesPage() {
   const cookieStore = await cookies();
-  const locale = (cookieStore.get("NEXT_LOCALE")?.value || i18n.defaultLocale) as Locale;
+  const locale = (cookieStore.get("NEXT_LOCALE")?.value ||
+    i18n.defaultLocale) as Locale;
   const dictionary = await getDictionary(locale);
   const { productsFigma: figma } = dictionary;
 
-  // Aggregate and filter projects relevant to Figma Templates
-  const templateProjects: Project[] = projects.filter((project) => {
-    const isTemplate =
-      project.category === "Figma Template" ||
-      project.tags.includes("Figma") ||
-      project.tags.includes("UI Kit") ||
-      project.title.toLowerCase().includes("kit");
-    return isTemplate;
-  });
+  // Fetch from Supabase
+  const supabase = await createClient();
+  const { data: adminProjects } = await supabase
+    .from("projects")
+    .select("*")
+    .eq("is_published", true)
+    .eq("type", "product_figma")
+    .order("sort_order", { ascending: true })
+    .order("created_at", { ascending: false });
+
+  // Map Supabase data to frontend Project interface
+  const dbProjects: Project[] = ((adminProjects as AdminProject[]) || []).map(
+    (p) => ({
+      id: p.id,
+      title: locale === "tr" ? p.title_tr : p.title_en || p.title_tr,
+      description:
+        (locale === "tr" ? p.description_tr : p.description_en) ||
+        p.description_tr ||
+        "",
+      coverImage:
+        p.cover_image ||
+        "https://placehold.co/600x400/dc2626/white?text=No+Image",
+      tags: p.tags || [],
+      year: p.year || "",
+      category:
+        (locale === "tr" ? p.category_tr : p.category_en) ||
+        p.category_tr ||
+        "",
+      problem: locale === "tr" ? p.problem_tr : p.problem_en,
+      solution: locale === "tr" ? p.solution_tr : p.solution_en,
+      role: locale === "tr" ? p.role_tr : p.role_en,
+      features: p.features || [],
+      designProcess:
+        locale === "tr" ? p.design_process_tr : p.design_process_en,
+      technicalDetails:
+        locale === "tr" ? p.technical_details_tr : p.technical_details_en,
+      lessonsLearned:
+        locale === "tr" ? p.lessons_learned_tr : p.lessons_learned_en,
+      galleryImages: p.gallery_images || [],
+      mermaid: p.mermaid || undefined,
+      links: {
+        demo: p.demo_url || undefined,
+        repo: p.repo_url || undefined,
+        caseStudy: p.case_study_url || undefined,
+      },
+    }),
+  );
 
   return (
     <div className="min-h-screen pb-24">
@@ -37,8 +78,8 @@ export default async function FigmaTemplatesPage() {
       <div className="container mx-auto px-4 max-w-6xl mt-16 md:mt-24">
         {/* Templates Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
-          {templateProjects.length > 0 ? (
-            templateProjects.map((project, index) => (
+          {dbProjects.length > 0 ? (
+            dbProjects.map((project, index) => (
               <FigmaTemplateCard
                 key={project.id || project.title + index}
                 project={project}
@@ -46,8 +87,12 @@ export default async function FigmaTemplatesPage() {
               />
             ))
           ) : (
-            <div className="col-span-full text-center py-20 text-slate-500 border-2 border-dashed border-slate-200">
-              <p>{figma.empty}</p>
+            <div className="col-span-full flex justify-center py-20">
+              <Alert variant="warning" className="max-w-md flex-initial">
+                <AlertCircle className="h-4 w-4" />
+                <AlertTitle>{dictionary.shared?.warning || "Uyarı"}</AlertTitle>
+                <AlertDescription>{figma.empty}</AlertDescription>
+              </Alert>
             </div>
           )}
         </div>
@@ -73,4 +118,3 @@ export default async function FigmaTemplatesPage() {
     </div>
   );
 }
-

@@ -24,5 +24,6 @@
       "description": "Büyük ölçekli bir e-ticaret platformu için modüler bir tasarım sistemi. Atomik bileşenler, renk belirteçleri ve erişilebilirlik kılavuzları içerir.",
       "category": "Tasarım Sistemi"
     }
-  ]
+  ],
+  "empty": "Henüz bu alanda bir proje bulunmamaktadır."
 }

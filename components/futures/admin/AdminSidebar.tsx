@@ -1,6 +1,6 @@
 "use client";
 
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import {
   Sidebar,
   SidebarHeader,
@@ -14,7 +14,7 @@ import {
   SidebarTrigger,
   SidebarUserProfile,
 } from "poyraz-ui/organisms";
-import { Logo } from "poyraz-ui/atoms";
+import { Logo, Button } from "poyraz-ui/atoms";
 import {
   LayoutDashboard,
   FolderKanban,
@@ -24,7 +24,9 @@ import {
   Award,
   BookOpen,
   ExternalLink,
+  LogOut,
 } from "lucide-react";
+import { useSupabase } from "@/lib/supabase/hooks";
 
 const menuItems = [
   {
@@ -66,15 +68,26 @@ const menuItems = [
 
 export function AdminSidebar() {
   const pathname = usePathname();
+  const router = useRouter();
+  const { supabase } = useSupabase();
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    router.push("/admin/login");
+    router.refresh();
+  };
 
   return (
-    <Sidebar variant="collapsible" className="h-screen sticky top-0 border-r">
+    <Sidebar
+      variant="collapsible"
+      className="h-screen sticky top-0 border-r flex flex-col"
+    >
       <SidebarHeader>
         <Logo width={40} height={40} />
         <SidebarTrigger action="collapse" />
       </SidebarHeader>
 
-      <SidebarContent>
+      <SidebarContent className="flex-1">
         <SidebarGroup>
           <SidebarGroupLabel>İçerik Yönetimi</SidebarGroupLabel>
           <SidebarMenu>
@@ -106,13 +119,21 @@ export function AdminSidebar() {
         </SidebarGroup>
       </SidebarContent>
 
-      <SidebarFooter>
+      <SidebarFooter className="border-t p-4 flex flex-col gap-4">
         <SidebarUserProfile
           name="Poyraz Avsever"
           role="Admin"
           avatarUrl="/logo/logo.jpeg"
           initials="PA"
         />
+        <Button
+          variant="outline"
+          className="w-full justify-start text-red-600 hover:bg-red-50 hover:text-red-700 border-red-200"
+          onClick={handleLogout}
+        >
+          <LogOut className="w-4 h-4 mr-2" />
+          Çıkış Yap
+        </Button>
       </SidebarFooter>
     </Sidebar>
   );

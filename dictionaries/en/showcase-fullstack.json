@@ -24,5 +24,6 @@
       "description": "Designing a robust PostgreSQL schema for a multi-tenant e-commerce platform. Includes complex relationships, indexing strategies, and PL/pgSQL functions.",
       "category": "Database"
     }
-  ]
+  ],
+  "empty": "There are currently no projects in this area."
 }

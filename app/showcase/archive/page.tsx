@@ -1,60 +1,66 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-﻿import { cookies } from "next/headers";
+import { cookies } from "next/headers";
 import { ArchiveHero } from "@/components/futures/archive/ArchiveHero";
 import { ProjectGrid } from "@/components/shared/ProjectGrid";
-import { projects as portfolioProjects } from "@/data/portfolio-data";
-import { fullstackCases } from "@/data/fullstack-data";
-import { designProjects } from "@/data/design-data";
+import { Alert, AlertTitle, AlertDescription } from "poyraz-ui/molecules";
+import { AlertCircle } from "lucide-react";
 import { Project } from "@/types/project";
+import { AdminProject } from "@/types/admin";
 import { getDictionary } from "@/get-dictionary";
 import { i18n, type Locale } from "@/i18n-config";
+import { createClient } from "@/lib/supabase/server";
 
 export default async function ArchivePage() {
   const cookieStore = await cookies();
-  const locale = (cookieStore.get("NEXT_LOCALE")?.value || i18n.defaultLocale) as Locale;
+  const locale = (cookieStore.get("NEXT_LOCALE")?.value ||
+    i18n.defaultLocale) as Locale;
   const dictionary = await getDictionary(locale);
   const { showcaseArchive: archive } = dictionary;
 
-  // Localize projects helper (it's repeated, maybe I should share it, but for simplicity let's do it here)
-  const localize = (list: Project[], dictKey: string) => {
-    const dict = (dictionary as any)[dictKey]?.projects || [];
-    return list.map((item) => {
-      const localized = dict.find(
-        (p: any) => p.id === item.id || p.title === item.title,
-      );
-      return localized
-        ? {
-            ...item,
-            title: localized.title,
-            description: localized.description,
-            category: localized.category,
-            problem: localized.problem || item.problem,
-            solution: localized.solution || item.solution,
-            role: localized.role || item.role,
-            features: localized.features || item.features,
-            designProcess: localized.designProcess || item.designProcess,
-            technicalDetails:
-              localized.technicalDetails || item.technicalDetails,
-            lessonsLearned: localized.lessonsLearned || item.lessonsLearned,
-            client: localized.client || item.client,
-          }
-        : item;
-    });
-  };
+  // Fetch all published projects from Supabase
+  const supabase = await createClient();
+  const { data: adminProjects } = await supabase
+    .from("projects")
+    .select("*")
+    .eq("is_published", true)
+    .order("created_at", { ascending: false });
 
-  // Combine all projects with localization
-  const allProjects: Project[] = [
-    ...localize(portfolioProjects, "showcasePortfolio"),
-    ...localize(fullstackCases, "showcaseFullstack"),
-    ...localize(designProjects, "showcaseDesign"),
-  ];
-
-  // Optional: Sort by year descending
-  allProjects.sort((a, b) => {
-    const yearA = parseInt(a.year) || 0;
-    const yearB = parseInt(b.year) || 0;
-    return yearB - yearA;
-  });
+  // Map Supabase data to frontend Project interface
+  const dbProjects: Project[] = ((adminProjects as AdminProject[]) || []).map(
+    (p) => ({
+      id: p.id,
+      title: locale === "tr" ? p.title_tr : p.title_en || p.title_tr,
+      description:
+        (locale === "tr" ? p.description_tr : p.description_en) ||
+        p.description_tr ||
+        "",
+      coverImage:
+        p.cover_image ||
+        "https://placehold.co/600x400/dc2626/white?text=No+Image",
+      tags: p.tags || [],
+      year: p.year || "",
+      category:
+        (locale === "tr" ? p.category_tr : p.category_en) ||
+        p.category_tr ||
+        "",
+      problem: locale === "tr" ? p.problem_tr : p.problem_en,
+      solution: locale === "tr" ? p.solution_tr : p.solution_en,
+      role: locale === "tr" ? p.role_tr : p.role_en,
+      features: p.features || [],
+      designProcess:
+        locale === "tr" ? p.design_process_tr : p.design_process_en,
+      technicalDetails:
+        locale === "tr" ? p.technical_details_tr : p.technical_details_en,
+      lessonsLearned:
+        locale === "tr" ? p.lessons_learned_tr : p.lessons_learned_en,
+      galleryImages: p.gallery_images || [],
+      mermaid: p.mermaid || undefined,
+      links: {
+        demo: p.demo_url || undefined,
+        repo: p.repo_url || undefined,
+        caseStudy: p.case_study_url || undefined,
+      },
+    }),
+  );
 
   return (
     <div className="min-h-screen pb-24">
@@ -66,9 +72,18 @@ export default async function ArchivePage() {
       />
 
       <div className="container mx-auto px-4 max-w-6xl mt-16 md:mt-24">
-        <ProjectGrid projects={allProjects} dictionary={dictionary} />
+        {dbProjects.length > 0 ? (
+          <ProjectGrid projects={dbProjects} dictionary={dictionary} />
+        ) : (
+          <div className="flex justify-center py-20">
+            <Alert variant="warning" className="max-w-md">
+              <AlertCircle className="h-4 w-4" />
+              <AlertTitle>{dictionary.shared?.warning || "Uyarı"}</AlertTitle>
+              <AlertDescription>{archive.empty}</AlertDescription>
+            </Alert>
+          </div>
+        )}
       </div>
     </div>
   );
 }
-

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import {
   Card,
   CardHeader,
@@ -14,17 +15,34 @@ import {
   PasswordInput,
 } from "poyraz-ui/atoms";
 import { Icon } from "@iconify/react";
+import { useSupabase } from "@/lib/supabase/hooks";
 
 export function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
+  const router = useRouter();
+  const { supabase } = useSupabase();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    // Supabase auth entegrasyonu buraya gelecek
-    setTimeout(() => setLoading(false), 1500);
+    setErrorMsg("");
+
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    setLoading(false);
+
+    if (error) {
+      setErrorMsg(error.message);
+    } else {
+      router.push("/admin/projects");
+      router.refresh(); // Refresh the router to update server components with the new session
+    }
   };
 
   return (
@@ -55,6 +73,12 @@ export function LoginForm() {
 
         <form onSubmit={handleSubmit}>
           <CardContent className="space-y-4">
+            {errorMsg && (
+              <div className="p-3 bg-red-50 text-red-600 rounded-md border border-red-200 text-sm">
+                {errorMsg}
+              </div>
+            )}
+
             <div className="space-y-2">
               <Label htmlFor="email">E-posta</Label>
               <Input
@@ -85,6 +109,7 @@ export function LoginForm() {
               size="lg"
               className="w-full"
               loading={loading}
+              disabled={loading}
             >
               Giriş Yap
               <Icon icon="mdi:arrow-right" className="ml-2 w-4 h-4" />

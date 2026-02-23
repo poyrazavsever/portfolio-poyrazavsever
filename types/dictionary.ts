@@ -169,6 +169,7 @@ export interface Dictionary {
       };
       client: string;
     };
+    warning: string;
   };
   home: {
     hero: {

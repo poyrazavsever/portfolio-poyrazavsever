@@ -24,5 +24,6 @@
       "description": "Çok kiracılı bir e-ticaret platformu için sağlam bir PostgreSQL şeması tasarlamak. Karmaşık ilişkileri, indeksleme stratejilerini ve PL/pgSQL fonksiyonlarını içerir.",
       "category": "Veritabanı"
     }
-  ]
+  ],
+  "empty": "Henüz bu alanda bir proje bulunmamaktadır."
 }

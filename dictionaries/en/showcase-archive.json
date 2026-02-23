@@ -4,5 +4,6 @@
     "highlight": "Archive",
     "description": "A comprehensive collection of all my works across design, development, and engineering.",
     "badge": "Project Archive"
-  }
+  },
+  "empty": "There are currently no projects in this area."
 }

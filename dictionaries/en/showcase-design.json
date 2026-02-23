@@ -24,5 +24,6 @@
       "description": "A modular design system for a large-scale e-commerce platform. Includes atomic components, color tokens, and accessibility guidelines.",
       "category": "Design System"
     }
-  ]
+  ],
+  "empty": "There are currently no projects in this area."
 }

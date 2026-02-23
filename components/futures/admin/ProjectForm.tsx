@@ -28,10 +28,11 @@ import {
 import { AdminProject, ProjectType, PROJECT_TYPE_LABELS } from "@/types/admin";
 import { generateSlug } from "@/lib/admin-utils";
 import { Upload, X, Plus } from "lucide-react";
+import { createProject, updateProject } from "@/lib/supabase/queries/projects";
 
 interface ProjectFormProps {
   project?: AdminProject;
-  onCancel: () => void;
+  onCancel: (shouldRefresh?: boolean) => void;
 }
 
 const projectTypes = Object.entries(PROJECT_TYPE_LABELS) as [
@@ -42,11 +43,44 @@ const projectTypes = Object.entries(PROJECT_TYPE_LABELS) as [
 export function ProjectForm({ project, onCancel }: ProjectFormProps) {
   const isEditing = !!project;
   const [type, setType] = useState<ProjectType>("portfolio");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Form state
   const [titleTr, setTitleTr] = useState("");
+  const [titleEn, setTitleEn] = useState("");
   const [slug, setSlug] = useState("");
   const [slugManual, setSlugManual] = useState(false);
+  const [descriptionTr, setDescriptionTr] = useState("");
+  const [descriptionEn, setDescriptionEn] = useState("");
+  const [categoryTr, setCategoryTr] = useState("");
+  const [categoryEn, setCategoryEn] = useState("");
+  const [year, setYear] = useState("");
+  const [tags, setTags] = useState("");
+  const [features, setFeatures] = useState("");
+  const [problemTr, setProblemTr] = useState("");
+  const [problemEn, setProblemEn] = useState("");
+  const [solutionTr, setSolutionTr] = useState("");
+  const [solutionEn, setSolutionEn] = useState("");
+  const [roleTr, setRoleTr] = useState("");
+  const [roleEn, setRoleEn] = useState("");
+  const [designProcessTr, setDesignProcessTr] = useState("");
+  const [designProcessEn, setDesignProcessEn] = useState("");
+  const [technicalDetailsTr, setTechnicalDetailsTr] = useState("");
+  const [technicalDetailsEn, setTechnicalDetailsEn] = useState("");
+  const [lessonsLearnedTr, setLessonsLearnedTr] = useState("");
+  const [lessonsLearnedEn, setLessonsLearnedEn] = useState("");
+  const [mermaid, setMermaid] = useState("");
+  const [demoUrl, setDemoUrl] = useState("");
+  const [repoUrl, setRepoUrl] = useState("");
+  const [caseStudyUrl, setCaseStudyUrl] = useState("");
+  const [price, setPrice] = useState("");
+  const [isPremium, setIsPremium] = useState(false);
+  const [figmaUrl, setFigmaUrl] = useState("");
+  const [screensCount, setScreensCount] = useState("");
+  const [componentsCount, setComponentsCount] = useState("");
+  const [sortOrder, setSortOrder] = useState("0");
+  const [isPublished, setIsPublished] = useState(true);
+  const [featured, setFeatured] = useState(false);
 
   // Cover image
   const [coverPreview, setCoverPreview] = useState<string | null>(null);
@@ -56,21 +90,95 @@ export function ProjectForm({ project, onCancel }: ProjectFormProps) {
   const [galleryPreviews, setGalleryPreviews] = useState<string[]>([]);
   const galleryInputRef = useRef<HTMLInputElement>(null);
 
+  // File objects for uploading
+  const [coverFile, setCoverFile] = useState<File | null>(null);
+  const [galleryFiles, setGalleryFiles] = useState<
+    { file: File; preview: string }[]
+  >([]);
+
   useEffect(() => {
     if (project) {
       setType(project.type);
-      setTitleTr(project.title_tr);
-      setSlug(project.slug);
+      setTitleTr(project.title_tr || "");
+      setTitleEn(project.title_en || "");
+      setSlug(project.slug || "");
       setSlugManual(true);
+      setDescriptionTr(project.description_tr || "");
+      setDescriptionEn(project.description_en || "");
+      setCategoryTr(project.category_tr || "");
+      setCategoryEn(project.category_en || "");
+      setYear(project.year || "");
+      setTags(project.tags?.join(", ") || "");
+      setFeatures(project.features?.join("\n") || "");
+      setProblemTr(project.problem_tr || "");
+      setProblemEn(project.problem_en || "");
+      setSolutionTr(project.solution_tr || "");
+      setSolutionEn(project.solution_en || "");
+      setRoleTr(project.role_tr || "");
+      setRoleEn(project.role_en || "");
+      setDesignProcessTr(project.design_process_tr || "");
+      setDesignProcessEn(project.design_process_en || "");
+      setTechnicalDetailsTr(project.technical_details_tr || "");
+      setTechnicalDetailsEn(project.technical_details_en || "");
+      setLessonsLearnedTr(project.lessons_learned_tr || "");
+      setLessonsLearnedEn(project.lessons_learned_en || "");
+      setMermaid(project.mermaid || "");
+      setDemoUrl(project.demo_url || "");
+      setRepoUrl(project.repo_url || "");
+      setCaseStudyUrl(project.case_study_url || "");
+      setPrice(project.price?.toString() || "");
+      setIsPremium(project.is_premium || false);
+      setFigmaUrl(project.figma_url || "");
+      setScreensCount(project.screens_count?.toString() || "");
+      setComponentsCount(project.components_count?.toString() || "");
+      setSortOrder(project.sort_order?.toString() || "0");
+      setIsPublished(project.is_published ?? true);
+      setFeatured(project.featured || false);
       setCoverPreview(project.cover_image || null);
+      setCoverFile(null);
       setGalleryPreviews(project.gallery_images || []);
+      setGalleryFiles([]);
     } else {
       setType("portfolio");
       setTitleTr("");
+      setTitleEn("");
       setSlug("");
       setSlugManual(false);
+      setDescriptionTr("");
+      setDescriptionEn("");
+      setCategoryTr("");
+      setCategoryEn("");
+      setYear("");
+      setTags("");
+      setFeatures("");
+      setProblemTr("");
+      setProblemEn("");
+      setSolutionTr("");
+      setSolutionEn("");
+      setRoleTr("");
+      setRoleEn("");
+      setDesignProcessTr("");
+      setDesignProcessEn("");
+      setTechnicalDetailsTr("");
+      setTechnicalDetailsEn("");
+      setLessonsLearnedTr("");
+      setLessonsLearnedEn("");
+      setMermaid("");
+      setDemoUrl("");
+      setRepoUrl("");
+      setCaseStudyUrl("");
+      setPrice("");
+      setIsPremium(false);
+      setFigmaUrl("");
+      setScreensCount("");
+      setComponentsCount("");
+      setSortOrder("0");
+      setIsPublished(true);
+      setFeatured(false);
       setCoverPreview(null);
+      setCoverFile(null);
       setGalleryPreviews([]);
+      setGalleryFiles([]);
     }
   }, [project]);
 
@@ -91,25 +199,120 @@ export function ProjectForm({ project, onCancel }: ProjectFormProps) {
     if (file) {
       const url = URL.createObjectURL(file);
       setCoverPreview(url);
+      setCoverFile(file);
     }
   };
 
   const handleGalleryUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (files) {
-      const urls = Array.from(files).map((f) => URL.createObjectURL(f));
-      setGalleryPreviews((prev) => [...prev, ...urls]);
+      const newFiles = Array.from(files).map((file) => ({
+        file,
+        preview: URL.createObjectURL(file),
+      }));
+      setGalleryFiles((prev) => [...prev, ...newFiles]);
     }
   };
 
-  const removeGalleryImage = (index: number) => {
+  const removeCoverImage = () => {
+    setCoverPreview(null);
+    setCoverFile(null);
+    if (coverInputRef.current) coverInputRef.current.value = "";
+  };
+
+  const removeGalleryImageOld = (index: number) => {
     setGalleryPreviews((prev) => prev.filter((_, i) => i !== index));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const removeGalleryImageNew = (index: number) => {
+    setGalleryFiles((prev) => prev.filter((_, i) => i !== index));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Supabase entegrasyonu buraya gelecek
-    onCancel();
+    setIsSubmitting(true);
+
+    try {
+      const { uploadProjectImage } =
+        await import("@/lib/supabase/queries/projects");
+
+      let finalCoverUrl = coverPreview;
+      if (coverFile) {
+        const fileExt = coverFile.name.split(".").pop();
+        const fileName = `covers/${Date.now()}-${slug}.${fileExt}`;
+        finalCoverUrl = await uploadProjectImage(coverFile, fileName);
+      }
+
+      const finalGalleryUrls = [...galleryPreviews];
+      for (let i = 0; i < galleryFiles.length; i++) {
+        const file = galleryFiles[i].file;
+        const fileExt = file.name.split(".").pop();
+        const fileName = `gallery/${Date.now()}-${slug}-${i}.${fileExt}`;
+        const url = await uploadProjectImage(file, fileName);
+        finalGalleryUrls.push(url);
+      }
+
+      const projectData: Partial<AdminProject> = {
+        title_tr: titleTr,
+        title_en: titleEn,
+        slug: slug || generateSlug(titleTr),
+        type,
+        description_tr: descriptionTr,
+        description_en: descriptionEn,
+        category_tr: categoryTr,
+        category_en: categoryEn,
+        year,
+        tags: tags
+          .split(",")
+          .map((t) => t.trim())
+          .filter(Boolean),
+        features: features
+          .split("\n")
+          .map((f) => f.trim())
+          .filter(Boolean),
+        problem_tr: problemTr,
+        problem_en: problemEn,
+        solution_tr: solutionTr,
+        solution_en: solutionEn,
+        role_tr: roleTr,
+        role_en: roleEn,
+        design_process_tr: designProcessTr,
+        design_process_en: designProcessEn,
+        technical_details_tr: technicalDetailsTr,
+        technical_details_en: technicalDetailsEn,
+        lessons_learned_tr: lessonsLearnedTr,
+        lessons_learned_en: lessonsLearnedEn,
+        mermaid,
+        demo_url: demoUrl,
+        repo_url: repoUrl,
+        case_study_url: caseStudyUrl,
+        is_premium: isPremium,
+        price: price ? parseFloat(price) : undefined,
+        figma_url: figmaUrl,
+        screens_count: screensCount ? parseInt(screensCount) : undefined,
+        components_count: componentsCount
+          ? parseInt(componentsCount)
+          : undefined,
+        sort_order: parseInt(sortOrder) || 0,
+        is_published: isPublished,
+        featured,
+        cover_image: finalCoverUrl || undefined,
+        gallery_images: finalGalleryUrls.length > 0 ? finalGalleryUrls : [],
+      };
+
+      if (isEditing && project?.id) {
+        await updateProject(project.id, projectData);
+      } else {
+        await createProject({ ...projectData });
+      }
+
+      onCancel(true); // close form and refresh table
+    } catch (error) {
+      console.error("Failed to save project:", error);
+      alert("Proje kaydedilirken bir hata oluştu.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -119,10 +322,12 @@ export function ProjectForm({ project, onCancel }: ProjectFormProps) {
           {isEditing ? `"${project.title_tr}" Düzenleniyor` : "Yeni Proje Ekle"}
         </Typography>
         <div className="flex gap-2">
-          <Button type="button" variant="outline" onClick={onCancel}>
+          <Button type="button" variant="outline" onClick={() => onCancel()}>
             İptal
           </Button>
-          <Button type="submit">{isEditing ? "Güncelle" : "Oluştur"}</Button>
+          <Button type="submit" loading={isSubmitting} disabled={isSubmitting}>
+            {isEditing ? "Güncelle" : "Oluştur"}
+          </Button>
         </div>
       </div>
 
@@ -139,7 +344,7 @@ export function ProjectForm({ project, onCancel }: ProjectFormProps) {
         </TabsList>
 
         {/* ── Genel ── */}
-        <TabsContent value="general" className="space-y-4">
+        <TabsContent value="general" className="space-y-4 force-mount">
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label>Başlık (TR)</Label>
@@ -153,7 +358,8 @@ export function ProjectForm({ project, onCancel }: ProjectFormProps) {
               <Label>Başlık (EN)</Label>
               <Input
                 placeholder="Project title"
-                defaultValue={project?.title_en}
+                value={titleEn}
+                onChange={(e) => setTitleEn(e.target.value)}
               />
             </div>
           </div>
@@ -199,14 +405,16 @@ export function ProjectForm({ project, onCancel }: ProjectFormProps) {
               <Label>Açıklama (TR)</Label>
               <Textarea
                 placeholder="Kısa açıklama"
-                defaultValue={project?.description_tr}
+                value={descriptionTr}
+                onChange={(e) => setDescriptionTr(e.target.value)}
               />
             </div>
             <div className="space-y-2">
               <Label>Açıklama (EN)</Label>
               <Textarea
                 placeholder="Short description"
-                defaultValue={project?.description_en}
+                value={descriptionEn}
+                onChange={(e) => setDescriptionEn(e.target.value)}
               />
             </div>
           </div>
@@ -216,14 +424,16 @@ export function ProjectForm({ project, onCancel }: ProjectFormProps) {
               <Label>Kategori (TR)</Label>
               <Input
                 placeholder="SaaS, Mobil..."
-                defaultValue={project?.category_tr}
+                value={categoryTr}
+                onChange={(e) => setCategoryTr(e.target.value)}
               />
             </div>
             <div className="space-y-2">
               <Label>Kategori (EN)</Label>
               <Input
                 placeholder="SaaS, Mobile..."
-                defaultValue={project?.category_en}
+                value={categoryEn}
+                onChange={(e) => setCategoryEn(e.target.value)}
               />
             </div>
           </div>
@@ -231,13 +441,18 @@ export function ProjectForm({ project, onCancel }: ProjectFormProps) {
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label>Yıl</Label>
-              <Input placeholder="2024" defaultValue={project?.year} />
+              <Input
+                placeholder="2024"
+                value={year}
+                onChange={(e) => setYear(e.target.value)}
+              />
             </div>
             <div className="space-y-2">
               <Label>Etiketler (virgülle ayır)</Label>
               <Input
                 placeholder="React, Next.js, TypeScript"
-                defaultValue={project?.tags?.join(", ")}
+                value={tags}
+                onChange={(e) => setTags(e.target.value)}
               />
             </div>
           </div>
@@ -247,7 +462,8 @@ export function ProjectForm({ project, onCancel }: ProjectFormProps) {
             <Textarea
               placeholder={"Özellik 1\nÖzellik 2\nÖzellik 3"}
               rows={4}
-              defaultValue={project?.features?.join("\n")}
+              value={features}
+              onChange={(e) => setFeatures(e.target.value)}
             />
           </div>
         </TabsContent>
@@ -259,46 +475,113 @@ export function ProjectForm({ project, onCancel }: ProjectFormProps) {
             destekler.
           </Typography>
 
-          {[
-            { label: "Problem", keyTr: "problem_tr", keyEn: "problem_en" },
-            { label: "Çözüm", keyTr: "solution_tr", keyEn: "solution_en" },
-            { label: "Rol", keyTr: "role_tr", keyEn: "role_en" },
-            {
-              label: "Tasarım Süreci",
-              keyTr: "design_process_tr",
-              keyEn: "design_process_en",
-            },
-            {
-              label: "Teknik Detaylar",
-              keyTr: "technical_details_tr",
-              keyEn: "technical_details_en",
-            },
-            {
-              label: "Öğrenilen Dersler",
-              keyTr: "lessons_learned_tr",
-              keyEn: "lessons_learned_en",
-            },
-          ].map((field) => (
-            <div key={field.keyTr} className="space-y-2">
-              <Label>{field.label}</Label>
-              <div className="grid grid-cols-2 gap-2">
-                <Textarea
-                  placeholder={`${field.label} (TR)`}
-                  rows={3}
-                  defaultValue={
-                    project?.[field.keyTr as keyof AdminProject] as string
-                  }
-                />
-                <Textarea
-                  placeholder={`${field.label} (EN)`}
-                  rows={3}
-                  defaultValue={
-                    project?.[field.keyEn as keyof AdminProject] as string
-                  }
-                />
-              </div>
+          <div className="space-y-2">
+            <Label>Problem</Label>
+            <div className="grid grid-cols-2 gap-2">
+              <Textarea
+                placeholder="Problem (TR)"
+                rows={3}
+                value={problemTr}
+                onChange={(e) => setProblemTr(e.target.value)}
+              />
+              <Textarea
+                placeholder="Problem (EN)"
+                rows={3}
+                value={problemEn}
+                onChange={(e) => setProblemEn(e.target.value)}
+              />
             </div>
-          ))}
+          </div>
+
+          <div className="space-y-2">
+            <Label>Çözüm</Label>
+            <div className="grid grid-cols-2 gap-2">
+              <Textarea
+                placeholder="Çözüm (TR)"
+                rows={3}
+                value={solutionTr}
+                onChange={(e) => setSolutionTr(e.target.value)}
+              />
+              <Textarea
+                placeholder="Çözüm (EN)"
+                rows={3}
+                value={solutionEn}
+                onChange={(e) => setSolutionEn(e.target.value)}
+              />
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <Label>Rol</Label>
+            <div className="grid grid-cols-2 gap-2">
+              <Textarea
+                placeholder="Rol (TR)"
+                rows={3}
+                value={roleTr}
+                onChange={(e) => setRoleTr(e.target.value)}
+              />
+              <Textarea
+                placeholder="Rol (EN)"
+                rows={3}
+                value={roleEn}
+                onChange={(e) => setRoleEn(e.target.value)}
+              />
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <Label>Tasarım Süreci</Label>
+            <div className="grid grid-cols-2 gap-2">
+              <Textarea
+                placeholder="Tasarım Süreci (TR)"
+                rows={3}
+                value={designProcessTr}
+                onChange={(e) => setDesignProcessTr(e.target.value)}
+              />
+              <Textarea
+                placeholder="Tasarım Süreci (EN)"
+                rows={3}
+                value={designProcessEn}
+                onChange={(e) => setDesignProcessEn(e.target.value)}
+              />
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <Label>Teknik Detaylar</Label>
+            <div className="grid grid-cols-2 gap-2">
+              <Textarea
+                placeholder="Teknik Detaylar (TR)"
+                rows={3}
+                value={technicalDetailsTr}
+                onChange={(e) => setTechnicalDetailsTr(e.target.value)}
+              />
+              <Textarea
+                placeholder="Teknik Detaylar (EN)"
+                rows={3}
+                value={technicalDetailsEn}
+                onChange={(e) => setTechnicalDetailsEn(e.target.value)}
+              />
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <Label>Öğrenilen Dersler</Label>
+            <div className="grid grid-cols-2 gap-2">
+              <Textarea
+                placeholder="Öğrenilen Dersler (TR)"
+                rows={3}
+                value={lessonsLearnedTr}
+                onChange={(e) => setLessonsLearnedTr(e.target.value)}
+              />
+              <Textarea
+                placeholder="Öğrenilen Dersler (EN)"
+                rows={3}
+                value={lessonsLearnedEn}
+                onChange={(e) => setLessonsLearnedEn(e.target.value)}
+              />
+            </div>
+          </div>
 
           <Separator />
 
@@ -311,7 +594,8 @@ export function ProjectForm({ project, onCancel }: ProjectFormProps) {
               placeholder={"graph TD\n  A[App] --> B[API]\n  B --> C[Database]"}
               rows={6}
               className="font-mono text-sm"
-              defaultValue={project?.mermaid}
+              value={mermaid}
+              onChange={(e) => setMermaid(e.target.value)}
             />
           </div>
         </TabsContent>
@@ -338,10 +622,7 @@ export function ProjectForm({ project, onCancel }: ProjectFormProps) {
                 />
                 <button
                   type="button"
-                  onClick={() => {
-                    setCoverPreview(null);
-                    if (coverInputRef.current) coverInputRef.current.value = "";
-                  }}
+                  onClick={removeCoverImage}
                   className="absolute top-2 right-2 w-7 h-7 bg-red-600 text-white flex items-center justify-center hover:bg-red-700 transition-colors"
                 >
                   <X className="w-4 h-4" />
@@ -376,19 +657,41 @@ export function ProjectForm({ project, onCancel }: ProjectFormProps) {
             />
 
             <div className="grid grid-cols-3 gap-4">
+              {/* Existing/Uploaded Gallery Previews (Strings) */}
               {galleryPreviews.map((url, i) => (
                 <div
-                  key={i}
+                  key={`old-${i}`}
                   className="relative aspect-square border-2 border-dashed border-slate-300"
                 >
                   <img
                     src={url}
-                    alt={`Galeri ${i + 1}`}
+                    alt={`Galeri Mevcut ${i + 1}`}
                     className="w-full h-full object-cover"
                   />
                   <button
                     type="button"
-                    onClick={() => removeGalleryImage(i)}
+                    onClick={() => removeGalleryImageOld(i)}
+                    className="absolute top-1 right-1 w-6 h-6 bg-red-600 text-white flex items-center justify-center hover:bg-red-700 transition-colors"
+                  >
+                    <X className="w-3 h-3" />
+                  </button>
+                </div>
+              ))}
+
+              {/* Newly Added Gallery Previews (Files) */}
+              {galleryFiles.map((fileObj, i) => (
+                <div
+                  key={`new-${i}`}
+                  className="relative aspect-square border-2 border-dashed border-slate-300"
+                >
+                  <img
+                    src={fileObj.preview}
+                    alt={`Galeri Yeni ${i + 1}`}
+                    className="w-full h-full object-cover"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => removeGalleryImageNew(i)}
                     className="absolute top-1 right-1 w-6 h-6 bg-red-600 text-white flex items-center justify-center hover:bg-red-700 transition-colors"
                   >
                     <X className="w-3 h-3" />
@@ -414,21 +717,24 @@ export function ProjectForm({ project, onCancel }: ProjectFormProps) {
             <Label>Demo URL</Label>
             <Input
               placeholder="https://demo.example.com"
-              defaultValue={project?.demo_url}
+              value={demoUrl}
+              onChange={(e) => setDemoUrl(e.target.value)}
             />
           </div>
           <div className="space-y-2">
             <Label>Repository URL</Label>
             <Input
               placeholder="https://github.com/..."
-              defaultValue={project?.repo_url}
+              value={repoUrl}
+              onChange={(e) => setRepoUrl(e.target.value)}
             />
           </div>
           <div className="space-y-2">
             <Label>Case Study URL</Label>
             <Input
               placeholder="https://..."
-              defaultValue={project?.case_study_url}
+              value={caseStudyUrl}
+              onChange={(e) => setCaseStudyUrl(e.target.value)}
             />
           </div>
         </TabsContent>
@@ -449,13 +755,15 @@ export function ProjectForm({ project, onCancel }: ProjectFormProps) {
                     <Input
                       type="number"
                       step="0.01"
-                      defaultValue={project?.price}
+                      value={price}
+                      onChange={(e) => setPrice(e.target.value)}
                     />
                   </div>
                   <div className="flex items-center gap-2 pt-6">
                     <Checkbox
                       id="is_premium"
-                      defaultChecked={project?.is_premium}
+                      checked={isPremium}
+                      onCheckedChange={(checked) => setIsPremium(!!checked)}
                     />
                     <Label htmlFor="is_premium">Premium Ürün</Label>
                   </div>
@@ -472,7 +780,8 @@ export function ProjectForm({ project, onCancel }: ProjectFormProps) {
                   <Label>Figma URL</Label>
                   <Input
                     placeholder="https://figma.com/..."
-                    defaultValue={project?.figma_url}
+                    value={figmaUrl}
+                    onChange={(e) => setFigmaUrl(e.target.value)}
                   />
                 </div>
                 <div className="grid grid-cols-2 gap-4">
@@ -480,14 +789,16 @@ export function ProjectForm({ project, onCancel }: ProjectFormProps) {
                     <Label>Ekran Sayısı</Label>
                     <Input
                       type="number"
-                      defaultValue={project?.screens_count}
+                      value={screensCount}
+                      onChange={(e) => setScreensCount(e.target.value)}
                     />
                   </div>
                   <div className="space-y-2">
                     <Label>Bileşen Sayısı</Label>
                     <Input
                       type="number"
-                      defaultValue={project?.components_count}
+                      value={componentsCount}
+                      onChange={(e) => setComponentsCount(e.target.value)}
                     />
                   </div>
                 </div>
@@ -497,13 +808,15 @@ export function ProjectForm({ project, onCancel }: ProjectFormProps) {
                     <Input
                       type="number"
                       step="0.01"
-                      defaultValue={project?.price}
+                      value={price}
+                      onChange={(e) => setPrice(e.target.value)}
                     />
                   </div>
                   <div className="flex items-center gap-2 pt-6">
                     <Checkbox
                       id="is_premium_figma"
-                      defaultChecked={project?.is_premium}
+                      checked={isPremium}
+                      onCheckedChange={(checked) => setIsPremium(!!checked)}
                     />
                     <Label htmlFor="is_premium_figma">Premium</Label>
                   </div>
@@ -530,19 +843,28 @@ export function ProjectForm({ project, onCancel }: ProjectFormProps) {
         <TabsContent value="meta" className="space-y-4">
           <div className="space-y-2">
             <Label>Sıralama</Label>
-            <Input type="number" defaultValue={project?.sort_order ?? 0} />
+            <Input
+              type="number"
+              value={sortOrder}
+              onChange={(e) => setSortOrder(e.target.value)}
+            />
           </div>
 
           <div className="flex items-center gap-6">
             <div className="flex items-center gap-2">
               <Checkbox
                 id="is_published"
-                defaultChecked={project?.is_published ?? true}
+                checked={isPublished}
+                onCheckedChange={(checked) => setIsPublished(!!checked)}
               />
               <Label htmlFor="is_published">Yayınla</Label>
             </div>
             <div className="flex items-center gap-2">
-              <Checkbox id="featured" defaultChecked={project?.featured} />
+              <Checkbox
+                id="featured"
+                checked={featured}
+                onCheckedChange={(checked) => setFeatured(!!checked)}
+              />
               <Label htmlFor="featured">Öne Çıkar</Label>
             </div>
           </div>
