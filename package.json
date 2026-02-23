@@ -11,6 +11,8 @@
   "dependencies": {
     "@formatjs/intl-localematcher": "^0.8.1",
     "@iconify/react": "^6.0.2",
+    "@supabase/ssr": "^0.8.0",
+    "@supabase/supabase-js": "^2.97.0",
     "@types/negotiator": "^0.6.4",
     "@types/react-syntax-highlighter": "^15.5.13",
     "framer-motion": "^12.23.24",
