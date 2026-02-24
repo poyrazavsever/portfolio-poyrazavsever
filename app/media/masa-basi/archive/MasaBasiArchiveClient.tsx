@@ -51,6 +51,7 @@ export function MasaBasiArchiveClient({
             <MediaListItem
               key={ep.id}
               id={ep.id}
+              displayId={ep.displayId}
               title={ep.title}
               guest={ep.guest}
               date={ep.date}

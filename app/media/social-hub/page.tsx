@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-﻿import { cookies } from "next/headers";
+import { cookies } from "next/headers";
 import { MediaHero } from "@/components/futures/media/MediaHero";
 import { InstagramCard } from "@/components/futures/media/InstagramCard";
 import { YoutubeCard } from "@/components/futures/media/YoutubeCard";
@@ -7,46 +7,64 @@ import { Button, PatternGrid, Typography } from "poyraz-ui/atoms";
 import { Instagram, Youtube, ArrowRight } from "lucide-react";
 import { getDictionary } from "@/get-dictionary";
 import { i18n, type Locale } from "@/i18n-config";
+import { getPublishedSocialVideos } from "@/lib/supabase/queries/media";
 
 export default async function SocialHubPage() {
   const cookieStore = await cookies();
-  const locale = (cookieStore.get("NEXT_LOCALE")?.value || i18n.defaultLocale) as Locale;
+  const locale = (cookieStore.get("NEXT_LOCALE")?.value ||
+    i18n.defaultLocale) as Locale;
   const dictionary = await getDictionary(locale);
   const t = dictionary.mediaSocial;
   const common = dictionary.mediaCommon.labels;
 
-  const instagramPosts = (t.instagram || []).map((post: any) => ({
-    ...post,
-    thumbnail:
-      post.id === "1"
-        ? "https://images.unsplash.com/photo-1611162616475-46b635cb6868?q=80&w=1974&auto=format&fit=crop"
-        : post.id === "2"
-          ? "https://images.unsplash.com/photo-1516259762381-22954d7d3ad2?q=80&w=2089&auto=format&fit=crop"
-          : post.id === "3"
-            ? "https://images.unsplash.com/photo-1555099962-4199c345e5dd?q=80&w=2070&auto=format&fit=crop"
-            : "https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=2070&auto=format&fit=crop",
-    videoUrl: "#",
-  }));
+  const allVideos = await getPublishedSocialVideos();
 
-  const youtubeVideos = t.youtube.map((video: any) => ({
-    ...video,
-    thumbnail:
-      video.id === "1"
-        ? "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=2072&auto=format&fit=crop"
-        : video.id === "2"
-          ? "https://images.unsplash.com/photo-1587620962725-abab7fe55159?q=80&w=2031&auto=format&fit=crop"
-          : "https://images.unsplash.com/photo-1550439062-609e1531270e?q=80&w=2070&auto=format&fit=crop",
-    videoUrl: "https://youtube.com",
-    category:
-      video.id === "1"
-        ? "Tutorial"
-        : video.id === "2"
-          ? "Kariyer"
-          : "Teknoloji",
-    views: "15B",
-    duration: "45:20",
-    publishedAt: "2 days ago",
-  }));
+  // Supabase'den veri varsa onu kullan, yoksa dictionary fallback
+  const instagramPosts =
+    allVideos.filter((v) => v.platform === "instagram").length > 0
+      ? allVideos
+          .filter((v) => v.platform === "instagram")
+          .map((v) => ({
+            id: v.id,
+            caption: v.caption || "",
+            thumbnail: v.thumbnail_url || "",
+            videoUrl: v.video_url || "#",
+            likes: v.likes_count || "0",
+            comments: v.comments_count || "0",
+          }))
+      : (t.instagram || []).map((post: any) => ({
+          ...post,
+          thumbnail:
+            "https://images.unsplash.com/photo-1611162616475-46b635cb6868?q=80&w=1974&auto=format&fit=crop",
+          videoUrl: "#",
+        }));
+
+  const youtubeVideos =
+    allVideos.filter((v) => v.platform === "youtube").length > 0
+      ? allVideos
+          .filter((v) => v.platform === "youtube")
+          .map((v) => ({
+            id: v.id,
+            title: v.title || "",
+            thumbnail: v.thumbnail_url || "",
+            videoUrl: v.video_url || "#",
+            views: v.views_count || "0",
+            duration: v.duration || "",
+            publishedAt: v.published_at || "",
+            likes: v.likes_count || "0",
+            comments: v.comments_count || "0",
+            category: "Video",
+          }))
+      : t.youtube.map((video: any) => ({
+          ...video,
+          thumbnail:
+            "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=2072&auto=format&fit=crop",
+          videoUrl: "https://youtube.com",
+          category: "Tutorial",
+          views: "15B",
+          duration: "45:20",
+          publishedAt: "2 days ago",
+        }));
 
   return (
     <div className="min-h-screen bg-white pb-32">
@@ -123,4 +141,3 @@ export default async function SocialHubPage() {
     </div>
   );
 }
-

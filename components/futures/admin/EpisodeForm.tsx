@@ -15,6 +15,11 @@ import {
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "poyraz-ui/molecules";
 import { AdminEpisode, EpisodeSeries, SERIES_LABELS } from "@/types/admin";
 import { Upload, X } from "lucide-react";
+import {
+  createEpisode,
+  updateEpisode,
+  uploadGuestImage,
+} from "@/lib/supabase/queries/media";
 
 interface EpisodeFormProps {
   episode?: AdminEpisode;
@@ -30,9 +35,43 @@ export function EpisodeForm({
   const isEditing = !!episode;
   const series = episode?.series || defaultSeries;
 
-  // Guest image
   const [guestPreview, setGuestPreview] = useState<string | null>(null);
+  const [guestFile, setGuestFile] = useState<File | null>(null);
   const guestInputRef = useRef<HTMLInputElement>(null);
+  const [loading, setLoading] = useState(false);
+
+  // Form Data State
+  const [formData, setFormData] = useState({
+    episode_number: episode?.episode_number?.toString() || "1",
+    season: episode?.season?.toString() || "1",
+    title_tr: episode?.title_tr || "",
+    title_en: episode?.title_en || "",
+    description_tr: episode?.description_tr || "",
+    description_en: episode?.description_en || "",
+    content_tr: episode?.content_tr || "",
+    content_en: episode?.content_en || "",
+    guest_name: episode?.guest_name || "",
+    guest_role: episode?.guest_role || "",
+    date: episode?.date || "",
+    time: episode?.time || "",
+    duration: episode?.duration || "",
+    topics: episode?.topics?.join(", ") || "",
+    youtube_url: episode?.youtube_url || "",
+    spotify_url: episode?.spotify_url || "",
+    is_upcoming: episode?.is_upcoming ?? false,
+    is_published: episode?.is_published ?? true,
+  });
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleCheckboxChange = (name: string, checked: boolean) => {
+    setFormData((prev) => ({ ...prev, [name]: checked }));
+  };
 
   useEffect(() => {
     if (episode) {
@@ -40,17 +79,59 @@ export function EpisodeForm({
     } else {
       setGuestPreview(null);
     }
+    setGuestFile(null);
   }, [episode]);
 
   const handleGuestUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
+      setGuestFile(file);
       setGuestPreview(URL.createObjectURL(file));
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setLoading(true);
+
+    let guestImageUrl = episode?.guest_image || "";
+    if (guestFile) {
+      const path = `guests/${Date.now()}-${guestFile.name}`;
+      guestImageUrl = await uploadGuestImage(guestFile, path);
+    }
+
+    const data = {
+      series,
+      episode_number: parseInt(formData.episode_number) || 1,
+      season: parseInt(formData.season) || 1,
+      title_tr: formData.title_tr,
+      title_en: formData.title_en,
+      description_tr: formData.description_tr,
+      description_en: formData.description_en,
+      content_tr: formData.content_tr,
+      content_en: formData.content_en,
+      guest_name: formData.guest_name,
+      guest_role: formData.guest_role,
+      guest_image: guestImageUrl,
+      date: formData.date,
+      time: formData.time,
+      duration: formData.duration,
+      topics: formData.topics
+        ? formData.topics.split(",").map((t) => t.trim())
+        : [],
+      youtube_url: formData.youtube_url,
+      spotify_url: formData.spotify_url,
+      is_upcoming: formData.is_upcoming,
+      is_published: formData.is_published,
+    };
+
+    if (isEditing && episode) {
+      await updateEpisode(episode.id, data);
+    } else {
+      await createEpisode(data);
+    }
+
+    setLoading(false);
     onCancel();
   };
 
@@ -66,7 +147,9 @@ export function EpisodeForm({
           <Button type="button" variant="outline" onClick={onCancel}>
             İptal
           </Button>
-          <Button type="submit">{isEditing ? "Güncelle" : "Oluştur"}</Button>
+          <Button type="submit" loading={loading} disabled={loading}>
+            {isEditing ? "Güncelle" : "Oluştur"}
+          </Button>
         </div>
       </div>
 
@@ -89,17 +172,21 @@ export function EpisodeForm({
             <div className="space-y-2">
               <Label>Bölüm No</Label>
               <Input
+                name="episode_number"
                 type="number"
                 placeholder="12"
-                defaultValue={episode?.episode_number}
+                value={formData.episode_number}
+                onChange={handleChange}
               />
             </div>
             <div className="space-y-2">
               <Label>Sezon</Label>
               <Input
+                name="season"
                 type="number"
                 placeholder="1"
-                defaultValue={episode?.season ?? 1}
+                value={formData.season}
+                onChange={handleChange}
               />
             </div>
             <div className="space-y-2">
@@ -116,15 +203,19 @@ export function EpisodeForm({
             <div className="space-y-2">
               <Label>Başlık (TR)</Label>
               <Input
+                name="title_tr"
                 placeholder="Bölüm başlığı"
-                defaultValue={episode?.title_tr}
+                value={formData.title_tr}
+                onChange={handleChange}
               />
             </div>
             <div className="space-y-2">
               <Label>Başlık (EN)</Label>
               <Input
+                name="title_en"
                 placeholder="Episode title"
-                defaultValue={episode?.title_en}
+                value={formData.title_en}
+                onChange={handleChange}
               />
             </div>
           </div>
@@ -133,17 +224,21 @@ export function EpisodeForm({
             <div className="space-y-2">
               <Label>Açıklama (TR)</Label>
               <Textarea
+                name="description_tr"
                 placeholder="Kısa açıklama"
                 rows={3}
-                defaultValue={episode?.description_tr}
+                value={formData.description_tr}
+                onChange={handleChange}
               />
             </div>
             <div className="space-y-2">
               <Label>Açıklama (EN)</Label>
               <Textarea
+                name="description_en"
                 placeholder="Short description"
                 rows={3}
-                defaultValue={episode?.description_en}
+                value={formData.description_en}
+                onChange={handleChange}
               />
             </div>
           </div>
@@ -151,27 +246,41 @@ export function EpisodeForm({
           <div className="grid grid-cols-3 gap-4">
             <div className="space-y-2">
               <Label>Tarih</Label>
-              <Input type="date" defaultValue={episode?.date} />
+              <Input
+                name="date"
+                type="date"
+                value={formData.date}
+                onChange={handleChange}
+              />
             </div>
             <div className="space-y-2">
               <Label>Saat</Label>
               <Input
+                name="time"
                 type="time"
                 placeholder="20:00"
-                defaultValue={episode?.time}
+                value={formData.time}
+                onChange={handleChange}
               />
             </div>
             <div className="space-y-2">
               <Label>Süre</Label>
-              <Input placeholder="1h 15m" defaultValue={episode?.duration} />
+              <Input
+                name="duration"
+                placeholder="1h 15m"
+                value={formData.duration}
+                onChange={handleChange}
+              />
             </div>
           </div>
 
           <div className="space-y-2">
             <Label>Konular (virgülle ayır)</Label>
             <Input
+              name="topics"
               placeholder="React, TypeScript, Architecture"
-              defaultValue={episode?.topics?.join(", ")}
+              value={formData.topics}
+              onChange={handleChange}
             />
           </div>
         </TabsContent>
@@ -183,15 +292,19 @@ export function EpisodeForm({
               <div className="space-y-2">
                 <Label>Konuk Adı</Label>
                 <Input
+                  name="guest_name"
                   placeholder="Ahmet Yılmaz"
-                  defaultValue={episode?.guest_name}
+                  value={formData.guest_name}
+                  onChange={handleChange}
                 />
               </div>
               <div className="space-y-2">
                 <Label>Konuk Rolü</Label>
                 <Input
+                  name="guest_role"
                   placeholder="Senior Developer @ Company"
-                  defaultValue={episode?.guest_role}
+                  value={formData.guest_role}
+                  onChange={handleChange}
                 />
               </div>
             </div>
@@ -217,6 +330,7 @@ export function EpisodeForm({
                     type="button"
                     onClick={() => {
                       setGuestPreview(null);
+                      setGuestFile(null);
                       if (guestInputRef.current)
                         guestInputRef.current.value = "";
                     }}
@@ -250,23 +364,27 @@ export function EpisodeForm({
             <div className="space-y-2">
               <Label>İçerik (TR)</Label>
               <Textarea
+                name="content_tr"
                 placeholder={
                   "# Bölüm Notları\n\n## Konular\n\n- Konu 1\n- Konu 2"
                 }
                 rows={15}
                 className="font-mono text-sm"
-                defaultValue={episode?.content_tr}
+                value={formData.content_tr}
+                onChange={handleChange}
               />
             </div>
             <div className="space-y-2">
               <Label>İçerik (EN)</Label>
               <Textarea
+                name="content_en"
                 placeholder={
                   "# Episode Notes\n\n## Topics\n\n- Topic 1\n- Topic 2"
                 }
                 rows={15}
                 className="font-mono text-sm"
-                defaultValue={episode?.content_en}
+                value={formData.content_en}
+                onChange={handleChange}
               />
             </div>
           </div>
@@ -277,15 +395,19 @@ export function EpisodeForm({
           <div className="space-y-2">
             <Label>YouTube URL</Label>
             <Input
+              name="youtube_url"
               placeholder="https://youtube.com/watch?v=..."
-              defaultValue={episode?.youtube_url}
+              value={formData.youtube_url}
+              onChange={handleChange}
             />
           </div>
           <div className="space-y-2">
             <Label>Spotify URL</Label>
             <Input
+              name="spotify_url"
               placeholder="https://open.spotify.com/episode/..."
-              defaultValue={episode?.spotify_url}
+              value={formData.spotify_url}
+              onChange={handleChange}
             />
           </div>
         </TabsContent>
@@ -296,7 +418,11 @@ export function EpisodeForm({
             <div className="flex items-center gap-2">
               <Checkbox
                 id="is_published"
-                defaultChecked={episode?.is_published ?? true}
+                name="is_published"
+                checked={formData.is_published}
+                onCheckedChange={(c) =>
+                  handleCheckboxChange("is_published", c as boolean)
+                }
               />
               <Label htmlFor="is_published">Yayınla</Label>
             </div>
@@ -304,7 +430,11 @@ export function EpisodeForm({
               <div className="flex items-center gap-2">
                 <Checkbox
                   id="is_upcoming"
-                  defaultChecked={episode?.is_upcoming}
+                  name="is_upcoming"
+                  checked={formData.is_upcoming}
+                  onCheckedChange={(c) =>
+                    handleCheckboxChange("is_upcoming", c as boolean)
+                  }
                 />
                 <Label htmlFor="is_upcoming">Yaklaşan Yayın</Label>
               </div>

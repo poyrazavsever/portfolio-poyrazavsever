@@ -6,6 +6,7 @@ import { FileText, Calendar, Clock, User } from "lucide-react";
 
 interface MediaListItemProps {
   id: string;
+  displayId?: string;
   title: string;
   date: string;
   duration?: string;
@@ -16,6 +17,7 @@ interface MediaListItemProps {
 
 export function MediaListItem({
   id,
+  displayId,
   title,
   date,
   duration,
@@ -28,18 +30,26 @@ export function MediaListItem({
     <div className="group flex flex-col sm:flex-row sm:items-center justify-between p-5 bg-white border-b border-dashed border-slate-200 hover:bg-slate-50 transition-colors">
       <div className="flex gap-4">
         <span className="text-slate-300 font-mono font-bold text-lg pt-1 select-none">
-          #{id}
+          #{displayId || id}
         </span>
         <div>
-          <h3 className="font-bold text-lg text-slate-900 mb-2">{title}</h3>
+          {title ? (
+            <h3 className="font-bold text-lg text-slate-900 mb-2">{title}</h3>
+          ) : (
+            <h3 className="font-bold text-lg text-slate-400 italic mb-2">
+              Başlıksız Bölüm
+            </h3>
+          )}
           <div className="flex flex-wrap items-center gap-4 text-sm text-slate-500 font-medium font-mono">
-            <span className="flex items-center gap-1.5">
-              <Calendar className="w-3 h-3" /> {date}
-            </span>
+            {date && (
+              <span className="flex items-center gap-1.5">
+                <Calendar className="w-3 h-3" /> {date}
+              </span>
+            )}
 
             {guest && (
               <>
-                <span className="w-1 h-1 bg-slate-300 rounded-full" />
+                {date && <span className="w-1 h-1 bg-slate-300 rounded-full" />}
                 <span className="flex items-center gap-1.5">
                   <User className="w-3 h-3" /> {guest}
                 </span>
@@ -48,7 +58,9 @@ export function MediaListItem({
 
             {duration && (
               <>
-                <span className="w-1 h-1 bg-slate-300 rounded-full" />
+                {(date || guest) && (
+                  <span className="w-1 h-1 bg-slate-300 rounded-full" />
+                )}
                 <span className="flex items-center gap-1.5">
                   <Clock className="w-3 h-3" /> {duration}
                 </span>

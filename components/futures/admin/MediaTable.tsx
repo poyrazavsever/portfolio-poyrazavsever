@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect, useCallback } from "react";
 import { Badge, Button, Typography } from "poyraz-ui/atoms";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "poyraz-ui/molecules";
 import { DataTable } from "poyraz-ui/organisms";
@@ -12,7 +12,12 @@ import {
   PLATFORM_LABELS,
   SOCIAL_LIMITS,
 } from "@/types/admin";
-import { mockEpisodes, mockSocialVideos } from "@/data/admin/mock-media";
+import {
+  getAdminEpisodes,
+  getAdminSocialVideos,
+  deleteEpisode,
+  deleteSocialVideo,
+} from "@/lib/supabase/queries/media";
 import { EpisodeForm } from "./EpisodeForm";
 import { SocialForm } from "./SocialForm";
 
@@ -192,33 +197,44 @@ export function MediaTable() {
   const [activeSeries, setActiveSeries] = useState<EpisodeSeries>("masa_basi");
   const [isMounted, setIsMounted] = useState(false);
 
-  useEffect(() => {
-    setIsMounted(true);
+  // Supabase data
+  const [episodes, setEpisodes] = useState<AdminEpisode[]>([]);
+  const [socialVideos, setSocialVideos] = useState<AdminSocialVideo[]>([]);
+
+  const fetchData = useCallback(async () => {
+    const [eps, vids] = await Promise.all([
+      getAdminEpisodes(),
+      getAdminSocialVideos(),
+    ]);
+    setEpisodes(eps);
+    setSocialVideos(vids);
   }, []);
 
-  // Separated episodes by series
+  useEffect(() => {
+    setIsMounted(true);
+    fetchData();
+  }, [fetchData]);
+
   const masaBasiEpisodes = useMemo(
-    () => mockEpisodes.filter((e) => e.series === "masa_basi"),
-    [],
+    () => episodes.filter((e) => e.series === "masa_basi"),
+    [episodes],
   );
   const yazilimaDairEpisodes = useMemo(
-    () => mockEpisodes.filter((e) => e.series === "yazilima_dair"),
-    [],
+    () => episodes.filter((e) => e.series === "yazilima_dair"),
+    [episodes],
   );
 
-  // Social video counts for limits display
   const igCount = useMemo(
     () =>
-      mockSocialVideos.filter(
-        (v) => v.platform === "instagram" && v.is_published,
-      ).length,
-    [],
+      socialVideos.filter((v) => v.platform === "instagram" && v.is_published)
+        .length,
+    [socialVideos],
   );
   const ytCount = useMemo(
     () =>
-      mockSocialVideos.filter((v) => v.platform === "youtube" && v.is_published)
+      socialVideos.filter((v) => v.platform === "youtube" && v.is_published)
         .length,
-    [],
+    [socialVideos],
   );
 
   const handleEditEpisode = (rows: AdminEpisode[]) => {
@@ -242,11 +258,27 @@ export function MediaTable() {
         ? "yazilima_dair"
         : "masa_basi";
     setActiveTab(prevTab);
+    fetchData();
   };
 
   const handleSocialFormClose = () => {
     setEditingSocial(undefined);
     setActiveTab("social");
+    fetchData();
+  };
+
+  const handleDeleteEpisode = async (rows: AdminEpisode[]) => {
+    if (rows.length === 1 && confirm(`"${rows[0].title_tr}" silinsin mi?`)) {
+      await deleteEpisode(rows[0].id);
+      fetchData();
+    }
+  };
+
+  const handleDeleteSocial = async (rows: AdminSocialVideo[]) => {
+    if (rows.length === 1 && confirm("Bu içerik silinsin mi?")) {
+      await deleteSocialVideo(rows[0].id);
+      fetchData();
+    }
   };
 
   return (
@@ -376,7 +408,7 @@ export function MediaTable() {
             </div>
             <DataTable
               columns={socialColumns}
-              data={mockSocialVideos}
+              data={socialVideos}
               getRowId={(row) => row.id}
               selectable
               onSelectionChange={handleEditSocial}

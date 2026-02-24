@@ -32,6 +32,7 @@ export function YazilimaDairClient({
             <MediaListItem
               key={ep.id}
               id={ep.id}
+              displayId={ep.displayId}
               title={ep.title}
               date={ep.date}
               duration="45 dk"

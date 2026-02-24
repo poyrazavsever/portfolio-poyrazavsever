@@ -21,6 +21,10 @@ import {
 } from "poyraz-ui/molecules";
 import { AdminSocialVideo, SocialPlatform } from "@/types/admin";
 import { Upload, X } from "lucide-react";
+import {
+  createSocialVideo,
+  updateSocialVideo,
+} from "@/lib/supabase/queries/media";
 
 interface SocialFormProps {
   video?: AdminSocialVideo;
@@ -32,6 +36,8 @@ export function SocialForm({ video, onCancel }: SocialFormProps) {
   const [platform, setPlatform] = useState<SocialPlatform>("instagram");
   const [thumbPreview, setThumbPreview] = useState<string | null>(null);
   const thumbInputRef = useRef<HTMLInputElement>(null);
+  const formRef = useRef<HTMLFormElement>(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (video) {
@@ -50,13 +56,42 @@ export function SocialForm({ video, onCancel }: SocialFormProps) {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setLoading(true);
+
+    const form = formRef.current;
+    if (!form) return;
+
+    const fd = new FormData(form);
+
+    const data = {
+      platform,
+      title: (fd.get("title") as string) || "",
+      caption: (fd.get("caption") as string) || "",
+      thumbnail_url: video?.thumbnail_url || thumbPreview || "",
+      video_url: (fd.get("video_url") as string) || "",
+      likes_count: (fd.get("likes_count") as string) || "",
+      comments_count: (fd.get("comments_count") as string) || "",
+      views_count: (fd.get("views_count") as string) || "",
+      duration: (fd.get("duration") as string) || "",
+      published_at: (fd.get("published_at") as string) || "",
+      sort_order: parseInt(fd.get("sort_order") as string) || 0,
+      is_published: fd.get("is_published") === "on",
+    };
+
+    if (isEditing && video) {
+      await updateSocialVideo(video.id, data);
+    } else {
+      await createSocialVideo(data);
+    }
+
+    setLoading(false);
     onCancel();
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6 max-w-4xl">
+    <form ref={formRef} onSubmit={handleSubmit} className="space-y-6 max-w-4xl">
       <div className="flex items-center justify-between">
         <Typography variant="h3">
           {isEditing
@@ -67,7 +102,9 @@ export function SocialForm({ video, onCancel }: SocialFormProps) {
           <Button type="button" variant="outline" onClick={onCancel}>
             İptal
           </Button>
-          <Button type="submit">{isEditing ? "Güncelle" : "Oluştur"}</Button>
+          <Button type="submit" loading={loading} disabled={loading}>
+            {isEditing ? "Güncelle" : "Oluştur"}
+          </Button>
         </div>
       </div>
 
@@ -92,7 +129,11 @@ export function SocialForm({ video, onCancel }: SocialFormProps) {
           </div>
           <div className="space-y-2">
             <Label>Sıralama</Label>
-            <Input type="number" defaultValue={video?.sort_order ?? 0} />
+            <Input
+              name="sort_order"
+              type="number"
+              defaultValue={video?.sort_order ?? 0}
+            />
           </div>
         </div>
 
@@ -153,6 +194,7 @@ export function SocialForm({ video, onCancel }: SocialFormProps) {
             <div className="space-y-2">
               <Label>Caption</Label>
               <Textarea
+                name="caption"
                 placeholder="React 19 ile gelen yeni hook'lar 🔥 #react #webdev"
                 rows={3}
                 defaultValue={video?.caption}
@@ -161,6 +203,7 @@ export function SocialForm({ video, onCancel }: SocialFormProps) {
             <div className="space-y-2">
               <Label>Video URL</Label>
               <Input
+                name="video_url"
                 placeholder="https://instagram.com/reel/..."
                 defaultValue={video?.video_url}
               />
@@ -168,11 +211,19 @@ export function SocialForm({ video, onCancel }: SocialFormProps) {
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label>Beğeni Sayısı</Label>
-                <Input placeholder="2.4K" defaultValue={video?.likes_count} />
+                <Input
+                  name="likes_count"
+                  placeholder="2.4K"
+                  defaultValue={video?.likes_count}
+                />
               </div>
               <div className="space-y-2">
                 <Label>Yorum Sayısı</Label>
-                <Input placeholder="128" defaultValue={video?.comments_count} />
+                <Input
+                  name="comments_count"
+                  placeholder="128"
+                  defaultValue={video?.comments_count}
+                />
               </div>
             </div>
           </div>
@@ -183,6 +234,7 @@ export function SocialForm({ video, onCancel }: SocialFormProps) {
             <div className="space-y-2">
               <Label>Video Başlığı</Label>
               <Input
+                name="title"
                 placeholder="Next.js Full Tutorial"
                 defaultValue={video?.title}
               />
@@ -190,6 +242,7 @@ export function SocialForm({ video, onCancel }: SocialFormProps) {
             <div className="space-y-2">
               <Label>Video URL</Label>
               <Input
+                name="video_url"
                 placeholder="https://youtube.com/watch?v=..."
                 defaultValue={video?.video_url}
               />
@@ -197,15 +250,24 @@ export function SocialForm({ video, onCancel }: SocialFormProps) {
             <div className="grid grid-cols-3 gap-4">
               <div className="space-y-2">
                 <Label>İzlenme</Label>
-                <Input placeholder="12K" defaultValue={video?.views_count} />
+                <Input
+                  name="views_count"
+                  placeholder="12K"
+                  defaultValue={video?.views_count}
+                />
               </div>
               <div className="space-y-2">
                 <Label>Süre</Label>
-                <Input placeholder="1:24:30" defaultValue={video?.duration} />
+                <Input
+                  name="duration"
+                  placeholder="1:24:30"
+                  defaultValue={video?.duration}
+                />
               </div>
               <div className="space-y-2">
                 <Label>Yayın Zamanı</Label>
                 <Input
+                  name="published_at"
                   placeholder="2 hafta önce"
                   defaultValue={video?.published_at}
                 />
@@ -214,11 +276,19 @@ export function SocialForm({ video, onCancel }: SocialFormProps) {
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label>Beğeni</Label>
-                <Input placeholder="890" defaultValue={video?.likes_count} />
+                <Input
+                  name="likes_count"
+                  placeholder="890"
+                  defaultValue={video?.likes_count}
+                />
               </div>
               <div className="space-y-2">
                 <Label>Yorum</Label>
-                <Input placeholder="67" defaultValue={video?.comments_count} />
+                <Input
+                  name="comments_count"
+                  placeholder="67"
+                  defaultValue={video?.comments_count}
+                />
               </div>
             </div>
           </div>
@@ -227,6 +297,7 @@ export function SocialForm({ video, onCancel }: SocialFormProps) {
         <div className="flex items-center gap-2">
           <Checkbox
             id="is_published"
+            name="is_published"
             defaultChecked={video?.is_published ?? true}
           />
           <Label htmlFor="is_published">Yayınla</Label>

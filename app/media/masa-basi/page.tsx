@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-﻿import { cookies } from "next/headers";
+import { cookies } from "next/headers";
 import { MediaHero } from "@/components/futures/media/MediaHero";
 import { UpcomingStreamCard } from "@/components/futures/media/UpcomingStreamCard";
 import { Button, Typography } from "poyraz-ui/atoms";
@@ -7,13 +7,17 @@ import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { getDictionary } from "@/get-dictionary";
 import { i18n, type Locale } from "@/i18n-config";
+import { getUpcomingEpisode } from "@/lib/supabase/queries/media";
 
 export default async function MasaBasiPage() {
   const cookieStore = await cookies();
-  const locale = (cookieStore.get("NEXT_LOCALE")?.value || i18n.defaultLocale) as Locale;
+  const locale = (cookieStore.get("NEXT_LOCALE")?.value ||
+    i18n.defaultLocale) as Locale;
   const dictionary = await getDictionary(locale);
   const t = dictionary.mediaMasaBasi;
   const common = dictionary.mediaCommon.labels;
+
+  const upcoming = await getUpcomingEpisode();
 
   return (
     <div className="min-h-screen pb-32 bg-white">
@@ -26,14 +30,16 @@ export default async function MasaBasiPage() {
       {/* Upcoming / Featured Stream */}
       <div className="container mx-auto px-4 max-w-6xl -mt-12 relative z-10 mb-20">
         <UpcomingStreamCard
-          guestName="Burak Selim Åenyurt"
-          guestRole="Software Architect / MVP"
-          topic={t.upcoming.topic}
-          date={t.upcoming.date}
-          time={t.upcoming.time}
-          youtubeLink="https://youtube.com/@TheCodeMan"
+          guestName={upcoming?.guest_name || "TBA"}
+          guestRole={upcoming?.guest_role || ""}
+          topic={upcoming?.title_tr || t.upcoming.topic}
+          date={upcoming?.date || t.upcoming.date}
+          time={upcoming?.time || t.upcoming.time}
+          youtubeLink={
+            upcoming?.youtube_url || "https://youtube.com/@TheCodeMan"
+          }
           dictionary={dictionary}
-          // guestImage="" // Using fallback for now
+          guestImage={upcoming?.guest_image}
         />
       </div>
 
@@ -62,4 +68,3 @@ export default async function MasaBasiPage() {
     </div>
   );
 }
-
