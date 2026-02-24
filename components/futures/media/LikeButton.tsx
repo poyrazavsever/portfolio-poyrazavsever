@@ -2,30 +2,74 @@
 
 import { Button } from "poyraz-ui/atoms";
 import { Heart } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { cn } from "poyraz-ui";
+import { useAuth } from "@/hooks/use-auth";
+import {
+  getLikesCount,
+  getUserLikeStatus,
+  toggleLike,
+} from "@/lib/supabase/queries/blog";
 
 interface LikeButtonProps {
-  initialCount?: number;
+  postId: string;
 }
 
-export function LikeButton({ initialCount = 0 }: LikeButtonProps) {
+export function LikeButton({ postId }: LikeButtonProps) {
+  const { user, isLoading: authLoading, signInWithGithub } = useAuth();
   const [liked, setLiked] = useState(false);
-  const [count, setCount] = useState(initialCount);
+  const [count, setCount] = useState(0);
+  const [isProcessing, setIsProcessing] = useState(false);
 
-  const handleLike = () => {
-    if (liked) {
-      setCount((prev) => prev - 1);
-    } else {
-      setCount((prev) => prev + 1);
+  // İlk yüklemede beğeni sayısını ve kullanıcı durumunu çek
+  const fetchLikeData = useCallback(async () => {
+    const likesCount = await getLikesCount(postId);
+    setCount(likesCount);
+
+    if (user) {
+      const status = await getUserLikeStatus(postId, user.id);
+      setLiked(status);
     }
+  }, [postId, user]);
+
+  useEffect(() => {
+    if (!authLoading) {
+      fetchLikeData();
+    }
+  }, [authLoading, fetchLikeData]);
+
+  const handleLike = async () => {
+    // Giriş yapmamış → GitHub login'e yönlendir
+    if (!user) {
+      signInWithGithub();
+      return;
+    }
+
+    // Optimistic UI
+    setIsProcessing(true);
+    const prevLiked = liked;
+    const prevCount = count;
     setLiked(!liked);
+    setCount(liked ? count - 1 : count + 1);
+
+    const { liked: newStatus, error } = await toggleLike(postId, user.id);
+
+    if (error) {
+      // Hata olursa geri al
+      setLiked(prevLiked);
+      setCount(prevCount);
+    } else {
+      setLiked(newStatus);
+    }
+
+    setIsProcessing(false);
   };
 
   return (
     <Button
       variant="outline"
       onClick={handleLike}
+      disabled={isProcessing}
       className={cn(
         "gap-2 transition-all duration-300",
         liked

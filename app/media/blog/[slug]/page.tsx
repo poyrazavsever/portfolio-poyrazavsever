@@ -1,8 +1,8 @@
 import { cookies } from "next/headers";
 /* eslint-disable @next/next/no-img-element */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { CommentSection } from "@/components/futures/media/CommentSection";
 import { LikeButton } from "@/components/futures/media/LikeButton";
+import { ShareButton } from "@/components/futures/media/ShareButton";
 import {
   Avatar,
   AvatarFallback,
@@ -10,15 +10,15 @@ import {
   Button,
   Typography,
 } from "poyraz-ui/atoms";
-import { Calendar, Clock, Share2, ArrowLeft } from "lucide-react";
+import { Calendar, Clock, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { dracula } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { getDictionary } from "@/get-dictionary";
 import { i18n, type Locale } from "@/i18n-config";
-
-// blogData is now loaded from dictionary
+import { getBlogPostBySlug } from "@/lib/supabase/queries/blog";
+import { notFound } from "next/navigation";
 
 export default async function BlogPostPage({
   params,
@@ -28,22 +28,38 @@ export default async function BlogPostPage({
   // Await params for Next.js 15+
   const { slug } = await params;
   const cookieStore = await cookies();
-  const locale = (cookieStore.get("NEXT_LOCALE")?.value || i18n.defaultLocale) as Locale;
+  const locale = (cookieStore.get("NEXT_LOCALE")?.value ||
+    i18n.defaultLocale) as Locale;
+  const isEnLocale = locale === "en";
   const dictionary = await getDictionary(locale);
-  const t = dictionary.mediaBlog;
   const common = dictionary.mediaCommon.labels;
 
-  const post = t.posts.find((p: any) => p.slug === slug);
+  const post = await getBlogPostBySlug(slug);
 
-  // Default to logic or safe fallback
-  const safePost = post || t.posts[0];
+  if (!post) {
+    notFound();
+  }
 
-  // Add image/meta manually since it's missing in json but present in mock
+  const title = isEnLocale ? post.title_en || post.title_tr : post.title_tr;
+  const content = isEnLocale
+    ? post.content_en || post.content_tr
+    : post.content_tr;
+
   const meta = {
     image:
+      post.cover_image ||
       "https://images.unsplash.com/photo-1618477247222-ac5913054c26?q=80&w=2070&auto=format&fit=crop",
-    readTime: "8 dk",
-    date: "25 Oct 2023",
+    readTime: post.read_time_min ? `${post.read_time_min} dk` : "5 dk",
+    date: post.published_at
+      ? new Date(post.published_at).toLocaleDateString(
+          isEnLocale ? "en-US" : "tr-TR",
+          {
+            day: "numeric",
+            month: "short",
+            year: "numeric",
+          },
+        )
+      : "",
   };
 
   return (
@@ -70,7 +86,7 @@ export default async function BlogPostPage({
               variant="outline"
               className="border-red-200 text-red-600 bg-red-50"
             >
-              {safePost.category}
+              {post.category}
             </Badge>
             <div className="flex items-center gap-2 text-sm font-mono text-slate-400">
               <span className="flex items-center gap-1">
@@ -84,7 +100,7 @@ export default async function BlogPostPage({
           </div>
 
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 mb-8 leading-tight">
-            {safePost.title}
+            {title}
           </h1>
 
           <div className="flex flex-col md:flex-row items-center justify-between gap-6 border-y border-dashed border-slate-200 py-6">
@@ -103,14 +119,8 @@ export default async function BlogPostPage({
             </div>
 
             <div className="flex items-center gap-4">
-              <LikeButton initialCount={42} />
-              <Button
-                variant="ghost"
-                size="icon"
-                className="text-slate-400 hover:text-slate-900"
-              >
-                <Share2 className="w-5 h-5" />
-              </Button>
+              <LikeButton postId={post.id} />
+              <ShareButton title={title || ""} slug={post.slug} />
             </div>
           </div>
         </header>
@@ -120,7 +130,7 @@ export default async function BlogPostPage({
           <div className="relative aspect-21/9 overflow-hidden rounded-lg">
             <img
               src={meta.image}
-              alt={safePost.title}
+              alt={title || "Blog cover"}
               className="w-full h-full object-cover"
             />
           </div>
@@ -223,7 +233,7 @@ export default async function BlogPostPage({
               ),
             }}
           >
-            {safePost.content}
+            {content || ""}
           </ReactMarkdown>
         </div>
 
@@ -233,11 +243,11 @@ export default async function BlogPostPage({
             <p className="text-slate-400 mb-4 font-mono text-sm">
               {common.didYouLikePost}
             </p>
-            <LikeButton initialCount={42} />
+            <LikeButton postId={post.id} />
           </div>
         </div>
 
-        <CommentSection dictionary={dictionary} />
+        <CommentSection dictionary={dictionary} postId={post.id} />
       </article>
     </div>
   );

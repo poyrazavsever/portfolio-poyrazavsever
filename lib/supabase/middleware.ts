@@ -39,10 +39,16 @@ export async function updateSession(request: NextRequest) {
     !request.nextUrl.pathname.startsWith("/admin/login");
 
   if (isPanelRoute && !user) {
-    // Profil sorgusuna da gerek yok, kullanıcı girişi yoksa admin/login'e at.
-    // Auth kısmında sadece elle yetkilendirilmiş admin açılacak demiştiniz.
     const url = request.nextUrl.clone();
     url.pathname = "/admin/login";
+    return NextResponse.redirect(url);
+  }
+
+  // Admin paneline sadece belirli e-posta adresine sahip kullanıcılar erişebilir
+  const adminEmail = process.env.ADMIN_EMAIL;
+  if (isPanelRoute && user && adminEmail && user.email !== adminEmail) {
+    const url = request.nextUrl.clone();
+    url.pathname = "/";
     return NextResponse.redirect(url);
   }
 

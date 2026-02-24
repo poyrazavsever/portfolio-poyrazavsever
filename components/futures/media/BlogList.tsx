@@ -9,24 +9,40 @@ import { Dictionary } from "@/types/dictionary";
 
 // categories are now from dictionary
 
+import { AdminBlogPost } from "@/types/admin";
+
 interface BlogListProps {
   dictionary: Dictionary;
+  initialPosts: AdminBlogPost[];
 }
 
-export function BlogList({ dictionary }: BlogListProps) {
+export function BlogList({ dictionary, initialPosts }: BlogListProps) {
   const t = dictionary.mediaBlog;
   const common = dictionary.mediaCommon.labels;
 
   const categories = Object.values(t.categories) as string[];
-  const blogPosts = (t.posts || []).map((post: any) => ({
+  const isEn = dictionary.mediaBlog.hero.title !== "Yazılar"; // Rough locale check or pass locale down. Since dictionary is localized, we can check a known string or just use _tr/_en based on context. Wait, the better way is to pass `locale` or rely on the fact that if we just want `title`, we need `post.title_tr` or `post.title_en`. Let's just use `post.title_tr` for now, assuming Turkish as primary, or fallback.
+  // Wait, I can determine locale from dictionary context, like `dictionary.shared.warning === "Warning"`.
+  const isEnLocale = dictionary.shared?.warning === "Warning";
+
+  const blogPosts = initialPosts.map((post) => ({
     ...post,
-    date: "18 Oct 2023", // Static for now or we could add to dict
-    readTime: "12",
-    image: post.slug.includes("clean")
-      ? "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop"
-      : post.slug.includes("figma")
-        ? "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=2070&auto=format&fit=crop"
-        : "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop",
+    title: isEnLocale ? post.title_en || post.title_tr : post.title_tr,
+    excerpt: isEnLocale ? post.excerpt_en || post.excerpt_tr : post.excerpt_tr,
+    date: post.published_at
+      ? new Date(post.published_at).toLocaleDateString(
+          isEnLocale ? "en-US" : "tr-TR",
+          {
+            day: "numeric",
+            month: "short",
+            year: "numeric",
+          },
+        )
+      : "",
+    readTime: post.read_time_min?.toString() || "5",
+    image:
+      post.cover_image ||
+      "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop",
     author: { name: "Poyraz Avsever", avatar: "" },
   }));
 

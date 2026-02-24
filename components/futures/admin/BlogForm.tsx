@@ -33,10 +33,15 @@ import {
 import { generateSlug, estimateReadTime } from "@/lib/admin-utils";
 import { Upload, X, Eye } from "lucide-react";
 import ReactMarkdown from "react-markdown";
+import {
+  createBlogPost,
+  updateBlogPost,
+  uploadBlogImage,
+} from "@/lib/supabase/queries/blog";
 
 interface BlogFormProps {
   post?: AdminBlogPost;
-  onCancel: () => void;
+  onCancel: (shouldRefresh?: boolean) => void;
 }
 
 const categories = Object.entries(BLOG_CATEGORY_LABELS) as [
@@ -46,15 +51,27 @@ const categories = Object.entries(BLOG_CATEGORY_LABELS) as [
 
 export function BlogForm({ post, onCancel }: BlogFormProps) {
   const isEditing = !!post;
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Cover image
   const [coverPreview, setCoverPreview] = useState<string | null>(null);
+  const [coverFile, setCoverFile] = useState<File | null>(null);
   const coverInputRef = useRef<HTMLInputElement>(null);
 
   // Form state
+  // General state
   const [titleTr, setTitleTr] = useState("");
+  const [titleEn, setTitleEn] = useState("");
   const [slug, setSlug] = useState("");
   const [slugManual, setSlugManual] = useState(false);
+  const [category, setCategory] = useState<BlogCategory | "">("");
+  const [excerptTr, setExcerptTr] = useState("");
+  const [excerptEn, setExcerptEn] = useState("");
+  const [tags, setTags] = useState("");
+
+  // Status state
+  const [isPublished, setIsPublished] = useState(false);
+  const [publishedAt, setPublishedAt] = useState<string>("");
 
   // Markdown content
   const [contentTr, setContentTr] = useState("");
@@ -68,16 +85,36 @@ export function BlogForm({ post, onCancel }: BlogFormProps) {
   useEffect(() => {
     if (post) {
       setCoverPreview(post.cover_image || null);
-      setTitleTr(post.title_tr);
-      setSlug(post.slug);
+      setCoverFile(null);
+      setTitleTr(post.title_tr || "");
+      setTitleEn(post.title_en || "");
+      setSlug(post.slug || "");
       setSlugManual(true);
+      setCategory(post.category || "");
+      setExcerptTr(post.excerpt_tr || "");
+      setExcerptEn(post.excerpt_en || "");
+      setTags(post.tags?.join(", ") || "");
+      setIsPublished(post.is_published ?? false);
+      setPublishedAt(
+        post.published_at
+          ? new Date(post.published_at).toISOString().slice(0, 16)
+          : "",
+      );
       setContentTr(post.content_tr || "");
       setContentEn(post.content_en || "");
     } else {
       setCoverPreview(null);
+      setCoverFile(null);
       setTitleTr("");
+      setTitleEn("");
       setSlug("");
       setSlugManual(false);
+      setCategory("");
+      setExcerptTr("");
+      setExcerptEn("");
+      setTags("");
+      setIsPublished(false);
+      setPublishedAt("");
       setContentTr("");
       setContentEn("");
     }
@@ -100,13 +137,58 @@ export function BlogForm({ post, onCancel }: BlogFormProps) {
     const file = e.target.files?.[0];
     if (file) {
       setCoverPreview(URL.createObjectURL(file));
+      setCoverFile(file);
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Supabase entegrasyonu buraya gelecek
-    onCancel();
+    setIsSubmitting(true);
+
+    try {
+      let finalCoverUrl = coverPreview;
+      if (coverFile) {
+        const fileExt = coverFile.name.split(".").pop();
+        const fileName = `${Date.now()}-${slug}.${fileExt}`;
+        finalCoverUrl = await uploadBlogImage(coverFile, fileName);
+      }
+
+      const postData: Partial<AdminBlogPost> = {
+        title_tr: titleTr,
+        title_en: titleEn,
+        slug: slug,
+        category: category as BlogCategory,
+        excerpt_tr: excerptTr,
+        excerpt_en: excerptEn,
+        content_tr: contentTr,
+        content_en: contentEn,
+        cover_image: finalCoverUrl || undefined,
+        read_time_min: readTime,
+        tags: tags
+          .split(",")
+          .map((t) => t.trim())
+          .filter((t) => t.length > 0),
+        is_published: isPublished,
+        published_at: publishedAt
+          ? new Date(publishedAt).toISOString()
+          : undefined,
+      };
+
+      if (isEditing && post?.id) {
+        await updateBlogPost(post.id, postData);
+      } else {
+        await createBlogPost(
+          postData as Omit<AdminBlogPost, "id" | "created_at" | "updated_at">,
+        );
+      }
+
+      onCancel(true);
+    } catch (error) {
+      console.error("Detay kaydetme hatası:", error);
+      alert("Bir hata oluştu. Konsolu kontrol edin.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -116,10 +198,16 @@ export function BlogForm({ post, onCancel }: BlogFormProps) {
           {isEditing ? `"${post.title_tr}" Düzenleniyor` : "Yeni Blog Yazısı"}
         </Typography>
         <div className="flex gap-2">
-          <Button type="button" variant="outline" onClick={onCancel}>
+          <Button type="button" variant="outline" onClick={() => onCancel()}>
             İptal
           </Button>
-          <Button type="submit">{isEditing ? "Güncelle" : "Oluştur"}</Button>
+          <Button type="submit" disabled={isSubmitting}>
+            {isSubmitting
+              ? "Kaydediliyor..."
+              : isEditing
+                ? "Güncelle"
+                : "Oluştur"}
+          </Button>
         </div>
       </div>
 
@@ -146,7 +234,11 @@ export function BlogForm({ post, onCancel }: BlogFormProps) {
             </div>
             <div className="space-y-2">
               <Label>Başlık (EN)</Label>
-              <Input placeholder="Post title" defaultValue={post?.title_en} />
+              <Input
+                placeholder="Post title"
+                value={titleEn}
+                onChange={(e) => setTitleEn(e.target.value)}
+              />
             </div>
           </div>
 
@@ -168,7 +260,10 @@ export function BlogForm({ post, onCancel }: BlogFormProps) {
             </div>
             <div className="space-y-2">
               <Label>Kategori</Label>
-              <Select defaultValue={post?.category}>
+              <Select
+                value={category}
+                onValueChange={(val) => setCategory(val as BlogCategory)}
+              >
                 <SelectTrigger>
                   <SelectValue placeholder="Kategori seç" />
                 </SelectTrigger>
@@ -189,7 +284,8 @@ export function BlogForm({ post, onCancel }: BlogFormProps) {
               <Textarea
                 placeholder="Kısa özet — kart ve SEO için"
                 rows={3}
-                defaultValue={post?.excerpt_tr}
+                value={excerptTr}
+                onChange={(e) => setExcerptTr(e.target.value)}
               />
             </div>
             <div className="space-y-2">
@@ -197,7 +293,8 @@ export function BlogForm({ post, onCancel }: BlogFormProps) {
               <Textarea
                 placeholder="Short excerpt — for cards and SEO"
                 rows={3}
-                defaultValue={post?.excerpt_en}
+                value={excerptEn}
+                onChange={(e) => setExcerptEn(e.target.value)}
               />
             </div>
           </div>
@@ -222,7 +319,8 @@ export function BlogForm({ post, onCancel }: BlogFormProps) {
               <Label>Etiketler (virgülle ayır)</Label>
               <Input
                 placeholder="React, TypeScript, Next.js"
-                defaultValue={post?.tags?.join(", ")}
+                value={tags}
+                onChange={(e) => setTags(e.target.value)}
               />
             </div>
           </div>
@@ -333,6 +431,7 @@ export function BlogForm({ post, onCancel }: BlogFormProps) {
                 type="button"
                 onClick={() => {
                   setCoverPreview(null);
+                  setCoverFile(null);
                   if (coverInputRef.current) coverInputRef.current.value = "";
                 }}
                 className="absolute top-2 right-2 w-7 h-7 bg-red-600 text-white flex items-center justify-center hover:bg-red-700 transition-colors"
@@ -360,18 +459,16 @@ export function BlogForm({ post, onCancel }: BlogFormProps) {
             <Label>Yayın Tarihi</Label>
             <Input
               type="datetime-local"
-              defaultValue={
-                post?.published_at
-                  ? new Date(post.published_at).toISOString().slice(0, 16)
-                  : undefined
-              }
+              value={publishedAt}
+              onChange={(e) => setPublishedAt(e.target.value)}
             />
           </div>
 
           <div className="flex items-center gap-2">
             <Checkbox
               id="is_published"
-              defaultChecked={post?.is_published ?? false}
+              checked={isPublished}
+              onCheckedChange={(checked) => setIsPublished(checked as boolean)}
             />
             <Label htmlFor="is_published">Yayınla</Label>
           </div>
