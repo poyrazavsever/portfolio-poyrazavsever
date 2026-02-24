@@ -1,47 +1,31 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import {
   Card,
   CardHeader,
   CardContent,
   CardFooter,
   Button,
-  Input,
-  Label,
   Logo,
   Typography,
-  PasswordInput,
 } from "poyraz-ui/atoms";
-import { Icon } from "@iconify/react";
-import { useSupabase } from "@/lib/supabase/hooks";
+import { Github } from "lucide-react";
+import { useAuth } from "@/hooks/use-auth";
 
 export function LoginForm() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
-  const router = useRouter();
-  const { supabase } = useSupabase();
+  const { signInWithGithub } = useAuth();
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleGithubLogin = async () => {
     setLoading(true);
     setErrorMsg("");
-
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
-
-    setLoading(false);
-
-    if (error) {
-      setErrorMsg(error.message);
-    } else {
-      router.push("/admin/projects");
-      router.refresh(); // Refresh the router to update server components with the new session
+    try {
+      await signInWithGithub("/admin/projects");
+    } catch {
+      setErrorMsg("Giriş yapılırken bir hata oluştu.");
+      setLoading(false);
     }
   };
 
@@ -71,55 +55,30 @@ export function LoginForm() {
           </Typography>
         </CardHeader>
 
-        <form onSubmit={handleSubmit}>
-          <CardContent className="space-y-4">
-            {errorMsg && (
-              <div className="p-3 bg-red-50 text-red-600 rounded-md border border-red-200 text-sm">
-                {errorMsg}
-              </div>
-            )}
-
-            <div className="space-y-2">
-              <Label htmlFor="email">E-posta</Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="admin@poyrazavsever.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
+        <CardContent className="space-y-4">
+          {errorMsg && (
+            <div className="p-3 bg-red-50 text-red-600 rounded-md border border-red-200 text-sm">
+              {errorMsg}
             </div>
+          )}
 
-            <div className="space-y-2">
-              <Label htmlFor="password">Şifre</Label>
-              <PasswordInput
-                id="password"
-                placeholder="••••••••"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-            </div>
-          </CardContent>
+          <Button
+            size="lg"
+            className="w-full gap-2"
+            onClick={handleGithubLogin}
+            loading={loading}
+            disabled={loading}
+          >
+            <Github className="w-5 h-5" />
+            GitHub ile Devam Et
+          </Button>
+        </CardContent>
 
-          <CardFooter className="flex flex-col gap-4">
-            <Button
-              type="submit"
-              size="lg"
-              className="w-full"
-              loading={loading}
-              disabled={loading}
-            >
-              Giriş Yap
-              <Icon icon="mdi:arrow-right" className="ml-2 w-4 h-4" />
-            </Button>
-
-            <Typography variant="muted" className="text-center">
-              Sadece yetkili kullanıcılar erişebilir.
-            </Typography>
-          </CardFooter>
-        </form>
+        <CardFooter>
+          <Typography variant="muted" className="text-center w-full">
+            Sadece yetkili kullanıcılar erişebilir.
+          </Typography>
+        </CardFooter>
       </Card>
     </div>
   );
