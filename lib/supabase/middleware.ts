@@ -44,12 +44,14 @@ export async function updateSession(request: NextRequest) {
     return NextResponse.redirect(url);
   }
 
-  // Admin paneline sadece belirli e-posta adresine sahip kullanıcılar erişebilir
-  const adminEmail = process.env.ADMIN_EMAIL;
-  if (isPanelRoute && user && adminEmail && user.email !== adminEmail) {
-    const url = request.nextUrl.clone();
-    url.pathname = "/";
-    return NextResponse.redirect(url);
+  
+  if (isPanelRoute && user) {
+    const adminEmail = process.env.ADMIN_EMAIL;
+    if (!adminEmail || user.email !== adminEmail) {
+      const url = request.nextUrl.clone();
+      url.pathname = "/";
+      return NextResponse.redirect(url);
+    }
   }
 
   return supabaseResponse;
