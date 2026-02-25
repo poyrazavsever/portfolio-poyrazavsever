@@ -9,14 +9,14 @@
     }
   },
   "howItWorks": {
-    "title": "How the System",
-    "highlight": "Works",
-    "subtitle": "How will you work with me? The process is very simple.",
+    "title": "How I",
+    "highlight": "Work",
+    "subtitle": "From idea to product — the 4 steps behind everything.",
     "steps": [
-      { "title": "Meet!" },
-      { "title": "Create Order" },
-      { "title": "Send Brief" },
-      { "title": "Receive Delivery" }
+      { "title": "Explore" },
+      { "title": "Plan" },
+      { "title": "Build" },
+      { "title": "Ship" }
     ]
   },
   "courses": {

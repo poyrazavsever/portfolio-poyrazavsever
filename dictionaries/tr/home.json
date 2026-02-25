@@ -9,14 +9,14 @@
     }
   },
   "howItWorks": {
-    "title": "Sistem Nasıl",
-    "highlight": "Çalışıyor",
-    "subtitle": "Benimle nasıl çalışacaksın? Süreç çok basit.",
+    "title": "Nasıl",
+    "highlight": "Çalışıyorum",
+    "subtitle": "Fikirden ürüne, her şeyin arkasındaki 4 adım.",
     "steps": [
-      { "title": "Tanışalım!" },
-      { "title": "Sipariş Oluştur" },
-      { "title": "Brief Gönder" },
-      { "title": "Teslim Al" }
+      { "title": "Keşfet" },
+      { "title": "Planla" },
+      { "title": "Üret" },
+      { "title": "Yayınla" }
     ]
   },
   "courses": {
