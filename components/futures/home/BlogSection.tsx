@@ -2,57 +2,17 @@ import { Button, Typography } from "poyraz-ui/atoms";
 import { HorizontalScroll } from "@/components/shared/HorizontalScroll";
 import { BlogCard } from "@/components/shared/BlogCard";
 import Link from "next/link";
-
-const posts = [
-  {
-    title: "0'dan React Dersleri",
-    category: "React",
-    excerpt:
-      "A comprehensive journey through the modern web stack. Learn React, State Management, Hooks...",
-    readTime: 4,
-    image: "https://img.youtube.com/vi/b3SL2S1zYwU/maxresdefault.jpg",
-    slug: "react-101",
-  },
-  {
-    title: "Next.js ile SSR ve ISR Rehberi",
-    category: "Next.js",
-    excerpt:
-      "Server-side rendering ve incremental static regeneration konularını detaylıca inceliyoruz...",
-    readTime: 6,
-    image: "https://img.youtube.com/vi/W1b6K7C86HY/maxresdefault.jpg",
-    slug: "nextjs-ssr-isr",
-  },
-  {
-    title: "Node.js ile REST API Geliştirme",
-    category: "Node.js",
-    excerpt:
-      "Express.js kullanarak production-ready REST API nasıl geliştirilir, adım adım anlatıyoruz...",
-    readTime: 5,
-    image: "https://img.youtube.com/vi/N17_NNAHgzk/maxresdefault.jpg",
-    slug: "nodejs-rest-api",
-  },
-  {
-    title: "TypeScript Advanced Patterns",
-    category: "TypeScript",
-    excerpt:
-      "Generics, utility types ve conditional types ile ileri seviye TypeScript kullanımı...",
-    readTime: 7,
-    image: "https://img.youtube.com/vi/H8sP8HejI7A/maxresdefault.jpg",
-    slug: "typescript-advanced",
-  },
-];
-
 import { Dictionary } from "@/types/dictionary";
-
-// ... (imports)
-
-// ... (posts array)
+import { AdminBlogPost } from "@/types/admin";
+import { Locale } from "@/i18n-config";
 
 interface BlogSectionProps {
   dictionary: Dictionary;
+  posts: AdminBlogPost[];
+  locale: Locale;
 }
 
-export function BlogSection({ dictionary }: BlogSectionProps) {
+export function BlogSection({ dictionary, posts, locale }: BlogSectionProps) {
   return (
     <section className="relative py-16 md:py-24">
       <div className="max-w-6xl mx-auto px-4">
@@ -86,17 +46,28 @@ export function BlogSection({ dictionary }: BlogSectionProps) {
       <div className="max-w-6xl mx-auto px-4">
         <HorizontalScroll className="flex gap-5 overflow-x-auto pb-8 pt-3 px-3 -mx-3 scrollbar-none">
           {posts.map((post) => {
-            const translatedPost =
-              dictionary.home.blog.posts[
-                post.slug as keyof typeof dictionary.home.blog.posts
-              ];
+            const title = locale === "tr" ? post.title_tr : post.title_en;
+            const excerpt =
+              locale === "tr" ? post.excerpt_tr || "" : post.excerpt_en || "";
+            const category = post.category || "Blog";
+
             return (
-              <div key={post.slug} className="min-w-[320px] w-[380px] shrink-0">
+              <div key={post.id} className="min-w-[320px] w-[380px] shrink-0">
                 <BlogCard
-                  {...post}
-                  title={translatedPost?.title || post.title}
-                  category={translatedPost?.category || post.category}
-                  excerpt={translatedPost?.excerpt || post.excerpt}
+                  title={title}
+                  category={category}
+                  excerpt={excerpt}
+                  slug={post.slug}
+                  image={post.cover_image || "/placeholder.png"}
+                  readTime={post.read_time_min || 3}
+                  date={
+                    post.published_at
+                      ? new Date(post.published_at).toLocaleDateString(
+                          locale === "tr" ? "tr-TR" : "en-US",
+                          { day: "numeric", month: "short", year: "numeric" },
+                        )
+                      : undefined
+                  }
                   dictionary={dictionary}
                 />
               </div>
