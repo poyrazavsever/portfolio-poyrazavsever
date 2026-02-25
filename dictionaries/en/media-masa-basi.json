@@ -5,6 +5,7 @@
     "badge": "Podcast"
   },
   "upcoming": {
+    "badge": "UPCOMING STREAM",
     "topic": "The Future of AI in Software Engineering",
     "date": "24 Nov 2023",
     "time": "20:00 TRT"
