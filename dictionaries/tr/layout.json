@@ -86,6 +86,7 @@
         },
         "clientPortal": {
           "label": "Müşteri Portalı",
+          "comingSoon": "Çok yakında",
           "items": {
             "login": {
               "title": "Müşteri Girişi ↗",

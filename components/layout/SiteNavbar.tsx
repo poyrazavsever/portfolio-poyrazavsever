@@ -372,28 +372,48 @@ export function SiteNavbar({
 
           {/* ── 3. Client Portal ── */}
           <NavbarDropdown label={t.menu.clientPortal.label}>
-            <NavbarMegaMenu>
-              <NavbarMegaMenuItem
-                title={t.menu.clientPortal.items.login.title}
-                description={t.menu.clientPortal.items.login.desc}
-                href="https://portal.poyrazavsever.com/login"
-              />
-              <NavbarMegaMenuItem
-                title={t.menu.clientPortal.items.services.title}
-                description={t.menu.clientPortal.items.services.desc}
-                href="/services"
-              />
-              <NavbarMegaMenuItem
-                title={t.menu.clientPortal.items.workflow.title}
-                description={t.menu.clientPortal.items.workflow.desc}
-                href="/services/workflow"
-              />
-              <NavbarMegaMenuItem
-                title={t.menu.clientPortal.items.pricing.title}
-                description={t.menu.clientPortal.items.pricing.desc}
-                href="/services/pricing"
-              />
-            </NavbarMegaMenu>
+            <div className="relative">
+              {/* Locked Overlay */}
+              <div className="absolute -inset-x-px -inset-y-px bg-white/60 backdrop-blur-[2px] z-60 flex flex-col items-center justify-center border border-dashed border-red-200">
+                <div className="flex flex-col items-center gap-2">
+                  <Icon
+                    icon="mdi:lock"
+                    className="text-red-600"
+                    width={32}
+                    height={32}
+                  />
+                  <Typography
+                    variant="small"
+                    className="font-bold uppercase tracking-widest text-red-600"
+                  >
+                    {t.menu.clientPortal.comingSoon}
+                  </Typography>
+                </div>
+              </div>
+
+              <NavbarMegaMenu className="pointer-events-none grayscale opacity-40">
+                <NavbarMegaMenuItem
+                  title={t.menu.clientPortal.items.login.title}
+                  description={t.menu.clientPortal.items.login.desc}
+                  href="https://portal.poyrazavsever.com/login"
+                />
+                <NavbarMegaMenuItem
+                  title={t.menu.clientPortal.items.services.title}
+                  description={t.menu.clientPortal.items.services.desc}
+                  href="/services"
+                />
+                <NavbarMegaMenuItem
+                  title={t.menu.clientPortal.items.workflow.title}
+                  description={t.menu.clientPortal.items.workflow.desc}
+                  href="/services/workflow"
+                />
+                <NavbarMegaMenuItem
+                  title={t.menu.clientPortal.items.pricing.title}
+                  description={t.menu.clientPortal.items.pricing.desc}
+                  href="/services/pricing"
+                />
+              </NavbarMegaMenu>
+            </div>
           </NavbarDropdown>
 
           {/* ── 4. Media & Insights ── */}
@@ -679,24 +699,46 @@ export function SiteNavbar({
           openGroup={openGroup}
           setOpenGroup={setOpenGroup}
         >
-          <NavbarMobileLink href="https://portal.poyrazavsever.com/login">
-            {t.menu.clientPortal.items.login.title}
-          </NavbarMobileLink>
-          <NavbarMobileLink href="/services">
-            {t.menu.clientPortal.items.services.title}
-          </NavbarMobileLink>
-          <NavbarMobileLink href="/services/workflow">
-            {t.menu.clientPortal.items.workflow.title}
-          </NavbarMobileLink>
-          <NavbarMobileLink href="/pricing">
-            {t.menu.clientPortal.items.pricing.title}
-          </NavbarMobileLink>
-          <NavbarMobileLink href="/client/meeting">
-            {t.menu.clientPortal.items.meeting.title}
-          </NavbarMobileLink>
-          <NavbarMobileLink href="/client/proposal">
-            {t.menu.clientPortal.items.proposal.title}
-          </NavbarMobileLink>
+          <div className="relative">
+            {/* Locked Overlay */}
+            <div className="absolute inset-0 bg-white/70 backdrop-blur-[1px] z-50 flex flex-col items-center justify-center py-8">
+              <div className="flex flex-col items-center gap-1.5 border border-dashed border-red-600 p-4 bg-white">
+                <Icon
+                  icon="mdi:lock"
+                  className="text-red-600"
+                  width={24}
+                  height={24}
+                />
+                <Typography
+                  variant="small"
+                  className="font-bold text-[10px] uppercase tracking-tighter text-red-600"
+                >
+                  {t.menu.clientPortal.comingSoon}
+                </Typography>
+              </div>
+            </div>
+
+            <div className="pointer-events-none grayscale opacity-30">
+              <NavbarMobileLink href="https://portal.poyrazavsever.com/login">
+                {t.menu.clientPortal.items.login.title}
+              </NavbarMobileLink>
+              <NavbarMobileLink href="/services">
+                {t.menu.clientPortal.items.services.title}
+              </NavbarMobileLink>
+              <NavbarMobileLink href="/services/workflow">
+                {t.menu.clientPortal.items.workflow.title}
+              </NavbarMobileLink>
+              <NavbarMobileLink href="/pricing">
+                {t.menu.clientPortal.items.pricing.title}
+              </NavbarMobileLink>
+              <NavbarMobileLink href="/client/meeting">
+                {t.menu.clientPortal.items.meeting.title}
+              </NavbarMobileLink>
+              <NavbarMobileLink href="/client/proposal">
+                {t.menu.clientPortal.items.proposal.title}
+              </NavbarMobileLink>
+            </div>
+          </div>
         </MobileAccordionGroup>
 
         <MobileAccordionGroup

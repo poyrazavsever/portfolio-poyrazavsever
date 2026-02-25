@@ -45,6 +45,7 @@ export interface Dictionary {
         };
         clientPortal: {
           label: string;
+          comingSoon: string;
           items: {
             login: { title: string; desc: string };
             services: { title: string; desc: string };

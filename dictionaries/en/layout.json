@@ -86,6 +86,7 @@
         },
         "clientPortal": {
           "label": "Client Portal",
+          "comingSoon": "Coming soon",
           "items": {
             "login": {
               "title": "Client Login ↗",
