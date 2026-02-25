@@ -7,16 +7,20 @@ import {
   Label,
   Typography,
   Separator,
-  Badge,
   Checkbox,
 } from "poyraz-ui/atoms";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "poyraz-ui/molecules";
 import { AdminCertification } from "@/types/admin";
-import { X, Upload, Plus } from "lucide-react";
+import {
+  createCertification,
+  updateCertification,
+  uploadCertificationImage,
+} from "@/lib/supabase/queries/certifications";
+import { X, Upload } from "lucide-react";
 
 interface CertificationFormProps {
   certification?: AdminCertification;
-  onCancel: () => void;
+  onCancel: (shouldRefresh?: boolean) => void;
 }
 
 export function CertificationForm({
@@ -27,11 +31,37 @@ export function CertificationForm({
   const [preview, setPreview] = useState<string | null>(
     certification?.image || null,
   );
+  const [imageFile, setImageFile] = useState<File | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const [formData, setFormData] = useState({
+    title_tr: certification?.title_tr || "",
+    title_en: certification?.title_en || "",
+    organization_tr: certification?.organization_tr || "",
+    organization_en: certification?.organization_en || "",
+    issue_date_tr: certification?.issue_date_tr || "",
+    issue_date_en: certification?.issue_date_en || "",
+    credential_id: certification?.credential_id || "",
+    tags: certification?.tags?.join(", ") || "",
+    link: certification?.link || "",
+    sort_order: certification?.sort_order?.toString() || "1",
+    is_published: certification?.is_published ?? true,
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleCheckboxChange = (name: string, checked: boolean) => {
+    setFormData((prev) => ({ ...prev, [name]: checked }));
+  };
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
+      setImageFile(file);
       const reader = new FileReader();
       reader.onloadend = () => {
         setPreview(reader.result as string);
@@ -40,9 +70,52 @@ export function CertificationForm({
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    onCancel();
+    setIsLoading(true);
+
+    try {
+      let finalImageUrl = preview || undefined;
+      if (imageFile) {
+        const fileExt = imageFile.name.split(".").pop();
+        const fileName = `${Date.now()}-cert.${fileExt}`;
+        finalImageUrl = await uploadCertificationImage(imageFile, fileName);
+      }
+
+      const payload: Omit<
+        AdminCertification,
+        "id" | "created_at" | "updated_at"
+      > = {
+        title_tr: formData.title_tr,
+        title_en: formData.title_en,
+        organization_tr: formData.organization_tr,
+        organization_en: formData.organization_en,
+        issue_date_tr: formData.issue_date_tr,
+        issue_date_en: formData.issue_date_en,
+        credential_id: formData.credential_id || undefined,
+        link: formData.link || undefined,
+        image: finalImageUrl,
+        tags: formData.tags
+          .split(",")
+          .map((t) => t.trim())
+          .filter(Boolean),
+        sort_order: parseInt(formData.sort_order || "1", 10),
+        is_published: formData.is_published,
+      };
+
+      if (isEditing && certification?.id) {
+        await updateCertification(certification.id, payload);
+      } else {
+        await createCertification(payload);
+      }
+
+      onCancel(true);
+    } catch (error) {
+      console.error("Failed to save certification:", error);
+      alert("Sertifika kaydedilirken hata oluştu.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -54,10 +127,12 @@ export function CertificationForm({
             : "Yeni Sertifika Ekle"}
         </Typography>
         <div className="flex gap-2">
-          <Button type="button" variant="outline" onClick={onCancel}>
+          <Button type="button" variant="outline" onClick={() => onCancel()}>
             İptal
           </Button>
-          <Button type="submit">{isEditing ? "Güncelle" : "Oluştur"}</Button>
+          <Button type="submit" loading={isLoading} disabled={isLoading}>
+            {isEditing ? "Güncelle" : "Oluştur"}
+          </Button>
         </div>
       </div>
 
@@ -76,15 +151,19 @@ export function CertificationForm({
             <div className="space-y-2">
               <Label>Sertifika Adı (TR)</Label>
               <Input
+                name="title_tr"
                 placeholder="React ile İleri Seviye Web Geliştirme"
-                defaultValue={certification?.title_tr}
+                value={formData.title_tr}
+                onChange={handleChange}
               />
             </div>
             <div className="space-y-2">
               <Label>Certificate Title (EN)</Label>
               <Input
+                name="title_en"
                 placeholder="Advanced Web Development with React"
-                defaultValue={certification?.title_en}
+                value={formData.title_en}
+                onChange={handleChange}
               />
             </div>
           </div>
@@ -93,15 +172,19 @@ export function CertificationForm({
             <div className="space-y-2">
               <Label>Kurum / Organizasyon (TR)</Label>
               <Input
+                name="organization_tr"
                 placeholder="BTK Akademi"
-                defaultValue={certification?.organization_tr}
+                value={formData.organization_tr}
+                onChange={handleChange}
               />
             </div>
             <div className="space-y-2">
               <Label>Organization (EN)</Label>
               <Input
+                name="organization_en"
                 placeholder="BTK Academy"
-                defaultValue={certification?.organization_en}
+                value={formData.organization_en}
+                onChange={handleChange}
               />
             </div>
           </div>
@@ -110,15 +193,19 @@ export function CertificationForm({
             <div className="space-y-2">
               <Label>Veriliş Tarihi (TR)</Label>
               <Input
+                name="issue_date_tr"
                 placeholder="Ocak 2024"
-                defaultValue={certification?.issue_date_tr}
+                value={formData.issue_date_tr}
+                onChange={handleChange}
               />
             </div>
             <div className="space-y-2">
               <Label>Issue Date (EN)</Label>
               <Input
+                name="issue_date_en"
                 placeholder="January 2024"
-                defaultValue={certification?.issue_date_en}
+                value={formData.issue_date_en}
+                onChange={handleChange}
               />
             </div>
           </div>
@@ -126,16 +213,20 @@ export function CertificationForm({
           <div className="space-y-2">
             <Label>Sertifika No / Credential ID</Label>
             <Input
+              name="credential_id"
               placeholder="BTK-123456"
-              defaultValue={certification?.credential_id}
+              value={formData.credential_id}
+              onChange={handleChange}
             />
           </div>
 
           <div className="space-y-2">
             <Label>Yetenekler (virgülle ayır)</Label>
             <Input
+              name="tags"
               placeholder="React, State Management, UI/UX"
-              defaultValue={certification?.tags.join(", ")}
+              value={formData.tags}
+              onChange={handleChange}
             />
           </div>
         </TabsContent>
@@ -145,8 +236,10 @@ export function CertificationForm({
           <div className="space-y-2">
             <Label>Sertifika Bağlantısı (URL)</Label>
             <Input
+              name="link"
               placeholder="https://example.com/certificate/123"
-              defaultValue={certification?.link}
+              value={formData.link}
+              onChange={handleChange}
             />
           </div>
 
@@ -171,6 +264,7 @@ export function CertificationForm({
                   type="button"
                   onClick={() => {
                     setPreview(null);
+                    setImageFile(null);
                     if (fileInputRef.current) fileInputRef.current.value = "";
                   }}
                   className="absolute top-2 right-2 w-8 h-8 bg-red-600 text-white flex items-center justify-center hover:bg-red-700 transition-colors shadow-lg"
@@ -202,15 +296,20 @@ export function CertificationForm({
             <div className="space-y-2">
               <Label>Sıralama</Label>
               <Input
+                name="sort_order"
                 type="number"
-                defaultValue={certification?.sort_order ?? 1}
+                value={formData.sort_order}
+                onChange={handleChange}
               />
             </div>
             <div className="flex items-end pb-2">
               <div className="flex items-center gap-2">
                 <Checkbox
                   id="is_published"
-                  defaultChecked={certification?.is_published ?? true}
+                  checked={formData.is_published}
+                  onCheckedChange={(c) =>
+                    handleCheckboxChange("is_published", c as boolean)
+                  }
                 />
                 <Label htmlFor="is_published">Yayınla</Label>
               </div>

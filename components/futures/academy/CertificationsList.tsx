@@ -11,51 +11,45 @@ import {
 } from "poyraz-ui/atoms";
 import { Icon } from "@iconify/react";
 import { Dictionary } from "@/types/dictionary";
-
-const staticCertifications = [
-  {
-    credentialId: "BTK-123456",
-    link: "#",
-    image: "https://www.color-hex.com/palettes/36931.png",
-  },
-  {
-    credentialId: "UC-554123",
-    link: "#",
-    image: "https://www.color-hex.com/palettes/36931.png",
-  },
-  {
-    credentialId: "TGY-98765",
-    link: "#",
-    image: "https://www.color-hex.com/palettes/36931.png",
-  },
-];
+import { AdminCertification } from "@/types/admin";
+import { Locale } from "@/i18n-config";
 
 interface CertificationsListProps {
   dictionary: Dictionary;
+  certifications: AdminCertification[];
+  locale: Locale;
 }
 
-export function CertificationsList({ dictionary }: CertificationsListProps) {
+export function CertificationsList({
+  dictionary,
+  certifications,
+  locale,
+}: CertificationsListProps) {
   const { certifications: certsDict } = dictionary.academy;
-
-  const mergedCertifications = staticCertifications.map((cert, index) => ({
-    ...cert,
-    ...certsDict.items[index],
-  }));
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {mergedCertifications.map((cert) => (
+      {certifications.map((cert) => (
         <Card
-          key={cert.title}
+          key={cert.id}
           variant="default"
-          className="group hover:border-red-600 transition-colors"
+          className="group hover:border-red-600 transition-colors flex flex-col h-full"
         >
-          <CardImage className="aspect-video relative overflow-hidden border-b border-dashed border-slate-200">
-            <img
-              src={cert.image}
-              alt={cert.title}
-              className="object-cover transition-transform duration-500 group-hover:scale-105"
-            />
+          <CardImage className="aspect-video relative overflow-hidden border-b border-dashed border-slate-200 bg-slate-50">
+            {cert.image ? (
+              <img
+                src={cert.image}
+                alt={locale === "tr" ? cert.title_tr : cert.title_en}
+                className="object-contain w-full h-full transition-transform duration-500 group-hover:scale-105"
+              />
+            ) : (
+              <div className="w-full h-full flex items-center justify-center">
+                <Icon
+                  icon="mdi:certificate-outline"
+                  className="w-16 h-16 text-slate-300"
+                />
+              </div>
+            )}
           </CardImage>
 
           <CardHeader>
@@ -71,15 +65,19 @@ export function CertificationsList({ dictionary }: CertificationsListProps) {
               ))}
             </div>
             <CardTitle className="text-xl group-hover:text-red-600 transition-colors line-clamp-2">
-              {cert.title}
+              {locale === "tr" ? cert.title_tr : cert.title_en}
             </CardTitle>
           </CardHeader>
 
-          <CardContent>
+          <CardContent className="grow">
             <div className="space-y-2 text-sm text-slate-500">
               <div className="flex items-center gap-2">
                 <Icon icon="mdi:domain" className="w-4 h-4 text-slate-400" />
-                <span>{cert.organization}</span>
+                <span>
+                  {locale === "tr"
+                    ? cert.organization_tr
+                    : cert.organization_en}
+                </span>
               </div>
               <div className="flex items-center gap-2">
                 <Icon
@@ -87,32 +85,39 @@ export function CertificationsList({ dictionary }: CertificationsListProps) {
                   className="w-4 h-4 text-slate-400"
                 />
                 <span>
-                  {certsDict.labels.issued} {cert.issueDate}
+                  {certsDict.labels.issued}{" "}
+                  {locale === "tr" ? cert.issue_date_tr : cert.issue_date_en}
                 </span>
               </div>
-              <div className="flex items-center gap-2">
-                <Icon
-                  icon="mdi:certificate-outline"
-                  className="w-4 h-4 text-slate-400"
-                />
-                <span className="font-mono text-xs">{cert.credentialId}</span>
-              </div>
+              {cert.credential_id && (
+                <div className="flex items-center gap-2">
+                  <Icon
+                    icon="mdi:certificate-outline"
+                    className="w-4 h-4 text-slate-400"
+                  />
+                  <span className="font-mono text-xs">
+                    {cert.credential_id}
+                  </span>
+                </div>
+              )}
             </div>
           </CardContent>
 
-          <CardFooter className="mt-auto border-t border-dashed border-slate-200 pt-4">
-            <Button
-              className="w-full gap-2"
-              variant="outline"
-              size="sm"
-              asChild
-            >
-              <a href={cert.link} target="_blank" rel="noopener noreferrer">
-                <Icon icon="mdi:open-in-new" className="w-4 h-4" />
-                {certsDict.labels.showCredential}
-              </a>
-            </Button>
-          </CardFooter>
+          {cert.link && (
+            <CardFooter className="mt-auto border-t border-dashed border-slate-200 pt-4">
+              <Button
+                className="w-full gap-2"
+                variant="outline"
+                size="sm"
+                asChild
+              >
+                <a href={cert.link} target="_blank" rel="noopener noreferrer">
+                  <Icon icon="mdi:open-in-new" className="w-4 h-4" />
+                  {certsDict.labels.showCredential}
+                </a>
+              </Button>
+            </CardFooter>
+          )}
         </Card>
       ))}
     </div>

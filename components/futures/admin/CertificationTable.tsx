@@ -6,7 +6,10 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "poyraz-ui/molecules";
 import { DataTable } from "poyraz-ui/organisms";
 import type { DataTableColumnDef } from "poyraz-ui/organisms";
 import { AdminCertification } from "@/types/admin";
-import { mockCertifications } from "@/data/admin/mock-certifications";
+import {
+  getAdminCertifications,
+  deleteCertification,
+} from "@/lib/supabase/queries/certifications";
 import { CertificationForm } from "./CertificationForm";
 
 const columns: DataTableColumnDef<AdminCertification>[] = [
@@ -64,26 +67,72 @@ export function CertificationTable() {
     AdminCertification | undefined
   >();
   const [isMounted, setIsMounted] = useState(false);
+  const [data, setData] = useState<AdminCertification[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [selectedRows, setSelectedRows] = useState<AdminCertification[]>([]);
+
+  const loadData = async () => {
+    setIsLoading(true);
+    try {
+      const records = await getAdminCertifications();
+      setData(records);
+    } catch (error) {
+      console.error("Failed to load certifications:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   useEffect(() => {
     setIsMounted(true);
+    loadData();
   }, []);
 
-  const handleEdit = (rows: AdminCertification[]) => {
+  const handleSelection = (rows: AdminCertification[]) => {
+    setSelectedRows(rows);
     if (rows.length === 1) {
       setEditingCertification(rows[0]);
+    } else {
+      setEditingCertification(undefined);
+    }
+  };
+
+  const handleEditClick = () => {
+    if (editingCertification) {
       setActiveTab("form");
     }
   };
 
   const handleAddNew = () => {
     setEditingCertification(undefined);
+    setSelectedRows([]);
     setActiveTab("form");
   };
 
-  const handleFormClose = () => {
+  const handleFormClose = (shouldRefresh?: boolean) => {
     setEditingCertification(undefined);
     setActiveTab("list");
+    if (shouldRefresh) {
+      loadData();
+    }
+  };
+
+  const handleDelete = async (rows: AdminCertification[]) => {
+    if (
+      window.confirm(
+        `${rows.length} sertifikayı silmek istediğinizden emin misiniz?`,
+      )
+    ) {
+      try {
+        for (const row of rows) {
+          await deleteCertification(row.id);
+        }
+        await loadData();
+      } catch (error) {
+        console.error("Sertifika silinirken hata:", error);
+        alert("Sertifika silinirken bir hata oluştu.");
+      }
+    }
   };
 
   return (
@@ -117,17 +166,36 @@ export function CertificationTable() {
           <TabsContent value="list" className="space-y-4">
             <div className="flex justify-between items-center">
               <Typography variant="h4">Sertifika Listesi</Typography>
-              <Button onClick={handleAddNew}>Yeni Sertifika Ekle</Button>
+              <div className="flex gap-2">
+                {selectedRows.length > 0 && (
+                  <>
+                    {selectedRows.length === 1 && (
+                      <Button variant="outline" onClick={handleEditClick}>
+                        Seçileni Düzenle
+                      </Button>
+                    )}
+                    <Button
+                      variant="destructive"
+                      onClick={() => handleDelete(selectedRows)}
+                    >
+                      Seçilenleri Sil ({selectedRows.length})
+                    </Button>
+                  </>
+                )}
+                <Button onClick={handleAddNew}>Yeni Sertifika Ekle</Button>
+              </div>
             </div>
             <DataTable
               columns={columns}
-              data={mockCertifications}
+              data={data}
               getRowId={(row) => row.id}
               selectable
-              onSelectionChange={handleEdit}
+              onSelectionChange={handleSelection}
               searchPlaceholder="Sertifika ara..."
               pageSize={10}
-              emptyMessage="Henüz bir sertifika eklenmemiş."
+              emptyMessage={
+                isLoading ? "Yükleniyor..." : "Henüz bir sertifika eklenmemiş."
+              }
             />
           </TabsContent>
 
