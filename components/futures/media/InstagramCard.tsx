@@ -54,11 +54,17 @@ export function InstagramCard({
 
         {/* Image Container */}
         <div className="relative aspect-[4/5] overflow-hidden bg-slate-100">
-          <img
-            src={thumbnail}
-            alt={caption}
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-          />
+          {thumbnail ? (
+            <img
+              src={thumbnail}
+              alt={caption || "Instagram post"}
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+          ) : (
+            <div className="w-full h-full bg-slate-200 flex items-center justify-center text-slate-400">
+              <Instagram className="w-8 h-8 opacity-50" />
+            </div>
+          )}
 
           {/* Overlay gradient */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-70 transition-opacity duration-300" />

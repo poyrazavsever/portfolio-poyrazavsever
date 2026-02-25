@@ -20,6 +20,7 @@ export default async function PastEpisodesPage() {
     supabaseEpisodes.length > 0
       ? supabaseEpisodes.map((ep) => ({
           id: ep.id,
+          displayId: ep.episode_number?.toString() || ep.id,
           title: locale === "en" ? ep.title_en || ep.title_tr : ep.title_tr,
           guest: ep.guest_name || "",
           date: ep.date,

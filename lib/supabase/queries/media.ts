@@ -4,76 +4,106 @@ import { unstable_noStore as noStore } from "next/cache";
 
 // ── EPISODES (Admin) ──
 
-export async function getAdminEpisodes(): Promise<AdminEpisode[]> {
+export async function getAdminEpisodes(
+  series: string,
+): Promise<AdminEpisode[]> {
   noStore();
   const supabase = createClient();
+  const table =
+    series === "masa_basi" ? "masa_basi_episodes" : "yazilima_dair_episodes";
 
   const { data, error } = await supabase
-    .from("episodes")
+    .from(table)
     .select("*")
     .order("created_at", { ascending: false });
 
   if (error) {
-    console.error("Error fetching episodes:", error);
+    console.error(`Error fetching ${series} episodes:`, error);
     return [];
   }
 
-  return data as AdminEpisode[];
+  // Inject series back into the result for frontend compatibility if needed
+  return (data || []).map((ep) => ({
+    ...ep,
+    series: series as any,
+  })) as AdminEpisode[];
 }
 
 export async function createEpisode(
   episode: Omit<AdminEpisode, "id" | "created_at" | "updated_at">,
 ): Promise<{ data: AdminEpisode | null; error: Error | null }> {
   const supabase = createClient();
+  const table =
+    episode.series === "masa_basi"
+      ? "masa_basi_episodes"
+      : "yazilima_dair_episodes";
+
+  // Exclude series before inserting if the DB schema doesn't have it
+  const { series, ...insertData } = episode as any;
 
   const { data, error } = await supabase
-    .from("episodes")
-    .insert([episode])
+    .from(table)
+    .insert([insertData])
     .select()
     .single();
 
   if (error) {
-    console.error("Error creating episode:", error);
+    console.error(`Error creating ${episode.series} episode:`, error);
     return { data: null, error: new Error(error.message) };
   }
 
-  return { data: data as AdminEpisode, error: null };
+  return {
+    data: { ...data, series: episode.series } as AdminEpisode,
+    error: null,
+  };
 }
 
 export async function updateEpisode(
+  series: string,
   id: string,
   episode: Partial<AdminEpisode>,
 ): Promise<{ data: AdminEpisode | null; error: Error | null }> {
   const supabase = createClient();
+  const table =
+    series === "masa_basi" ? "masa_basi_episodes" : "yazilima_dair_episodes";
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
-  const { id: _, created_at, updated_at, ...updateData } = episode as any;
+  const {
+    id: _,
+    created_at,
+    updated_at,
+    series: __,
+    ...updateData
+  } = episode as any;
   updateData.updated_at = new Date().toISOString();
 
   const { data, error } = await supabase
-    .from("episodes")
+    .from(table)
     .update(updateData)
     .eq("id", id)
     .select()
     .single();
 
   if (error) {
-    console.error("Error updating episode:", error);
+    console.error(`Error updating ${series} episode:`, error);
     return { data: null, error: new Error(error.message) };
   }
 
-  return { data: data as AdminEpisode, error: null };
+  return { data: { ...data, series } as AdminEpisode, error: null };
 }
 
 export async function deleteEpisode(
+  series: string,
   id: string,
 ): Promise<{ error: Error | null }> {
   const supabase = createClient();
+  const table =
+    series === "masa_basi" ? "masa_basi_episodes" : "yazilima_dair_episodes";
 
-  const { error } = await supabase.from("episodes").delete().eq("id", id);
+  const { error } = await supabase.from(table).delete().eq("id", id);
 
   if (error) {
-    console.error("Error deleting episode:", error);
+    console.error(`Error deleting ${series} episode:`, error);
     return { error: new Error(error.message) };
   }
 
@@ -107,27 +137,34 @@ export async function getPublishedEpisodes(
   series: string,
 ): Promise<AdminEpisode[]> {
   const supabase = createClient();
+  const table =
+    series === "masa_basi" ? "masa_basi_episodes" : "yazilima_dair_episodes";
 
   const { data, error } = await supabase
-    .from("episodes")
+    .from(table)
     .select("*")
-    .eq("series", series)
     .eq("is_published", true)
     .order("episode_number", { ascending: false });
 
   if (error) {
-    console.error("Error fetching published episodes:", error);
+    console.error(`Error fetching published ${series} episodes:`, error);
     return [];
   }
 
-  return data as AdminEpisode[];
+  return (data || []).map((ep) => ({
+    ...ep,
+    series: series as any,
+  })) as AdminEpisode[];
 }
 
 export async function getUpcomingEpisode(): Promise<AdminEpisode | null> {
   const supabase = createClient();
 
+  // Upcoming episodes apply to "Masa Başı" primarily based on current usage
+  const table = "masa_basi_episodes";
+
   const { data, error } = await supabase
-    .from("episodes")
+    .from(table)
     .select("*")
     .eq("is_upcoming", true)
     .eq("is_published", true)
@@ -140,7 +177,11 @@ export async function getUpcomingEpisode(): Promise<AdminEpisode | null> {
     return null;
   }
 
-  return data as AdminEpisode | null;
+  if (data) {
+    return { ...data, series: "masa_basi" as any } as AdminEpisode;
+  }
+
+  return null;
 }
 
 // ── SOCIAL VIDEOS (Admin) ──

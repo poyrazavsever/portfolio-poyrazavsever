@@ -16,6 +16,7 @@ import ReactMarkdown from "react-markdown";
 
 export interface MediaItem {
   id: string;
+  displayId?: string;
   title: string;
   date: string;
   youtubeLink?: string;
@@ -47,7 +48,7 @@ export function MediaSheet({
         <div className="p-6 border-b border-dashed border-slate-200 bg-slate-50">
           <div className="flex items-center gap-2 mb-4">
             <Badge variant="outline" className="bg-white">
-              {badgePrefix} #{item.id}
+              {badgePrefix} #{item.displayId || item.id}
             </Badge>
             <span className="text-slate-400 font-mono text-sm flex items-center gap-1">
               <Calendar className="w-3 h-3" /> {item.date}

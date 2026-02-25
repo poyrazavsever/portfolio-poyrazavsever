@@ -74,11 +74,8 @@ export function EpisodeForm({
   };
 
   useEffect(() => {
-    if (episode) {
-      setGuestPreview(episode.guest_image || null);
-    } else {
-      setGuestPreview(null);
-    }
+    const preview = episode?.guest_image || null;
+    setGuestPreview(preview);
     setGuestFile(null);
   }, [episode]);
 
@@ -113,8 +110,8 @@ export function EpisodeForm({
       guest_name: formData.guest_name,
       guest_role: formData.guest_role,
       guest_image: guestImageUrl,
-      date: formData.date,
-      time: formData.time,
+      date: formData.date || new Date().toISOString().split("T")[0],
+      time: formData.time || "20:00",
       duration: formData.duration,
       topics: formData.topics
         ? formData.topics.split(",").map((t) => t.trim())
@@ -126,7 +123,7 @@ export function EpisodeForm({
     };
 
     if (isEditing && episode) {
-      await updateEpisode(episode.id, data);
+      await updateEpisode(series, episode.id, data);
     } else {
       await createEpisode(data);
     }

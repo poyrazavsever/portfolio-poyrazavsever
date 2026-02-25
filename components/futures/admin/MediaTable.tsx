@@ -8,7 +8,6 @@ import type { DataTableColumnDef } from "poyraz-ui/organisms";
 import {
   AdminEpisode,
   AdminSocialVideo,
-  EpisodeSeries,
   PLATFORM_LABELS,
   SOCIAL_LIMITS,
 } from "@/types/admin";
@@ -194,7 +193,6 @@ export function MediaTable() {
     AdminSocialVideo | undefined
   >();
   const [activeTab, setActiveTab] = useState("masa_basi");
-  const [activeSeries, setActiveSeries] = useState<EpisodeSeries>("masa_basi");
   const [isMounted, setIsMounted] = useState(false);
 
   // Supabase data
@@ -202,16 +200,20 @@ export function MediaTable() {
   const [socialVideos, setSocialVideos] = useState<AdminSocialVideo[]>([]);
 
   const fetchData = useCallback(async () => {
-    const [eps, vids] = await Promise.all([
-      getAdminEpisodes(),
+    const [masaBasiEps, yazilimaDairEps, vids] = await Promise.all([
+      getAdminEpisodes("masa_basi"),
+      getAdminEpisodes("yazilima_dair"),
       getAdminSocialVideos(),
     ]);
-    setEpisodes(eps);
+    setEpisodes([...masaBasiEps, ...yazilimaDairEps]);
     setSocialVideos(vids);
   }, []);
 
   useEffect(() => {
     setIsMounted(true);
+  }, []);
+
+  useEffect(() => {
     fetchData();
   }, [fetchData]);
 
@@ -240,7 +242,11 @@ export function MediaTable() {
   const handleEditEpisode = (rows: AdminEpisode[]) => {
     if (rows.length === 1) {
       setEditingEpisode(rows[0]);
-      setActiveTab("episode_form");
+      setActiveTab(
+        rows[0].series === "masa_basi"
+          ? "masa_basi_form"
+          : "yazilima_dair_form",
+      );
     }
   };
 
@@ -269,7 +275,7 @@ export function MediaTable() {
 
   const handleDeleteEpisode = async (rows: AdminEpisode[]) => {
     if (rows.length === 1 && confirm(`"${rows[0].title_tr}" silinsin mi?`)) {
-      await deleteEpisode(rows[0].id);
+      await deleteEpisode(rows[0].series, rows[0].id);
       fetchData();
     }
   };
@@ -303,18 +309,8 @@ export function MediaTable() {
       {!isMounted ? null : (
         <Tabs value={activeTab} onValueChange={setActiveTab}>
           <TabsList>
-            <TabsTrigger
-              value="masa_basi"
-              onClick={() => setActiveSeries("masa_basi")}
-            >
-              Masa Başı
-            </TabsTrigger>
-            <TabsTrigger
-              value="yazilima_dair"
-              onClick={() => setActiveSeries("yazilima_dair")}
-            >
-              Yazılıma Dair
-            </TabsTrigger>
+            <TabsTrigger value="masa_basi">Masa Başı</TabsTrigger>
+            <TabsTrigger value="yazilima_dair">Yazılıma Dair</TabsTrigger>
             <TabsTrigger value="social">
               Sosyal Medya
               <span className="ml-1.5 text-xs text-slate-400 font-mono">
@@ -322,8 +318,27 @@ export function MediaTable() {
                 {SOCIAL_LIMITS.youtube} YT)
               </span>
             </TabsTrigger>
-            <TabsTrigger value="episode_form">
-              {editingEpisode ? "Bölüm Düzenle" : "Yeni Bölüm"}
+            <TabsTrigger
+              value="masa_basi_form"
+              onClick={() => {
+                if (activeTab !== "masa_basi_form")
+                  setEditingEpisode(undefined);
+              }}
+            >
+              {editingEpisode?.series === "masa_basi"
+                ? "MB Düzenle"
+                : "Yeni MB"}
+            </TabsTrigger>
+            <TabsTrigger
+              value="yazilima_dair_form"
+              onClick={() => {
+                if (activeTab !== "yazilima_dair_form")
+                  setEditingEpisode(undefined);
+              }}
+            >
+              {editingEpisode?.series === "yazilima_dair"
+                ? "YD Düzenle"
+                : "Yeni YD"}
             </TabsTrigger>
             <TabsTrigger value="social_form">
               {editingSocial ? "İçerik Düzenle" : "Yeni İçerik"}
@@ -337,7 +352,7 @@ export function MediaTable() {
               <Button
                 onClick={() => {
                   setEditingEpisode(undefined);
-                  setActiveTab("episode_form");
+                  setActiveTab("masa_basi_form");
                 }}
               >
                 Yeni Bölüm Ekle
@@ -362,7 +377,7 @@ export function MediaTable() {
               <Button
                 onClick={() => {
                   setEditingEpisode(undefined);
-                  setActiveTab("episode_form");
+                  setActiveTab("yazilima_dair_form");
                 }}
               >
                 Yeni Bölüm Ekle
@@ -418,11 +433,28 @@ export function MediaTable() {
             />
           </TabsContent>
 
-          {/* ── Episode Form ── */}
-          <TabsContent value="episode_form">
+          {/* ── Masa Başı Form ── */}
+          <TabsContent value="masa_basi_form">
             <EpisodeForm
-              episode={editingEpisode}
-              defaultSeries={activeSeries}
+              episode={
+                editingEpisode?.series === "masa_basi"
+                  ? editingEpisode
+                  : undefined
+              }
+              defaultSeries="masa_basi"
+              onCancel={handleEpisodeFormClose}
+            />
+          </TabsContent>
+
+          {/* ── Yazılıma Dair Form ── */}
+          <TabsContent value="yazilima_dair_form">
+            <EpisodeForm
+              episode={
+                editingEpisode?.series === "yazilima_dair"
+                  ? editingEpisode
+                  : undefined
+              }
+              defaultSeries="yazilima_dair"
               onCancel={handleEpisodeFormClose}
             />
           </TabsContent>
