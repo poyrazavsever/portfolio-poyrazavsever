@@ -57,22 +57,22 @@ create trigger set_certifications_updated_at
 
 -- Insert the storage bucket if it doesn't exist
 insert into storage.buckets (id, name, public)
-values ('certification-images', 'certification-images', true)
+values ('certifications-images', 'certifications-images', true)
 on conflict (id) do nothing;
 
 -- Set up storage policies for the new bucket
-create policy "Public Access for certification-images"
+create policy "Public Access for certifications-images"
   on storage.objects for select
-  using ( bucket_id = 'certification-images' );
+  using ( bucket_id = 'certifications-images' );
 
-create policy "Auth Insert for certification-images"
+create policy "Auth Insert for certifications-images"
   on storage.objects for insert
-  with check ( bucket_id = 'certification-images' and auth.role() = 'authenticated' );
+  with check ( bucket_id = 'certifications-images' and auth.role() = 'authenticated' );
 
-create policy "Auth Update for certification-images"
+create policy "Auth Update for certifications-images"
   on storage.objects for update
-  using ( bucket_id = 'certification-images' and auth.role() = 'authenticated' );
+  using ( bucket_id = 'certifications-images' and auth.role() = 'authenticated' );
 
-create policy "Auth Delete for certification-images"
+create policy "Auth Delete for certifications-images"
   on storage.objects for delete
-  using ( bucket_id = 'certification-images' and auth.role() = 'authenticated' );
+  using ( bucket_id = 'certifications-images' and auth.role() = 'authenticated' );

@@ -10,8 +10,12 @@ import {
   ReadingItemType,
   READING_STATUS_LABELS,
 } from "@/types/admin";
-import { mockReadingItems } from "@/data/admin/mock-reading-list";
 import { ReadingListForm } from "./ReadingListForm";
+import {
+  getAdminReadingItems,
+  deleteReadingItem,
+} from "@/lib/supabase/queries/reading-list";
+import { Trash2 } from "lucide-react";
 
 const getStatusBadge = (status: string) => {
   switch (status) {
@@ -97,24 +101,43 @@ export function ReadingListTable() {
   >();
   const [formType, setFormType] = useState<ReadingItemType>("book");
   const [isMounted, setIsMounted] = useState(false);
+  const [data, setData] = useState<AdminReadingItem[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [selectedRows, setSelectedRows] = useState<AdminReadingItem[]>([]);
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  const fetchData = async () => {
+    setIsLoading(true);
+    try {
+      const items = await getAdminReadingItems();
+      setData(items);
+    } catch (error) {
+      console.error("Failed to load reading list items:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   useEffect(() => {
     setIsMounted(true);
+    fetchData();
   }, []);
 
-  const books = useMemo(
-    () => mockReadingItems.filter((i) => i.type === "book"),
-    [],
-  );
-  const videos = useMemo(
-    () => mockReadingItems.filter((i) => i.type === "video"),
-    [],
-  );
+  const books = useMemo(() => data.filter((i) => i.type === "book"), [data]);
+  const videos = useMemo(() => data.filter((i) => i.type === "video"), [data]);
 
-  const handleEdit = (rows: AdminReadingItem[]) => {
+  const handleSelection = (rows: AdminReadingItem[]) => {
+    setSelectedRows(rows);
     if (rows.length === 1) {
       setEditingItem(rows[0]);
       setFormType(rows[0].type);
+    } else {
+      setEditingItem(undefined);
+    }
+  };
+
+  const handleEditClick = () => {
+    if (editingItem) {
       setActiveTab("form");
     }
   };
@@ -125,28 +148,82 @@ export function ReadingListTable() {
     setActiveTab("form");
   };
 
-  const handleFormClose = () => {
+  const handleFormClose = (shouldRefresh?: boolean) => {
     setEditingItem(undefined);
+    setSelectedRows([]);
     setActiveTab(formType === "book" ? "books" : "videos");
+    if (shouldRefresh) {
+      fetchData();
+    }
+  };
+
+  const handleDelete = async () => {
+    if (!selectedRows.length) return;
+
+    if (
+      window.confirm(
+        `Seçili ${selectedRows.length} öğeyi silmek istediğinize emin misiniz?`,
+      )
+    ) {
+      setIsDeleting(true);
+      try {
+        for (const item of selectedRows) {
+          await deleteReadingItem(item.id);
+        }
+        setSelectedRows([]);
+        setEditingItem(undefined);
+        await fetchData();
+      } catch (error) {
+        console.error("Failed to delete reading items:", error);
+        alert("Öğeler silinirken bir hata oluştu.");
+      } finally {
+        setIsDeleting(false);
+      }
+    }
   };
 
   return (
     <div className="space-y-6">
-      <div>
-        <Typography variant="h2">
-          Okuma Listesi{" "}
-          <Typography
-            variant="h2"
-            component="span"
-            secondaryFont
-            className="text-red-600"
-          >
-            Yönetimi
+      <div className="flex justify-between items-start">
+        <div>
+          <Typography variant="h2">
+            Okuma Listesi{" "}
+            <Typography
+              variant="h2"
+              component="span"
+              secondaryFont
+              className="text-red-600"
+            >
+              Yönetimi
+            </Typography>
           </Typography>
-        </Typography>
-        <Typography variant="muted">
-          Kitap ve video içerik listesini yönet.
-        </Typography>
+          <Typography variant="muted">
+            Kitap ve video içerik listesini yönet.
+          </Typography>
+        </div>
+
+        {selectedRows.length > 0 && activeTab !== "form" && (
+          <div className="flex items-center gap-2 bg-slate-50 p-2 border border-slate-200 rounded">
+            <Typography variant="muted" className="text-sm mr-2">
+              {selectedRows.length} öğe seçili
+            </Typography>
+            {selectedRows.length === 1 && (
+              <Button size="sm" variant="outline" onClick={handleEditClick}>
+                Düzenle
+              </Button>
+            )}
+            <Button
+              size="sm"
+              variant="destructive"
+              onClick={handleDelete}
+              loading={isDeleting}
+              disabled={isDeleting}
+            >
+              <Trash2 className="w-4 h-4 mr-2" />
+              Sil
+            </Button>
+          </div>
+        )}
       </div>
 
       {!isMounted ? null : (
@@ -171,10 +248,12 @@ export function ReadingListTable() {
               data={books}
               getRowId={(row) => row.id}
               selectable
-              onSelectionChange={handleEdit}
+              onSelectionChange={handleSelection}
               searchPlaceholder="Kitap ara..."
               pageSize={10}
-              emptyMessage="Henüz bir kitap eklenmemiş."
+              emptyMessage={
+                isLoading ? "Yükleniyor..." : "Henüz bir kitap eklenmemiş."
+              }
             />
           </TabsContent>
 
@@ -190,10 +269,12 @@ export function ReadingListTable() {
               data={videos}
               getRowId={(row) => row.id}
               selectable
-              onSelectionChange={handleEdit}
+              onSelectionChange={handleSelection}
               searchPlaceholder="Video ara..."
               pageSize={10}
-              emptyMessage="Henüz bir video eklenmemiş."
+              emptyMessage={
+                isLoading ? "Yükleniyor..." : "Henüz bir video eklenmemiş."
+              }
             />
           </TabsContent>
 
