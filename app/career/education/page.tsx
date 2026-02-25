@@ -4,12 +4,32 @@ import { Timeline } from "@/components/futures/career/Timeline";
 import { Typography } from "poyraz-ui/atoms";
 import { getDictionary } from "@/get-dictionary";
 import { i18n, type Locale } from "@/i18n-config";
+import { getPublishedCareerRecords } from "@/lib/supabase/queries/career";
+import { AdminCareerItem } from "@/types/admin";
 
 export default async function EducationPage() {
   const cookieStore = await cookies();
-  const locale = (cookieStore.get("NEXT_LOCALE")?.value || i18n.defaultLocale) as Locale;
+  const locale = (cookieStore.get("NEXT_LOCALE")?.value ||
+    i18n.defaultLocale) as Locale;
   const dictionary = await getDictionary(locale);
   const { education: edDict } = dictionary.career;
+
+  const records = await getPublishedCareerRecords("education");
+
+  const mapToTimelineItem = (item: AdminCareerItem) => ({
+    id: item.id,
+    role: locale === "en" ? item.role_en : item.role_tr,
+    company: locale === "en" ? item.company_en : item.company_tr,
+    date: locale === "en" ? item.date_en : item.date_tr,
+    location:
+      (locale === "en" ? item.location_en : item.location_tr) || undefined,
+    type:
+      (locale === "en" ? item.employment_type_en : item.employment_type_tr) ||
+      undefined,
+    description:
+      (locale === "en" ? item.description_en : item.description_tr) || [],
+    skills: item.skills || [],
+  });
 
   return (
     <div className="min-h-screen pb-24">
@@ -33,9 +53,8 @@ export default async function EducationPage() {
             {edDict.titleHighlight}
           </span>
         </Typography>
-        <Timeline items={edDict.items} />
+        <Timeline items={records.map(mapToTimelineItem)} />
       </div>
     </div>
   );
 }
-

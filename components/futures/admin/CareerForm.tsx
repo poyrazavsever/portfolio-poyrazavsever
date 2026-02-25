@@ -17,15 +17,26 @@ import {
   CareerItemType,
   CAREER_ITEM_TYPE_LABELS,
 } from "@/types/admin";
-import { X, Plus } from "lucide-react";
+import {
+  createCareerRecord,
+  updateCareerRecord,
+  deleteCareerRecord,
+} from "@/lib/supabase/queries/career";
+import { X, Plus, Trash } from "lucide-react";
 
 interface CareerFormProps {
   item?: AdminCareerItem;
   defaultType: CareerItemType;
   onCancel: () => void;
+  onSave: () => void;
 }
 
-export function CareerForm({ item, defaultType, onCancel }: CareerFormProps) {
+export function CareerForm({
+  item,
+  defaultType,
+  onCancel,
+  onSave,
+}: CareerFormProps) {
   const isEditing = !!item;
   const type = item?.type || defaultType;
 
@@ -64,9 +75,97 @@ export function CareerForm({ item, defaultType, onCancel }: CareerFormProps) {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [formData, setFormData] = useState({
+    role_tr: item?.role_tr || "",
+    role_en: item?.role_en || "",
+    company_tr: item?.company_tr || "",
+    company_en: item?.company_en || "",
+    location_tr: item?.location_tr || "",
+    location_en: item?.location_en || "",
+    date_tr: item?.date_tr || "",
+    date_en: item?.date_en || "",
+    employment_type_tr: item?.employment_type_tr || "",
+    employment_type_en: item?.employment_type_en || "",
+    skills: item?.skills?.join(", ") || "",
+    sort_order: item?.sort_order?.toString() || "1",
+    is_published: item?.is_published ?? true,
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleCheckboxChange = (name: string, checked: boolean) => {
+    setFormData((prev) => ({ ...prev, [name]: checked }));
+  };
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    onCancel();
+    setIsLoading(true);
+
+    const payload: Omit<AdminCareerItem, "id" | "created_at"> = {
+      type: type,
+      role_tr: formData.role_tr,
+      role_en: formData.role_en,
+      company_tr: formData.company_tr,
+      company_en: formData.company_en,
+      location_tr: formData.location_tr,
+      location_en: formData.location_en,
+      date_tr: formData.date_tr,
+      date_en: formData.date_en,
+      employment_type_tr: formData.employment_type_tr,
+      employment_type_en: formData.employment_type_en,
+      description_tr: descTr.filter((d) => d.trim() !== ""),
+      description_en: descEn.filter((d) => d.trim() !== ""),
+      skills: formData.skills
+        .split(",")
+        .map((s) => s.trim())
+        .filter((s) => s !== ""),
+      sort_order: parseInt(formData.sort_order || "1", 10),
+      is_published: formData.is_published,
+    };
+
+    try {
+      if (isEditing && item) {
+        const { error } = await updateCareerRecord(item.id, payload);
+        if (error) throw error;
+        alert("Deneyim güncellendi.");
+      } else {
+        const { error } = await createCareerRecord(payload);
+        if (error) throw error;
+        alert("Deneyim eklendi.");
+      }
+      onSave();
+    } catch (err: any) {
+      alert(err.message || "Bir hata oluştu.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleDelete = async () => {
+    if (!item) return;
+    if (
+      confirm("Bu deneyimi kalıcı olarak silmek istediğinize emin misiniz?")
+    ) {
+      setIsLoading(true);
+      try {
+        const success = await deleteCareerRecord(item.id);
+        if (success) {
+          alert("Deneyim silindi.");
+          onSave();
+        } else {
+          alert("Deneyim silinemedi.");
+        }
+      } catch (err) {
+        alert("Silinirken bir hata oluştu.");
+      } finally {
+        setIsLoading(false);
+      }
+    }
   };
 
   return (
@@ -78,10 +177,17 @@ export function CareerForm({ item, defaultType, onCancel }: CareerFormProps) {
             : `Yeni ${CAREER_ITEM_TYPE_LABELS[type]} Ekle`}
         </Typography>
         <div className="flex gap-2">
-          <Button type="button" variant="outline" onClick={onCancel}>
+          <Button
+            type="button"
+            variant="outline"
+            onClick={onCancel}
+            disabled={isLoading}
+          >
             İptal
           </Button>
-          <Button type="submit">{isEditing ? "Güncelle" : "Oluştur"}</Button>
+          <Button type="submit" disabled={isLoading}>
+            {isEditing ? "Güncelle" : "Oluştur"}
+          </Button>
         </div>
       </div>
 
@@ -100,23 +206,29 @@ export function CareerForm({ item, defaultType, onCancel }: CareerFormProps) {
             <div className="space-y-2">
               <Label>Pozisyon / Bölüm (TR)</Label>
               <Input
+                name="role_tr"
+                required
                 placeholder={
                   type === "education"
                     ? "Bilgisayar Mühendisliği"
                     : "Senior Developer"
                 }
-                defaultValue={item?.role_tr}
+                value={formData.role_tr}
+                onChange={handleChange}
               />
             </div>
             <div className="space-y-2">
               <Label>Role / Department (EN)</Label>
               <Input
+                name="role_en"
+                required
                 placeholder={
                   type === "education"
                     ? "Computer Engineering"
                     : "Senior Developer"
                 }
-                defaultValue={item?.role_en}
+                value={formData.role_en}
+                onChange={handleChange}
               />
             </div>
           </div>
@@ -130,12 +242,15 @@ export function CareerForm({ item, defaultType, onCancel }: CareerFormProps) {
                 (TR)
               </Label>
               <Input
+                name="company_tr"
+                required
                 placeholder={
                   type === "education"
                     ? "İstanbul Teknik Üniversitesi"
                     : "Teknoloji A.Ş."
                 }
-                defaultValue={item?.company_tr}
+                value={formData.company_tr}
+                onChange={handleChange}
               />
             </div>
             <div className="space-y-2">
@@ -146,8 +261,11 @@ export function CareerForm({ item, defaultType, onCancel }: CareerFormProps) {
                 (EN)
               </Label>
               <Input
+                name="company_en"
+                required
                 placeholder={type === "education" ? "ITU" : "Tech Corp"}
-                defaultValue={item?.company_en}
+                value={formData.company_en}
+                onChange={handleChange}
               />
             </div>
           </div>
@@ -156,15 +274,21 @@ export function CareerForm({ item, defaultType, onCancel }: CareerFormProps) {
             <div className="space-y-2">
               <Label>Tarih Aralığı (TR)</Label>
               <Input
+                name="date_tr"
+                required
                 placeholder="Haziran 2021 - Günümüz"
-                defaultValue={item?.date_tr}
+                value={formData.date_tr}
+                onChange={handleChange}
               />
             </div>
             <div className="space-y-2">
               <Label>Date Range (EN)</Label>
               <Input
+                name="date_en"
+                required
                 placeholder="June 2021 - Present"
-                defaultValue={item?.date_en}
+                value={formData.date_en}
+                onChange={handleChange}
               />
             </div>
           </div>
@@ -173,15 +297,19 @@ export function CareerForm({ item, defaultType, onCancel }: CareerFormProps) {
             <div className="space-y-2">
               <Label>Konum (TR)</Label>
               <Input
+                name="location_tr"
                 placeholder="İstanbul, Türkiye"
-                defaultValue={item?.location_tr}
+                value={formData.location_tr}
+                onChange={handleChange}
               />
             </div>
             <div className="space-y-2">
               <Label>Location (EN)</Label>
               <Input
+                name="location_en"
                 placeholder="Istanbul, Turkey"
-                defaultValue={item?.location_en}
+                value={formData.location_en}
+                onChange={handleChange}
               />
             </div>
           </div>
@@ -192,8 +320,10 @@ export function CareerForm({ item, defaultType, onCancel }: CareerFormProps) {
                 {type === "education" ? "Derece" : "Çalışma Şekli"} (TR)
               </Label>
               <Input
+                name="employment_type_tr"
                 placeholder={type === "education" ? "Lisans" : "Tam Zamanlı"}
-                defaultValue={item?.employment_type_tr}
+                value={formData.employment_type_tr}
+                onChange={handleChange}
               />
             </div>
             <div className="space-y-2">
@@ -201,10 +331,12 @@ export function CareerForm({ item, defaultType, onCancel }: CareerFormProps) {
                 {type === "education" ? "Degree" : "Employment Type"} (EN)
               </Label>
               <Input
+                name="employment_type_en"
                 placeholder={
                   type === "education" ? "Bachelor's Degree" : "Full-time"
                 }
-                defaultValue={item?.employment_type_en}
+                value={formData.employment_type_en}
+                onChange={handleChange}
               />
             </div>
           </div>
@@ -289,8 +421,10 @@ export function CareerForm({ item, defaultType, onCancel }: CareerFormProps) {
           <div className="space-y-2">
             <Label>Yetenekler (virgülle ayır)</Label>
             <Input
+              name="skills"
               placeholder="React, TypeScript, Node.js"
-              defaultValue={item?.skills?.join(", ")}
+              value={formData.skills}
+              onChange={handleChange}
             />
           </div>
         </TabsContent>
@@ -300,18 +434,46 @@ export function CareerForm({ item, defaultType, onCancel }: CareerFormProps) {
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label>Sıralama</Label>
-              <Input type="number" defaultValue={item?.sort_order ?? 1} />
+              <Input
+                name="sort_order"
+                type="number"
+                value={formData.sort_order}
+                onChange={handleChange}
+              />
             </div>
             <div className="flex items-end pb-2">
               <div className="flex items-center gap-2">
                 <Checkbox
                   id="is_published"
-                  defaultChecked={item?.is_published ?? true}
+                  name="is_published"
+                  checked={formData.is_published}
+                  onCheckedChange={(c) =>
+                    handleCheckboxChange("is_published", c as boolean)
+                  }
                 />
                 <Label htmlFor="is_published">Yayınla</Label>
               </div>
             </div>
           </div>
+
+          {isEditing && (
+            <div className="mt-8 pt-6 border-t border-dashed border-red-200">
+              <div className="flex items-center justify-between">
+                <Typography variant="muted" className="text-sm">
+                  Bu deneyimi sistemden tamamen silin.
+                </Typography>
+                <Button
+                  type="button"
+                  variant="outline"
+                  className="text-red-600 hover:text-red-700 hover:bg-red-50 border-red-200"
+                  onClick={handleDelete}
+                  disabled={isLoading}
+                >
+                  <Trash className="w-4 h-4 mr-2" /> Sil
+                </Button>
+              </div>
+            </div>
+          )}
         </TabsContent>
       </Tabs>
     </form>

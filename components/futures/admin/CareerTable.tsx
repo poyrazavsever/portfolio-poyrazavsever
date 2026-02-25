@@ -10,8 +10,9 @@ import {
   CareerItemType,
   CAREER_ITEM_TYPE_LABELS,
 } from "@/types/admin";
-import { mockCareerItems } from "@/data/admin/mock-career";
 import { CareerForm } from "./CareerForm";
+import { getAdminCareerRecords } from "@/lib/supabase/queries/career";
+import { useCallback } from "react";
 
 const columns: DataTableColumnDef<AdminCareerItem>[] = [
   {
@@ -59,21 +60,33 @@ export function CareerTable() {
   const [editingItem, setEditingItem] = useState<AdminCareerItem | undefined>();
   const [formType, setFormType] = useState<CareerItemType>("work");
   const [isMounted, setIsMounted] = useState(false);
+  const [careerItems, setCareerItems] = useState<AdminCareerItem[]>([]);
+
+  const fetchData = useCallback(async () => {
+    const records = await getAdminCareerRecords();
+    setCareerItems(records);
+  }, []);
 
   useEffect(() => {
     setIsMounted(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    if (isMounted) {
+      fetchData();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isMounted, fetchData]);
 
   const experienceItems = useMemo(
     () =>
-      mockCareerItems.filter(
-        (i) => i.type === "work" || i.type === "volunteer",
-      ),
-    [],
+      careerItems.filter((i) => i.type === "work" || i.type === "volunteer"),
+    [careerItems],
   );
   const educationItems = useMemo(
-    () => mockCareerItems.filter((i) => i.type === "education"),
-    [],
+    () => careerItems.filter((i) => i.type === "education"),
+    [careerItems],
   );
 
   const handleEdit = (rows: AdminCareerItem[]) => {
@@ -93,6 +106,11 @@ export function CareerTable() {
   const handleFormClose = () => {
     setEditingItem(undefined);
     setActiveTab(formType === "education" ? "education" : "experience");
+  };
+
+  const handleSave = () => {
+    fetchData();
+    handleFormClose();
   };
 
   return (
@@ -175,6 +193,7 @@ export function CareerTable() {
               item={editingItem}
               defaultType={formType}
               onCancel={handleFormClose}
+              onSave={handleSave}
             />
           </TabsContent>
         </Tabs>
