@@ -165,6 +165,10 @@
             "reading": {
               "title": "My Reading & Watch List",
               "desc": "Books, videos and recommended resources"
+            },
+            "slides": {
+              "title": "LinkedIn Slides",
+              "desc": "Technical content shared on LinkedIn"
             }
           }
         },

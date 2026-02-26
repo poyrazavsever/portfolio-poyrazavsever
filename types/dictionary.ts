@@ -74,6 +74,7 @@ export interface Dictionary {
             journey: { title: string; desc: string };
             certs: { title: string; desc: string };
             reading: { title: string; desc: string };
+            slides: { title: string; desc: string };
           };
         };
         ecosystem: {
@@ -330,6 +331,18 @@ export interface Dictionary {
         author: string;
         platform: string;
       }[];
+    };
+    slides: {
+      hero: {
+        title: string;
+        highlight: string;
+        description: string;
+        badge: string;
+      };
+      labels: {
+        page: string;
+        of: string;
+      };
     };
   };
   career: {

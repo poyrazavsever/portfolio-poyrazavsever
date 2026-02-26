@@ -164,7 +164,11 @@
             },
             "reading": {
               "title": "Okuma & İzleme Listesi",
-              "desc": "Kitaplar, videolar ve önerilen kaynaklar"
+              "desc": "Seçkin teknik kütüphane ve kaynaklar"
+            },
+            "slides": {
+              "title": "LinkedIn Slaytları",
+              "desc": "Linkedin üzerinde paylaştığım teknik içerikler"
             }
           }
         },

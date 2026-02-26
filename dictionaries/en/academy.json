@@ -87,5 +87,17 @@
         "platform": "YouTube"
       }
     ]
+  },
+  "slides": {
+    "hero": {
+      "title": "LinkedIn",
+      "highlight": "Slides",
+      "description": "PDF versions of technical content and guides that I share on LinkedIn.",
+      "badge": "Educational Materials"
+    },
+    "labels": {
+      "page": "Page",
+      "of": "/"
+    }
   }
 }

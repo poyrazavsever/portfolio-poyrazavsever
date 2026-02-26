@@ -466,6 +466,11 @@ export function SiteNavbar({
                 description={t.menu.academy.items.reading.desc}
                 href="/academy/reading-list"
               />
+              <NavbarMegaMenuItem
+                title={t.menu.academy.items.slides.title}
+                description={t.menu.academy.items.slides.desc}
+                href="/academy"
+              />
             </NavbarMegaMenu>
           </NavbarDropdown>
 

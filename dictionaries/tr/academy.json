@@ -87,5 +87,17 @@
         "platform": "YouTube"
       }
     ]
+  },
+  "slides": {
+    "hero": {
+      "title": "LinkedIn",
+      "highlight": "Slaytları",
+      "description": "Linkedin üzerinde paylaştığım teknik içeriklerin ve rehberlerin PDF versiyonları.",
+      "badge": "Eğitim Materyalleri"
+    },
+    "labels": {
+      "page": "Sayfa",
+      "of": "/"
+    }
   }
 }
