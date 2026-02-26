@@ -91,6 +91,7 @@ export interface Dictionary {
             experience: { title: string; desc: string };
             education: { title: string; desc: string };
             resume: { title: string; desc: string };
+            testimonials: { title: string; desc: string };
             contact: { title: string; desc: string };
           };
         };
@@ -273,6 +274,12 @@ export interface Dictionary {
         label: string;
         desc: string;
       }[];
+    };
+    testimonials: {
+      title: string;
+      highlight: string;
+      description: string;
+      badge: string;
     };
   };
   academy: {

@@ -26,6 +26,7 @@ import {
   ExternalLink,
   LogOut,
   Mail,
+  MessageSquare,
 } from "lucide-react";
 import { useSupabase } from "@/lib/supabase/hooks";
 
@@ -49,6 +50,11 @@ const menuItems = [
     href: "/admin/media",
     label: "Medya",
     icon: <Video className="w-4 h-4" />,
+  },
+  {
+    href: "/admin/testimonials",
+    label: "Referanslar",
+    icon: <MessageSquare className="w-4 h-4" />,
   },
   {
     href: "/admin/career",

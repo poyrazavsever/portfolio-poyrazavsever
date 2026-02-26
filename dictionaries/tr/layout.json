@@ -204,6 +204,10 @@
               "title": "İnteraktif Özgeçmiş",
               "desc": "Dijital CV ve yetenek özeti"
             },
+            "testimonials": {
+              "title": "Referanslar",
+              "desc": "Birlikte çalıştığımız kişilerin görüşleri"
+            },
             "contact": {
               "title": "İletişim",
               "desc": "Benimle iletişime geçin"

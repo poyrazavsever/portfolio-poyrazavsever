@@ -508,6 +508,11 @@ export function SiteNavbar({
                 description={t.menu.about.items.education.desc}
                 href="/career/education"
               />
+              <NavbarMegaMenuItem
+                title={t.menu.about.items.testimonials.title}
+                description={t.menu.about.items.testimonials.desc}
+                href="/testimonials"
+              />
             </NavbarMegaMenu>
           </NavbarDropdown>
         </NavbarLinks>

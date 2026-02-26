@@ -9,7 +9,8 @@ import { i18n, type Locale } from "@/i18n-config";
 
 export default async function AboutPage() {
   const cookieStore = await cookies();
-  const locale = (cookieStore.get("NEXT_LOCALE")?.value || i18n.defaultLocale) as Locale;
+  const locale = (cookieStore.get("NEXT_LOCALE")?.value ||
+    i18n.defaultLocale) as Locale;
   const dictionary = await getDictionary(locale);
 
   return (
@@ -24,4 +25,3 @@ export default async function AboutPage() {
     </div>
   );
 }
-

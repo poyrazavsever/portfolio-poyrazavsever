@@ -204,6 +204,10 @@
               "title": "Interactive Resume",
               "desc": "Digital CV and skills overview"
             },
+            "testimonials": {
+              "title": "Testimonials",
+              "desc": "What people say about working with me"
+            },
             "contact": { "title": "Contact Me", "desc": "Get in touch" }
           }
         }

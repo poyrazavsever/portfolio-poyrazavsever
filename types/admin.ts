@@ -320,6 +320,21 @@ export interface AdminContactMessage {
   created_at: string;
 }
 
+// ── Testimonials ──
+
+export interface AdminTestimonial {
+  id: string;
+  full_name: string;
+  title: string;
+  content_tr: string;
+  content_en: string;
+  avatar_url?: string;
+  company_logo_url?: string;
+  order_index: number;
+  is_published: boolean;
+  created_at: string;
+}
+
 export const CONTACT_TOPIC_LABELS: Record<ContactMessageTopic, string> = {
   project: "Proje Talebi",
   consulting: "Danışmanlık",

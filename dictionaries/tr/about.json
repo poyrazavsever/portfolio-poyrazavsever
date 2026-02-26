@@ -91,5 +91,11 @@
         "desc": "Indie & Elektronik"
       }
     ]
+  },
+  "testimonials": {
+    "title": "Referanslar &",
+    "highlight": "Görüşler",
+    "description": "Birlikte çalıştığımız kişilerin ve kurumların benim hakkımdaki düşünceleri.",
+    "badge": "Güven & İşbirliği"
   }
 }

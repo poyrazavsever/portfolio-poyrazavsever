@@ -91,5 +91,11 @@
         "desc": "Indie & Electronic"
       }
     ]
+  },
+  "testimonials": {
+    "title": "Testimonials &",
+    "highlight": "Reviews",
+    "description": "What people and organizations I've worked with say about me.",
+    "badge": "Trust & Collaboration"
   }
 }
