@@ -10,9 +10,9 @@
     "description": "Bir toplantı planlamak veya doğrudan mesaj göndermek için formu doldurun. Genellikle 24 saat içinde yanıt veririm.",
     "emailLabel": "E-posta",
     "locationLabel": "Konum",
-    "locationValue": "İstanbul, Türkiye (Uzaktan Çalışma Uygundur)",
+    "locationValue": "Ankara, Türkiye (Uzaktan Çalışma Uygundur)",
     "availabilityLabel": "Müsaitlik",
-    "availabilityValue": "Pzt - Cum, 09:00 - 18:00 (GMT+3)"
+    "availabilityValue": "Her gün, 18:00 - 24:00 (GMT+3)"
   },
   "form": {
     "title": "Mesaj Gönder",

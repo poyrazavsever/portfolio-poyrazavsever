@@ -25,6 +25,7 @@ import {
   BookOpen,
   ExternalLink,
   LogOut,
+  Mail,
 } from "lucide-react";
 import { useSupabase } from "@/lib/supabase/hooks";
 
@@ -63,6 +64,11 @@ const menuItems = [
     href: "/admin/reading-list",
     label: "Okuma Listesi",
     icon: <BookOpen className="w-4 h-4" />,
+  },
+  {
+    href: "/admin/contact",
+    label: "Gelen Mesajlar",
+    icon: <Mail className="w-4 h-4" />,
   },
 ];
 

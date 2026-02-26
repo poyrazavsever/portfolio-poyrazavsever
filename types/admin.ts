@@ -298,3 +298,37 @@ export const READING_ITEM_TYPE_LABELS: Record<ReadingItemType, string> = {
   book: "Kitap",
   video: "Video",
 };
+
+// ── Contact ──
+
+export type ContactMessageTopic =
+  | "project"
+  | "consulting"
+  | "speaking"
+  | "other";
+export type ContactMessageStatus = "unread" | "read" | "replied";
+
+export interface AdminContactMessage {
+  id: string;
+  name: string;
+  email: string;
+  topic: ContactMessageTopic;
+  date?: string;
+  time?: string;
+  message: string;
+  status: ContactMessageStatus;
+  created_at: string;
+}
+
+export const CONTACT_TOPIC_LABELS: Record<ContactMessageTopic, string> = {
+  project: "Proje Talebi",
+  consulting: "Danışmanlık",
+  speaking: "Konuşmacı Talebi",
+  other: "Diğer",
+};
+
+export const CONTACT_STATUS_LABELS: Record<ContactMessageStatus, string> = {
+  unread: "Okunmadı",
+  read: "Okundu",
+  replied: "Yanıtlandı",
+};

@@ -10,9 +10,9 @@
     "description": "Fill out the form to schedule a meeting or send a direct message. I usually respond within 24 hours.",
     "emailLabel": "Email",
     "locationLabel": "Location",
-    "locationValue": "Istanbul, Turkey (Remote Available)",
+    "locationValue": "Ankara, Turkey (Remote Available)",
     "availabilityLabel": "Availability",
-    "availabilityValue": "Mon - Fri, 09:00 - 18:00 (GMT+3)"
+    "availabilityValue": "Every day, 18:00 - 24:00 (GMT+3)"
   },
   "form": {
     "title": "Send a Message",
