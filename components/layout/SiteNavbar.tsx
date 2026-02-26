@@ -445,6 +445,11 @@ export function SiteNavbar({
                 description={t.menu.media.items.social.desc}
                 href="/media/social-hub"
               />
+              <NavbarMegaMenuItem
+                title={t.menu.media.items.slides?.title}
+                description={t.menu.media.items.slides?.desc}
+                href="/academy"
+              />
             </NavbarMegaMenu>
           </NavbarDropdown>
 
@@ -465,11 +470,6 @@ export function SiteNavbar({
                 title={t.menu.academy.items.reading.title}
                 description={t.menu.academy.items.reading.desc}
                 href="/academy/reading-list"
-              />
-              <NavbarMegaMenuItem
-                title={t.menu.academy.items.slides.title}
-                description={t.menu.academy.items.slides.desc}
-                href="/academy"
               />
             </NavbarMegaMenu>
           </NavbarDropdown>
@@ -776,6 +776,9 @@ export function SiteNavbar({
           </NavbarMobileLink>
           <NavbarMobileLink href="/media/social">
             {t.menu.media.items.social.title}
+          </NavbarMobileLink>
+          <NavbarMobileLink href="/academy">
+            {t.menu.media.items.slides?.title}
           </NavbarMobileLink>
         </MobileAccordionGroup>
 

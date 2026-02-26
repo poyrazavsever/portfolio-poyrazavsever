@@ -66,6 +66,7 @@ export interface Dictionary {
             apply: { title: string; desc: string };
             systemDesign: { title: string; desc: string };
             uiUx: { title: string; desc: string };
+            slides: { title: string; desc: string };
           };
         };
         academy: {
@@ -74,7 +75,6 @@ export interface Dictionary {
             journey: { title: string; desc: string };
             certs: { title: string; desc: string };
             reading: { title: string; desc: string };
-            slides: { title: string; desc: string };
           };
         };
         ecosystem: {

@@ -148,6 +148,10 @@
             "uiUx": {
               "title": "UI/UX Principles & Trends",
               "desc": "Design patterns and best practices"
+            },
+            "slides": {
+              "title": "LinkedIn Slides",
+              "desc": "Technical content shared on LinkedIn"
             }
           }
         },
@@ -165,10 +169,6 @@
             "reading": {
               "title": "My Reading & Watch List",
               "desc": "Books, videos and recommended resources"
-            },
-            "slides": {
-              "title": "LinkedIn Slides",
-              "desc": "Technical content shared on LinkedIn"
             }
           }
         },

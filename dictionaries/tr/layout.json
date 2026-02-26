@@ -148,6 +148,10 @@
             "uiUx": {
               "title": "UI/UX Prensipleri",
               "desc": "Tasarım kalıpları ve en iyi uygulamalar"
+            },
+            "slides": {
+              "title": "LinkedIn Slaytları",
+              "desc": "Linkedin üzerinde paylaştığım teknik içerikler"
             }
           }
         },
@@ -165,10 +169,6 @@
             "reading": {
               "title": "Okuma & İzleme Listesi",
               "desc": "Seçkin teknik kütüphane ve kaynaklar"
-            },
-            "slides": {
-              "title": "LinkedIn Slaytları",
-              "desc": "Linkedin üzerinde paylaştığım teknik içerikler"
             }
           }
         },
