@@ -209,7 +209,8 @@
       },
       "actions": {
         "login": "Giriş Yap",
-        "contact": "İletişim"
+        "contact": "İletişim",
+        "serviceUnavailable": "Şu an bu servis hizmette değildir."
       }
     },
     "footer": {

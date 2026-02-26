@@ -206,7 +206,8 @@
       },
       "actions": {
         "login": "Login",
-        "contact": "Contact"
+        "contact": "Contact",
+        "serviceUnavailable": "This service is currently unavailable."
       }
     },
     "footer": {

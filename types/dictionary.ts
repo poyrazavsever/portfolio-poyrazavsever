@@ -97,6 +97,7 @@ export interface Dictionary {
       actions: {
         login: string;
         contact: string;
+        serviceUnavailable: string;
       };
     };
     footer: {
@@ -383,6 +384,11 @@ export interface Dictionary {
     };
   };
   contact: {
+    alerts: {
+      fillRequired: string;
+      success: string;
+      error: string;
+    };
     hero: {
       title: string;
       highlight: string;

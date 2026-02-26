@@ -46,7 +46,7 @@ export function HeroSection({ dictionary }: HeroSectionProps) {
         <div className="mt-8 md:mt-16">
           <div className="mx-auto max-w-4xl">
             <Image
-              src="/images/herosection.png"
+              src="/images/herosectionNew2.png"
               alt="Poyraz Avsever — Dashboard Preview"
               width={1200}
               height={750}

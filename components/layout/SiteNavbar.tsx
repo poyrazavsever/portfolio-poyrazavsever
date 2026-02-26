@@ -25,6 +25,7 @@ import {
   DrawerTitle,
   DrawerTrigger,
   DrawerFooter,
+  toast,
 } from "poyraz-ui/molecules";
 import { Button, Badge, Logo, Typography } from "poyraz-ui/atoms";
 import { Icon } from "@iconify/react";
@@ -507,14 +508,12 @@ export function SiteNavbar({
         </NavbarLinks>
 
         <NavbarActions>
-          <Button variant="outline" size="sm" asChild>
-            <a
-              href="https://portal.poyrazavsever.com/login"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {t.actions.login}
-            </a>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => toast.warning(t.actions.serviceUnavailable)}
+          >
+            {t.actions.login}
           </Button>
           <Button size="sm" asChild>
             <Link href="/contact">{t.actions.contact}</Link>

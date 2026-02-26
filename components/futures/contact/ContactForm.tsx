@@ -41,12 +41,12 @@ export function ContactForm({ dictionary }: ContactFormProps) {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const { info, form } = dictionary.contact;
+  const { info, form, alerts } = dictionary.contact;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!name || !email || !topic || !message) {
-      toast.error("Lütfen gerekli alanları doldurun.");
+      toast.error(alerts.fillRequired);
       return;
     }
 
@@ -62,9 +62,7 @@ export function ContactForm({ dictionary }: ContactFormProps) {
         message,
       });
 
-      toast.success(
-        "Mesajınız başarıyla gönderildi! Size en kısa sürede dönüş yapacağım.",
-      );
+      toast.success(alerts.success);
       // Reset form
       setName("");
       setEmail("");
@@ -74,7 +72,7 @@ export function ContactForm({ dictionary }: ContactFormProps) {
       setMessage("");
     } catch (err) {
       console.error(err);
-      toast.error("Bir hata oluştu. Lütfen tekrar deneyin.");
+      toast.error(alerts.error);
     } finally {
       setIsSubmitting(false);
     }

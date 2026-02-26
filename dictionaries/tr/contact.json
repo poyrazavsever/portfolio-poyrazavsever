@@ -1,4 +1,9 @@
 {
+  "alerts": {
+    "fillRequired": "Lütfen gerekli alanları doldurun.",
+    "success": "Mesajınız başarıyla gönderildi! Size en kısa sürede dönüş yapacağım.",
+    "error": "Bir hata oluştu. Lütfen tekrar deneyin."
+  },
   "hero": {
     "title": "Harika Şeyler",
     "highlight": "İnşa Edelim",
