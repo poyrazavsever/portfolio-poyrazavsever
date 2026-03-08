@@ -64,13 +64,13 @@ export function HowItWorksSection({ dictionary }: HowItWorksSectionProps) {
       <div className="relative z-10 max-w-6xl mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-12">
-          <Typography variant="h2">
+          <Typography variant="h1">
             {howItWorks.title}{" "}
             <span className="text-red-600 font-secondary">
               {howItWorks.highlight}
             </span>
           </Typography>
-          <Typography variant="muted" className="mt-2 text-slate-500">
+          <Typography variant="lead" className="mt-2 text-slate-500">
             {howItWorks.subtitle}
           </Typography>
         </div>

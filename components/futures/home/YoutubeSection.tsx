@@ -83,13 +83,13 @@ export function YoutubeSection({ dictionary }: YoutubeSectionProps) {
       <div className="relative z-10 max-w-6xl mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-10">
-          <Typography variant="h2">
+          <Typography variant="h1">
             {youtube.title}{" "}
             <span className="text-red-600 font-secondary">
               {youtube.highlight}
             </span>
           </Typography>
-          <Typography variant="muted" className="mt-2 text-slate-500">
+          <Typography variant="lead" className="mt-2 text-slate-500">
             {youtube.subtitle}
           </Typography>
         </div>

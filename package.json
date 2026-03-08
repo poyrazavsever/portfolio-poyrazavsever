@@ -20,7 +20,7 @@
     "mermaid": "^11.12.3",
     "negotiator": "^1.0.0",
     "next": "16.0.10",
-    "poyraz-ui": "^0.2.2",
+    "poyraz-ui": "^2.0.1",
     "react": "19.2.0",
     "react-dom": "19.2.0",
     "react-hook-form": "^7.71.1",

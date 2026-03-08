@@ -18,13 +18,13 @@ export function BlogSection({ dictionary, posts, locale }: BlogSectionProps) {
       <div className="max-w-6xl mx-auto px-4">
         {/* Header — left aligned */}
         <div className="text-left mb-10">
-          <Typography variant="h2">
+          <Typography variant="h1">
             {dictionary.home.blog.title} <br className="hidden sm:block" />
             <span className="text-red-600 font-secondary">
               {dictionary.home.blog.highlight}
             </span>
           </Typography>
-          <Typography variant="muted" className="mt-2">
+          <Typography variant="lead" className="mt-2 text-slate-500">
             {dictionary.home.blog.subtitle}
           </Typography>
           <div className="flex items-center justify-start gap-3 mt-4">
