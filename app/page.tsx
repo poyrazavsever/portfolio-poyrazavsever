@@ -3,9 +3,10 @@ import { getAllPageMetadata } from "@/lib/mdx";
 
 export default async function Home() {
   const pages = await getAllPageMetadata();
+  const firstPage = pages.find((page) => page.slug !== "roadmap") ?? pages[0];
 
-  if (pages.length > 0) {
-    redirect(`/${pages[0].slug}`);
+  if (firstPage) {
+    redirect(`/${firstPage.slug}`);
   }
 
   return (

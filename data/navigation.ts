@@ -51,7 +51,7 @@ export const ACTIVITY_LINKS: ActivityLink[] = [
   },
   {
     id: "roadmap",
-    href: "/roadmap",
+    href: "https://js.poyrazavsever.com",
     label: "52 Week Plan",
     icon: "solar:calendar-mark-bold-duotone",
   },
