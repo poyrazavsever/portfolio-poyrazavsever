@@ -49,6 +49,29 @@ const categories = Object.entries(BLOG_CATEGORY_LABELS) as [
   string,
 ][];
 
+function normalizeBlogCategory(
+  value?: string | null,
+): BlogCategory | undefined {
+  if (!value) return undefined;
+
+  const normalized = value
+    .trim()
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+  if (normalized === "tech" || normalized === "design" || normalized === "engineering") {
+    return normalized as BlogCategory;
+  }
+
+  const reverseMap: Record<string, BlogCategory> = {
+    teknoloji: "tech",
+    tasarim: "design",
+    muhendislik: "engineering",
+  };
+
+  return reverseMap[normalized];
+}
+
 export function BlogForm({ post, onCancel }: BlogFormProps) {
   const isEditing = !!post;
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -90,7 +113,7 @@ export function BlogForm({ post, onCancel }: BlogFormProps) {
       setTitleEn(post.title_en || "");
       setSlug(post.slug || "");
       setSlugManual(true);
-      setCategory(post.category || "");
+      setCategory(normalizeBlogCategory(post.category) || "");
       setExcerptTr(post.excerpt_tr || "");
       setExcerptEn(post.excerpt_en || "");
       setTags(post.tags?.join(", ") || "");
@@ -153,11 +176,13 @@ export function BlogForm({ post, onCancel }: BlogFormProps) {
         finalCoverUrl = await uploadBlogImage(coverFile, fileName);
       }
 
+      const normalizedCategory = normalizeBlogCategory(category);
+
       const postData: Partial<AdminBlogPost> = {
         title_tr: titleTr,
         title_en: titleEn,
         slug: slug,
-        category: category as BlogCategory,
+        category: normalizedCategory,
         excerpt_tr: excerptTr,
         excerpt_en: excerptEn,
         content_tr: contentTr,
@@ -175,11 +200,13 @@ export function BlogForm({ post, onCancel }: BlogFormProps) {
       };
 
       if (isEditing && post?.id) {
-        await updateBlogPost(post.id, postData);
+        const { error } = await updateBlogPost(post.id, postData);
+        if (error) throw error;
       } else {
-        await createBlogPost(
+        const { error } = await createBlogPost(
           postData as Omit<AdminBlogPost, "id" | "created_at" | "updated_at">,
         );
+        if (error) throw error;
       }
 
       onCancel(true);
