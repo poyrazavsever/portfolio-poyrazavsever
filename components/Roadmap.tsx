@@ -1,10 +1,49 @@
 "use client";
 
-import { useState, useEffect, createContext, useContext } from "react";
+import {
+  useState,
+  useEffect,
+  createContext,
+  useContext,
+  useSyncExternalStore,
+} from "react";
 import { Icon } from "@iconify/react";
 
 // Context to share week title with Day components for unique storage keys
 const WeekContext = createContext<string>("");
+const roadmapStorageEvent = "roadmap-storage-change";
+
+function subscribeRoadmapState(onStoreChange: () => void) {
+  if (typeof window === "undefined") {
+    return () => {};
+  }
+
+  const handleChange = () => onStoreChange();
+  window.addEventListener("storage", handleChange);
+  window.addEventListener(roadmapStorageEvent, handleChange);
+
+  return () => {
+    window.removeEventListener("storage", handleChange);
+    window.removeEventListener(roadmapStorageEvent, handleChange);
+  };
+}
+
+function readRoadmapState(storageKey: string) {
+  if (typeof window === "undefined") {
+    return false;
+  }
+
+  const saved = localStorage.getItem(storageKey);
+  if (!saved) {
+    return false;
+  }
+
+  try {
+    return JSON.parse(saved) === true;
+  } catch {
+    return false;
+  }
+}
 
 export function Roadmap({ children }: { children: React.ReactNode }) {
   return (
@@ -53,8 +92,6 @@ export function Day({
   day: string;
   children: React.ReactNode;
 }) {
-  const [isChecked, setIsChecked] = useState(false);
-  const [mounted, setMounted] = useState(false);
   const weekTitle = useContext(WeekContext);
 
   // Generate unique key combining week title and day
@@ -62,29 +99,17 @@ export function Day({
   const safeWeek = weekTitle.replace(/[^a-zA-Z0-9]/g, "-").toLowerCase();
   const safeDay = day.replace(/[^a-zA-Z0-9]/g, "-").toLowerCase();
   const storageKey = `roadmap-check-${safeWeek}-${safeDay}`;
-
-  useEffect(() => {
-    setMounted(true);
-    const saved = localStorage.getItem(storageKey);
-    if (saved) {
-      setIsChecked(JSON.parse(saved));
-    }
-  }, [storageKey]);
+  const isChecked = useSyncExternalStore(
+    subscribeRoadmapState,
+    () => readRoadmapState(storageKey),
+    () => false,
+  );
 
   const toggleCheck = () => {
     const newState = !isChecked;
-    setIsChecked(newState);
     localStorage.setItem(storageKey, JSON.stringify(newState));
+    window.dispatchEvent(new Event(roadmapStorageEvent));
   };
-
-  if (!mounted) {
-    return (
-      <div className="flex gap-4 p-3 rounded-xl border border-transparent">
-        <div className="shrink-0 mt-1 w-6 h-6 rounded-md border border-(--color-border) bg-(--color-surface)" />
-        <div className="opacity-0">{children}</div>
-      </div>
-    );
-  }
 
   return (
     <div

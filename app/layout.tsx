@@ -3,7 +3,6 @@ import "./globals.css";
 import { ThemeProvider } from "./components/theme-provider";
 import ActivityBar from "./components/layout/activitybar";
 import Sidebar from "./components/layout/sidebar";
-import { nunito } from "./font";
 import { getAllPageMetadata } from "@/lib/mdx";
 import type { PageMeta } from "@/lib/mdx";
 import { getAllBlogPostsMetadata } from "@/lib/blog";
@@ -132,12 +131,7 @@ export default async function RootLayout({
   };
 
   return (
-    <html
-      lang="en"
-      data-theme="mint"
-      className={nunito.variable}
-      suppressHydrationWarning
-    >
+    <html lang="en" data-theme="mint" suppressHydrationWarning>
       <body className="bg-(--color-background) text-(--color-text) antialiased">
         <ThemeProvider>
           <ActivityBar searchData={searchIndex} />
